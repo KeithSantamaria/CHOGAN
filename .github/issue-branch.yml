@@ -1,0 +1,5 @@
+branchName: full
+autoCloseIssue: true
+branches:
+  - label: '*'
+    name: development

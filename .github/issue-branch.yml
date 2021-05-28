@@ -2,4 +2,4 @@ branchName: full
 autoCloseIssue: true
 branches:
   - label: '*'
-    name: development
+    name: main

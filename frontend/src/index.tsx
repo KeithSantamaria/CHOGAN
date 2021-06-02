@@ -5,11 +5,13 @@ import Chogan from './Chogan';
 import { store } from './redux/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+import HomeListView from './components/HomeListView';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Chogan />
+      <HomeListView />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

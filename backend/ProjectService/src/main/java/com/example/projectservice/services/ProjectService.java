@@ -21,7 +21,7 @@ public class ProjectService implements IProjectService {
 
     @Override
     public void insert(Project project) {
-
+         projectRepo.insert(project);
     }
 
     /*

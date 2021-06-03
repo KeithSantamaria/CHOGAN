@@ -1,11 +1,19 @@
 import React, {useState} from 'react';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faFolder} from '@fortawesome/free-solid-svg-icons';
 
-export default function DisplayFolder(props){
+type DisplayFolderProps = {
+    folderName: string
+}
+
+export default function DisplayFolder({ folderName }: DisplayFolderProps) {
 
     return (
         <div>
-            <img src="" alt="folder-symbol"/>
-            <h5>props.folderName</h5>
+            <span className="folder-card">
+                <FontAwesomeIcon className='fa-icon-folder fa-2x' icon={faFolder}/>
+                <h5>{folderName}</h5>
+            </span>
         </div>
     );
 }

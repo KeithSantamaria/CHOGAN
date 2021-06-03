@@ -16,9 +16,7 @@ export default function ProjectElipsisBtn() {
                 <FontAwesomeIcon className='fas fa-ellipsis-h' icon={faEllipsisH}/>
             </Button>
             <Modal show={show} onHide={handleClose}>
-                <Modal show={show} onHide={handleClose}>
-                    <ProjectActionsModal/>
-                </Modal>
+                <ProjectActionsModal/>
             </Modal>
             
         </div>

@@ -14,5 +14,5 @@ public class Endpoint {
     private String endpointId;
     private String endpointName;
     private String endpointUrlPattern;
-    private String endpoinDescription;
+    private String endpointDescription;
 }

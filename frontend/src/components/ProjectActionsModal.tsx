@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import {Button, Modal} from "react-bootstrap";
+import {Button, Modal, Form} from "react-bootstrap";
 import AddToFolder from "./AddToFolder";
+import "../css/PopUpModal/popUpModal.css";
 
 export default function ProjectActionsModal() {
 
@@ -16,11 +17,13 @@ export default function ProjectActionsModal() {
 
     return (
         <div>
-            <button onClick={addToFolderAction} >Add To Folder</button>
-            <button onClick={cloneAction}>Clone</button>
-            <button onClick={editAction}>Edit</button>
-            <button onClick={removeAction}>Remove</button>
-            <button onClick={cancelAction}>Cancel</button>
+            <Form>
+                <Button className="project-actions-modal-buttons" onClick={addToFolderAction} >Add To Folder</Button>
+                <Button className="project-actions-modal-buttons" onClick={cloneAction}>Clone</Button>
+                <Button className="project-actions-modal-buttons" onClick={editAction}>Edit</Button>
+                <Button className="project-actions-modal-buttons" onClick={removeAction}>Remove</Button>
+                <Button className="project-actions-modal-buttons" onClick={cancelAction}>Cancel</Button>
+            </Form>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal show={show} onHide={handleClose}>

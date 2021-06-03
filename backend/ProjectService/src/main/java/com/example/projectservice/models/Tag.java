@@ -18,4 +18,13 @@ public class Tag {
     private String tagId;
     private Map<String, List<String>> techs;
 
+    /*
+    frontend
+
+    react/redux/boostrap
+
+    frontend: ["react/redux/bootstrap"]
+
+    frontend: ["react","redux","bootstrap"]
+    */
 }

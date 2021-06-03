@@ -19,4 +19,6 @@ public class Project {
     private List<Tag> tags;
     private List<UserStory> userStories;
 
+
+    //will recieve user ID
 }

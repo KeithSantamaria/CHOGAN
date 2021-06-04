@@ -1,7 +1,7 @@
 .home-container-wrapper {
     margin-top: 2em;
     width: 1100px;
-    /* background-color: aqua; */
+    background-color: #fafafa;
 }
 
 .tabs-wrapper .fa-icon {
@@ -78,4 +78,26 @@
     color: #72a4c2;
     /* height: 25px;
     width: 25px; */
+}
+
+.outer-proj-card-wrapper {
+  margin-right: 2em;
+  display: inline-flex;
+  /* display: relative; */
+}
+
+.proj-card-wrapper {
+    margin-top: 2em;
+    height: 250px;
+    width: 250px;
+    background-color: white;
+    /* display: block; */
+    box-shadow: 0 0 35px rgba(8, 8, 8, 0.1)  ; 
+	-webkit-box-shadow: 0 0 35px rgba(8, 8, 8, 0.1)  ; 
+	-moz-box-shadow: 0 0 35px rgba(8, 8, 8, 0.1)  ; 
+    border-radius: 10px;
+}
+
+.proj-card-wrapper .row {
+    margin-left: 0;
 }

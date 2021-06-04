@@ -1,16 +1,28 @@
 import React from 'react';
+import {Col, Row} from 'react-bootstrap';
 
 export default function ProjectCard(props:any) {
   return (
     <>
          {props.projects.map((project:any) => (
-            <div key={project.id}>
-                <span>{project.name}</span>
-                <span>{project.des}</span>
-                {project.tags.map((t:any) => (
-                    <span>{t}</span>
-                ))}
-            </div>
+           <span className="outer-proj-card-wrapper">
+             <span key={project.id} className="proj-card-wrapper">
+                <Row>
+                  <span>{project.name}</span>
+                </Row>
+
+                <Row>
+                  <span>{project.des}</span>
+                </Row> 
+
+                <Row>
+                  {project.tags.map((t:any) => (
+                      <span>{t}</span>
+                  ))}
+                </Row>
+              </span>
+           </span>
+            
             
         ))}
     </>

@@ -1,0 +1,14 @@
+.auth-page-overall {
+  background-color: blueviolet;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: 100vh;
+  padding: 0;
+}
+.auth-page-left-pane {
+  background-color: darkcyan;
+}
+.auth-page-right-pane {
+  background-color: darkgoldenrod;
+}

@@ -1,14 +1,12 @@
 import React from 'react';
 import { Counter } from './redux/Counter';
 import './Chogan.css';
-import AddToFolder from './components/AddToFolder';
+import Home from './pages/home/Home';
 
 function Chogan() {
   return (
     <div className="App">
-      <Counter />
-      {/*this is for debugging*/}
-      <AddToFolder/>
+      <Home/>
     </div>
   );
 }

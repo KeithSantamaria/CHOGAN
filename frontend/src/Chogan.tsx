@@ -1,11 +1,11 @@
 import React from 'react';
-import { Counter } from './redux/Counter';
+import ProjectsHome from './components/ProjectsHome';
 import './Chogan.css';
 
 function Chogan() {
   return (
     <div className="App">
-      <Counter />
+      <ProjectsHome />
     </div>
   );
 }

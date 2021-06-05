@@ -13,8 +13,8 @@ export default function Home() {
      * Mock Data
      */
     const [projects, setProjects] = useState([
-        {id: 1, name: 'Project1', des: 'Project Chogan', tags: ["React", "Docker", "Java"]},
-        {id: 2, name: 'Project1', des: 'Project Chogan', tags: ["React", "Docker", "Java"]},
+        {id: 1, name: 'Project1', des: 'Project Chogandas jhbd jasda asds a Casdsad  Chogandas jhbd jasda asds a Casdsad   Chogandas jhbd jasda asds a Casdsad   Chogandas jhbd jasda asds a Casdsad ', tags: ["React", "Docker", "Java","React", "Docker", "Java", "React", "Docker", "Java","Java", "React", "Docker", "Java"]},
+        {id: 2, name: 'Project1', des: 'Project Chogansadasdasdasda Chogandas jhbd jasda asds a Casdsad  Chogandas jhbd jasda asds a Casdsad   Chogandas jhbd jasda asds a Casdsad', tags: ["React", "Docker", "Java"]},
         {id: 3, name: 'Project1', des: 'Project Chogan', tags: ["React", "Docker", "Java"]},
         {id: 4, name: 'Project1', des: 'Project Chogan', tags: ["React", "Docker", "Java"]},
         {id: 5, name: 'Project1', des: 'Project Chogan', tags: ["React", "Docker", "Java"]}

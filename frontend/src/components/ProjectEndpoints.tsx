@@ -1,13 +1,13 @@
 import React from 'react'
 import ProjectSideNav from './ProjectSideNav'
 
-function ProjectERDs() {
+function ProjectEndpoints() {
     return (
         <div>
             <ProjectSideNav />
-            <p>ERDs</p>
+            <p>Endpoints</p>
         </div>
     )
 }
 
-export default ProjectERDs
+export default ProjectEndpoints

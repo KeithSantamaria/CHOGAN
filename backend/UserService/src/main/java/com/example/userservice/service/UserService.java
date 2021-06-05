@@ -11,36 +11,70 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class UserService {
 
     @Autowired
-    private UserRepo dao;
+    private UserRepo userRepository;
 
 //    public void clear() { dao.clear(); }
 
-    public boolean newUser(String username, String password, String email, int securityQuestionId, String securityAnswer) {
-        return true;
+    public User newUser(User user) {
+        if(user.getId() == null) {
+            try {
+                return userRepository.save(user);
+            } catch (Exception exception) {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
 
-    public boolean setFullName(String firstName, String lastName) {
-        return true;
+    public User updateUser(User user) {
+        if(user.getId() == null) {
+            return null;
+        } else {
+            try {
+                return userRepository.save(user);
+            } catch (Exception exception) {
+                return null;
+            }
+        }
+    }
+
+    public void setFullName(String username, String firstName, String lastName) {
+        User user = userRepository.findByUsername(username);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        userRepository.save(user);
     }
 
     public User getUserByUsername(String username) {
-        return new User();
+        return userRepository.findByUsername(username);
     }
 
     public User getUserById(String Id) {
-        return new User();
+        return userRepository.findById(Id);
     }
 
-    public User userLogIn(String username, String password) {
-        return new User();
+    public boolean userLogIn(String username, String password) {
+        User user = userRepository.findByUsername(username);
+        return( user != null && user.getPassword().equals(password)) ? true : false;
     }
 
-    public void changePassword(String Id, String newPassword) {
-
+    public void changePassword(String Id, String newPassword, String response) {
+        if (checkSecurityQuestion(Id, response)) {
+            User user = userRepository.findById(Id);
+            user.setPassword(newPassword);
+            userRepository.save(user);
+        }
+        else return;
     }
 
     public boolean checkSecurityQuestion(String Id, String response) {
-        return true;
+        User user = userRepository.findById(Id);
+        if(user.getSecurityAnswer().equals(response)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

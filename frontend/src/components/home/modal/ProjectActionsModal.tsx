@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Button, Modal, Form} from "react-bootstrap";
 import AddToFolder from "./AddToFolder";
-import "../css/PopUpModal/popUpModal.css";
+import "../../../css/home/PopUpModal/popUpModal.css";
 
 export default function ProjectActionsModal() {
 

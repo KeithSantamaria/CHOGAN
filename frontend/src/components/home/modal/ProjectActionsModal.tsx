@@ -2,18 +2,25 @@ import React, { useState } from 'react';
 import {Button, Modal, Form} from "react-bootstrap";
 import AddToFolder from "./AddToFolder";
 import "../../../css/home/PopUpModal/popUpModal.css";
+import EditProject from "./EditProject";
 
 export default function ProjectActionsModal() {
 
     const [show, setShow] = useState(false);
+    const [edit, setEdit] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const handleOpenEdit=()=>{setEdit(true)};
+    const handleCloseEdit=()=>{setEdit(false)};
+
     const addToFolderAction = () => { handleShow(); }
     const cloneAction = () => { }
-    const editAction = () => { }
+    const editAction = () => { handleOpenEdit();}
     const removeAction = () => { }
     const cancelAction = () => { }
+
+
 
     return (
         <div>
@@ -34,6 +41,13 @@ export default function ProjectActionsModal() {
                     <Modal.Title>Folders</Modal.Title>
                 </Modal.Header>
                 <AddToFolder/>
+            </Modal>
+
+            <Modal show={edit} onHide={handleCloseEdit}>
+                <Modal.Header closeButton className="action-header" >
+                    <Modal.Title >Edit Project</Modal.Title>
+                </Modal.Header>
+                <EditProject title="sample project" description="this is not a legit project."/>
             </Modal>
         </div>
     );

@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import {Col, Row} from 'react-bootstrap';
+import {Button, Col, Row} from 'react-bootstrap';
 import '../css/project-sidenav.css';
 import { useHistory } from "react-router-dom";
 
 const ProjectSideNav = () => {
 
     const history = useHistory();
-
-
-    const goToGenera = () => {
+    const goToGeneral = () => {
         history.push("/user/project/general");    
     };   
     const goToWireframes = () => {
@@ -34,47 +32,48 @@ const ProjectSideNav = () => {
             <div className="sm-wrapper">
                 <Row>
                     <Col>
-                        <p> General Information </p>
+                    <p onClick={goToGeneral}> General Information </p>
                     </Col>
 
                 </Row>
 
                 <Row>
                     <Col>
-                    <p> Wireframes </p>
+                    <p onClick={goToWireframes}> Wireframes </p>
                     </Col>
                 </Row>
 
                 <Row>
                     <Col>
-                    <p> ERD </p>
+                    <p onClick={goToERDs}> ERD </p>
                     </Col>
 
                 </Row>
 
                 <Row>
                     <Col>
-                    <p> Endpoints </p>
+                    <p onClick={goToEndpoints}> Endpoints </p>
                     </Col>
                 </Row>
 
                 <Row>
                     <Col>
-                    <p> Models </p>
+                    <p onClick={goToModels}> Models </p>
                     </Col>
                 </Row>
 
                 <Row>
                     <Col>
-                    <p> User Stories </p>
+                    <p onClick={goToUserStories}> User Stories </p>
                     </Col>
                 </Row>
 
                 <Row>
                     <Col>
-                    <p> Technology Tags </p>
+                    <p onClick={goToTags}> Technology Tags </p>
                     </Col>
                 </Row>
+
             </div>
         </div>
         )

@@ -61,7 +61,7 @@ const SignUp: React.FC = () => {
                     placeholder='Username'
                     onChange={onChange}
                     required
-                /> 
+                />
                 <input
                     name='password'
                     id='password'
@@ -70,6 +70,7 @@ const SignUp: React.FC = () => {
                     onChange={onChange}
                     required
                 />
+                <button type='submit'>SignUp</button>
         </form>
     </div>)
 

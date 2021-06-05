@@ -1,5 +1,12 @@
 branchName: full
 autoCloseIssue: true
 branches:
-  - label: '*'
-    name: main
+  - label: Authentication
+    name: authentication
+  - label: Home 
+    name: home
+  - label: Project
+    name: projects-service
+  - label: Routes-Devops-etc
+    name: routes-devops-etc
+

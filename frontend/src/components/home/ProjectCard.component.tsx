@@ -14,59 +14,24 @@ export default function ProjectCard(props:any) {
                 <Card.Text>
                   <span className="proj-card-des">{project.des}</span>
                 </Card.Text >
-                {project.tags.slice(0,4).map((t:any) => (
-                  <span className="proj-card-wrapper-tags">
-                    <span className="proj-card-tags">
-                      {t}
-                    </span>
-                  </span>
-                    
-                ))}
+                
               </Card.Body>
               <Card.Footer className="text-right">
+                <div className="text-left">
+                  {project.tags.slice(0,4).map((t:any) => (
+                      <span className="proj-card-wrapper-tags">
+                        <span className="proj-card-tags">
+                          {t}
+                        </span>
+                      </span>
+                    ))}
+                </div>
                 <span><ProjectElipsisBtn/></span>
               </Card.Footer>
             </Card>
           </CardDeck>
         </span>
-        
       ))}
-         {/* {props.projects.map((project:any) => (
-           <span className="outer-proj-card-wrapper">
-             <span key={project.id} className="proj-card-wrapper">
-                <Row>
-                  <span className="proj-card-name">{project.name}</span>
-                </Row>
-
-                <Row>
-                  <span className="proj-card-des">{project.des}</span>
-                </Row> 
-
-                <Row>
-                  {project.tags.slice(0,4).map((t:any) => (
-                    <span className="proj-card-wrapper-tags">
-                      <span className="proj-card-tags">
-                        {t}
-                      </span>
-                    </span>
-                     
-                  ))}
-                </Row>
-
-                <Row className="elipsis-btn-wrapper">
-                  <Col></Col><Col></Col><Col></Col>
-                  <Col>
-                    <span className="elipsis-btn align-bottom">
-                      <ProjectElipsisBtn/>
-                    </span>
-                  </Col>
-                    
-                </Row>
-              </span>
-           </span>
-            
-            
-        ))} */}
     </>
   );
 }

@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {Col, Row, Card, CardDeck} from 'react-bootstrap';
+import {useEffect, useState} from 'react';
+import {Card, CardDeck} from 'react-bootstrap';
 import ProjectElipsisBtn from './modal/ProjectElipsisBtn';
 
 export default function ProjectCard(props:any) {

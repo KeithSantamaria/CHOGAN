@@ -6,12 +6,9 @@ import {Col, Row} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
 
-
-
 export default function GridView(props: any) {
     const [active, setActive] = useState(false);
     const [sortedArray, setSortedArray] = useState([]);
-    const [projects, setProjects] = useState([]);
 
     useEffect(() => {
         if(active) {
@@ -22,7 +19,7 @@ export default function GridView(props: any) {
             setSortedArray(props.projects);
         }
 
-    },[active]);
+    },[active, props.projects]);
 
     const toggle = () => { 
         if(active === false) {
@@ -43,32 +40,32 @@ export default function GridView(props: any) {
         className='sort';
     }
 
-  return (
-    <>
-        <Row className="folder-container-wrapper">
-            <Col style={{paddingBottom: '15px'}}>
-                <span>Folders</span>
-            </Col>
+    return (
+        <>
+            <Row className="folder-container-wrapper">
+                <Col style={{paddingBottom: '15px'}}>
+                    <span>Folders</span>
+                </Col>
 
-            <Col className="row-2-col-2" >
-                <div style={{float: 'right'}} className={className + " grid-sort-down"} onClick={toggle}>
-                    <span style={{paddingRight: '8px'}}>Name</span>
-                    {active ? <FontAwesomeIcon className="fa-icon fa-1x" icon={faSortDown}/> : <FontAwesomeIcon className="fa-icon fa-1x" icon={faSortUp}/>}
-                </div>
-                
-            </Col>
-        </Row>
+                <Col className="row-2-col-2" >
+                    <div style={{float: 'right'}} className={className + " grid-sort-down"} onClick={toggle}>
+                        <span style={{paddingRight: '8px'}}>Name</span>
+                        {active ? <FontAwesomeIcon className="fa-icon fa-1x" icon={faSortDown}/> : <FontAwesomeIcon className="fa-icon fa-1x" icon={faSortUp}/>}
+                    </div>
+                    
+                </Col>
+            </Row>
 
-        <FolderCard folders={props.folders}/>
+            <FolderCard folders={props.folders}/>
 
-        <Row className="project-container-wrapper">
-            <Col>
-                <span>Projects</span>
-            </Col>
-        </Row>
+            <Row className="project-container-wrapper">
+                <Col>
+                    <span>Projects</span>
+                </Col>
+            </Row>
 
-        <ProjectCard projects= {sortedArray}/>
+            <ProjectCard projects= {sortedArray}/>
 
-    </>
-  );
+        </>
+    );
 }

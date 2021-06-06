@@ -3,7 +3,7 @@ import GridView from '../../components/home/GridView.component';
 import UserView from '../../components/home/UserView.component';
 import '../../css/home/home.css';
 
-import {Col, Row, Container} from 'react-bootstrap';
+import {Col, Row} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTh, faList} from "@fortawesome/free-solid-svg-icons";
 

@@ -24,7 +24,7 @@ export default function ProjectActionsModal() {
 
     return (
         <div>
-            {/* <div className='exit-button'><Button className='exit-button' onClick={handleClose}>X</Button></div> */}
+
             <Modal.Header closeButton>
                 <Modal.Title>Actions</Modal.Title>
             </Modal.Header>
@@ -37,18 +37,13 @@ export default function ProjectActionsModal() {
             </Form>
 
             <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Folders</Modal.Title>
-                </Modal.Header>
                 <AddToFolder/>
             </Modal>
 
             <Modal show={edit} onHide={handleCloseEdit}>
-                <Modal.Header closeButton className="action-header" >
-                    <Modal.Title >Edit Project</Modal.Title>
-                </Modal.Header>
                 <EditProject title="sample project" description="this is not a legit project."/>
             </Modal>
+            
         </div>
     );
 

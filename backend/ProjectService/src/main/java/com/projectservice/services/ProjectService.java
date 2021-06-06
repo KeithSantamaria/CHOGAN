@@ -1,7 +1,8 @@
-package com.example.projectservice.services;
+package com.projectservice.services;
 
-import com.example.projectservice.models.Project;
-import com.example.projectservice.repository.ProjectRepo;
+import com.projectservice.services.IProjectService;
+import com.projectservice.models.Project;
+import com.projectservice.repository.ProjectRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,18 @@ public class ProjectService implements IProjectService {
     public List<Project> findAllByUserId(String userId) {
         return null;
     }
+
+
+    /*
+     *
+     * Read
+     *
+     */
+    @Override
+    public Project findByProjectId(String projectId) {
+        return projectRepo.findByProjectId(projectId);
+    }
+
 
     /*
      *

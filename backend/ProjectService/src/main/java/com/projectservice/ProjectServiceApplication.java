@@ -1,4 +1,4 @@
-package com.example.projectservice;
+package com.projectservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,14 +1,18 @@
-package com.example.projectservice.controller;
+package com.projectservice.controller;
 
-import com.example.projectservice.models.Project;
-import com.example.projectservice.services.IProjectService;
+import com.projectservice.models.Project;
+import com.projectservice.services.IProjectService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
+@Slf4j
 @RequestMapping("/api")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProjectController {
@@ -36,7 +40,12 @@ public class ProjectController {
     * Read
     *
     * */
-
+    @GetMapping("/read/project")
+    public ResponseEntity<Project> readProject(@RequestParam String projectId){
+        Project project = projectService.findByProjectId(projectId);
+        log.info("Retrieved project with id: {}.",projectId);
+        return new ResponseEntity<>(project,HttpStatus.OK);
+    }
     /*
     *
     * Update

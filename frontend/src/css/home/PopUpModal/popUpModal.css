@@ -16,8 +16,16 @@
     color: white;
 }
 
-
-
 .modal-body{
     border-top: 0;
+    background-color: #2f3545;
+}
+
+.sub-modal {
+    background-color: #2f3545;
+}
+
+.sub-modal-body {
+    display: block;
+    min-height:20rem;
 }

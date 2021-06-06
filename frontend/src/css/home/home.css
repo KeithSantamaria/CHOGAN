@@ -153,6 +153,7 @@
 
 .card-container-wrapper {
     height: 250px;
+    transition: 0.5s ease-in-out;
 }
 
 
@@ -198,4 +199,21 @@
 	-webkit-box-shadow: 0 0 15px rgba(84, 75, 84, 0.2)  ; 
 	-moz-box-shadow: 0 0 15px rgba(84, 75, 84, 0.2)  ; 
     border-radius: 20px;
+}
+
+.grid-sort-down:hover {
+    cursor: pointer;
+    color: #F26925;
+}
+
+.sort {
+    font-weight: bold;
+    transition: 0.2 ease-in-out;
+    color: black;
+}
+
+.sort-active {
+    color: #F26925;
+    font-weight: bold;
+    transition: 0.2 ease-in-out;
 }

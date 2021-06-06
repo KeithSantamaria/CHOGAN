@@ -1,11 +1,17 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Col, Row, Card, CardDeck} from 'react-bootstrap';
 import ProjectElipsisBtn from './modal/ProjectElipsisBtn';
 
 export default function ProjectCard(props:any) {
+  const [renderCard, setRenderCard] = useState([]);
+
+  useEffect(() => {
+    setRenderCard(props.projects)
+  }, [props.projects]);
+
   return (
     <>
-      {props.projects.map((project:any) => (
+      {renderCard.map((project:any) => (
         <span key={project.id}  className="card-container-wrapper" >
           <CardDeck className="card-project-wrapper" style={{display: 'inline-flex', flexDirection: 'row' }}>
             <Card style={{ width: '18rem', flex: 1}} className="card-project">

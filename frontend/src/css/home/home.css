@@ -1,7 +1,19 @@
 .home-container-wrapper {
     margin-top: 2em;
-    width: 1100px;
+    margin-left:2em;
+    /* width: 100vh; */
     background-color: #fafafa;
+    border-radius: 10px 10px 0 0;
+}
+
+.user-container-wrapper {
+    /* position: fixed; */
+    height: 100px;
+    
+}
+
+.tabs-container-wrapper {
+    padding-top: 1em;
 }
 
 .tabs-wrapper .fa-icon {
@@ -27,10 +39,6 @@
 
 .proj-info-wrapper span {
     padding-left: 5em;
-}
-
-.home-container-wrapper {
-    margin-left:10em;
 }
 
 .folder-container-wrapper {
@@ -86,6 +94,11 @@
 	-webkit-box-shadow: 0 0 35px rgba(8, 8, 8, 0.1)  ; 
 	-moz-box-shadow: 0 0 35px rgba(8, 8, 8, 0.1)  ; 
     border-radius: 10px;
+}
+
+.card-footer:last-child {
+    border-radius: 20px;
+    
 }
 
 .proj-card-wrapper .row {
@@ -169,10 +182,10 @@
 
 .card-project:hover {
     color: #f5f5f5;
-    transition: 0.2s ease-in-out;
+    transition: 0.5s ease-in-out;
     background-color: #2f3545;
     cursor: pointer;
-    transform: scale(1.1);
+    transform: scale(1.05);
     opacity: 1.0;
 }
 

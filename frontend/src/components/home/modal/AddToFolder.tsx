@@ -7,14 +7,17 @@ export default function AddToFolder(){
 
     return (
         <>
-            <Modal.Header closeButton>
+            <Modal.Header className="sub-modal" closeButton>
                 <Modal.Title>Folders</Modal.Title>
             </Modal.Header>
-            {data.map(i => {
-                return(
-                    <DisplayFolder folderName={i}/>
-                )
-            })}
+            <Modal.Body className="sub-modal-body">
+                {data.map(i => {
+                    return(
+                        <DisplayFolder folderName={i}/>
+                    )
+                })}
+            </Modal.Body>
+            
 
         </>
     );

@@ -1,7 +1,8 @@
 package com.example.projectservice.controller;
 
-import com.example.projectservice.models.Project;
-import com.example.projectservice.services.IProjectService;
+import com.projectservice.controller.ProjectController;
+import com.projectservice.models.Project;
+import com.projectservice.services.IProjectService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

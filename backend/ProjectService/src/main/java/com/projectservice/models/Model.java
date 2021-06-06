@@ -1,4 +1,4 @@
-package com.example.projectservice.models;
+package com.projectservice.models;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -13,7 +13,7 @@ import java.util.Map;
 @Data
 @Document
 public class Model {
-    @Id
+//    @Id
     private String modelId;
     private String modelName;
     private Map<String, String> modelMetadata;

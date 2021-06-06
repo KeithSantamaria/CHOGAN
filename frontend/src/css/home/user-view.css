@@ -58,3 +58,8 @@
     color: #F26925;
 
 }
+
+.user-col-2-icon:hover {
+    transition: 0.5s ease-in-out;
+    color: #F26925;
+}

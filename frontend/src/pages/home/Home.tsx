@@ -68,8 +68,6 @@ export default function Home() {
                 <span className="user-container-wrapper">
                     <UserView projects={projects}/>
                 </span>
-                
-
             </Col>
         </Row>
     </div>

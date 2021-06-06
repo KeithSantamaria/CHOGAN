@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {Button} from "react-bootstrap";
+import {Button, Modal} from "react-bootstrap";
 import "../../../css/home/PopUpModal/editProject.css"
 
 type ProjectProp = {
@@ -21,6 +21,9 @@ export default function EditProject({title, description }: ProjectProp) {
 
     return (
         <div>
+            <Modal.Header closeButton className="action-header" >
+                <Modal.Title >Edit Project</Modal.Title>
+            </Modal.Header>
             <span className="edit-card">
                 <form >
                     <input type="text" value={currTitle}

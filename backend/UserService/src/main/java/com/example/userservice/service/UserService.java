@@ -39,11 +39,11 @@ public class UserService {
         }
     }
 
-    public void setFullName(String username, String firstName, String lastName) {
+    public User setFullName(String username, String firstName, String lastName) {
         User user = userRepository.findByUsername(username);
         user.setFirstName(firstName);
         user.setLastName(lastName);
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     public User getUserByUsername(String username) {
@@ -59,22 +59,18 @@ public class UserService {
         return( user != null && user.getPassword().equals(password)) ? true : false;
     }
 
-    public void changePassword(String Id, String newPassword, String response) {
+    public User changePassword(String Id, String newPassword, String response) {
         if (checkSecurityQuestion(Id, response)) {
             User user = userRepository.findById(Id);
             user.setPassword(newPassword);
-            userRepository.save(user);
+            return userRepository.save(user);
         }
-        else return;
+        else return null;
     }
 
     public boolean checkSecurityQuestion(String Id, String response) {
         User user = userRepository.findById(Id);
-        if(user.getSecurityAnswer().equals(response)) {
-            return true;
-        } else {
-            return false;
-        }
+        return (user.getSecurityAnswer().equals(response) ? true : false);
     }
 
 

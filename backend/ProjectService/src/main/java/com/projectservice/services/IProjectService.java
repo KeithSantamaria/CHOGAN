@@ -1,12 +1,11 @@
 package com.projectservice.services;
 
-import com.projectservice.models.*;
 import com.projectservice.models.Project;
 
 import java.util.List;
 
 /**
- * TODO: update void or return project;
+ * Functional interface for the project service
  */
 public interface IProjectService {
 

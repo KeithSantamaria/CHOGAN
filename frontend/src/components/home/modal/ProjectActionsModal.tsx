@@ -25,16 +25,16 @@ export default function ProjectActionsModal() {
     return (
         <div>
 
-            <Modal.Header closeButton>
-                <Modal.Title>Actions</Modal.Title>
-            </Modal.Header>
-            <Form>
-                <Button className="project-actions-modal-buttons" onClick={addToFolderAction} >Add To Folder</Button>
-                <Button className="project-actions-modal-buttons" onClick={cloneAction}>Clone</Button>
-                <Button className="project-actions-modal-buttons" onClick={editAction}>Edit</Button>
-                <Button className="project-actions-modal-buttons" onClick={removeAction}>Remove</Button>
-                <Button className="project-actions-modal-buttons" onClick={cancelAction}>Cancel</Button>
-            </Form>
+            <Modal.Header className='action-header' closeButton></Modal.Header>
+            <Modal.Body className='modal-body'>
+                <Form>
+                    <Button className="project-actions-modal-buttons" onClick={addToFolderAction} >Add To Folder</Button>
+                    <Button className="project-actions-modal-buttons" onClick={cloneAction}>Clone</Button>
+                    <Button className="project-actions-modal-buttons" onClick={editAction}>Edit</Button>
+                    <Button className="project-actions-modal-buttons" onClick={removeAction}>Remove</Button>
+                    <Button className="project-actions-modal-buttons" onClick={cancelAction}>Cancel</Button>
+                </Form>
+            </Modal.Body>
 
             <Modal show={show} onHide={handleClose}>
                 <AddToFolder/>

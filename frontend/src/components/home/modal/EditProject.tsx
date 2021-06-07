@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {Button, Modal} from "react-bootstrap";
+import {Button, Modal, Form} from "react-bootstrap";
 import "../../../css/home/PopUpModal/editProject.css"
 
 type ProjectProp = {
@@ -24,16 +24,15 @@ export default function EditProject({title, description }: ProjectProp) {
             <Modal.Header closeButton className="action-header" >
                 <Modal.Title >Edit Project</Modal.Title>
             </Modal.Header>
-            <span className="edit-card">
-                <form >
+            <Modal.Body>
+                <Form className="edit-card">
                     <input type="text" value={currTitle}
-                           onChange={(e)=>{setCurrTitle(e.target.value)}}/>
+                        onChange={(e)=>{setCurrTitle(e.target.value)}}/>
                     <input type="text" value={currDescription}
-                           onChange={(e)=>{setCurrDescription(e.target.value)}}/>
-
-                           <Button variant="success" className="save-changes" onClick={saveChanges}>Save Changes</Button>
-                </form>
-            </span>
+                        onChange={(e)=>{setCurrDescription(e.target.value)}}/>
+                        <Button variant="success" className="save-changes" onClick={saveChanges}>Save Changes</Button>
+                </Form>
+            </Modal.Body>
         </div>
     );
 }

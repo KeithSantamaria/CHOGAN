@@ -9,6 +9,10 @@
 }
 
 .edit-card input{
+    padding: 3px;
+    border-radius: 5px;
     display: block;
-    margin: 1rem 5rem;
+    width: 90%;
+    display: block;
+    margin: 10px auto;
 }

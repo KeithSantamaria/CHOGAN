@@ -9,10 +9,10 @@ type DisplayFolderProps = {
 export default function DisplayFolder({ folderName }: DisplayFolderProps) {
 
     return (
-        <div>
+        <div className='folder-button'>
             <span className="folder-card">
-                <FontAwesomeIcon className='fa-icon-folder fa-2x' icon={faFolder}/>
-                <h5>{folderName}</h5>
+                <FontAwesomeIcon className='fa-icon-folder fa-2x folder-button-icon' icon={faFolder}/>
+                <span className="folder-button-name">{folderName}</span>
             </span>
         </div>
     );

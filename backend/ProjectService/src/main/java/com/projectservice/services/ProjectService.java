@@ -92,6 +92,6 @@ public class ProjectService implements IProjectService {
      */
     @Override
     public void delete(String projectId) {
-
+        projectRepo.deleteById(projectId);
     }
 }

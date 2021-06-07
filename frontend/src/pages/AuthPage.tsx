@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Container, Col} from 'react-bootstrap';
+
+import LoginForm from '../components/loginForm';
 import '../css/authentication/AuthPage.css'
 
 const AuthPage:React.FC = () => {
@@ -24,7 +26,7 @@ const AuthPage:React.FC = () => {
 
   const RenderForm = () => {
     if(authModeFlag === logInMode){
-      return <p>Login</p>
+      return <LoginForm/>
     }
     else{
       return <p>SignUp</p>
@@ -48,6 +50,7 @@ const AuthPage:React.FC = () => {
       </Col>
 
       <Col xs = {9} md = {5} className = "auth-page-right-pane">
+        <div className = "render-right-pane">
         <div className = "render-form"><RenderForm/></div>
         <Button 
           className ="switch-auth-mode-button" 
@@ -56,6 +59,7 @@ const AuthPage:React.FC = () => {
         >
           {switchModeText}
         </Button>
+        </div>
       </Col>
     </Container>
   )

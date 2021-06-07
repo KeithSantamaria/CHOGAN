@@ -31,19 +31,22 @@
 
 .switch-auth-mode-button{
   margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 35%;
-  color: white;
+  color: black;
 }
 
 .switch-auth-mode-button:hover{
-  color: white;
+  color: black;
 }
 
 .render-form{
-  margin: 0;
+  margin: 20px;
+}
+
+.render-right-pane{
+  background-color: white;
+  border-radius: 10px;
   position: absolute;
   top: 35%;
   left: 35%;
+  min-width: 300px;
 }

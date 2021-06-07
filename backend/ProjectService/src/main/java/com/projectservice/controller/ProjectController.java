@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller for handling all project related endpoints
+ */
 @RestController
 @AllArgsConstructor
 @Slf4j
@@ -25,6 +28,11 @@ public class ProjectController {
     *
     * */
 
+    /**
+     * Creates a project in the database
+     * @param project The project to add
+     * @return A response entity containing the success of the creation
+     */
     @PutMapping("create/project")
     public ResponseEntity<Project> createNewProject(@RequestBody Project project){
         // two possible solutions, either a successful creation or a failed creation
@@ -43,9 +51,19 @@ public class ProjectController {
     * Read
     *
     * */
+
+    /**
+     * Reads a project based off of a projects Id
+     * @param projectId The Id of the project to read
+     * @return The status of the project
+     */
     @GetMapping("/read/project")
     public ResponseEntity<Project> readProject(@RequestParam String projectId){
         Project project = projectService.findByProjectId(projectId);
+        if (project == null){
+            log.error("Cannot retrieve project with id: {}. Project does not exist.",projectId);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
         log.info("Retrieved project with id: {}.",projectId);
         return new ResponseEntity<>(project,HttpStatus.OK);
     }

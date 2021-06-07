@@ -49,7 +49,7 @@ class ProjectControllerTest {
     * */
 
     @Test
-    public void readProjectTest(){
+    public void readProjectSuccessTest(){
         Project project = new Project();
         String projectId = "Id";
         project.setProjectId(projectId);
@@ -59,6 +59,17 @@ class ProjectControllerTest {
         ResponseEntity<Project> response = projectController.readProject(projectId);
 
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
+    }
+
+    @Test
+    public void readProjectFailureTest(){
+        String projectId = "Id";
+
+        Mockito.when(projectService.findByProjectId(projectId)).thenReturn(null);
+
+        ResponseEntity<Project> response = projectController.readProject(projectId);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     /*

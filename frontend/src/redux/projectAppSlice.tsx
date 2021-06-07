@@ -14,6 +14,9 @@ import { ESMap, Map } from "typescript";
   export interface ProjectAppState {
       projects : Array<{
         project: {
+            projectId: string;
+            projectName: string;
+            projectDescription: string;
             models: Array<{
                 model:{
                     modelId: string;
@@ -47,6 +50,42 @@ import { ESMap, Map } from "typescript";
             }>
         }
       }>;
+      project: {
+        projectId: string;
+        projectName: string;
+        projectDescription: string;
+        models: Array<{
+            model:{
+                modelId: string;
+                modelName: string;
+                modelMetadata:Array<{
+                    // index signature https://basarat.gitbook.io/typescript/type-system/index-signatures
+                    key: string, value: string
+                }>                
+            }
+        }>,
+        endpoints: Array <{
+            endpoint: {
+                endpointId: string;
+                endpointName: string;
+                endpointUrlPattern: string;
+                endpointDescription: string;
+            }
+        }>,
+        tags: Array<{
+            tag:{
+                tagId: string;
+                tagName: string;
+                tagDescription: string;
+            }
+        }>,
+        userStories: Array<{
+            userStory: {
+                userStoryId: string;
+                userStoryDescription: string;
+            }
+        }>
+        };
       model:{
         modelId: string;
         modelName: string;
@@ -70,6 +109,7 @@ import { ESMap, Map } from "typescript";
         userStoryId: string;
         userStoryDescription: string;
       };
+
       createNewEndPointForm: {endpointName: string, urlPattern: string, endpointDescription: string};
       createNewPojoForm: {pojoName: string};
       createNewUserStory: {userStoryName: string};
@@ -82,6 +122,42 @@ import { ESMap, Map } from "typescript";
 
   const initialState: ProjectAppState = {
     projects: [],
+    project: {
+        projectId: "",
+        projectName: "",
+        projectDescription: "",
+        // models:{
+        //     model:{
+        //         modelId: "",
+        //         modelName: "",
+        //         modelMetadata: {
+        //             // index signature https://basarat.gitbook.io/typescript/type-system/index-signatures
+        //             key: "", value: "",
+        //         },              
+        //     },
+        // },
+        // endpoints: {
+        //     endpoint: {
+        //         endpointId: "",
+        //         endpointName: "",
+        //         endpointUrlPattern: "",
+        //         endpointDescription: "",
+        //     }
+        // },
+        // tags: {
+        //     tag:{
+        //         tagId: "",
+        //         tagName: "",
+        //         tagDescription: "",
+        //     }
+        // },
+        // userStories: {
+        //     userStory: {
+        //         userStoryId: "",
+        //         userStoryDescription: "",
+        //     }
+        // }
+        },
       model:{
         modelId: "",
         modelName: "",

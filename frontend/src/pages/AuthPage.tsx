@@ -1,7 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Button, Container, Col} from 'react-bootstrap';
 
-import LoginForm from '../components/loginForm';
+import {useAppSelector, useAppDispatch} from '../redux/hooks';
+import {currentUser} from '../redux/userSlice';
+
+import LoginForm from '../components/authentication/loginForm';
 import '../css/authentication/AuthPage.css'
 
 const AuthPage:React.FC = () => {
@@ -9,6 +12,12 @@ const AuthPage:React.FC = () => {
   const logInText:String = "Already have an account? Log in here!";
   const signUpMode:Boolean = true;
   const logInMode:Boolean = false;
+
+  const currentlyLoggedUser = useAppSelector(currentUser)
+  
+  useEffect(() => {
+    console.log(currentlyLoggedUser);
+  },[currentlyLoggedUser])
 
   const [authModeFlag,setAuthModeFlag] = useState(logInMode);
   const [switchModeText, setSwitchModeText] = useState(logInText)

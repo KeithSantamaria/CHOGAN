@@ -11,7 +11,7 @@ public interface IProjectService {
 
     void insert(Project project);
     void delete(String projectId);
-    void update(Project project);
+    Project update(Project project);
     Project findByProjectId(String projectId);
     List<Project> findAllByUserId(String userId);
 

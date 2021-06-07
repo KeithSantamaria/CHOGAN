@@ -82,6 +82,8 @@ class ProjectControllerTest {
     public void updateProjectTest(){
         Project project = new Project();
 
+        Mockito.when(projectService.update(project)).thenReturn(project);
+
         ResponseEntity<Project> response = projectController.updateProject(project);
 
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);

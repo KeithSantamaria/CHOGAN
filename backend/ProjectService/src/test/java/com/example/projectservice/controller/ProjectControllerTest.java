@@ -78,6 +78,15 @@ class ProjectControllerTest {
     *
     * */
 
+    @Test
+    public void updateProjectTest(){
+        Project project = new Project();
+
+        ResponseEntity<Project> response = projectController.updateProject(project);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
+    }
+
     /*
     *
     * Delete

@@ -1,5 +1,6 @@
 package com.example.projectservice.models;
 
+import com.projectservice.models.Tag;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,13 @@ class TagTest {
         tag.setTagId("Id");
         String id = tag.getTagId();
         Assertions.assertEquals(id,"Id");
+    }
+
+    @Test
+    void getTagName(){
+        tag.setTagName("Name");
+        String name = tag.getTagName();
+        Assertions.assertEquals(name,"Name");
     }
 
     @Test

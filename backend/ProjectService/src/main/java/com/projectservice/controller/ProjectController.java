@@ -24,13 +24,16 @@ public class ProjectController {
     * Create
     *
     * */
-    @PutMapping("CreateNewProject")
+
+    @PutMapping("create/project")
     public ResponseEntity<Project> createNewProject(@RequestBody Project project){
         // two possible solutions, either a successful creation or a failed creation
         try{
             projectService.insert(project);
+            log.info("Successfully created project with id: {}.",project.getProjectId());
             return new ResponseEntity<>(project,HttpStatus.CREATED);
         }catch (Exception e){
+            log.error("Failed to create new project.");
             return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

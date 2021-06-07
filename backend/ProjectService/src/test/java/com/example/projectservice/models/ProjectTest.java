@@ -1,6 +1,6 @@
 package com.example.projectservice.models;
 
-import com.projectservice.models.Project;
+import com.projectservice.models.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,6 +37,20 @@ class ProjectTest {
         project.setProjectName("Name");
         String name = project.getProjectName();
         Assertions.assertEquals(name,"Name");
+    }
+
+    @Test
+    void getProjectStatus(){
+        project.setProjectStatus("Status");
+        String status = project.getProjectStatus();
+        Assertions.assertEquals(status,"Status");
+    }
+
+    @Test
+    void getProjectDescription(){
+        project.setProjectDescription("Desc");
+        String description = project.getProjectDescription();
+        Assertions.assertEquals(description,"Desc");
     }
 
     @Test

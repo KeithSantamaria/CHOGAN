@@ -15,8 +15,9 @@ import { ESMap, Map } from "typescript";
   export interface ProjectAppState {
       projects : Array<{
         project: {
-            projectName: string,
-            projectDescription: string,
+            projectId: string;
+            projectName: string;
+            projectDescription: string;
             models: Array<{
                 model:{
                     modelId: string;
@@ -50,11 +51,42 @@ import { ESMap, Map } from "typescript";
             }>
         }
       }>;
-      sampleProjects: Array<{
+      project: {
         projectId: string;
         projectName: string;
         projectDescription: string;
-      }>;
+        models: Array<{
+            model:{
+                modelId: string;
+                modelName: string;
+                modelMetadata:Array<{
+                    // index signature https://basarat.gitbook.io/typescript/type-system/index-signatures
+                    key: string, value: string
+                }>                
+            }
+        }>,
+        endpoints: Array <{
+            endpoint: {
+                endpointId: string;
+                endpointName: string;
+                endpointUrlPattern: string;
+                endpointDescription: string;
+            }
+        }>,
+        tags: Array<{
+            tag:{
+                tagId: string;
+                tagName: string;
+                tagDescription: string;
+            }
+        }>,
+        userStories: Array<{
+            userStory: {
+                userStoryId: string;
+                userStoryDescription: string;
+            }
+        }>
+        };
       model:{
         modelId: string;
         modelName: string;
@@ -78,6 +110,7 @@ import { ESMap, Map } from "typescript";
         userStoryId: string;
         userStoryDescription: string;
       };
+
       createNewEndPointForm: {endpointName: string, urlPattern: string, endpointDescription: string};
       createNewPojoForm: {pojoName: string};
       createNewUserStory: {userStoryName: string};
@@ -90,15 +123,42 @@ import { ESMap, Map } from "typescript";
 
   const initialState: ProjectAppState = {
     projects: [],
-      sampleProjects: [{
-        projectId: "12345",
-        projectName: "Sample Project from Store",
-        projectDescription: "This project is the base project in redux-store This project is the base project in redux-store This project is the base project in redux-store",
-      }, {
-        projectId: "22345",
-        projectName: "Sample 2 from Store",
-        projectDescription: "This project is the base project in redux-store",
-      }],
+    project: {
+        projectId: "",
+        projectName: "",
+        projectDescription: "",
+        // models:{
+        //     model:{
+        //         modelId: "",
+        //         modelName: "",
+        //         modelMetadata: {
+        //             // index signature https://basarat.gitbook.io/typescript/type-system/index-signatures
+        //             key: "", value: "",
+        //         },              
+        //     },
+        // },
+        // endpoints: {
+        //     endpoint: {
+        //         endpointId: "",
+        //         endpointName: "",
+        //         endpointUrlPattern: "",
+        //         endpointDescription: "",
+        //     }
+        // },
+        // tags: {
+        //     tag:{
+        //         tagId: "",
+        //         tagName: "",
+        //         tagDescription: "",
+        //     }
+        // },
+        // userStories: {
+        //     userStory: {
+        //         userStoryId: "",
+        //         userStoryDescription: "",
+        //     }
+        // }
+        },
       model:{
         modelId: "",
         modelName: "",

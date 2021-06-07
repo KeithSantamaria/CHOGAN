@@ -2,13 +2,15 @@ import React, { useMemo } from 'react'
 import axios from 'axios';
 import ProjectSideNav from './ProjectSideNav'
 import { useAppDispatch } from "../redux/hooks"
-import { Jumbotron, Card, Button } from 'react-bootstrap';
+import { Jumbotron, Card, Button, Modal } from 'react-bootstrap';
 
 // For production, project will be passed as a prop from Project Card (built by Home group)
 
 // const ProjectGeneralInfo = ({project} : any ) => {
 const ProjectGeneralInfo = () => {
 
+    const [modalShow, setModalShow] = React.useState(false);
+    
     const [project, setProject] = React.useState("");
     const [projectId, setProjectId] = React.useState("");
     const [projectName, setProjectName] = React.useState("");
@@ -24,6 +26,8 @@ const ProjectGeneralInfo = () => {
   
     // Code for grabbing user from User Slice
 
+    const handleOpen = () => setModalShow(true);
+    const handleClose = () => setModalShow(false);
 
     const getProject = () => {
         // Test query string works; comment when ready to test prod
@@ -46,7 +50,7 @@ const ProjectGeneralInfo = () => {
           });
       };
 
-      
+
 
       // const updateProjectStatus = (event: any, project: any) => {
       //   const queryString = `http://localhost:42069/api/update/project/status`;
@@ -78,23 +82,46 @@ const ProjectGeneralInfo = () => {
         getProject();
       }, []);
 
-    
+      const widgetModal = () => {        
+        return (
+            <Modal
+                size="lg"   
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                show={modalShow}
+                onHide={handleClose}
+            >
+                <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+                    Create New Widget
+                </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+
+                </Modal.Body>
+                <Modal.Footer>
+                 <Button onClick={ handleClose }>Close</Button>
+                </Modal.Footer>
+          </Modal>
+        )
+    }
     return (
         <div>
+          {/* <ProjectSideNav /> */}
+          <Card>
+            <Card.Body>
+              {/* <Card.Title>{userAppState.user.userName} - {projectName}</Card.Title> */}
+              <Card.Title>{projectName}</Card.Title>
 
-            <ProjectSideNav />
-            <Card>
-              <Card.Body>
-                {/* <Card.Title>{userAppState.user.userName} - {projectName}</Card.Title> */}
-                <Card.Title>{projectName}</Card.Title>
-
-                <Card.Text>
-                  {projectDescription}
-                </Card.Text>
-              </Card.Body>
-            </Card>
-
-
+              <Card.Text>
+                {projectDescription}
+              </Card.Text>
+            </Card.Body>
+          </Card>
+          <Button variant="primary" onClick={handleOpen}>
+            New Widget
+          </Button>
+          {widgetModal()}
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import react, {useState} from "react";
 import {useForm} from "./loginFormLogic"
 import 'bootstrap/dist/css/bootstrap.css';
-import '../css/login.css'
+import '../css/authentication/login.css'
 
 export default function LoginForm(){
 

@@ -1,5 +1,6 @@
 package com.example.projectservice.models;
 
+import com.projectservice.models.Model;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

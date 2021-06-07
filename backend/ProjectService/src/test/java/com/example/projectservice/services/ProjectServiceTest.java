@@ -5,14 +5,20 @@ import com.projectservice.repository.ProjectRepo;
 import com.projectservice.services.ProjectService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.SpringBootConfiguration;
 
-@SpringBootTest
+@SpringBootConfiguration
 class ProjectServiceTest {
 
     private ProjectRepo projectRepo = Mockito.mock(ProjectRepo.class);
 
     private ProjectService projectService = new ProjectService(projectRepo);
+
+    /*
+    *
+    * Create
+    *
+    * */
 
     @Test
     public void insertTest(){
@@ -20,5 +26,24 @@ class ProjectServiceTest {
 
         projectService.insert(project);
     }
+
+    /*
+    *
+    * Read
+    *
+    * */
+
+    /*
+    *
+    * Update
+    *
+    * */
+
+    /*
+    *
+    * Delete
+    *
+    * */
+
 
 }

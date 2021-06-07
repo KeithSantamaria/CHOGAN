@@ -90,4 +90,9 @@ public class ProjectController {
     *
     * */
 
+    @DeleteMapping("delete/project")
+    public ResponseEntity<Project> deleteProject(@RequestParam String projectId){
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

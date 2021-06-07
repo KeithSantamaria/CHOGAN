@@ -1,15 +1,18 @@
+
+
 .home-container-wrapper {
     margin-top: 2em;
     margin-left:2em;
-    /* width: 100vh; */
     background-color: #fafafa;
     border-radius: 10px 10px 0 0;
+    height: 97vh;
+    overflow: scroll;
+    top: 0; 
+    left: 0;
 }
 
 .user-container-wrapper {
-    /* position: fixed; */
     height: 100px;
-    
 }
 
 .tabs-container-wrapper {
@@ -38,7 +41,7 @@
 }
 
 .proj-info-wrapper span {
-    padding-left: 5em;
+    padding-left: 2em;
 }
 
 .folder-container-wrapper {
@@ -85,41 +88,10 @@
   flex-direction: column;
 }
 
-.proj-card-wrapper {
-    margin-top: 2em;
-    height: 250px;
-    width: 250px;
-    background-color: white;
-    box-shadow: 0 0 35px rgba(8, 8, 8, 0.1)  ; 
-	-webkit-box-shadow: 0 0 35px rgba(8, 8, 8, 0.1)  ; 
-	-moz-box-shadow: 0 0 35px rgba(8, 8, 8, 0.1)  ; 
-    border-radius: 10px;
-}
 
 .card-footer:last-child {
     border-radius: 20px;
     
-}
-
-.proj-card-wrapper .row {
-    margin-left: 0;
-}
-
-.proj-card-wrapper .elipsis-btn-wrapper {
-    padding-top: 1em;
-    text-align: right; 
-    display:block;
-    padding-right: 1em;
-} 
-
-.proj-card-wrapper {
-    padding-left: 1em;
-    padding-top: 1em;
-}
-
-.proj-card-name {
-    font-weight: bold;
-    font-size: 20px;
 }
 
 .proj-card-tags {
@@ -152,7 +124,7 @@
 }
 
 .card-container-wrapper {
-    height: 250px;
+    height: 200px;
     transition: 0.5s ease-in-out;
 }
 
@@ -207,13 +179,13 @@
 }
 
 .sort {
-    font-weight: bold;
+    font-weight:400;
     transition: 0.2 ease-in-out;
     color: black;
 }
 
 .sort-active {
     color: #F26925;
-    font-weight: bold;
+    font-weight: 400;
     transition: 0.2 ease-in-out;
 }

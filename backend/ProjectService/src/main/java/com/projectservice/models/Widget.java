@@ -1,2 +1,6 @@
-package com.projectservice.models;public class Widget {
+package com.projectservice.models;
+/**
+* Pojo for Widgets
+* */
+public class Widget {
 }

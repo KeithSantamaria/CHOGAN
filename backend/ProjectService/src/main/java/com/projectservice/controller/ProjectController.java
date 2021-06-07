@@ -80,7 +80,8 @@ public class ProjectController {
      */
     @PostMapping("update/project")
     public ResponseEntity<Project> updateProject(@RequestBody Project project){
-        return new ResponseEntity<>(project,HttpStatus.OK);
+        Project updatedProject = projectService.update(project);
+        return new ResponseEntity<>(updatedProject,HttpStatus.OK);
     }
 
     /*

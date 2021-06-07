@@ -76,8 +76,8 @@ public class ProjectService implements IProjectService {
      * @param project The project to update and the updated version
      */
     @Override
-    public void update(Project project) {
-
+    public Project update(Project project) {
+        return null;
     }
 
     /*

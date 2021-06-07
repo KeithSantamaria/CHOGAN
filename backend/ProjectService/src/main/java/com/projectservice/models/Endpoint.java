@@ -1,4 +1,4 @@
-package com.example.projectservice.models;
+package com.projectservice.models;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Document
 public class Endpoint {
-    @Id
+//    @Id
     private String endpointId;
     private String endpointName;
     private String endpointUrlPattern;

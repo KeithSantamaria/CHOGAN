@@ -1,4 +1,4 @@
-package com.example.projectservice.models;
+package com.projectservice.models;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -14,10 +14,10 @@ import java.util.Map;
 @Data
 @Document
 public class Tag {
-    @Id
+//    @Id
     private String tagId;
+    private String tagName;
     private Map<String, List<String>> techs;
-
     /*
     frontend
 

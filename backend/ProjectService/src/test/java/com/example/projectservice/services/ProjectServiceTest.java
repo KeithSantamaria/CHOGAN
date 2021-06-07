@@ -1,7 +1,8 @@
 package com.example.projectservice.services;
 
-import com.example.projectservice.models.Project;
-import com.example.projectservice.repository.ProjectRepo;
+import com.projectservice.models.Project;
+import com.projectservice.repository.ProjectRepo;
+import com.projectservice.services.ProjectService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;

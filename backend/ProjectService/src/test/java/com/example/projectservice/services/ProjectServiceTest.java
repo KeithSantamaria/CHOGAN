@@ -51,6 +51,18 @@ class ProjectServiceTest {
     *
     * */
 
+    @Test
+    public void updateProjectTest(){
+        Project project = new Project();
+
+        Mockito.when(projectRepo.save(project)).thenReturn(project);
+
+        Project updatedProject = projectService.update(project);
+
+        Assertions.assertEquals(updatedProject,project);
+    }
+
+
     /*
     *
     * Delete

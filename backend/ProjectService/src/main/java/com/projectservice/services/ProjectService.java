@@ -77,7 +77,7 @@ public class ProjectService implements IProjectService {
      */
     @Override
     public Project update(Project project) {
-        return null;
+        return projectRepo.save(project);
     }
 
     /*

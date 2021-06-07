@@ -1,7 +1,7 @@
 import react, {useState} from "react";
 import {useForm} from "./loginFormLogic"
 import 'bootstrap/dist/css/bootstrap.css';
-import '../css/login.css'
+import '../../css/authentication/login.css'
 
 export default function LoginForm(){
 
@@ -22,7 +22,7 @@ export default function LoginForm(){
 return(
     <form onSubmit ={onSubmit}>
         <div className="form-group">
-            <label>Username</label>
+            <label className = "text-center">Sign In</label>
             <input
                 className="form-control center"
                 name='email'

@@ -1,6 +1,7 @@
 import react, {useState} from "react";
 import {useForm} from "./loginFormLogic"
-
+import 'bootstrap/dist/css/bootstrap.css';
+import '../css/login.css'
 
 export default function LoginForm(){
 
@@ -20,9 +21,10 @@ export default function LoginForm(){
 
 return(
     <form onSubmit ={onSubmit}>
-        <div>
+        <div className="form-group">
             <label>Username</label>
             <input
+                className="form-control center"
                 name='email'
                 id='email'
                 type='email'
@@ -30,8 +32,10 @@ return(
                 onChange={onChange}
                 required
                 />
-
+        </div>
+        <div className="form-group">
             <input
+                className="form-control center"
                 name='password'
                 id='password'
                 type='password'
@@ -39,8 +43,9 @@ return(
                 onChange={onChange}
                 required
             />
-            <button type='submit'>Login</button>
+            
         </div>
+        <button className="btn btn-primary btn-block center" type='submit'>Login</button>
     </form>
 );
 }

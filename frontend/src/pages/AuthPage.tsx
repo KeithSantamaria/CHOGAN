@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {Button, Container, Col} from 'react-bootstrap';
+
+import LoginForm from '../components/loginForm';
 import '../css/authentication/AuthPage.css'
 
 const AuthPage:React.FC = () => {
@@ -24,7 +26,7 @@ const AuthPage:React.FC = () => {
 
   const RenderForm = () => {
     if(authModeFlag === logInMode){
-      return <p>Login</p>
+      return <LoginForm/>
     }
     else{
       return <p>SignUp</p>

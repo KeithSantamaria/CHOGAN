@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {Button, Modal, Form} from "react-bootstrap";
 import "../../../css/home/PopUpModal/editProject.css"
 

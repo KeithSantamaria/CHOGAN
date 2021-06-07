@@ -73,6 +73,16 @@ public class ProjectController {
     *
     * */
 
+    /**
+     * Updates a project with the entered project
+     * @param project The updated project
+     * @return The status of the update. Will always to true
+     */
+    @PostMapping("update/project")
+    public ResponseEntity<Project> updateProject(@RequestBody Project project){
+        return new ResponseEntity<>(project,HttpStatus.OK);
+    }
+
     /*
     *
     * Delete

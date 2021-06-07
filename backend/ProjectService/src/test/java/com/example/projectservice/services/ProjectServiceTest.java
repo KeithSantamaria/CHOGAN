@@ -69,5 +69,11 @@ class ProjectServiceTest {
     *
     * */
 
+    @Test
+    public void deleteProjectTest(){
+        String projectId = "Id";
+
+        projectService.delete(projectId);
+    }
 
 }

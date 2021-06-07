@@ -94,4 +94,13 @@ class ProjectControllerTest {
     * Delete
     *
     * */
+
+    @Test
+    public void deleteProjectTest(){
+        String projectId = "Id";
+
+        ResponseEntity<Project> response = projectController.deleteProject(projectId);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
+    }
 }

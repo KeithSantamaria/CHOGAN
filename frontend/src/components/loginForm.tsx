@@ -22,7 +22,7 @@ export default function LoginForm(){
 return(
     <form onSubmit ={onSubmit}>
         <div className="form-group">
-            <label>Username</label>
+            <label className = "text-center">Sign In</label>
             <input
                 className="form-control center"
                 name='email'

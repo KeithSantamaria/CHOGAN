@@ -3,6 +3,12 @@
     padding: 10px;
   }
 
+.text-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .form-inline {
     width: 100%;
   }
@@ -16,7 +22,7 @@
   }
   
   .form-control {
-    width: 50% !important;
+    width: 100% !important;
     border: 3px solid #72a4c2;
   }
 

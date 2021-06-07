@@ -50,6 +50,7 @@ const AuthPage:React.FC = () => {
       </Col>
 
       <Col xs = {9} md = {5} className = "auth-page-right-pane">
+        <div className = "render-right-pane">
         <div className = "render-form"><RenderForm/></div>
         <Button 
           className ="switch-auth-mode-button" 
@@ -58,6 +59,7 @@ const AuthPage:React.FC = () => {
         >
           {switchModeText}
         </Button>
+        </div>
       </Col>
     </Container>
   )

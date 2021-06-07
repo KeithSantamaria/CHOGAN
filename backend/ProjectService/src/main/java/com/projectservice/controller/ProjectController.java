@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 /**
  * Controller for handling all project related endpoints
@@ -76,7 +75,7 @@ public class ProjectController {
     /**
      * Updates a project with the entered project
      * @param project The updated project
-     * @return The status of the update. Will always to true
+     * @return The status of the response. Will always be OK
      */
     @PostMapping("update/project")
     public ResponseEntity<Project> updateProject(@RequestBody Project project){
@@ -90,8 +89,14 @@ public class ProjectController {
     *
     * */
 
+    /**
+     * Deletes a project with the given Id
+     * @param projectId The id of the project to delete
+     * @return The status of the response, will always be OK
+     */
     @DeleteMapping("delete/project")
     public ResponseEntity<Project> deleteProject(@RequestParam String projectId){
+        projectService.delete(projectId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

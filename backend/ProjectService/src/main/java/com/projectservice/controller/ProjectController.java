@@ -1,6 +1,7 @@
 package com.projectservice.controller;
 
 import com.projectservice.models.Project;
+import com.projectservice.models.Widget;
 import com.projectservice.services.IProjectService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -77,12 +78,19 @@ public class ProjectController {
      * @param project The updated project
      * @return The status of the response. Will always be OK
      */
-    @PostMapping("update/project")
+    @PutMapping("update/project")
     public ResponseEntity<Project> updateProject(@RequestBody Project project){
         Project updatedProject = projectService.update(project);
         return new ResponseEntity<>(updatedProject,HttpStatus.OK);
     }
 
+    @PutMapping("update")
+    public ResponseEntity<Project> updateProjectWidgets(@RequestBody Widget widget, String projectId){
+        Project project = projectService.findByProjectId(projectId);
+        project.getWidgets().add(widget);
+        projectService.update(project);
+        return new ResponseEntity<>(project,HttpStatus.OK);
+    }
     /*
     *
     * Delete

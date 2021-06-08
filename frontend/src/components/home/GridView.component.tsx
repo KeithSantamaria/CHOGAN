@@ -2,13 +2,20 @@ import React, {useState, useEffect} from 'react';
 import FolderCard from '../../components/home/FolderCard.component';
 import ProjectCard from '../../components/home/ProjectCard.component';
 
-import {Col, Row} from 'react-bootstrap';
+import {Button, Col, Form, Row} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
+import {faPlus, faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
+import Modal from "react-bootstrap/Modal";
+import CreateProjectForm from "./form/CreateProjectForm";
 
 export default function GridView(props: any) {
     const [active, setActive] = useState(false);
     const [sortedArray, setSortedArray] = useState([]);
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     useEffect(() => {
         if(active) {
@@ -31,6 +38,23 @@ export default function GridView(props: any) {
             console.log("Not" + JSON.stringify(sortedArray));
         }
         return null;
+    }
+
+    const createModal=()=>{
+        return(
+            <Modal
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>New Project</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <CreateProjectForm handleClose={handleClose}/>
+                </Modal.Body>
+            </Modal>
+            )
     }
 
     let className='sort';
@@ -75,7 +99,9 @@ export default function GridView(props: any) {
             <hr/>
 
             <ProjectCard projects= {sortedArray}/>
+            <FontAwesomeIcon icon={faPlus} className="" onClick={handleShow}/>
 
+            {createModal()}
         </>
     );
 }

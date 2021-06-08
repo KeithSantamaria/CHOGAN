@@ -1,0 +1,52 @@
+.auth-page-overall {
+  background-color: blueviolet;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: 100vh;
+  padding: 0;
+}
+
+.auth-page-left-pane {
+  background-color: darkcyan;
+}
+
+.auth-page-right-pane {
+  background-color:  #474C55;
+}
+
+.welcome-to-chogan-text{
+  padding-top: 20%;
+  color: white;
+  text-align: center;
+  font-size: 100px;
+}
+
+.welcome-bottom-text{
+  color: white;
+  text-align: center;
+  font-size: 45px;
+
+}
+
+.switch-auth-mode-button{
+  margin: 0;
+  color: black;
+}
+
+.switch-auth-mode-button:hover{
+  color: black;
+}
+
+.render-form{
+  margin: 20px;
+}
+
+.render-right-pane{
+  background-color: white;
+  border-radius: 10px;
+  position: absolute;
+  top: 35%;
+  left: 35%;
+  min-width: 300px;
+}

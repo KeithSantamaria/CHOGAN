@@ -41,7 +41,7 @@ export default function Home() {
     }
 
   return (
-    <div>
+    <div className="body">
         <Row>
             <Col sm={9} className="home-container-wrapper">
                 <Row className="tabs-container-wrapper">
@@ -53,7 +53,7 @@ export default function Home() {
                     <Col className="proj-info-wrapper">
                         <div style={{float: 'right'}}>
                             <span>Projects {projects.length}</span>
-                            <span>Folders 2</span>
+                            {/* <span>Folders 2</span> */}
                         </div>
                     </Col>
                 </Row>

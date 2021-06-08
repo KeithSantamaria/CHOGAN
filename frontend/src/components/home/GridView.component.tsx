@@ -42,7 +42,7 @@ export default function GridView(props: any) {
 
     return (
         <>
-            <Row className="folder-container-wrapper">
+            {/* <Row className="folder-container-wrapper">
                 <Col style={{paddingBottom: '15px'}}>
                     <span>Folders</span>
                 </Col>
@@ -56,13 +56,23 @@ export default function GridView(props: any) {
                 </Col>
             </Row>
 
-            <FolderCard folders={props.folders}/>
+            <FolderCard folders={props.folders}/> */}
 
             <Row className="project-container-wrapper">
                 <Col>
                     <span>Projects</span>
                 </Col>
+
+                <Col className="row-2-col-2" >
+                    <div style={{float: 'right'}} className={className + " grid-sort-down"} onClick={toggle}>
+                        <span style={{paddingRight: '8px'}}>Name</span>
+                        {active ? <FontAwesomeIcon className="fa-icon fa-1x" icon={faSortDown}/> : <FontAwesomeIcon className="fa-icon fa-1x" icon={faSortUp}/>}
+                    </div>
+                    
+                </Col>
             </Row>
+
+            <hr/>
 
             <ProjectCard projects= {sortedArray}/>
 

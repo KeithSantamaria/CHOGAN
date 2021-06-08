@@ -1,1 +1,92 @@
-hi sam
+.modal-create-wrapper .modal-content {
+    background-color: #2f3545;
+    height: 70vh;
+    color: #f5f5f5;
+}
+
+.modal-create-wrapper .modal-header {
+    border-bottom: none;
+    color: #f5f5f5;
+}
+
+.modal-create-wrapper .modal-header .close {
+    color: #f5f5f5;
+}
+
+.create-proj-form-container .form-control {
+    background-color: #1c2331;
+    border: none;
+    color: #f5f5f5;
+}
+
+.create-proj-form-container h1 {
+    font-weight: bold;
+}
+
+.create-proj-form-container .btn-primary {
+    background-color: #5a6dd3;
+    border: none;
+}
+
+.create-proj-form-container .btn-primary:hover {
+    background-color: #72a4c2;
+    transition: 0.3 ease-in-out;
+}
+
+.create-proj-form-container .btn-outline {
+    border: 1px solid white;
+    color: #f5f5f5;
+}
+
+.create-proj-form-container .btn-outline:hover {
+    background-color: #fcb414;
+    color: #f5f5f5;
+    transition: 0.3 ease-in-out;
+
+}
+
+.create-proj-form-container .modal-create-form-textarea {
+    resize: none;
+}
+
+.create-proj-form-container .btn-group-wrapper {
+    padding-top: 2em;
+}
+
+.create-proj-form-container .project-name-wrapper {
+    padding-top: 2em;
+}
+
+.btn-group-wrapper span {
+    padding-right: 1.5em;
+}
+
+.fa-icon-new-proj-wrapper .btn {
+    height: 60px;
+    width: 60px;
+    background-color: #fcb414;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2)  ; 
+	-webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2)  ; 
+	-moz-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2)  ; 
+}
+
+.fa-icon-new-proj-wrapper .btn:hover {
+    transition: 0.5 ease-in-out;
+    transform: scale(1.05);
+}
+
+.fa-icon-new-proj-wrapper .btn:active {
+    background-color: #fcb414;
+    border: none;
+}
+
+.fa-icon-new-proj-wrapper .fa-icon-make-new-proj {
+    color: white;
+}
+
+.fa-icon-new-proj-wrapper {
+    position: fixed;
+    margin-top: 65vh;
+}

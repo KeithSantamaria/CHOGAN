@@ -1,14 +1,22 @@
-import React, {useState, useEffect} from 'react';
-import FolderCard from '../../components/home/FolderCard.component';
+import {useState, useEffect} from 'react';
+// import FolderCard from '../../components/home/FolderCard.component';
 import ProjectCard from '../../components/home/ProjectCard.component';
 
-import {Col, Row} from 'react-bootstrap';
+import {Button, Col, Row, Modal} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
+import {faPlus, faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
+
+import CreateProjectForm from "../home/form/CreateProjectForm";
+import '../../css/home/create-new-project.css';
 
 export default function GridView(props: any) {
     const [active, setActive] = useState(false);
     const [sortedArray, setSortedArray] = useState([]);
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     useEffect(() => {
         if(active) {
@@ -38,6 +46,25 @@ export default function GridView(props: any) {
         className += ' sort-active';
     } else {
         className='sort';
+    }
+
+    const createModal=()=>{
+        return(
+            <Modal
+                className="modal-create-wrapper"
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+                size="lg"
+            >
+                <Modal.Header closeButton>
+                    {/* <Modal.Title>New Project</Modal.Title> */}
+                </Modal.Header>
+                <Modal.Body>
+                    <CreateProjectForm handleClose={handleClose}/>
+                </Modal.Body>
+            </Modal>
+        )
     }
 
     return (
@@ -74,8 +101,23 @@ export default function GridView(props: any) {
 
             <hr/>
 
-            <ProjectCard projects= {sortedArray}/>
+            <Row>
+                <Col xs={11}>
+                    <ProjectCard projects= {sortedArray}/>
+                </Col>
 
+                <Col xs={1}>
+                    <span className="fa-icon-new-proj-wrapper">
+                        <span className="fa-icon-new-proj-wrapper-1">
+                            <Button onClick={handleShow}>
+                                <FontAwesomeIcon icon={faPlus} className="fa-icon-make-new-proj fa-2x" />
+                            </Button>
+                        </span>
+                    </span>
+                    
+                    {createModal()}
+                </Col>
+            </Row>
         </>
     );
 }

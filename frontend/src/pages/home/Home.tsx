@@ -7,7 +7,6 @@ import {Col, Row} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTh, faList} from "@fortawesome/free-solid-svg-icons";
 
-
 export default function Home() {
     /**
      * Mock Data
@@ -17,6 +16,11 @@ export default function Home() {
         {id: 2, name: 'cProject1', des: 'Project Chogansadasdasdasda', tags: ["React", "Docker", "Java"]},
         {id: 3, name: 'bProject1', des: 'Project Chogan', tags: ["React", "Docker"]},
         {id: 4, name: 'aProject1', des: 'Project Chogan', tags: ["React", "Java"]},
+        {id: 5, name: 'aProject1', des: 'Project Chogan', tags: ["React", "Java"]},
+        {id: 6, name: 'aProject1', des: 'Project Chogan', tags: ["React", "Java"]},
+        {id: 7, name: 'aProject1', des: 'Project Chogan', tags: ["React", "Java"]},
+        {id: 8, name: 'aProject1', des: 'Project Chogan', tags: ["React", "Java"]},
+
     ]);
 
     const [folders, setFolders] = useState([
@@ -24,7 +28,6 @@ export default function Home() {
         {id: 2, name: 'Work'},
         {id: 3, name: 'School'},
         {id: 4, name: 'Work'},
- 
     ]);
 
     const [tabs, setTabs] = useState("grid");

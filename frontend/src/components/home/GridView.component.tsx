@@ -1,12 +1,13 @@
-import React, {useState, useEffect} from 'react';
-import FolderCard from '../../components/home/FolderCard.component';
+import {useState, useEffect} from 'react';
+// import FolderCard from '../../components/home/FolderCard.component';
 import ProjectCard from '../../components/home/ProjectCard.component';
 
-import {Button, Col, Form, Row} from 'react-bootstrap';
+import {Button, Col, Row, Modal} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPlus, faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
-import Modal from "react-bootstrap/Modal";
-import CreateProjectForm from "./form/CreateProjectForm";
+
+import CreateProjectForm from "../home/form/CreateProjectForm";
+import '../../css/home/create-new-project.css';
 
 export default function GridView(props: any) {
     const [active, setActive] = useState(false);
@@ -40,28 +41,30 @@ export default function GridView(props: any) {
         return null;
     }
 
-    const createModal=()=>{
-        return(
-            <Modal
-                show={show}
-                onHide={handleClose}
-                backdrop="static"
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title>New Project</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <CreateProjectForm handleClose={handleClose}/>
-                </Modal.Body>
-            </Modal>
-            )
-    }
-
     let className='sort';
     if(active) {
         className += ' sort-active';
     } else {
         className='sort';
+    }
+
+    const createModal=()=>{
+        return(
+            <Modal
+                className="modal-create-wrapper"
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+                size="lg"
+            >
+                <Modal.Header closeButton>
+                    {/* <Modal.Title>New Project</Modal.Title> */}
+                </Modal.Header>
+                <Modal.Body>
+                    <CreateProjectForm handleClose={handleClose}/>
+                </Modal.Body>
+            </Modal>
+        )
     }
 
     return (
@@ -98,10 +101,23 @@ export default function GridView(props: any) {
 
             <hr/>
 
-            <ProjectCard projects= {sortedArray}/>
-            <FontAwesomeIcon icon={faPlus} className="" onClick={handleShow}/>
+            <Row>
+                <Col xs={11}>
+                    <ProjectCard projects= {sortedArray}/>
+                </Col>
 
-            {createModal()}
+                <Col xs={1}>
+                    <span className="fa-icon-new-proj-wrapper">
+                        <span className="fa-icon-new-proj-wrapper-1">
+                            <Button onClick={handleShow}>
+                                <FontAwesomeIcon icon={faPlus} className="fa-icon-make-new-proj fa-2x" />
+                            </Button>
+                        </span>
+                    </span>
+                    
+                    {createModal()}
+                </Col>
+            </Row>
         </>
     );
 }

@@ -14,7 +14,8 @@ function ProjectModels() {
     const dispatch = useAppDispatch();
     
     const getProject = () => {
-        // Test query string works; comment when ready to test prod
+        const formdata = projectAppState.createNewPojoForm;
+        // Test query string works; comment when ready to test prod;
         const queryString = `http://localhost:42069/api/read/project?projectId=60bc36b65d2b0da1deb9ada2`;
 
         // Production query string; uncomment when ready to test prod
@@ -64,12 +65,6 @@ function ProjectModels() {
             <Card>
               <Card.Body>
               <Card.Title>{model.modelName}</Card.Title>
-                {model.modelMetadata.foreach((
-                    <Card.Text>  
-                        
-                    </Card.Text>
-                    )
-                )}
             </Card.Body>
           </Card>
           );

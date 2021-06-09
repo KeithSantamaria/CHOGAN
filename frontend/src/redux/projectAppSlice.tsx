@@ -100,7 +100,7 @@ import { ESMap, Map } from "typescript";
                 widgetDescription: string;
             }
         }>
-    };
+      };
       model:{
         modelId: string;
         modelName: string;
@@ -348,6 +348,15 @@ import { ESMap, Map } from "typescript";
           console.log("Dispatching setProject reducer with aciton: ", action);
           state.projects = action.payload;
         },
+
+        setProjectEndpointsState: (state, action) => {
+            state.project.endpoints = action.payload;
+        },
+
+        setProjectWidgetsState: (state, action) => {
+            state.project.widgets = [...action.payload];
+        },
+
         setCreateNewEndPointForm: (state, action: {payload: {
             fieldName: string; value: string}                
         }) => {
@@ -408,10 +417,17 @@ import { ESMap, Map } from "typescript";
             console.log(`Setting ${fieldName} to ${value}`);
             state.createNewWidgetForm = {...state.createNewWidgetForm, [fieldName]: value};
         },  
+        resetCreateNewWidgetForm: (state) => {
+            state.createNewWidgetForm.widgetName = "";
+            state.createNewWidgetForm.widgetDescription = "";
+        }
     },
   });
 
   export const {
+    resetCreateNewWidgetForm,
+    setProjectWidgetsState,
+    setProjectEndpointsState,
     setProject,
     setEndpoint,
     setCreateNewEndPointForm,

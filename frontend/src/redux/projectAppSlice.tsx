@@ -62,44 +62,44 @@ import { ESMap, Map } from "typescript";
         projectName: string;
         projectDescription: string;
         projectStatus: string;
-        models: Array<{
-            model:{
-                modelId: string;
-                modelName: string;
-                modelMetadata:Array<{
-                    // index signature https://basarat.gitbook.io/typescript/type-system/index-signatures
-                    key: string, value: string
-                }>                
-            }
-        }>,
-        endpoints: Array <{
-            endpoint: {
-                endpointId: string;
-                endpointName: string;
-                endpointUrlPattern: string;
-                endpointDescription: string;
-            }
-        }>,
-        tags: Array<{
-            tag:{
-                tagId: string;
-                tagName: string;
-                tagDescription: string;
-            }
-        }>,
-        userStories: Array<{
-            userStory: {
-                userStoryId: string;
-                userStoryDescription: string;
-            }
-        }>,
-        widgets: Array<{
-            widget: {
-                widgetName: string;
-                widgetDescription: string;
-            }
-        }>
-      };
+    //     models: Array<{
+    //         model:{
+    //             modelId: string;
+    //             modelName: string;
+    //             modelMetadata:Array<{
+    //                 // index signature https://basarat.gitbook.io/typescript/type-system/index-signatures
+    //                 key: string, value: string
+    //             }>                
+    //         }
+    //     }>,
+    //     endpoints: Array <{
+    //         endpoint: {
+    //             endpointId: string;
+    //             endpointName: string;
+    //             endpointUrlPattern: string;
+    //             endpointDescription: string;
+    //         }
+    //     }>,
+    //     tags: Array<{
+    //         tag:{
+    //             tagId: string;
+    //             tagName: string;
+    //             tagDescription: string;
+    //         }
+    //     }>,
+    //     userStories: Array<{
+    //         userStory: {
+    //             userStoryId: string;
+    //             userStoryDescription: string;
+    //         }
+    //     }>,
+    //     widgets: Array<{
+    //         widget: {
+    //             widgetName: string;
+    //             widgetDescription: string;
+    //         }
+    //     }>
+    //   };
       model:{
         modelId: string;
         modelName: string;

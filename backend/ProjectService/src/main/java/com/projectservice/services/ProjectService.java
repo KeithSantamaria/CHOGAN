@@ -37,17 +37,6 @@ public class ProjectService implements IProjectService {
      *
      */
 
-    /**
-     * Finds all projects under a given user Id
-     * @param userId
-     * @return A list of all projects under the given user
-     */
-    @Override
-    public List<Project> findAllByUserId(String userId) {
-        return null;
-    }
-
-
     /*
      *
      * Read

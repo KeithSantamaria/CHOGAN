@@ -110,7 +110,7 @@ public class EndpointControllerTest {
 
         Mockito.when(endpointService.update(endpoint)).thenReturn(endpoint);
 
-        ResponseEntity<Endpoint> response = endpointController.updateEndpoint(endpoint);
+        ResponseEntity<List<Endpoint>> response = endpointController.updateEndpoint(endpoint);
 
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
     }
@@ -121,7 +121,7 @@ public class EndpointControllerTest {
 
         Mockito.when(endpointService.update(endpoint)).thenReturn(null);
 
-        ResponseEntity<Endpoint> response = endpointController.updateEndpoint(endpoint);
+        ResponseEntity<List<Endpoint>> response = endpointController.updateEndpoint(endpoint);
 
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
     }

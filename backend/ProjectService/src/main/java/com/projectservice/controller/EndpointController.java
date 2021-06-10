@@ -95,14 +95,14 @@ public class EndpointController {
      * @return The updated endpoint in a response entity
      */
     @PutMapping("/update/project/endpoint")
-    public ResponseEntity<Endpoint> updateEndpoint(@RequestBody Endpoint endpoint){
+    public ResponseEntity<List<Endpoint>> updateEndpoint(@RequestBody Endpoint endpoint){
         Endpoint updatedEndpoint = endpointService.update(endpoint);
         if (updatedEndpoint == null){
             log.error("No such endpoint found of endpointId : {}",endpoint.getEndpointId());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         log.info("Successfully updated endpoint of endpointId : {}",endpoint.getEndpointId());
-        return new ResponseEntity<>(updatedEndpoint, HttpStatus.OK);
+        return new ResponseEntity<>(endpointService.findAllByProjectId(updatedEndpoint.getProjectId()), HttpStatus.OK);
     }
 
     /*

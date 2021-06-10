@@ -111,7 +111,7 @@ public class ModelControllerTest {
 
         Mockito.when(modelService.updateModel(model)).thenReturn(model);
 
-        ResponseEntity<Model> response = modelController.updateModel(model);
+        ResponseEntity<List<Model>> response = modelController.updateModel(model);
 
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
     }
@@ -122,7 +122,7 @@ public class ModelControllerTest {
 
         Mockito.when(modelService.updateModel(model)).thenReturn(null);
 
-        ResponseEntity<Model> response = modelController.updateModel(model);
+        ResponseEntity<List<Model>> response = modelController.updateModel(model);
 
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
     }

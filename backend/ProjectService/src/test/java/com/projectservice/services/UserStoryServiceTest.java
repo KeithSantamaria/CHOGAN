@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class UserStoryServiceTest {
 
@@ -43,6 +46,19 @@ public class UserStoryServiceTest {
         Assertions.assertEquals(foundUserStory,userStory);
     }
 
+    @Test
+    void findByProjectIdTest(){
+        String projectId = "Id";
+        List<UserStory> list = new ArrayList<>();
+        list.add(new UserStory());
+
+        Mockito.when(userStoryRepo.findByProjectId(projectId)).thenReturn(list);
+
+        List<UserStory> foundList = userStoryService.findByProjectId(projectId);
+
+        Assertions.assertEquals(foundList,list);
+    }
+    
     /*
     *
     * Update

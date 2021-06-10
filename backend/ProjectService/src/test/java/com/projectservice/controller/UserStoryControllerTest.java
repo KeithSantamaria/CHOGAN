@@ -9,6 +9,7 @@ import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserStoryControllerTest {
@@ -71,6 +72,20 @@ public class UserStoryControllerTest {
 
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @Test
+    void readUserStoriesTest(){
+        String projectId = "Id";
+        List<UserStory> list = new ArrayList<>();
+        list.add(new UserStory());
+
+        Mockito.when(userStoryService.findByProjectId(projectId)).thenReturn(list);
+
+        ResponseEntity<List<UserStory>> response = userStoryController.readUserStories(projectId);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
+    }
+
 
     /*
     *

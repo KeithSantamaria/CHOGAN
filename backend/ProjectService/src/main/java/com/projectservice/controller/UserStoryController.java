@@ -49,7 +49,7 @@ public class UserStoryController {
     * */
 
     /**
-     * Getss a userstory based on userstory Id
+     * Gets a userstory based on userstory Id
      * @param userStoryId The userstory Id to get
      * @return The response entity
      */
@@ -62,6 +62,16 @@ public class UserStoryController {
         }
         log.info("Successfully found userstory of userStoryId : {}",userStoryId);
         return new ResponseEntity<>(foundUserStory,HttpStatus.OK);
+    }
+
+    /**
+     * Gets a list of user stories from a projectId
+     * @param projectId The project id of the field to grab
+     * @return The response entity
+     */
+    @GetMapping("/read/project/userstories")
+    public ResponseEntity<List<UserStory>> readUserStories(@RequestParam String projectId){
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /*

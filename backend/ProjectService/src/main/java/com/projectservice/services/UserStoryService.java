@@ -1,8 +1,11 @@
 package com.projectservice.services;
 
+import com.projectservice.models.UserStory;
 import com.projectservice.repository.UserStoryRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Class for handling all service layer methods for user stories
@@ -18,6 +21,10 @@ public class UserStoryService implements IUserStoryService{
     * Create
     *
     * */
+
+    @Override
+    public void insert(UserStory userStory) {
+    }
 
     /*
     *

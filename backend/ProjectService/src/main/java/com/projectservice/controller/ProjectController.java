@@ -1,7 +1,6 @@
 package com.projectservice.controller;
 
 import com.projectservice.models.Project;
-import com.projectservice.models.Widget;
 import com.projectservice.services.IProjectService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -83,9 +82,7 @@ public class ProjectController {
      */
     @PutMapping("/update/project")
     public ResponseEntity<Project> updateProject(@RequestBody Project project) {
-        System.out.println("b4 = " + project.toString());
         Project updatedProject = projectService.update(project);
-        System.out.println("after = " + updatedProject.toString());
         return new ResponseEntity<>(updatedProject, HttpStatus.OK);
     }
 

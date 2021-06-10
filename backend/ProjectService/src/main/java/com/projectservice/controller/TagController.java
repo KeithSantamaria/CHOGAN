@@ -4,6 +4,7 @@ import com.projectservice.models.Tag;
 import com.projectservice.services.ITagService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,5 +23,6 @@ public class TagController {
         } catch (Exception e){
             log.error("Failed to create new tag object in MongoDB");
         }
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

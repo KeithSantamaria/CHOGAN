@@ -39,7 +39,7 @@ public class UserStoryService implements IUserStoryService{
 
     @Override
     public List<UserStory> findByProjectId(String projectId) {
-        return null;
+        return userStoryRepo.findByProjectId(projectId);
     }
 
     /*

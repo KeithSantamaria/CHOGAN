@@ -71,7 +71,9 @@ public class UserStoryController {
      */
     @GetMapping("/read/project/userstories")
     public ResponseEntity<List<UserStory>> readUserStories(@RequestParam String projectId){
-        return new ResponseEntity<>(HttpStatus.OK);
+        List<UserStory> userStoryList = userStoryService.findByProjectId(projectId);
+        log.info("Successfully retrieved all user stories associated with projectId : {}",projectId);
+        return new ResponseEntity<>(userStoryList,HttpStatus.OK);
     }
 
     /*

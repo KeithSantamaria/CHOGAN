@@ -28,7 +28,7 @@ public class EndpointControllerTest {
     void createNewEndpointSuccessTest(){
         Endpoint endpoint = new Endpoint();
 
-        ResponseEntity<Endpoint> response = endpointController.createNewEndpoint(endpoint);
+        ResponseEntity<List<Endpoint>> response = endpointController.createNewEndpoint(endpoint);
 
         Assertions.assertEquals(response.getStatusCode(), HttpStatus.CREATED);
 
@@ -40,7 +40,7 @@ public class EndpointControllerTest {
 
         Mockito.doThrow(new Exception());
 
-        ResponseEntity<Endpoint> response = endpointController.createNewEndpoint(endpoint);
+        ResponseEntity<List<Endpoint>> response = endpointController.createNewEndpoint(endpoint);
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -110,7 +110,7 @@ public class EndpointControllerTest {
 
         Mockito.when(endpointService.update(endpoint)).thenReturn(endpoint);
 
-        ResponseEntity<Endpoint> response = endpointController.updateEndpoint(endpoint);
+        ResponseEntity<List<Endpoint>> response = endpointController.updateEndpoint(endpoint);
 
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
     }
@@ -121,7 +121,7 @@ public class EndpointControllerTest {
 
         Mockito.when(endpointService.update(endpoint)).thenReturn(null);
 
-        ResponseEntity<Endpoint> response = endpointController.updateEndpoint(endpoint);
+        ResponseEntity<List<Endpoint>> response = endpointController.updateEndpoint(endpoint);
 
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -148,12 +148,12 @@ public class EndpointControllerTest {
     @Test
     void deleteEndpointFailureTest(){
         String endpointId = "Id";
-        List<Endpoint> list = new ArrayList<>();
 
-        Mockito.when(endpointService.delete(endpointId)).thenReturn(list);
+        Mockito.when(endpointService.delete(endpointId)).thenReturn(null);
 
         ResponseEntity<List<Endpoint>> response = endpointController.deleteEndpoint(endpointId);
 
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
 }

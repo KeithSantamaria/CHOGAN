@@ -12,7 +12,7 @@ import java.util.Map;
  * map example: Map<"Frontend", ["React", "Redux", "Bootstrap"]>;
  */
 @Data
-@Document
+@Document(collection = "tags")
 public class Tag {
     @Id
     private String tagId;

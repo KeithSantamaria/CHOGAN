@@ -21,6 +21,12 @@ import java.util.List;
 public class EndpointController {
     private final IEndpointService endpointService;
 
+    /*
+    *
+    * Create
+    *
+    * */
+
     /**
      * Creates an endpoint in the endpoints collection in MongoDB
      * @param endpoint
@@ -35,6 +41,12 @@ public class EndpointController {
         }
         return new ResponseEntity<>(endpoint, HttpStatus.OK);
     }
+
+    /*
+    *
+    * Read
+    *
+    * */
 
     /**
      * Retrieves all endpoints associated with a given projectId
@@ -62,6 +74,12 @@ public class EndpointController {
         return new ResponseEntity<Object>(endpoints, HttpStatus.OK);
     }
 
+    /*
+    *
+    * Update
+    *
+    * */
+
     /**
      *
      * @param endpointId
@@ -73,6 +91,12 @@ public class EndpointController {
         log.info("Retrieved endpoint with id: {}", endpointId);
         return new ResponseEntity<>(endpoint, HttpStatus.OK);
     }
+
+    /*
+    *
+    * Delete
+    *
+    * */
 
     /**
      *

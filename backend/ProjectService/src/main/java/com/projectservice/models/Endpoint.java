@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * project endpoint pojo
  */
 @Data
-@Document
+@Document(collection = "endpoints")
 public class Endpoint {
     @Id
     private String endpointId;

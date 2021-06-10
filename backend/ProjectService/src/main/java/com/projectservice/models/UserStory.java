@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * Pojo for user stories
  */
 @Data
-@Document
+@Document(collection = "userstories")
 public class UserStory {
     @Id
     private String userStoryId;

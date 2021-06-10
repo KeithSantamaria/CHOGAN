@@ -19,24 +19,24 @@ const WidgetForm = (project: any) => {
     dispatch(setCreateNewWidgetForm({ fieldName, value }));
   };
 
-  const updateProject = () => {
-    const queryString = `http://localhost:42069/api/update/project/widget?projectId=${projectAppState.project.projectId}`;
+  const addWidget = () => {
+    const queryString = `http://localhost:42069/api/create/project/widget?projectId=${projectAppState.project.projectId}`;
     if (
       projectAppState.createNewWidgetForm.widgetDescription === "" ||
       projectAppState.createNewWidgetForm.widgetName === ""
     ) {
       alert("There is nothing to add");
     } else {
-      
       const widget = {
-          widgetName: projectAppState.createNewWidgetForm.widgetName,
-          widgetDescription: projectAppState.createNewWidgetForm.widgetDescription,
+        widgetName: projectAppState.createNewWidgetForm.widgetName,
+        widgetDescription:
+          projectAppState.createNewWidgetForm.widgetDescription,
       };
       console.log(widget);
 
       axios
         .put(queryString, widget)
-        .then((response) => { 
+        .then((response) => {
           console.log("response", response);
           dispatch(setProject(response.data));
           dispatch(resetCreateNewWidgetForm());
@@ -44,7 +44,6 @@ const WidgetForm = (project: any) => {
         .catch((error) => {
           console.log(error);
         });
-      
     }
   };
 
@@ -69,7 +68,7 @@ const WidgetForm = (project: any) => {
             onChange={formChangeHandler}
           />
         </Form.Group>
-        <Button onClick={updateProject}>Save</Button>
+        <Button onClick={addWidget}>Save</Button>
       </Form>
     </div>
   );

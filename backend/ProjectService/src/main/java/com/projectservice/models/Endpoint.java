@@ -10,8 +10,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Document
 public class Endpoint {
-//    @Id
+    @Id
     private String endpointId;
+    private String projectId;
     private String endpointName;
     private String endpointUrlPattern;
     private String endpointDescription;

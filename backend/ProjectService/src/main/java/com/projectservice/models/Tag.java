@@ -14,17 +14,9 @@ import java.util.Map;
 @Data
 @Document
 public class Tag {
-//    @Id
+    @Id
     private String tagId;
+    private String projectId;
     private String tagName;
     private Map<String, List<String>> techs;
-    /*
-    frontend
-
-    react/redux/boostrap
-
-    frontend: ["react/redux/bootstrap"]
-
-    frontend: ["react","redux","bootstrap"]
-    */
 }

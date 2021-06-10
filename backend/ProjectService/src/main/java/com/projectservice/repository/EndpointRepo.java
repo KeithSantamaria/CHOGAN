@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Interface for handling the endpoint repo
+ */
 @Repository
 public interface EndpointRepo extends MongoRepository<Endpoint, String> {
     List<Endpoint> findByProjectId(String projectId);

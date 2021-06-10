@@ -4,10 +4,17 @@ import com.projectservice.models.Tag;
 
 import java.util.List;
 
+/**
+ * Functional interface for tags
+ */
 public interface ITagService {
     void insert(Tag tag);
-    void delete(String tagId);
-    Tag update(Tag tag);
-    List<Tag> findAllByProjectId(String projectId);
+
     Tag findByTagId(String tagId);
+    List<Tag> findAllByProjectId(String projectId);
+
+    Tag update(Tag tag);
+
+    void delete(String tagId);
+
 }

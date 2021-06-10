@@ -55,7 +55,7 @@ public class ModelService implements IModelService{
      * @return The list of models, empty if none
      */
     public List<Model> findByProjectId(String projectId){
-        return new ArrayList<>();
+        return modelRepo.findByProjectId(projectId);
     }
 
     /*

@@ -132,4 +132,17 @@ public class ModelControllerTest {
     * Delete
     *
     * */
+
+    @Test
+    void deleteModelTest(){
+        String modelId = "Id";
+        List<Model> list = new ArrayList<>();
+        list.add(new Model());
+
+        Mockito.when(modelService.deleteModel(modelId)).thenReturn(list);
+
+        ResponseEntity<List<Model>> response = modelController.deleteModel(modelId);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
+    }
 }

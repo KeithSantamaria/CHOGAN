@@ -119,7 +119,7 @@ public class EndpointController {
     @DeleteMapping("/delete/project/endpoint")
     public ResponseEntity<List<Endpoint>> deleteEndpoint(@RequestParam String endpointId){
         List<Endpoint> updatedEndpoints = endpointService.delete(endpointId);
-        if (updatedEndpoints.isEmpty()){
+        if (updatedEndpoints == null){
             log.error("No such endpoint exists of endpointId : {}.",endpointId);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -148,12 +148,12 @@ public class EndpointControllerTest {
     @Test
     void deleteEndpointFailureTest(){
         String endpointId = "Id";
-        List<Endpoint> list = new ArrayList<>();
 
-        Mockito.when(endpointService.delete(endpointId)).thenReturn(list);
+        Mockito.when(endpointService.delete(endpointId)).thenReturn(null);
 
         ResponseEntity<List<Endpoint>> response = endpointController.deleteEndpoint(endpointId);
 
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
 }

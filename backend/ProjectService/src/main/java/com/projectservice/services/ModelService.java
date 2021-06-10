@@ -79,4 +79,9 @@ public class ModelService implements IModelService{
     * Delete
     *
     * */
+
+    @Override
+    public List<Model> deleteModel(String modelId){
+        return new ArrayList<>();
+    }
 }

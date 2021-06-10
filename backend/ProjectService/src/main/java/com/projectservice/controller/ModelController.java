@@ -107,4 +107,15 @@ public class ModelController {
     * Delete
     *
     * */
+
+    /**
+     * Deletes a model from the db
+     * @param modelId The model to delete
+     * @return The list of the remaining models
+     */
+    @DeleteMapping("/delete/project/model")
+    public ResponseEntity<List<Model>> deleteModel(@RequestParam String modelId){
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

@@ -85,4 +85,32 @@ public class ModelServiceTest {
     * Delete
     *
     * */
+
+    @Test
+    void deleteModelSuccessTest(){
+        String modelId = "Id";
+        Model model = new Model();
+        String projectId = "PiD";
+        List<Model> list = new ArrayList<>();
+
+        Mockito.when(modelRepo.findByModelId(modelId)).thenReturn(model);
+        Mockito.when(modelRepo.findByProjectId(projectId)).thenReturn(list);
+
+        List<Model> foundList = modelService.deleteModel(modelId);
+
+        Assertions.assertEquals(foundList,list);
+        }
+
+        @Test
+    void deleteModelFailureTest(){
+        String modelId = "Id";
+
+        Mockito.when(modelRepo.findByModelId(modelId)).thenReturn(null);
+
+        List<Model> foundList = modelService.deleteModel(modelId);
+
+        Assertions.assertNull(foundList);
+        }
+
+
 }

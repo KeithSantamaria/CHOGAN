@@ -20,6 +20,11 @@ public class ModelService implements IModelService{
     *
     * */
 
+    /**
+     * Adds a model to the db
+     * @param model The model to add
+     * @return The saved model
+     */
     @Override
     public Model insert(Model model){
         return modelRepo.save(model);
@@ -30,6 +35,11 @@ public class ModelService implements IModelService{
     * Read
     *
     * */
+
+    @Override
+    public Model findByModelId(String modelId){
+        return new Model();
+    }
 
     /*
     *

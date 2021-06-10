@@ -46,6 +46,11 @@ public class ModelController {
     *
     * */
 
+    @GetMapping("/read/project/model")
+    public ResponseEntity<Model> readModel(@RequestParam String modelId){
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     /*
     *
     * Update

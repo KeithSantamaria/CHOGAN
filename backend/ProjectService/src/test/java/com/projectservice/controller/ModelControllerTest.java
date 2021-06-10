@@ -41,11 +41,35 @@ public class ModelControllerTest {
 
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
     /*
     *
     * Read
     *
     * */
+
+    @Test
+    void readModelSuccessTest(){
+        String modelId = "Id";
+        Model model = new Model();
+
+        Mockito.when(modelService.findByModelId(modelId)).thenReturn(model);
+
+        ResponseEntity<Model> response = modelController.readModel(modelId);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
+    }
+
+    @Test
+    void readModelFailureTest(){
+        String modelId = "Id";
+
+        Mockito.when(modelService.findByModelId(modelId)).thenReturn(null);
+
+        ResponseEntity<Model> response = modelController.readModel(modelId);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
     /*
     *

@@ -35,6 +35,18 @@ public class ModelServiceTest {
     *
     * */
 
+    @Test
+    void findByModelIdTest(){
+        String modelId = "Id";
+        Model model = new Model();
+
+        Mockito.when(modelRepo.findByModelId(modelId)).thenReturn(model);
+
+        Model foundModel = modelService.findByModelId(modelId);
+
+        Assertions.assertEquals(foundModel,model);
+    }
+
     /*
     *
     * Update

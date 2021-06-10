@@ -7,4 +7,6 @@ import com.projectservice.models.Model;
  */
 public interface IModelService {
     Model insert(Model model);
+
+    Model findByModelId(String modelId);
 }

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useMemo } from 'react'
 import { Button, Card, Modal } from 'react-bootstrap';
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
-import { selectProjectApp, setProject } from '../redux/projectAppSlice';
+import { selectProjectApp, setProject, setProjectEndpointsState } from '../redux/projectAppSlice';
 import ProjectSideNav from './ProjectSideNav'
 import WidgetForm from './WidgetForm';
 
@@ -35,6 +35,7 @@ function ProjectEndpoints() {
         getProject();
       }, []);
 
+      
     const widgetModal = () => {        
         return (
             <Modal

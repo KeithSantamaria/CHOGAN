@@ -29,7 +29,7 @@ public class ModelControllerTest {
     void createNewModelSuccessTest(){
         Model model = new Model();
 
-        ResponseEntity<Model> response = modelController.createNewModel(model);
+        ResponseEntity<List<Model>> response = modelController.createNewModel(model);
 
         Assertions.assertEquals(response.getStatusCode(), HttpStatus.CREATED);
     }
@@ -40,7 +40,7 @@ public class ModelControllerTest {
 
         Mockito.doThrow(new Exception());
 
-        ResponseEntity<Model> response = modelController.createNewModel(model);
+        ResponseEntity<List<Model>> response = modelController.createNewModel(model);
 
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
     }

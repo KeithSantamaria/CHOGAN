@@ -28,7 +28,7 @@ public class EndpointControllerTest {
     void createNewEndpointSuccessTest(){
         Endpoint endpoint = new Endpoint();
 
-        ResponseEntity<Endpoint> response = endpointController.createNewEndpoint(endpoint);
+        ResponseEntity<List<Endpoint>> response = endpointController.createNewEndpoint(endpoint);
 
         Assertions.assertEquals(response.getStatusCode(), HttpStatus.CREATED);
 
@@ -40,7 +40,7 @@ public class EndpointControllerTest {
 
         Mockito.doThrow(new Exception());
 
-        ResponseEntity<Endpoint> response = endpointController.createNewEndpoint(endpoint);
+        ResponseEntity<List<Endpoint>> response = endpointController.createNewEndpoint(endpoint);
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

@@ -33,7 +33,7 @@ public class EndpointController {
      * @return A response entity containing the endpoint if successfull
      */
     @PostMapping("/create/project/endpoint")
-    public ResponseEntity<Endpoint> createNewEndpoint(@RequestBody Endpoint endpoint){
+    public ResponseEntity<List<Endpoint>> createNewEndpoint(@RequestBody Endpoint endpoint){
         try{
             endpointService.insert(endpoint);
         } catch (Exception e){
@@ -41,7 +41,7 @@ public class EndpointController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         log.info("Successfully added new endpoint object in MongoDB.");
-        return new ResponseEntity<>(endpoint, HttpStatus.CREATED);
+        return new ResponseEntity<>(endpointService.findAllByProjectId(endpoint.getProjectId()), HttpStatus.CREATED);
     }
 
     /*

@@ -3,6 +3,7 @@ import {
     createSlice,
 
     //  PayloadAction
+    PayloadAction
   } from "@reduxjs/toolkit";
 import { ESMap, Map } from "typescript";
 
@@ -100,6 +101,11 @@ import { ESMap, Map } from "typescript";
             }
         }>
       };
+      sampleProjects: Array<{
+        projectId: string;
+        projectName: string;
+        projectDescription: string;
+      }>;
       model:{
         modelId: string;
         modelName: string;
@@ -151,6 +157,15 @@ import { ESMap, Map } from "typescript";
         userStories: [],
         widgets: []
         },
+        sampleProjects: [{
+        projectId: "12345",
+        projectName: "Sample Project from Store",
+        projectDescription: "This project is the base project in redux-store",
+      }, {
+        projectId: "22345",
+        projectName: "Sample 2 from Store",
+        projectDescription: "This project is the base project in redux-store",
+      }],
       model:{
         modelId: "",
         modelName: "",
@@ -186,8 +201,8 @@ import { ESMap, Map } from "typescript";
       createNewProjectWireframeForm: {wireframeName: "", wireframeDescription: ""},
   };
 
-  export const projectAppSlice = createSlice({
-    name: "projectApp",
+  const projectAppSlice = createSlice({
+    name: 'projectApp',
     initialState,
     reducers: {
         setProject: (

@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TagServiceTest {
 
     private final TagRepo tagRepo = Mockito.mock(TagRepo.class);
@@ -44,6 +47,17 @@ public class TagServiceTest {
 
     }
 
+    @Test
+    void findByProjectIdTest(){
+        String projectId = "Id";
+        List<Tag> list = new ArrayList<>();
+
+        Mockito.when(tagRepo.findByProjectId(projectId)).thenReturn(list);
+
+        List<Tag> foundList = tagService.findAllByProjectId(projectId);
+
+        Assertions.assertEquals(foundList,list);
+    }
     /*
     *
     * Update

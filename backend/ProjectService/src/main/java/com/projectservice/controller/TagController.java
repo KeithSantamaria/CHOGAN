@@ -63,6 +63,16 @@ public class TagController {
         return new ResponseEntity<>(foundTag,HttpStatus.OK);
     }
 
+    /**
+     * Returns a list of all tags associated with a specific projectId
+     * @param projectId The id of the project
+     * @return A response entity
+     */
+    @GetMapping("/read/project/tags")
+    public ResponseEntity<List<Tag>> readTags(@RequestParam String projectId){
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     /*
     *
     * Update

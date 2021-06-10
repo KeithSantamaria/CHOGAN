@@ -9,6 +9,7 @@ import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TagControllerTest {
@@ -72,7 +73,30 @@ public class TagControllerTest {
      Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @Test
+    void readTagsSuccessTest(){
+        String projectId = "Id";
+        List<Tag> list = new ArrayList<>();
+        list.add(new Tag());
 
+        Mockito.when(tagService.findAllByProjectId(projectId)).thenReturn(list);
+
+        ResponseEntity<List<Tag>> response = tagController.readTags(projectId);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
+    }
+
+    @Test
+    void readTagsFailureTest(){
+        String projectId = "Id";
+        List<Tag> list = new ArrayList<>();
+
+        Mockito.when(tagService.findAllByProjectId(projectId)).thenReturn(list);
+
+        ResponseEntity<List<Tag>> response = tagController.readTags(projectId);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
     /*
     *
     * Update

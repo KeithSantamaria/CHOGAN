@@ -60,7 +60,7 @@ function ProjectModels() {
         <div>
           <ProjectSideNav />
 
-          {projectAppState.project.models.map( (model:any) => {
+          {projectAppState.models.map( (model:any) => {
           return(
             <Card>
               <Card.Body>

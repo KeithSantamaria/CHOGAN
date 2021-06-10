@@ -82,6 +82,12 @@ public class ModelService implements IModelService{
 
     @Override
     public List<Model> deleteModel(String modelId){
-        return new ArrayList<>();
+        Model foundModel = modelRepo.findByModelId(modelId);
+        if (foundModel == null){
+            return null;
+        }
+        String projectId = foundModel.getProjectId();
+        modelRepo.deleteById(modelId);
+        return modelRepo.findByProjectId(projectId);
     }
 }

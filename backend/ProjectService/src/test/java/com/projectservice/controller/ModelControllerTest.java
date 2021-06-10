@@ -134,7 +134,7 @@ public class ModelControllerTest {
     * */
 
     @Test
-    void deleteModelTest(){
+    void deleteModelSuccessTest(){
         String modelId = "Id";
         List<Model> list = new ArrayList<>();
         list.add(new Model());
@@ -144,5 +144,16 @@ public class ModelControllerTest {
         ResponseEntity<List<Model>> response = modelController.deleteModel(modelId);
 
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
+    }
+
+    @Test
+    void deleteModelFailureTest(){
+        String modelId = "Id";
+
+        Mockito.when(modelService.deleteModel(modelId)).thenReturn(null);
+
+        ResponseEntity<List<Model>> response = modelController.deleteModel(modelId);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

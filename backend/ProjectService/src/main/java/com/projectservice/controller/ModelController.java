@@ -115,7 +115,13 @@ public class ModelController {
      */
     @DeleteMapping("/delete/project/model")
     public ResponseEntity<List<Model>> deleteModel(@RequestParam String modelId){
-        return new ResponseEntity<>(HttpStatus.OK);
+        List<Model> updatedModels = modelService.deleteModel(modelId);
+        if (updatedModels == null){
+            log.error("No such model exists of modelId : {}",modelId);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        log.info("Successfully delete model of modelId : {}",modelId);
+        return new ResponseEntity<>(updatedModels,HttpStatus.OK);
     }
 
 }

@@ -55,7 +55,13 @@ public class UserStoryController {
      */
     @GetMapping("/read/project/userstory")
     public ResponseEntity<UserStory> readUserStory(@RequestParam String userStoryId){
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        UserStory foundUserStory = userStoryService.findByUserStoryId(userStoryId);
+        if (foundUserStory == null){
+            log.error("No such user story exists of userStoryId : {}",userStoryId);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        log.info("Successfully found userstory of userStoryId : {}",userStoryId);
+        return new ResponseEntity<>(foundUserStory,HttpStatus.OK);
     }
 
     /*

@@ -34,7 +34,7 @@ public class UserStoryService implements IUserStoryService{
 
     @Override
     public UserStory findByUserStoryId(String userStoryId) {
-        return null;
+        return userStoryRepo.findUserStoryById(userStoryId);
     }
 
     @Override

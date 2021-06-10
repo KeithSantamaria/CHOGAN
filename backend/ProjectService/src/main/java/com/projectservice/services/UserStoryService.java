@@ -32,15 +32,35 @@ public class UserStoryService implements IUserStoryService{
     *
     * */
 
+    @Override
+    public UserStory findByUserStoryId(String userStoryId) {
+        return null;
+    }
+
+    @Override
+    public List<UserStory> findByProjectId(String projectId) {
+        return null;
+    }
+
     /*
     *
     * Update
     *
     * */
 
+    @Override
+    public List<UserStory> updateUserStory(UserStory userStory) {
+        return null;
+    }
+
     /*
     *
     * Delete
     *
     * */
+
+    @Override
+    public List<UserStory> deleteUserStory(String userStoryId) {
+        return null;
+    }
 }

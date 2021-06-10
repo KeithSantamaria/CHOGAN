@@ -32,7 +32,14 @@ public class UserStoryController {
      */
     @PostMapping("/create/project/userstory")
     public ResponseEntity<List<UserStory>> createNewUserStory(@RequestBody UserStory userStory){
-        return new ResponseEntity<>(HttpStatus.OK);
+       try{
+           userStoryService.insert(userStory);
+       }catch (Exception e){
+            log.error("Failed to add userstory to the db.");
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+       }
+       log.info("Successfully added userstory object the db.");
+       return new ResponseEntity<>(userStoryService.findByProjectId(userStory.getProjectId()),HttpStatus.OK);
     }
 
     /*

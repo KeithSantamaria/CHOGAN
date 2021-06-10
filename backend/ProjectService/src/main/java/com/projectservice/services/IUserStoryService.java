@@ -10,4 +10,11 @@ import java.util.List;
 public interface IUserStoryService{
 
     void insert(UserStory userStory);
+
+    UserStory findByUserStoryId(String userStoryId);
+    List<UserStory> findByProjectId(String projectId);
+
+    List<UserStory> updateUserStory(UserStory userStory);
+
+    List<UserStory> deleteUserStory(String userStoryId);
 }

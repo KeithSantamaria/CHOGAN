@@ -111,6 +111,12 @@ public class UserStoryController {
      */
     @DeleteMapping("/delete/project/userstory")
     public ResponseEntity<List<UserStory>> deleteUserStory(@RequestParam String userStoryId){
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        List<UserStory> updatedUserStories = userStoryService.deleteUserStory(userStoryId);
+        if (updatedUserStories == null){
+            log.error("No such user story exists of userStoryId : {}",userStoryId);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        log.info("Successfully removed userstory of userStoryId : {}",userStoryId);
+        return new ResponseEntity<>(updatedUserStories,HttpStatus.OK);
     }
 }

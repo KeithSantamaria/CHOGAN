@@ -5,6 +5,7 @@ import com.projectservice.repository.TagRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -84,7 +85,13 @@ public class TagService implements ITagService{
      * @param tagId The tag to delete
      */
     @Override
-    public void delete(String tagId) {
+    public List<Tag> delete(String tagId) {
+        Tag foundTag = tagRepo.findByTagId(tagId);
+        if (foundTag == null){
+            return null;
+        }
+        String projectId = foundTag.getProjectId();
         tagRepo.deleteById(tagId);
+        return tagRepo.findByProjectId(projectId);
     }
 }

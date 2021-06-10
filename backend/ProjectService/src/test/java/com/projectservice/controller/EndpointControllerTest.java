@@ -74,7 +74,7 @@ public class EndpointControllerTest {
     }
 
     @Test
-    void readEndpointsSuccessTest(){
+    void readEndpointsTest(){
         String projectId = "Id";
         List<Endpoint> list = new ArrayList<>();
         list.add(new Endpoint());
@@ -84,18 +84,6 @@ public class EndpointControllerTest {
         ResponseEntity<List<Endpoint>> response = endpointController.readEndpoints(projectId);
 
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
-    }
-
-    @Test
-    void readEndpointsFailureTest(){
-        String projectId = "Id";
-        List<Endpoint> list = new ArrayList<>();
-
-        Mockito.when(endpointService.findAllByProjectId(projectId)).thenReturn(list);
-
-        ResponseEntity<List<Endpoint>> response = endpointController.readEndpoints(projectId);
-
-        Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     /*

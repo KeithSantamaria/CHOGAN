@@ -15,6 +15,6 @@ public interface ITagService {
 
     Tag update(Tag tag);
 
-    void delete(String tagId);
+    List<Tag> delete(String tagId);
 
 }

@@ -29,17 +29,19 @@ public class EndpointController {
 
     /**
      * Creates an endpoint in the endpoints collection in MongoDB
-     * @param endpoint
-     * @return
+     * @param endpoint The endpoint to add
+     * @return A response entity containing the endpoint if successfull
      */
     @PostMapping("/create/project/endpoint")
     public ResponseEntity<Endpoint> createNewEndpoint(@RequestBody Endpoint endpoint){
         try{
             endpointService.insert(endpoint);
         } catch (Exception e){
-            log.error("Failed to create new endpoint object in MongoDB");
+            log.error("Failed to create new endpoint object in MongoDB.");
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(endpoint, HttpStatus.OK);
+        log.info("Successfully added new endpoint object in MongoDB.");
+        return new ResponseEntity<>(endpoint, HttpStatus.CREATED);
     }
 
     /*
@@ -49,30 +51,37 @@ public class EndpointController {
     * */
 
     /**
+     * Gets a single endpoint based on endpointId
+     * @param endpointId The endpointId to find
+     * @return The endpoint with the id response entity
+     */
+    @GetMapping("/read/project/endpoint")
+    public ResponseEntity<Endpoint> readEndpoint(@RequestParam String endpointId){
+        Endpoint endpoint = endpointService.findByEndpointId(endpointId);
+        if (endpoint == null){
+            log.error("No such endpoint found of endpointId : {}",endpointId);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        log.info("Retrieved endpoint with id: {}", endpointId);
+        return new ResponseEntity<>(endpoint, HttpStatus.OK);
+    }
+
+    /**
      * Retrieves all endpoints associated with a given projectId
-     * @param projectId
-     * @return
+     * @param projectId The projectId to find
+     * @return A list of projects with an error code
      */
     @GetMapping("/read/project/endpoints")
-    public ResponseEntity<Object> readEndpoints(@RequestParam String projectId){
+    public ResponseEntity<List<Endpoint>> readEndpoints(@RequestParam String projectId){
         List<Endpoint> endpointList = endpointService.findAllByProjectId(projectId);
-
-        List<JSONObject> endpoints = new ArrayList<JSONObject>();
-        for(Endpoint e : endpointList){
-            JSONObject entity = new JSONObject();
-            entity.put("endpointId", e.getEndpointId());
-            entity.put("projectId", e.getProjectId());
-            entity.put("endpointName", e.getEndpointName());
-            entity.put("endpointUrlPattern", e.getEndpointUrlPattern());
-            entity.put("endpointDescription", e.getEndpointDescription());
+        if (endpointList.isEmpty()){
+            log.error("No such project found of projectId : {}.",projectId);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        if(endpoints == null){
-            log.error("No endpoints associated with projectId: {}", projectId);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        log.info("Retrieved endpoints associated with projectId: {}", projectId);
-        return new ResponseEntity<Object>(endpoints, HttpStatus.OK);
+        log.info("Successfully retrieved all endpoints for projectId : {}",projectId);
+        return new ResponseEntity<>(endpointList,HttpStatus.OK);
     }
+
 
     /*
     *
@@ -81,15 +90,19 @@ public class EndpointController {
     * */
 
     /**
-     *
-     * @param endpointId
-     * @return
+     * Updates an endpoint in the db
+     * @param endpoint The endpoint to update
+     * @return The updated endpoint in a response entity
      */
-    @GetMapping("/read/project/endpoint")
-    public ResponseEntity<Endpoint> readEndpoint(@RequestParam String endpointId){
-        Endpoint endpoint = endpointService.findByEndpointId(endpointId);
-        log.info("Retrieved endpoint with id: {}", endpointId);
-        return new ResponseEntity<>(endpoint, HttpStatus.OK);
+    @PutMapping("/update/project/endpoint")
+    public ResponseEntity<Endpoint> updateEndpoint(@RequestBody Endpoint endpoint){
+        Endpoint updatedEndpoint = endpointService.update(endpoint);
+        if (updatedEndpoint == null){
+            log.error("No such endpoint found of endpointId : {}",endpoint.getEndpointId());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        log.info("Successfully updated endpoint of endpointId : {}",endpoint.getEndpointId());
+        return new ResponseEntity<>(updatedEndpoint, HttpStatus.OK);
     }
 
     /*
@@ -99,24 +112,18 @@ public class EndpointController {
     * */
 
     /**
-     *
-     * @param endpoint
-     * @return
-     */
-    @PutMapping("/update/project/endpoint")
-    public ResponseEntity<Endpoint> updateEndpoint(@RequestBody Endpoint endpoint){
-        Endpoint updatedEndpoint = endpointService.update(endpoint);
-        return new ResponseEntity<>(updatedEndpoint, HttpStatus.OK);
-    }
-
-    /**
-     *
-     * @param endpointId
-     * @return
+     * Deletes an endpoint from the backend
+     * @param endpointId The endpoint to delete
+     * @return A list of all endpoints, notably missing the endpoints
      */
     @DeleteMapping("/delete/project/endpoint")
-    public ResponseEntity<Endpoint> deleteEndpoint(@RequestParam String endpointId){
-        endpointService.delete(endpointId);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<List<Endpoint>> deleteEndpoint(@RequestParam String endpointId){
+        List<Endpoint> updatedEndpoints = endpointService.delete(endpointId);
+        if (updatedEndpoints.isEmpty()){
+            log.error("No such endpoint exists of endpointId : {}.",endpointId);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        log.info("Successfully deleted endpoint of endpointId : {}.",endpointId);
+        return new ResponseEntity<>(updatedEndpoints,HttpStatus.OK);
     }
 }

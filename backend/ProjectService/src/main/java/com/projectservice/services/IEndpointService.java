@@ -15,5 +15,5 @@ public interface IEndpointService {
 
     Endpoint update(Endpoint endpoint);
 
-    void delete(String endpointId);
+    List<Endpoint> delete(String endpointId);
 }

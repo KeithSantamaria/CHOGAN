@@ -16,7 +16,6 @@ public class Model {
     @Id
     private String modelId;
     private String projectId;
-
     private String modelName;
     private Map<String, String> modelMetadata;
 }

@@ -1,6 +1,5 @@
 package com.projectservice.models;
 
-import com.projectservice.models.Model;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,24 +18,31 @@ class ModelTest {
     }
 
     @Test
-    void getModelId() {
+    void modelIdTest() {
         model.setModelId("Id");
         String id = model.getModelId();
         Assertions.assertEquals(id,"Id");
     }
 
     @Test
-    void getModelName() {
+    void projectIdTest(){
+        model.setProjectId("Id");
+        String id = model.getProjectId();
+        Assertions.assertEquals(id,"Id");
+    }
+
+    @Test
+    void modelNameTest() {
         model.setModelName("Name");
         String name = model.getModelName();
         Assertions.assertEquals(name,"Name");
     }
 
     @Test
-    void getModelMetadata() {
+    void modelMetadataTest() {
         Map<String,String> map = new HashMap<>();
         model.setModelMetadata(map);
-        Map foundMap = model.getModelMetadata();
+        Map<String, String> foundMap = model.getModelMetadata();
         Assertions.assertEquals(foundMap,map);
     }
 }

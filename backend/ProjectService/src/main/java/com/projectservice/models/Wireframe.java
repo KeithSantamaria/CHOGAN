@@ -4,14 +4,13 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-/**
- * Pojo for user stories
- */
 @Data
-@Document(collection = "userstories")
-public class UserStory {
+@Document(collection="wireframes")
+public class Wireframe {
     @Id
-    private String userStoryId;
+    private String wireframeId;
     private String projectId;
-    private String userStoryDescription;
+    private String wireframeName;
+    private String wireframeDescription;
+    private String wireframeImageUrl;
 }

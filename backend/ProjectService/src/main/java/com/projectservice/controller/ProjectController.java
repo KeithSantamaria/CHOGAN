@@ -68,6 +68,7 @@ public class ProjectController {
         log.info("Retrieved project with id: {}.", projectId);
         return new ResponseEntity<>(project, HttpStatus.OK);
     }
+
     /*
      *
      * Update
@@ -86,17 +87,6 @@ public class ProjectController {
         return new ResponseEntity<>(updatedProject, HttpStatus.OK);
     }
 
-
-//    @PutMapping("/update/project/widget")
-//    public ResponseEntity<Project> updateProjectWidgets(@RequestParam String projectId, @RequestBody Widget widget) {
-//        Project updatedProject = projectService.addWidget(projectId, widget);
-//        if (updatedProject == null) {
-//            log.error("Cannot add widget to project with id: {}. Project does not exist.", projectId);
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//        log.info("Successfully added widget to project id: {}", projectId);
-//        return new ResponseEntity<>(updatedProject, HttpStatus.OK);
-//    }
     /*
      *
      * Delete

@@ -74,10 +74,6 @@ public class EndpointController {
     @GetMapping("/read/project/endpoints")
     public ResponseEntity<List<Endpoint>> readEndpoints(@RequestParam String projectId){
         List<Endpoint> endpointList = endpointService.findAllByProjectId(projectId);
-        if (endpointList.isEmpty()){
-            log.error("No such project found of projectId : {}.",projectId);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
         log.info("Successfully retrieved all endpoints for projectId : {}",projectId);
         return new ResponseEntity<>(endpointList,HttpStatus.OK);
     }

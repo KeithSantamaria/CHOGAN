@@ -75,7 +75,7 @@ public class ModelControllerTest {
     }
 
     @Test
-    void readModelsSuccessTest(){
+    void readModelsTest(){
         String projectId = "Id";
         List<Model> list = new ArrayList<>();
         list.add(new Model());
@@ -85,18 +85,6 @@ public class ModelControllerTest {
         ResponseEntity<List<Model>> response = modelController.readModels(projectId);
 
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
-    }
-
-    @Test
-    void readModelsFailureTest(){
-        String projectId = "Id";
-        List<Model> list = new ArrayList<>();
-
-        Mockito.when(modelService.findByProjectId(projectId)).thenReturn(list);
-
-        ResponseEntity<List<Model>> response = modelController.readModels(projectId);
-
-        Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     /*

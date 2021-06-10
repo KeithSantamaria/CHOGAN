@@ -72,10 +72,6 @@ public class ModelController {
     @GetMapping("/read/project/models")
     public ResponseEntity<List<Model>> readModels(@RequestParam String projectId){
         List<Model> list = modelService.findByProjectId(projectId);
-        if (list.isEmpty()){
-            log.error("No such project exists of projectId : {}",projectId);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
         log.info("Successfully found models associated with projectId : {}",projectId);
         return new ResponseEntity<>(list,HttpStatus.OK);
     }

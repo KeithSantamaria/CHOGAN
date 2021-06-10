@@ -49,6 +49,28 @@ public class UserStoryControllerTest {
     *
     * */
 
+    @Test
+    void readUserStorySuccessTest(){
+        String userStoryId = "Id";
+        UserStory userStory = new UserStory();
+
+        Mockito.when(userStoryService.findByUserStoryId(userStoryId)).thenReturn(userStory);
+
+        ResponseEntity<UserStory> response = userStoryController.readUserStory(userStoryId);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
+    }
+
+    @Test
+    void readUserStoryFailureTest(){
+        String userStoryId = "Id";
+
+        Mockito.when(userStoryService.findByUserStoryId(userStoryId)).thenReturn(null);
+
+        ResponseEntity<UserStory> response =userStoryController.readUserStory(userStoryId);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
     /*
     *
     * Update

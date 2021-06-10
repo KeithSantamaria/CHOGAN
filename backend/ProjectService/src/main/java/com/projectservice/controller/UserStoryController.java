@@ -48,6 +48,16 @@ public class UserStoryController {
     *
     * */
 
+    /**
+     * Getss a userstory based on userstory Id
+     * @param userStoryId The userstory Id to get
+     * @return The response entity
+     */
+    @GetMapping("/read/project/userstory")
+    public ResponseEntity<UserStory> readUserStory(@RequestParam String userStoryId){
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     /*
     *
     * Update

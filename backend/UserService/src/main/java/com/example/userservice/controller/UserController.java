@@ -1,16 +1,29 @@
 package com.example.userservice.controller;
 
-import com.example.userservice.repository.UserRepo;
+import com.example.userservice.model.User;
 import com.example.userservice.service.UserService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+@Log4j2
 @RestController
 @RequestMapping("/user")
+//CHANGE THAT ONCE WE GET FRONTEND STABLE
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 public class UserController {
     //vars
-    UserRepo repo;
+    @Autowired
     UserService service;
 
     //Methods
+    @PostMapping()
+    public ResponseEntity<User> create(@RequestBody User request){
+        User userCreated = service.newUser(request);
+        log.info("Created user: " + userCreated);
+        return userCreated == null ? ResponseEntity.badRequest().build() : ResponseEntity.ok(userCreated);
+    }
+
+
 }

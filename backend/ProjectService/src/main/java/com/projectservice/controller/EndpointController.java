@@ -38,9 +38,10 @@ public class EndpointController {
             endpointService.insert(endpoint);
         } catch (Exception e){
             log.error("Failed to create new endpoint object in MongoDB.");
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         log.info("Successfully added new endpoint object in MongoDB.");
-        return new ResponseEntity<>(endpoint, HttpStatus.OK);
+        return new ResponseEntity<>(endpoint, HttpStatus.CREATED);
     }
 
     /*
@@ -73,7 +74,7 @@ public class EndpointController {
     @GetMapping("/read/project/endpoints")
     public ResponseEntity<List<Endpoint>> readEndpoints(@RequestParam String projectId){
         List<Endpoint> endpointList = endpointService.findAllByProjectId(projectId);
-        if (endpointList == null){
+        if (endpointList.isEmpty()){
             log.error("No such project found of projectId : {}.",projectId);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -89,9 +90,9 @@ public class EndpointController {
     * */
 
     /**
-     *
-     * @param endpoint
-     * @return
+     * Updates an endpoint in the db
+     * @param endpoint The endpoint to update
+     * @return The updated endpoint in a response entity
      */
     @PutMapping("/update/project/endpoint")
     public ResponseEntity<Endpoint> updateEndpoint(@RequestBody Endpoint endpoint){
@@ -118,7 +119,7 @@ public class EndpointController {
     @DeleteMapping("/delete/project/endpoint")
     public ResponseEntity<List<Endpoint>> deleteEndpoint(@RequestParam String endpointId){
         List<Endpoint> updatedEndpoints = endpointService.delete(endpointId);
-        if (updatedEndpoints == null){
+        if (updatedEndpoints.isEmpty()){
             log.error("No such endpoint exists of endpointId : {}.",endpointId);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

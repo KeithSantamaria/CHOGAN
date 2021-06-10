@@ -49,6 +49,30 @@ public class TagControllerTest {
     *
     * */
 
+    @Test
+    void readTagSuccessTest(){
+        String tagId = "Id";
+        Tag tag = new Tag();
+
+        Mockito.when(tagService.findByTagId(tagId)).thenReturn(tag);
+
+        ResponseEntity<Tag> response = tagController.readTag(tagId);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
+    }
+
+    @Test
+    void readTagFailureTest(){
+     String tagId = "Id";
+
+     Mockito.when(tagService.findByTagId(tagId)).thenReturn(null);
+
+     ResponseEntity<Tag> response = tagController.readTag(tagId);
+
+     Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
     /*
     *
     * Update

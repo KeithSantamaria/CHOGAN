@@ -47,6 +47,16 @@ public class TagController {
     *
     * */
 
+    /**
+     * Reads a single tag by tag Id
+     * @param tagId The tag to read
+     * @return The response entity
+     */
+    @GetMapping("/read/project/tag")
+    public ResponseEntity<Tag> readTag(@RequestParam String tagId){
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     /*
     *
     * Update

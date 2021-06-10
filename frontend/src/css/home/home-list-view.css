@@ -1,0 +1,9 @@
+.list-group {
+    width: 100%;
+    border-radius: 25px;
+}
+
+.project-list-item {
+    margin: 0px 0px 10px;
+    border-radius: 25px;
+}

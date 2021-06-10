@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @Slf4j
@@ -60,6 +62,16 @@ public class ModelController {
         }
         log.info("Successfully found model of modelId : {}",modelId);
         return new ResponseEntity<>(foundModel,HttpStatus.OK);
+    }
+
+    /**
+     * Finds a list of all models with a shared projectId
+      * @param projectId The projectId to find models by
+     * @return A response entity containing the models if successful
+     */
+    @GetMapping("/read/project/models")
+    public ResponseEntity<List<Model>> readModels(@RequestParam String projectId){
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /*

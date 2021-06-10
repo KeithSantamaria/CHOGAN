@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ModelServiceTest {
 
     private final ModelRepo modelRepo = Mockito.mock(ModelRepo.class);
@@ -45,6 +48,19 @@ public class ModelServiceTest {
         Model foundModel = modelService.findByModelId(modelId);
 
         Assertions.assertEquals(foundModel,model);
+    }
+
+    @Test
+    void findByProjectIdTest(){
+        String projectId = "Id";
+        List<Model> list = new ArrayList<>();
+        list.add(new Model());
+
+        Mockito.when(modelRepo.findByProjectId(projectId)).thenReturn(list);
+
+        List<Model> foundList = modelService.findByProjectId(projectId);
+
+        Assertions.assertEquals(foundList,list);
     }
 
     /*

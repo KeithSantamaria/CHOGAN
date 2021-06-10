@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.mongodb.core.aggregation.ArithmeticOperators;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class for handling all service layer methods for models
  */
@@ -44,6 +47,15 @@ public class ModelService implements IModelService{
     @Override
     public Model findByModelId(String modelId){
         return modelRepo.findByModelId(modelId);
+    }
+
+    /**
+     * Finds a list of models based on projectId
+     * @param projectId The projectId to find by
+     * @return The list of models, empty if none
+     */
+    public List<Model> findByProjectId(String projectId){
+        return new ArrayList<>();
     }
 
     /*

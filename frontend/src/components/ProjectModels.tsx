@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import axios from 'axios';
 import React, { useMemo } from 'react'
 import { Button, Card, Modal } from 'react-bootstrap';
@@ -73,6 +74,16 @@ function ProjectModels() {
             New Model
           </Button>
           {widgetModal()}
+=======
+import React from 'react'
+import ProjectSideNav from './ProjectSideNav'
+
+function ProjectModels() {
+    return (
+        <div>
+            <ProjectSideNav/>
+            <p>Models</p>
+>>>>>>> Stashed changes
         </div>
     )
 }

@@ -1,30 +1,44 @@
 import React, {useState} from 'react';
 import axios from "axios";
 import {useForm} from "./loginFormLogic"
+import 'bootstrap/dist/css/bootstrap.css';
+import '../../css/authentication/login.css'
+import { setProjects } from '../../redux/projectAppSlice';
+import {useAppSelector, useAppDispatch} from '../../redux/hooks';
+import {currentUser, setCurrentUser} from '../../redux/userSlice';
 
-const SignUp: React.FC = () => {
 
-//     React.useEffect(() => {
-//
-//     }, []);
+export default function SignUp() {
 
-//     const [email, setEmail] = useState("");
-//     const [username, setUsername] = useState("");
-//     const [password, setPassword] = useState("");
-    const initialState = {
-        email: "",
-        username:"",
-        password: "",
-    };
+    const currentlyLoggedUser = useAppSelector(currentUser);
+    const dispatchUser = useAppDispatch();
 
-     const { onChange, onSubmit, values } = useForm(
-            //submitUser,
-            initialState
-        );
+    React.useEffect(() => {
+        console.log(currentlyLoggedUser);
+    }, [currentlyLoggedUser]);
+
+    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
+
+    
 
     //Send value to database
      const submitUser = async () => {
-//         //e.preventDefault();
+        const userPayload = {
+          id : "",
+          username: username,
+          password: password, //should be hashed
+          email: email,
+          firstName: "",
+          lastName: "",
+          securityQuestionId: 0,
+          securityAnswer: "" //should be hashed
+        }
+
+        dispatchUser(setCurrentUser(userPayload));
+
 //         console.log("submitting user...");
 //
 //          axios({
@@ -44,36 +58,43 @@ const SignUp: React.FC = () => {
     return(
     <div>
         <p>Hello Keith. I don't believe that you're really 9 foot tall...</p>
-        <form onSubmit={onSubmit}>
-            <p>SignUp</p>
+        <form onSubmit={submitUser}>
+            
+            <div className="form-group">
+                <p className = "text-center">SignUp</p>
                 <input
+                    className="form-control center"
                     name='email'
                     id='email'
                     type='email'
                     placeholder='Email'
-                    onChange={onChange}
+                    onChange={e => setEmail(e.target.value)}
                     required
                 />
+                </div>
+                <div className="form-group">
                  <input
+                    className="form-control center"
                     name='username'
                     id='username'
                     type='username'
                     placeholder='Username'
-                    onChange={onChange}
+                    onChange={e => setUsername(e.target.value)}
                     required
                 />
+                </div>
+                <div className="form-group">
                 <input
+                    className="form-control center"
                     name='password'
                     id='password'
                     type='password'
                     placeholder='Password'
-                    onChange={onChange}
+                    onChange={e => setPassword(e.target.value)}
                     required
                 />
-                <button type='submit'>SignUp</button>
+                </div>
+                <button className="btn btn-primary btn-block center" type='submit'>SignUp</button>
         </form>
-    </div>)
-
+    </div>);
 }
-
-export default SignUp;

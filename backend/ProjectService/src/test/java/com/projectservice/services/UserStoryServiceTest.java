@@ -58,13 +58,24 @@ public class UserStoryServiceTest {
 
         Assertions.assertEquals(foundList,list);
     }
-    
+
     /*
     *
     * Update
     *
     * */
 
+    @Test
+    void updateUserStoryTest(){
+        UserStory userStory = new UserStory();
+
+        Mockito.when(userStoryRepo.save(userStory)).thenReturn(userStory);
+
+        UserStory foundUserStory = userStoryService.updateUserStory(userStory);
+
+        Assertions.assertEquals(foundUserStory,userStory);
+    }
+    
     /*
     *
     * Delete

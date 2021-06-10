@@ -14,7 +14,7 @@ public interface IUserStoryService{
     UserStory findByUserStoryId(String userStoryId);
     List<UserStory> findByProjectId(String projectId);
 
-    List<UserStory> updateUserStory(UserStory userStory);
+    UserStory updateUserStory(UserStory userStory);
 
     List<UserStory> deleteUserStory(String userStoryId);
 }

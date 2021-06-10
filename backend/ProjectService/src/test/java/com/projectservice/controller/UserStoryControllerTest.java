@@ -93,6 +93,28 @@ public class UserStoryControllerTest {
     *
     * */
 
+    @Test
+    void updateUserStorySuccessTest(){
+        UserStory userStory = new UserStory();
+
+        Mockito.when(userStoryService.updateUserStory(userStory)).thenReturn(userStory);
+
+        ResponseEntity<List<UserStory>> response = userStoryController.updateUserStory(userStory);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
+    }
+
+    @Test
+    void updateUserStoryFailureTest(){
+        UserStory userStory = new UserStory();
+
+        Mockito.when(userStoryService.updateUserStory(userStory)).thenReturn(null);
+
+        ResponseEntity<List<UserStory>> response = userStoryController.updateUserStory(userStory);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     /*
     *
     * Delete

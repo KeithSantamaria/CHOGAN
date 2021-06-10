@@ -49,7 +49,7 @@ public class UserStoryService implements IUserStoryService{
     * */
 
     @Override
-    public List<UserStory> updateUserStory(UserStory userStory) {
+    public UserStory updateUserStory(UserStory userStory) {
         return null;
     }
 

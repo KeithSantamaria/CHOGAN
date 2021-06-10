@@ -82,6 +82,16 @@ public class UserStoryController {
     *
     * */
 
+    /**
+     * Takes a user story and updates it, then returns all
+     * @param userStory The updated userstory
+     * @return The response entity
+     */
+    @PutMapping("/update/project/userstory")
+    public ResponseEntity<List<UserStory>> updateUserStory(@RequestBody UserStory userStory){
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     /*
     *
     * Delete

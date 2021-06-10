@@ -8,10 +8,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 * Pojo for Widgets
 * */
 @Data
-@Document
+@Document(collection = "widgets")
 public class Widget {
     @Id
     private String widgetId;
+    private String projectId;
     private String widgetName;
     private String widgetDescription;
 }

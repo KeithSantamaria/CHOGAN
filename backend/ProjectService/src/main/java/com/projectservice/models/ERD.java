@@ -5,13 +5,15 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * Pojo for user stories
+ * ERD for a project
  */
 @Data
-@Document(collection = "userstories")
-public class UserStory {
+@Document(collection = "erds")
+public class ERD {
     @Id
-    private String userStoryId;
+    private String erdID;
     private String projectId;
-    private String userStoryDescription;
+    private String erdName;
+    private String erdDescription;
+    private String erdImageUrl;
 }

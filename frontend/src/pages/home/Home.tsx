@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import GridView from '../../components/home/GridView.component';
 import UserView from '../../components/home/UserView.component';
+import HomeListView from '../../components/home/HomeListView';
 import '../../css/home/home.css';
 
 import {Col, Row} from 'react-bootstrap';
@@ -38,7 +39,7 @@ export default function Home() {
         }
 
         if(tabs === 'list') {
-            return <h1>List</h1>;
+            return <HomeListView />;
         }
         return null;
     }

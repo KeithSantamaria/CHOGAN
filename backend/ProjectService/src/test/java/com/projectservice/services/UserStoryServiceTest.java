@@ -4,6 +4,7 @@ import com.projectservice.models.UserStory;
 import com.projectservice.repository.UserStoryRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -75,10 +76,36 @@ public class UserStoryServiceTest {
 
         Assertions.assertEquals(foundUserStory,userStory);
     }
-    
+
     /*
     *
     * Delete
     *
     * */
+
+    @Test
+    void deleteUserStorySuccessTest(){
+        String userStoryId = "Id";
+        UserStory userStory = new UserStory();
+        userStory.setProjectId("pId");
+        List<UserStory> list = new ArrayList<>();
+
+        Mockito.when(userStoryRepo.findUserStoryById(userStoryId)).thenReturn(userStory);
+        Mockito.when(userStoryRepo.findByProjectId("pId")).thenReturn(list);
+
+        List<UserStory> foundList = userStoryService.deleteUserStory(userStoryId);
+
+        Assertions.assertEquals(foundList,list);
+    }
+
+    @Test
+    void deleteUserStoryFailureTest(){
+        String userStoryId = "Id";
+
+        Mockito.when(userStoryRepo.findUserStoryById(userStoryId)).thenReturn(null);
+
+        List<UserStory> foundList = userStoryService.deleteUserStory(userStoryId);
+
+        Assertions.assertNull(foundList);
+    }
 }

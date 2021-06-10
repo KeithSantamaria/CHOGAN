@@ -120,4 +120,28 @@ public class UserStoryControllerTest {
     * Delete
     *
     * */
+
+    @Test
+    void deleteUserStorySuccessTest(){
+        String userStoryId = "Id";
+        List<UserStory> list = new ArrayList<>();
+        list.add(new UserStory());
+
+        Mockito.when(userStoryService.deleteUserStory(userStoryId)).thenReturn(list);
+
+        ResponseEntity<List<UserStory>> response = userStoryController.deleteUserStory(userStoryId);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
+    }
+
+    @Test
+    void deleteUserStoryFailureTest(){
+        String userStoryId = "Id";
+
+        Mockito.when(userStoryService.deleteUserStory(userStoryId)).thenReturn(null);
+
+        ResponseEntity<List<UserStory>> response = userStoryController.deleteUserStory(userStoryId);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

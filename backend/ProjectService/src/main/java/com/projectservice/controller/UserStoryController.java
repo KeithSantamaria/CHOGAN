@@ -103,4 +103,14 @@ public class UserStoryController {
     * Delete
     *
     * */
+
+    /**
+     * Deletes a userstory from the DB
+     * @param userStoryId the user story to delete
+     * @return The response entity
+     */
+    @DeleteMapping("/delete/project/userstory")
+    public ResponseEntity<List<UserStory>> deleteUserStory(@RequestParam String userStoryId){
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

@@ -49,7 +49,7 @@ public class EndPointService implements IEndpointService{
      * @return
      */
     @Override
-    public Endpoint findByEndpointId(String endpointId) { return endpointRepo.findByEndPointId(endpointId); }
+    public Endpoint findByEndpointId(String endpointId) { return endpointRepo.findByEndpointId(endpointId); }
 
 
 }

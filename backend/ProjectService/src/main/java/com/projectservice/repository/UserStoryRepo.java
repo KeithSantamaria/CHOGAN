@@ -6,6 +6,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface UserStoryRepo extends MongoRepository<UserStory, String> {
-    List<UserStory> findByProjectId(String userStoryId);
-    UserStory findUserStoryById(String userStoryId);
+    List<UserStory> findByProjectId(String projectId);
+   // UserStory findUserstoryById(String userstoryId);
 }

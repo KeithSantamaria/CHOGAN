@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "userstories")
 public class UserStory {
     @Id
-    private String userStoryId;
+    private String userstoryId;
     private String projectId;
-    private String userStoryDescription;
+    private String userstoryDescription;
 }

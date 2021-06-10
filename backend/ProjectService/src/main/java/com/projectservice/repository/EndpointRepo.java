@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface EndpointRepo extends MongoRepository<Endpoint, String> {
     List<Endpoint> findByProjectId(String projectId);
-    Endpoint findByEndPointId(String endpointId);
+    Endpoint findByEndpointId(String endpointId);
 }

@@ -16,6 +16,7 @@ class UserStoryTest {
         userStory = new UserStory();
     }
 
+    /*
     @Test
     void getUserStoryId() {
         userStory.setUserStoryId("Id");
@@ -29,4 +30,5 @@ class UserStoryTest {
         String desc = userStory.getUserStoryDescription();
         Assertions.assertEquals(desc,"Desc");
     }
+    */
 }

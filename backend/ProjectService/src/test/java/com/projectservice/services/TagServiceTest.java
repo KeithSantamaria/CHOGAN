@@ -1,6 +1,8 @@
 package com.projectservice.services;
 
+import com.projectservice.models.Tag;
 import com.projectservice.repository.TagRepo;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class TagServiceTest {
@@ -14,6 +16,13 @@ public class TagServiceTest {
     * Create
     *
     * */
+
+    @Test
+    void insertTest(){
+        Tag tag = new Tag();
+
+        tagService.insert(tag);
+    }
 
     /*
     *

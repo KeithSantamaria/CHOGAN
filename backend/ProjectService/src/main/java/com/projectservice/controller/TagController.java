@@ -38,7 +38,7 @@ public class TagController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         log.info("Successfully added a tag object to the DB.");
-        return new ResponseEntity<>(tagService.findAllByProjectId(tag.getProjectId()),HttpStatus.OK);
+        return new ResponseEntity<>(tagService.findAllByProjectId(tag.getProjectId()),HttpStatus.CREATED);
     }
 
     /*

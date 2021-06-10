@@ -80,4 +80,30 @@ public class TagServiceTest {
     * Delete
     *
     * */
+
+    @Test
+    void deleteSuccessTest(){
+        String tagId = "Id";
+        Tag tag = new Tag();
+        tag.setProjectId("pId");
+        List<Tag> list = new ArrayList<>();
+
+        Mockito.when(tagRepo.findByTagId(tagId)).thenReturn(tag);
+        Mockito.when(tagRepo.findByProjectId("pId")).thenReturn(list);
+
+        List<Tag> foundList = tagService.delete(tagId);
+
+        Assertions.assertEquals(foundList,list);
+    }
+
+    @Test
+    void deleteFailureTest(){
+        String tagId = "Id";
+
+        Mockito.when(tagRepo.findByTagId(tagId)).thenReturn(null);
+
+        List<Tag> foundList = tagService.delete(tagId);
+
+        Assertions.assertNull(foundList);
+    }
 }

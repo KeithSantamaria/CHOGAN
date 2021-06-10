@@ -110,6 +110,12 @@ public class TagController {
      */
     @DeleteMapping("/delete/project/tag")
     public ResponseEntity<List<Tag>> deleteTag(@RequestParam String tagId){
-        return new ResponseEntity<>(HttpStatus.OK);
+        List<Tag> updatedTags = tagService.delete(tagId);
+        if (updatedTags == null){
+            log.error("No such tag exists of tagId : {}",tagId);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        log.info("Successfully added tag of tagId : {}",tagId);
+        return new ResponseEntity<>(updatedTags,HttpStatus.OK);
     }
 }

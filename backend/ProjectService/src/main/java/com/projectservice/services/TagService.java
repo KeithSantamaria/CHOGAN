@@ -86,7 +86,12 @@ public class TagService implements ITagService{
      */
     @Override
     public List<Tag> delete(String tagId) {
+        Tag foundTag = tagRepo.findByTagId(tagId);
+        if (foundTag == null){
+            return null;
+        }
+        String projectId = foundTag.getProjectId();
         tagRepo.deleteById(tagId);
-        return new ArrayList<>();
+        return tagRepo.findByProjectId(projectId);
     }
 }

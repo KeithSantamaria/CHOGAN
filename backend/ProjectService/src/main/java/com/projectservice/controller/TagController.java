@@ -88,7 +88,13 @@ public class TagController {
      */
     @PutMapping("/update/project/tag")
     public ResponseEntity<List<Tag>> updateTags(@RequestBody Tag tag){
-        return new ResponseEntity<>(HttpStatus.OK);
+        Tag updatedTag = tagService.update(tag);
+        if (updatedTag == null){
+            log.error("Failed to update tag of tagId: {}",tag.getTagId());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        log.info("Successfully updated tag of tagId : {}",tag.getTagId());
+        return new ResponseEntity<>(tagService.findAllByProjectId(tag.getProjectId()),HttpStatus.OK);
     }
 
     /*

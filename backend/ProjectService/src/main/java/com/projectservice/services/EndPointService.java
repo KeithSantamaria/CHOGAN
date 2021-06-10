@@ -77,5 +77,13 @@ public class EndPointService implements IEndpointService{
      * @param endpointId The endpoint to delete
      */
     @Override
-    public void delete(String endpointId) { endpointRepo.deleteById(endpointId); }
+    public List<Endpoint> delete(String endpointId) {
+        Endpoint foundEndpoint = endpointRepo.findByEndpointId(endpointId);
+        if (foundEndpoint == null){
+            return null;
+        }
+        String projectId = foundEndpoint.getProjectId();
+        endpointRepo.deleteById(endpointId);
+        return endpointRepo.findByProjectId(projectId);
+    }
 }

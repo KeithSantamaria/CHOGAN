@@ -81,6 +81,16 @@ public class TagController {
     *
     * */
 
+    /**
+     * Updates a tag and returns all the tags
+     * @param tag The tag to update
+     * @return The response entity
+     */
+    @PutMapping("/update/project/tag")
+    public ResponseEntity<List<Tag>> updateTags(@RequestBody Tag tag){
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     /*
     *
     * Delete

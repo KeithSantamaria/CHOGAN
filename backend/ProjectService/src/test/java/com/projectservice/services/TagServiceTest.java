@@ -64,6 +64,17 @@ public class TagServiceTest {
     *
     * */
 
+    @Test
+    void updateTest(){
+        Tag tag = new Tag();
+
+        Mockito.when(tagRepo.save(tag)).thenReturn(tag);
+
+        Tag foundTag = tagService.update(tag);
+
+        Assertions.assertEquals(foundTag,tag);
+    }
+
     /*
     *
     * Delete

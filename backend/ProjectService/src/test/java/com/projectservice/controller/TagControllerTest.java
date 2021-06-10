@@ -92,6 +92,28 @@ public class TagControllerTest {
     *
     * */
 
+    @Test
+    void updateTagSuccessTest(){
+        Tag tag = new Tag();
+
+        Mockito.when(tagService.update(tag)).thenReturn(tag);
+
+        ResponseEntity<List<Tag>> response = tagController.updateTags(tag);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
+    }
+
+    @Test
+    void updateTagFailureTest(){
+        Tag tag = new Tag();
+
+        Mockito.when(tagService.update(tag)).thenReturn(null);
+
+        ResponseEntity<List<Tag>> response = tagController.updateTags(tag);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     /*
     *
     * Delete

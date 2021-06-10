@@ -50,7 +50,7 @@ public class UserStoryService implements IUserStoryService{
 
     @Override
     public UserStory updateUserStory(UserStory userStory) {
-        return null;
+        return userStoryRepo.save(userStory);
     }
 
     /*

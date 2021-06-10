@@ -89,7 +89,13 @@ public class UserStoryController {
      */
     @PutMapping("/update/project/userstory")
     public ResponseEntity<List<UserStory>> updateUserStory(@RequestBody UserStory userStory){
-        return new ResponseEntity<>(HttpStatus.OK);
+        UserStory updatedUserStory = userStoryService.updateUserStory(userStory);
+        if (updatedUserStory == null){
+            log.error("Failed to update userstory of userStoryId : {}",userStory.getUserStoryId());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        log.info("Successfully updated userstory of userStoryId : {}",userStory.getUserStoryId());
+        return new ResponseEntity<>(userStoryService.findByProjectId(userStory.getProjectId()),HttpStatus.OK);
     }
 
     /*

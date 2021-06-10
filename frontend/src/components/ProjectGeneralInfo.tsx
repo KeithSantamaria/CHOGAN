@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 import React, { useMemo } from 'react'
 import axios from 'axios';
 import ProjectSideNav from './ProjectSideNav'
@@ -92,16 +91,6 @@ const ProjectGeneralInfo = () => {
             New Widget
           </Button>
           {widgetModal()}
-=======
-import React from 'react'
-import ProjectSideNav from './ProjectSideNav'
-
-function ProjectGeneralInfo() {
-    return (
-        <div>
-            <ProjectSideNav />
-            <p>General</p>
->>>>>>> Stashed changes
         </div>
     )
 }

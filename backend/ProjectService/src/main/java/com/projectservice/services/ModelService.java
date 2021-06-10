@@ -22,7 +22,7 @@ public class ModelService implements IModelService{
 
     @Override
     public Model insert(Model model){
-        return model;
+        return modelRepo.save(model);
     }
 
     /*

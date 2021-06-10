@@ -30,7 +30,14 @@ public class ModelController {
      */
     @PostMapping("/create/project/model")
     public ResponseEntity<Model> createNewModel(@RequestBody Model model){
-        return new ResponseEntity<>(HttpStatus.OK);
+        try{
+            Model savedModel = modelService.insert(model);
+            log.info("Successfully added new model to the DB.");
+            return new ResponseEntity<>(savedModel,HttpStatus.CREATED);
+        }catch (Exception e){
+            log.error("Failed to add model to the DB.");
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     /*

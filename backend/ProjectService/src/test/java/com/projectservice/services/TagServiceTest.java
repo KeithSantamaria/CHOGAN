@@ -40,7 +40,7 @@ public class TagServiceTest {
 
         Tag foundTag = tagService.findByTagId(tagId);
 
-        Assertions.assertEquals(foundTag,tagId);
+        Assertions.assertEquals(foundTag,tag);
 
     }
 

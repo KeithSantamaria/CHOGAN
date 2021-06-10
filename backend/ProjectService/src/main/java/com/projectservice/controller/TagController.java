@@ -54,7 +54,13 @@ public class TagController {
      */
     @GetMapping("/read/project/tag")
     public ResponseEntity<Tag> readTag(@RequestParam String tagId){
-        return new ResponseEntity<>(HttpStatus.OK);
+        Tag foundTag = tagService.findByTagId(tagId);
+        if (foundTag == null){
+            log.error("Failed to find tag with tagId : {}",tagId);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        log.info("Successfully found tag with tagId : {}",tagId);
+        return new ResponseEntity<>(foundTag,HttpStatus.OK);
     }
 
     /*

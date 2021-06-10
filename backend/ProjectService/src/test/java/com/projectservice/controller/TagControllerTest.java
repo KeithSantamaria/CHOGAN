@@ -119,4 +119,28 @@ public class TagControllerTest {
     * Delete
     *
     * */
+
+    @Test
+    void deleteTagSuccessTest(){
+        String tagId = "Id";
+        List<Tag> list = new ArrayList<>();
+        list.add(new Tag());
+
+        Mockito.when(tagService.delete(tagId)).thenReturn(list);
+
+        ResponseEntity<List<Tag>> response = tagController.deleteTag(tagId);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
+    }
+
+    @Test
+    void deleteTagFailureTest(){
+        String tagId = "Id";
+
+        Mockito.when(tagService.delete(tagId)).thenReturn(null);
+
+        ResponseEntity<List<Tag>> response = tagController.deleteTag(tagId);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

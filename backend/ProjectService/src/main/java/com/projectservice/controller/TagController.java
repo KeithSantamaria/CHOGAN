@@ -102,4 +102,14 @@ public class TagController {
     * Delete
     *
     * */
+
+    /**
+     * Deletes a tag from the DB
+     * @param tagId The tag id to delete
+     * @return The response entity
+     */
+    @DeleteMapping("/delete/project/tag")
+    public ResponseEntity<List<Tag>> deleteTag(@RequestParam String tagId){
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

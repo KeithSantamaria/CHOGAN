@@ -86,6 +86,16 @@ public class ModelController {
     *
     * */
 
+    /**
+     * Takes a model to update that has been updated
+     * @param model The updated model and model to update
+     * @return The response entity containing the result
+     */
+    @PutMapping("/update/project/model")
+    public ResponseEntity<Model> updateModel(@RequestBody Model model){
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     /*
     *
     * Delete

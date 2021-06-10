@@ -105,6 +105,28 @@ public class ModelControllerTest {
     *
     * */
 
+    @Test
+    void updateModelSuccessTest(){
+        Model model = new Model();
+
+        Mockito.when(modelService.updateModel(model)).thenReturn(model);
+
+        ResponseEntity<Model> response = modelController.updateModel(model);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
+    }
+
+    @Test
+    void updateModelFailureTest(){
+        Model model = new Model();
+
+        Mockito.when(modelService.updateModel(model)).thenReturn(null);
+
+        ResponseEntity<Model> response = modelController.updateModel(model);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     /*
     *
     * Delete

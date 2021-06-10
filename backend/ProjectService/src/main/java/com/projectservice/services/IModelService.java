@@ -12,4 +12,6 @@ public interface IModelService {
 
     Model findByModelId(String modelId);
     List<Model> findByProjectId(String projectId);
+
+    Model updateModel(Model model);
 }

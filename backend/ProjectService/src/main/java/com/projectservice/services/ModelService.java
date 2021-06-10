@@ -64,6 +64,16 @@ public class ModelService implements IModelService{
     *
     * */
 
+    /**
+     * Updates a model in the db with a new one
+     * @param model The updated model
+     * @return The updated model
+     */
+    @Override
+    public Model updateModel(Model model){
+        return model;
+    }
+
     /*
     *
     * Delete

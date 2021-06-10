@@ -69,6 +69,17 @@ public class ModelServiceTest {
     *
     * */
 
+    @Test
+    void updateModelTest(){
+        Model model = new Model();
+
+        Mockito.when(modelRepo.save(model)).thenReturn(model);
+
+        Model foundModel = modelService.updateModel(model);
+
+        Assertions.assertEquals(foundModel,model);
+    }
+
     /*
     *
     * Delete

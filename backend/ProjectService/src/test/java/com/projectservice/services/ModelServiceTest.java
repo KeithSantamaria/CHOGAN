@@ -1,6 +1,9 @@
 package com.projectservice.services;
 
+import com.projectservice.models.Model;
 import com.projectservice.repository.ModelRepo;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class ModelServiceTest {
@@ -15,6 +18,17 @@ public class ModelServiceTest {
     *
     * */
 
+    @Test
+    void insertTest(){
+        Model model = new Model();
+
+        Mockito.when(modelRepo.save(model)).thenReturn(model);
+
+        Model foundModel = modelService.insert(model);
+
+        Assertions.assertEquals(foundModel,model);
+    }
+
     /*
     *
     * Read
@@ -24,7 +38,7 @@ public class ModelServiceTest {
     /*
     *
     * Update
-    * 
+    *
     * */
 
     /*

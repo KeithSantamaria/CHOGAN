@@ -1,7 +1,9 @@
 package com.projectservice.services;
 
+import com.projectservice.models.Model;
 import com.projectservice.repository.ModelRepo;
 import lombok.AllArgsConstructor;
+import org.springframework.data.mongodb.core.aggregation.ArithmeticOperators;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,6 +19,11 @@ public class ModelService implements IModelService{
     * Create
     *
     * */
+
+    @Override
+    public Model insert(Model model){
+        return model;
+    }
 
     /*
     *

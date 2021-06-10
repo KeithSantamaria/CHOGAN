@@ -10,7 +10,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Document
 public class UserStory {
-//    @Id
+    @Id
     private String userStoryId;
+    private String projectId;
     private String userStoryDescription;
 }

@@ -3,7 +3,7 @@ import axios from 'axios';
 import ProjectSideNav from './ProjectSideNav'
 import WidgetForm from './WidgetForm';
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
-import { Jumbotron, Card, Button, Modal } from 'react-bootstrap';
+import { Card, Button, Modal } from 'react-bootstrap';
 import { selectProjectApp, setProject } from '../redux/projectAppSlice';
 
 // For production, project will be passed as a prop from Project Card (built by Home group)
@@ -42,7 +42,7 @@ const ProjectGeneralInfo = () => {
         getProject();
       }, []);
 
-      const widgetModal = () => {        
+      const newWidgetModal = () => {        
         return (
             <Modal
                 size="lg"   
@@ -62,6 +62,28 @@ const ProjectGeneralInfo = () => {
           </Modal>
         )
     }
+
+    const widgetModal = (widget:any) => {
+      return (
+        <Modal
+            size="lg"   
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={modalShow}
+            onHide={handleClose}
+        >
+            <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-vcenter">
+                {widget.widgetName}
+            </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {/* <WidgetForm project={projectAppState.project}/> */}
+              {widget.widgetDescription};
+            </Modal.Body>
+      </Modal>
+    )
+    }
     return (
         <div>
           <ProjectSideNav />
@@ -75,9 +97,9 @@ const ProjectGeneralInfo = () => {
               </Card.Text>
             </Card.Body>
           </Card>
-          {projectAppState.project.widgets.map( (widget: any) => {
+          {projectAppState.widgets.map( (widget: any) => {
             return(
-              <Card>
+              <Card >
                 <Card.Body>
                   <Card.Title>{widget.widgetName}</Card.Title>
                   <Card.Text>
@@ -90,7 +112,7 @@ const ProjectGeneralInfo = () => {
           <Button variant="primary" onClick={handleOpen}>
             New Widget
           </Button>
-          {widgetModal()}
+          {newWidgetModal()}
         </div>
     )
 }

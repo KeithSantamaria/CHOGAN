@@ -71,7 +71,7 @@ public class ModelService implements IModelService{
      */
     @Override
     public Model updateModel(Model model){
-        return model;
+        return modelRepo.save(model);
     }
 
     /*

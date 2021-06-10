@@ -93,7 +93,13 @@ public class ModelController {
      */
     @PutMapping("/update/project/model")
     public ResponseEntity<Model> updateModel(@RequestBody Model model){
-        return new ResponseEntity<>(HttpStatus.OK);
+        Model updatedModel = modelService.updateModel(model);
+        if (updatedModel == null){
+            log.error("Failed to update model of modelId : {}",model.getModelId());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        log.info("Successfullly updated model of modelId : {}",model.getModelId());
+        return new ResponseEntity<>(updatedModel,HttpStatus.OK);
     }
 
     /*

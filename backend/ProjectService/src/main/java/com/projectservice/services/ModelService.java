@@ -36,9 +36,14 @@ public class ModelService implements IModelService{
     *
     * */
 
+    /**
+     * Finds the model from an Id
+     * @param modelId The id of the model to find
+     * @return The model if found, null otherwise
+     */
     @Override
     public Model findByModelId(String modelId){
-        return new Model();
+        return modelRepo.findByModelId(modelId);
     }
 
     /*

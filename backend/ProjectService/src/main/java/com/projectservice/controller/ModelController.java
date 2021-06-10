@@ -46,9 +46,20 @@ public class ModelController {
     *
     * */
 
+    /**
+     * Gets a single model from its id
+     * @param modelId The id of the model to find
+     * @return The response entity containing the model
+     */
     @GetMapping("/read/project/model")
     public ResponseEntity<Model> readModel(@RequestParam String modelId){
-        return new ResponseEntity<>(HttpStatus.OK);
+        Model foundModel = modelService.findByModelId(modelId);
+        if (foundModel == null){
+            log.error("No such model exists of modelId : {}",modelId);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        log.info("Successfully found model of modelId : {}",modelId);
+        return new ResponseEntity<>(foundModel,HttpStatus.OK);
     }
 
     /*

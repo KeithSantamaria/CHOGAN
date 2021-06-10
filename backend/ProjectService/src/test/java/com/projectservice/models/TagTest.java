@@ -1,4 +1,4 @@
-package com.example.projectservice.models;
+package com.projectservice.models;
 
 import com.projectservice.models.Tag;
 import org.junit.jupiter.api.Assertions;

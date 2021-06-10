@@ -84,21 +84,21 @@ public class ProjectService implements IProjectService {
     /**
      *
      */
-    @Override
-    public Project addWidget(String projectId, Widget widget){
-        Project project = projectRepo.findByProjectId(projectId);
-        if(project == null){
-            return project;
-        }
-        List<Widget> widgets = project.getWidgets();
-        if(widgets.contains(widget)){
-            return null;
-        }
-        widgets.add(widget);
-        project.setWidgets(widgets);
-        projectRepo.save(project);
-        return project;
-    }
+//    @Override
+//    public Project addWidget(String projectId, Widget widget){
+//        Project project = projectRepo.findByProjectId(projectId);
+//        if(project == null){
+//            return project;
+//        }
+//        List<Widget> widgets = project.getWidgets();
+//        if(widgets.contains(widget)){
+//            return null;
+//        }
+//        widgets.add(widget);
+//        project.setWidgets(widgets);
+//        projectRepo.save(project);
+//        return project;
+//    }
     /*
      *
      * Delete

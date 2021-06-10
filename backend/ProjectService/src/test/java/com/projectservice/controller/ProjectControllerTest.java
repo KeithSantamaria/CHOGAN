@@ -1,4 +1,4 @@
-package com.example.projectservice.controller;
+package com.projectservice.controller;
 
 import com.projectservice.controller.ProjectController;
 import com.projectservice.models.Project;

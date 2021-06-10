@@ -1,4 +1,4 @@
-package com.example.projectservice.services;
+package com.projectservice.services;
 
 import com.projectservice.models.Project;
 import com.projectservice.repository.ProjectRepo;

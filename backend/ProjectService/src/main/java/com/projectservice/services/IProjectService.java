@@ -15,5 +15,5 @@ public interface IProjectService {
     Project update(Project project);
     Project findByProjectId(String projectId);
     List<Project> findAllByUserId(String userId);
-    Project addWidget(String projectId, Widget widget);
+//    Project addWidget(String projectId, Widget widget);
 }

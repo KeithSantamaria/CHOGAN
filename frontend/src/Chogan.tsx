@@ -8,7 +8,7 @@ import AddToFolder from './components/AddToFolder';
 function Chogan() {
   return (
     <div className="App">
-      <ProjectsHome />
+      <Home/>
     </div>
   );
 }

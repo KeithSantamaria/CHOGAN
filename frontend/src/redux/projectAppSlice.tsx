@@ -3,6 +3,7 @@ import {
     createSlice,
 
     //  PayloadAction
+    PayloadAction
   } from "@reduxjs/toolkit";
 import { ESMap, Map } from "typescript";
 
@@ -14,6 +15,8 @@ import { ESMap, Map } from "typescript";
   export interface ProjectAppState {
       projects : Array<{
         project: {
+            projectName: string,
+            projectDescription: string,
             models: Array<{
                 model:{
                     modelId: string;
@@ -46,6 +49,11 @@ import { ESMap, Map } from "typescript";
                 }
             }>
         }
+      }>;
+      sampleProjects: Array<{
+        projectId: string;
+        projectName: string;
+        projectDescription: string;
       }>;
       model:{
         modelId: string;
@@ -82,6 +90,15 @@ import { ESMap, Map } from "typescript";
 
   const initialState: ProjectAppState = {
     projects: [],
+      sampleProjects: [{
+        projectId: "12345",
+        projectName: "Sample Project from Store",
+        projectDescription: "This project is the base project in redux-store",
+      }, {
+        projectId: "22345",
+        projectName: "Sample 2 from Store",
+        projectDescription: "This project is the base project in redux-store",
+      }],
       model:{
         modelId: "",
         modelName: "",
@@ -112,106 +129,10 @@ import { ESMap, Map } from "typescript";
       createNewProjectWireframe: {wireframeName: "", wireframeDescription: ""},
   };
 
-  export const projectAppSlice = createSlice({
-    name: "projectApp",
+  const projectAppSlice = createSlice({
+    name: 'projectApp',
     initialState,
     reducers: {
-        setEndpoint: (
-            state, 
-            action: {
-                payload: {
-                    endpointId: string;
-                    endpointName: string;
-                    endpointUrlPattern: string;
-                    endpointDescription: string;
-                };
-            }
-        ) => {
-            console.log("Dispatching setEndPoint reducer with action: ", action);
-            state.endpoint = action.payload;
-        },
-        setUserStory: (
-            state,
-            action: {
-                payload: {
-                    userStoryId: string;
-                    userStoryDescription: string;
-                };
-            }
-        ) => {
-            console.log("Dispatching setUserStory reducer with action: ", action);
-            state.userStory = action.payload;
-        },
-        setTag: (
-            state,
-            action: {
-                payload: {
-                    tagId: string;
-                    tagName: string;
-                    tagDescription: string;
-                }
-            }
-        ) => {
-            console.log("Dispatching setTag reducer with action: ", action);
-            state.tag = action.payload;
-        },
-        setModel: (
-            state,
-            action:{
-                payload:{
-                    modelId: string,
-                    modelName: string,
-                    modelMetadata: Array<{
-                        key: string, value: string
-                    }>, 
-                }
-            }
-        ) => {
-          console.log("Dispatching setModel reducer with action:", action);
-          state.model = action.payload;
-        },
-        setProjects: (
-            state,
-            action:{
-                payload: Array<{
-                    project: {
-                    models: Array<{
-                        model:{
-                            modelId: string;
-                            modelName: string;
-                            modelMetadata:Array<{
-                                // index signature https://basarat.gitbook.io/typescript/type-system/index-signatures
-                                key: string, value: string
-                            }>                
-                        }
-                    }>,
-                    endpoints: Array <{
-                        endpoint: {
-                            endpointId: string;
-                            endpointName: string;
-                            endpointUrlPattern: string;
-                            endpointDescription: string;
-                        }
-                    }>,
-                    tags: Array<{
-                        tag:{
-                            tagId: string;
-                            tagName: string;
-                            tagDescription: string;
-                        }
-                    }>,
-                    userStories: Array<{
-                        userStory: {
-                            userStoryId: string;
-                            userStoryDescription: string;
-                        }
-                    }>
-                }}>
-            }
-        ) => {
-          console.log("Dispatching setProject reducer with aciton: ", action);
-          state.projects = action.payload;
-        },
         setCreateNewEndPointForm: (state, action: {payload: {
             fieldName: string; value: string}                
         }) => {
@@ -260,17 +181,12 @@ import { ESMap, Map } from "typescript";
   });
 
   export const {
-    setEndpoint,
     setCreateNewEndPointForm,
     setCreateNewPojoForm,
     setCreateNewProjectERD,
     setCreateNewProjectWireframe,
     setCreateNewTag,
     setCreateNewUserStory,
-    setModel,
-    setProjects,
-    setTag,
-    setUserStory
   } = projectAppSlice.actions;
 
 

@@ -74,7 +74,7 @@ public class TagControllerTest {
     }
 
     @Test
-    void readTagsSuccessTest(){
+    void readTagsTest(){
         String projectId = "Id";
         List<Tag> list = new ArrayList<>();
         list.add(new Tag());
@@ -86,17 +86,6 @@ public class TagControllerTest {
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
     }
 
-    @Test
-    void readTagsFailureTest(){
-        String projectId = "Id";
-        List<Tag> list = new ArrayList<>();
-
-        Mockito.when(tagService.findAllByProjectId(projectId)).thenReturn(list);
-
-        ResponseEntity<List<Tag>> response = tagController.readTags(projectId);
-
-        Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
-    }
     /*
     *
     * Update

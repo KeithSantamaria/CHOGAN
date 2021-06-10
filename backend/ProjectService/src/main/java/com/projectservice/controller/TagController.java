@@ -70,7 +70,9 @@ public class TagController {
      */
     @GetMapping("/read/project/tags")
     public ResponseEntity<List<Tag>> readTags(@RequestParam String projectId){
-        return new ResponseEntity<>(HttpStatus.OK);
+        List<Tag> tags = tagService.findAllByProjectId(projectId);
+        log.info("Successfully found tags for projectId : {}",projectId);
+        return new ResponseEntity<>(tags,HttpStatus.OK);
     }
 
     /*

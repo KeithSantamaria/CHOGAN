@@ -43,10 +43,9 @@ class TagTest {
     }
 
     @Test
-    void techsTest() {
-        Map<String, List<String>> map = new HashMap<>();
-        tag.setTechs(map);
-        Map<String, List<String>> foundMap = tag.getTechs();
-        Assertions.assertEquals(foundMap,map);
+    void tagDescriptionTest() {
+        tag.setTagDescription("Desc");
+        String desc = tag.getTagDescription();
+        Assertions.assertEquals(desc,"Desc");
     }
 }

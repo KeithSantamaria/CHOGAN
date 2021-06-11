@@ -40,18 +40,12 @@ public class UserService {
         } else {
             try {
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
+                user.setSecurityAnswer(passwordEncoder.encode(user.getSecurityAnswer()));
                 return userRepository.save(user);
             } catch (Exception exception) {
                 return null;
             }
         }
-    }
-
-    public User setFullName(String email, String firstName, String lastName) {
-        User user = userRepository.findByEmail(email);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        return userRepository.save(user);
     }
 
     public User getUserByEmail(String email) {
@@ -64,7 +58,10 @@ public class UserService {
 
     public User userLogIn(String email, String password) {
         User user = userRepository.findByEmail(email);
-        return( user != null && user.getPassword().equals(password)) ? user : null;
+        System.out.println("USER in LOGIN" + user.toString());
+        System.out.println( "SHOULD BE TRUE" + (password == user.getPassword() ) );
+        System.out.println("SHOULD BE TRUE NULL:" + (user != null ) );
+        return( user != null && passwordEncoder.matches(password, user.getPassword())) ? user : null;
     }
 
     public User changePassword(String Id, String newPassword, String response) {

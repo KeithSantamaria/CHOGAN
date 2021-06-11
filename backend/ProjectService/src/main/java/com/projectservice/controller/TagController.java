@@ -115,7 +115,7 @@ public class TagController {
             log.error("No such tag exists of tagId : {}",tagId);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        log.info("Successfully added tag of tagId : {}",tagId);
+        log.info("Successfully deleted tag of tagId : {}",tagId);
         return new ResponseEntity<>(updatedTags,HttpStatus.OK);
     }
 }

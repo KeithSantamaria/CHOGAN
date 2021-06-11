@@ -12,5 +12,5 @@ import java.util.List;
 @Repository
 public interface UserStoryRepo extends MongoRepository<UserStory, String> {
     List<UserStory> findByProjectId(String projectId);
-   // UserStory findUserstoryById(String userstoryId);
+    UserStory findUserStoryById(String userStoryId);
 }

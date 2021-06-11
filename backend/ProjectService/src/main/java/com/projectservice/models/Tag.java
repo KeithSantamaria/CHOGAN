@@ -18,5 +18,5 @@ public class Tag {
     private String tagId;
     private String projectId;
     private String tagName;
-    private Map<String, List<String>> techs;
+    private String tagDescription;
 }

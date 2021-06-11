@@ -9,18 +9,10 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTh, faList} from "@fortawesome/free-solid-svg-icons";
 
 export default function Home() {
-    const [active, setActive] = useState(false);
-    const [tabs, setTabs] = useState("grid");
+    const [activeGrid, setActiveGrid] = useState(true);
+    const [activeList, setActiveList] = useState(false);
 
-    const toggle = () => { 
-        if(active === false) {
-            setActive(true);
-        }
-        if(active === true) {
-            setActive(false);
-        }
-        return null;
-    }
+    const [tabs, setTabs] = useState("grid");
 
     /**
      * Mock Data
@@ -46,24 +38,24 @@ export default function Home() {
 
     const RenderTabs = () => {
         if(tabs === 'grid') {
-            // toggle();
             return <GridView projects={projects} folders={folders}/>;
         }
 
         if(tabs === 'list') {
-            // toggle();
             return <HomeListView />;
         }
         return null;
     }
 
     const handleGridView = () => {
-        toggle();
+        setActiveList(false);
+        setActiveGrid(true);
         setTabs('grid');
     }
 
     const handleListView = () => {
-        toggle();
+        setActiveList(true);
+        setActiveGrid(false);
         setTabs('list');
     }
   
@@ -74,8 +66,8 @@ export default function Home() {
             <Col sm={9} className="home-container-wrapper">
                 <Row className="tabs-container-wrapper">
                     <Col className="tabs-wrapper" >
-                        <FontAwesomeIcon style={active ? {color: 'black'} : {color: 'gray'}} className="fa-icon fa-icon-1" icon={faTh} onClick={() => handleGridView()}/>
-                        <FontAwesomeIcon style={!active ? {color: 'black'} : {color: 'gray'}} className="fa-icon fa-icon-2" icon={faList} onClick={() => handleListView()}/>
+                        <FontAwesomeIcon style={activeGrid ? {color: 'black'} : {color: 'gray'}} className="fa-icon fa-icon-1" icon={faTh} onClick={() => handleGridView()}/>
+                        <FontAwesomeIcon style={activeList ? {color: 'black'} : {color: 'gray'}} className="fa-icon fa-icon-2" icon={faList} onClick={() => handleListView()}/>
                     </Col>
 
                     <Col className="proj-info-wrapper">

@@ -15,8 +15,10 @@ import { ESMap, Map } from "typescript";
   export interface ProjectAppState {
       projects : Array<{
         project: {
-            projectName: string,
-            projectDescription: string,
+            projectId: string;
+            projectName: string;
+            projectDescription: string;
+            projectStatus: string;
             models: Array<{
                 model:{
                     modelId: string;
@@ -47,9 +49,58 @@ import { ESMap, Map } from "typescript";
                     userStoryId: string;
                     userStoryDescription: string;
                 }
+            }>,
+            widgets: Array<{
+                widget: {
+                    widgetName: string;
+                    widgetDescription: string;
+                }
             }>
         }
       }>;
+      project: {
+        projectId: string;
+        projectName: string;
+        projectDescription: string;
+        projectStatus: string;
+        models: Array<{
+            model:{
+                modelId: string;
+                modelName: string;
+                modelMetadata:Array<{
+                    // index signature https://basarat.gitbook.io/typescript/type-system/index-signatures
+                    key: string, value: string
+                }>                
+            }
+        }>,
+        endpoints: Array <{
+            endpoint: {
+                endpointId: string;
+                endpointName: string;
+                endpointUrlPattern: string;
+                endpointDescription: string;
+            }
+        }>,
+        tags: Array<{
+            tag:{
+                tagId: string;
+                tagName: string;
+                tagDescription: string;
+            }
+        }>,
+        userStories: Array<{
+            userStory: {
+                userStoryId: string;
+                userStoryDescription: string;
+            }
+        }>,
+        widgets: Array<{
+            widget: {
+                widgetName: string;
+                widgetDescription: string;
+            }
+        }>
+      };
       sampleProjects: Array<{
         projectId: string;
         projectName: string;
@@ -78,19 +129,35 @@ import { ESMap, Map } from "typescript";
         userStoryId: string;
         userStoryDescription: string;
       };
+      widget:{
+          widgetName: string;
+          widgetDescription: string;
+      };
       createNewEndPointForm: {endpointName: string, urlPattern: string, endpointDescription: string};
       createNewPojoForm: {pojoName: string};
-      createNewUserStory: {userStoryName: string};
-      createNewTag: {tagName: string, tagDescription: string};
+      createNewUserStoryForm: {userStoryName: string};
+      createNewTagForm: {tagName: string, tagDescription: string};
+      createNewWidgetForm: {widgetName: string, widgetDescription: string},
       //Bookmark for later - need to know how to upload photos 
-      createNewProjectERD: {erdName: string, erdDescription: string};
+      createNewProjectERDForm: {erdName: string, erdDescription: string};
       //Bookmark for later - need to know how to upload photos 
-      createNewProjectWireframe: {wireframeName: string, wireframeDescription: string}
+      createNewProjectWireframeForm: {wireframeName: string, wireframeDescription: string}
   }
 
   const initialState: ProjectAppState = {
     projects: [],
-      sampleProjects: [{
+    project: {
+        projectId: "",
+        projectName: "",
+        projectDescription: "",
+        projectStatus: "",
+        models:[],
+        endpoints: [],
+        tags: [],
+        userStories: [],
+        widgets: []
+        },
+        sampleProjects: [{
         projectId: "12345",
         projectName: "Sample Project from Store",
         projectDescription: "This project is the base project in redux-store This project is the base project in redux-store This project is the base project in redux-store",
@@ -119,26 +186,198 @@ import { ESMap, Map } from "typescript";
         userStoryId: "",
         userStoryDescription: "",
       },
+      widget:{
+          widgetName: "",
+          widgetDescription: "",
+      },
       createNewEndPointForm: {endpointName: "", urlPattern: "", endpointDescription: ""},
       createNewPojoForm: {pojoName: ""},
-      createNewUserStory: {userStoryName: ""},
-      createNewTag: {tagName: "", tagDescription: ""},
+      createNewUserStoryForm: {userStoryName: ""},
+      createNewTagForm: {tagName: "", tagDescription: ""},
+      createNewWidgetForm: {widgetName: "", widgetDescription: ""},
       //Bookmark for later - need to know how to upload photos 
-      createNewProjectERD: {erdName: "", erdDescription: ""},
+      createNewProjectERDForm: {erdName: "", erdDescription: ""},
       //Bookmark for later - need to know how to upload photos 
-      createNewProjectWireframe: {wireframeName: "", wireframeDescription: ""},
+      createNewProjectWireframeForm: {wireframeName: "", wireframeDescription: ""},
   };
 
   const projectAppSlice = createSlice({
     name: 'projectApp',
     initialState,
     reducers: {
+        setProject: (
+            state, 
+            action: {
+                payload: {
+                    projectId: string;
+                    projectName: string;
+                    projectDescription: string;
+                    projectStatus: string;
+                    models: Array<{
+                        model:{
+                            modelId: string;
+                            modelName: string;
+                            modelMetadata:Array<{
+                                // index signature https://basarat.gitbook.io/typescript/type-system/index-signatures
+                                key: string, value: string
+                            }>                
+                        }
+                    }>,
+                    endpoints: Array <{
+                        endpoint: {
+                            endpointId: string;
+                            endpointName: string;
+                            endpointUrlPattern: string;
+                            endpointDescription: string;
+                        }
+                    }>,
+                    tags: Array<{
+                        tag:{
+                            tagId: string;
+                            tagName: string;
+                            tagDescription: string;
+                        }
+                    }>,
+                    userStories: Array<{
+                        userStory: {
+                            userStoryId: string;
+                            userStoryDescription: string;
+                        }
+                    }>,
+                    widgets: Array<{
+                        widget: {
+                            widgetName: string;
+                            widgetDescription: string;
+                        }
+                    }>
+                }
+            }
+        ) => {
+            console.log("Dispatching setEndPoint reudcer with action: ", action);
+            state.project = action.payload;
+        },
+        setEndpoint: (
+            state, 
+            action: {
+                payload: {
+                    endpointId: string;
+                    endpointName: string;
+                    endpointUrlPattern: string;
+                    endpointDescription: string;
+                };
+            }
+        ) => {
+            console.log("Dispatching setEndPoint reducer with action: ", action);
+            state.endpoint = action.payload;
+        },
+        setUserStory: (
+            state,
+            action: {
+                payload: {
+                    userStoryId: string;
+                    userStoryDescription: string;
+                };
+            }
+        ) => {
+            console.log("Dispatching setUserStory reducer with action: ", action);
+            state.userStory = action.payload;
+        },
+        setTag: (
+            state,
+            action: {
+                payload: {
+                    tagId: string;
+                    tagName: string;
+                    tagDescription: string;
+                }
+            }
+        ) => {
+            console.log("Dispatching setTag reducer with action: ", action);
+            state.tag = action.payload;
+        },
+        setModel: (
+            state,
+            action:{
+                payload:{
+                    modelId: string,
+                    modelName: string,
+                    modelMetadata: Array<{
+                        key: string, value: string
+                    }>, 
+                }
+            }
+        ) => {
+          console.log("Dispatching setModel reducer with action:", action);
+          state.model = action.payload;
+        },
+        setProjects: (
+            state,
+            action:{
+                payload: Array<{
+                    project: {
+                    projectId: string;
+                    projectName: string;
+                    projectDescription: string;
+                    projectStatus: string;
+                    models: Array<{
+                        model:{
+                            modelId: string;
+                            modelName: string;
+                            modelMetadata:Array<{
+                                // index signature https://basarat.gitbook.io/typescript/type-system/index-signatures
+                                key: string, value: string
+                            }>                
+                        }
+                    }>,
+                    endpoints: Array <{
+                        endpoint: {
+                            endpointId: string;
+                            endpointName: string;
+                            endpointUrlPattern: string;
+                            endpointDescription: string;
+                        }
+                    }>,
+                    tags: Array<{
+                        tag:{
+                            tagId: string;
+                            tagName: string;
+                            tagDescription: string;
+                        }
+                    }>,
+                    userStories: Array<{
+                        userStory: {
+                            userStoryId: string;
+                            userStoryDescription: string;
+                        }
+                    }>,
+                    widgets: Array<{
+                        widget:{
+                            widgetName: string;
+                            widgetDescription: string;
+                        }
+                    }>
+                }}>
+            }
+        ) => {
+          console.log("Dispatching setProject reducer with aciton: ", action);
+          state.projects = action.payload;
+        },
+
+        setProjectEndpointsState: (state, action) => {
+            state.project.endpoints = action.payload;
+        },
+
+        setProjectWidgetsState: (state, action) => {
+            state.project.widgets = [...action.payload];
+        },
+
         setCreateNewEndPointForm: (state, action: {payload: {
             fieldName: string; value: string}                
         }) => {
             const fieldName = action.payload.fieldName;
             const value = action.payload.value;
             console.log(`Setting ${fieldName} to ${value}`);
+            state.createNewEndPointForm = {...state.createNewEndPointForm, [fieldName]:value};
         }, 
         setCreateNewPojoForm: (state, action: {payload: {
             fieldName: string; value: string}            
@@ -146,47 +385,76 @@ import { ESMap, Map } from "typescript";
             const fieldName = action.payload.fieldName;
             const value = action.payload.value;
             console.log(`Setting ${fieldName} to ${value}`);
+            state.createNewPojoForm = {...state.createNewPojoForm, [fieldName]: value};
         },
-        setCreateNewUserStory: (state, action: {payload: {
+        setCreateNewUserStoryForm: (state, action: {payload: {
             fieldName: string; value: string}                
         }) => {
             const fieldName = action.payload.fieldName;
             const value = action.payload.value;
             console.log(`Setting ${fieldName} to ${value}`);
+            state.createNewUserStoryForm = {...state.createNewUserStoryForm, [fieldName]: value};
         },
-        setCreateNewTag: (state, action: {payload: {
+        setCreateNewTagForm: (state, action: {payload: {
             fieldName: string; value: string}            
         }) => {
             const fieldName = action.payload.fieldName;
             const value = action.payload.value;
             console.log(`Setting ${fieldName} to ${value}`);
+            state.createNewTagForm = {...state.createNewTagForm, [fieldName]: value};
         },
         //Bookmark for later - need to know how to upload photos 
-        setCreateNewProjectERD: (state, action: {payload: {
+        setCreateNewProjectERDForm: (state, action: {payload: {
             fieldName: string; value: string}            
         }) => {
             const fieldName = action.payload.fieldName;
             const value = action.payload.value;
             console.log(`Setting ${fieldName} to ${value}`);
+            state.createNewProjectERDForm = {...state.createNewProjectERDForm, [fieldName]: value};
         },
         //Bookmark for later - need to know how to upload photos 
-        setCreateNewProjectWireframe: (state, action: {payload: {
+        setCreateNewProjectWireframeForm: (state, action: {payload: {
             fieldName: string; value: string}            
         }) => {
             const fieldName = action.payload.fieldName;
             const value = action.payload.value;
             console.log(`Setting ${fieldName} to ${value}`);
+            state.createNewProjectWireframeForm = {...state.createNewProjectWireframeForm, [fieldName]: value};
         },
+        setCreateNewWidgetForm: (
+            state,
+            action: {
+                payload: { fieldName: string; value: string}            
+        }) => {
+            const fieldName = action.payload.fieldName;
+            const value = action.payload.value;
+            console.log(`Setting ${fieldName} to ${value}`);
+            state.createNewWidgetForm = {...state.createNewWidgetForm, [fieldName]: value};
+        },  
+        resetCreateNewWidgetForm: (state) => {
+            state.createNewWidgetForm.widgetName = "";
+            state.createNewWidgetForm.widgetDescription = "";
+        }
     },
   });
 
   export const {
+    resetCreateNewWidgetForm,
+    setProjectWidgetsState,
+    setProjectEndpointsState,
+    setProject,
+    setEndpoint,
     setCreateNewEndPointForm,
     setCreateNewPojoForm,
-    setCreateNewProjectERD,
-    setCreateNewProjectWireframe,
-    setCreateNewTag,
-    setCreateNewUserStory,
+    setCreateNewWidgetForm,
+    setCreateNewProjectERDForm,
+    setCreateNewProjectWireframeForm,
+    setCreateNewTagForm,
+    setCreateNewUserStoryForm,
+    setModel,
+    setProjects,
+    setTag,
+    setUserStory
   } = projectAppSlice.actions;
 
 

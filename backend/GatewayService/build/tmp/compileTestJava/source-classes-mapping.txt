@@ -1,0 +1,2 @@
+com/example/gatewayservice/GatewayServiceApplicationTests.java
+ com.example.gatewayservice.GatewayServiceApplicationTests

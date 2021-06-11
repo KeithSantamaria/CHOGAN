@@ -30,7 +30,7 @@ export default function UserView(props: any) {
                     <span className="project-numbers-front">| <span className="project-number">{props.projects.length}</span> </span>
                 </Row>
 
-                <Row >
+                {/* <Row >
                     <h5>completed:</h5>
                 </Row>
 
@@ -44,7 +44,7 @@ export default function UserView(props: any) {
 
                 <Row>
                     <span className="project-numbers-front">| <span className="project-number">{props.projects.length}</span> </span>
-                </Row>
+                </Row> */}
             </Container>
             
         </Container>

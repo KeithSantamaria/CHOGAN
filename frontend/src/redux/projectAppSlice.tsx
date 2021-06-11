@@ -105,6 +105,7 @@ import { ESMap, Map } from "typescript";
         projectId: string;
         projectName: string;
         projectDescription: string;
+        tags:Array<string>;
       }>;
       model:{
         modelId: string;
@@ -161,10 +162,12 @@ import { ESMap, Map } from "typescript";
         projectId: "12345",
         projectName: "Sample Project from Store",
         projectDescription: "This project is the base project in redux-store This project is the base project in redux-store This project is the base project in redux-store",
+        tags: ['React', 'Docker', 'Java'],
       }, {
         projectId: "22345",
         projectName: "Sample 2 from Store",
         projectDescription: "This project is the base project in redux-store",
+        tags: ['React', 'Java'],
       }],
       model:{
         modelId: "",

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {Button, Modal, Form} from "react-bootstrap";
-import AddToFolder from "./AddToFolder";
 import "../../../css/home/PopUpModal/popUpModal.css";
 import EditProject from "./EditProject";
 
@@ -19,13 +18,11 @@ export default function ProjectActionsModal() {
     const removeAction = () => { }
     const cancelAction = () => { }
 
-
-
     return (
         <div>
 
             <Modal.Header className='action-header' closeButton></Modal.Header>
-            <Modal.Body className='modal-body'>
+            <Modal.Body className='modal-body modal-action-wrapper'>
                 <Form>
                     <Button className="project-actions-modal-buttons" onClick={cloneAction}>Clone</Button>
                     <Button className="project-actions-modal-buttons" onClick={editAction}>Edit</Button>

@@ -11,7 +11,7 @@ import { selectProjectApp, setProject } from '../redux/projectAppSlice';
 const ProjectGeneralInfo = () => {
 
   const dispatch = useAppDispatch();
-  const projectAppState= useAppSelector(selectProjectApp);
+  const projectAppState = useAppSelector(selectProjectApp);
   const [modalShow, setModalShow] = React.useState(false);
     
 

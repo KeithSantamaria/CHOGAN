@@ -10,7 +10,7 @@ import ProjectElipsisBtn from './modal/ProjectElipsisBtn';
 import CreateProjectForm from "../home/form/CreateProjectForm";
 import "../../css/home/home-list-view.css";
 
-function HomeListView(){
+function HomeListView(props: any){
     const projects = useAppSelector((state) => state.projectApp.sampleProjects);
 
     const [active, setActive] = useState(false);
@@ -21,6 +21,42 @@ function HomeListView(){
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    useEffect(() => 
+    {
+        if(active) 
+        {
+            props.projects.sort((a:any, b:any) => a.name > b.name ? 1 : -1)
+            setSortedArray(props.projects);
+        } 
+        else 
+        {
+            props.projects.sort((a:any, b:any) => a.name > b.name ? -1 : 1)
+            setSortedArray(props.projects);
+        }
+
+    },[active, props.projects]);
+//copy this over to the list view
+    const toggle = () => 
+    { 
+        if(active === false) 
+        {
+            setActive(true);
+            console.log("Sort" + JSON.stringify(sortedArray));
+        }
+        if(active === true) 
+        {
+            setActive(false);
+            console.log("Not" + JSON.stringify(sortedArray));
+        }
+        return null;
+    }
+
+    let className='sort';
+    if(active) {
+        className += ' sort-active';
+    } else {
+        className='sort';
+    }
 
     const handleSelect = (projectId: string) => {
 
@@ -45,16 +81,16 @@ function HomeListView(){
         )
     }
 
-    const projects_list = projects.map((e: any) => {
+    const projects_list = props.projects.map((e: any) => {
         return (
             <ListGroup.Item className="project-list-item">
                 <Row>
                     <Col className="project-name">
                         <FontAwesomeIcon style={{height: '40%', marginRight: '10px'}}className="fa-1x" icon={faClipboardList}/> 
-                        {e.projectName}
+                        {e.name}
                     </Col>
                     <Col className="project-description">
-                        {e.projectDescription}
+                        {e.des}
                     </Col>
                 <span><ProjectElipsisBtn/></span>
                 </Row>
@@ -71,9 +107,10 @@ function HomeListView(){
                     </Col>
 
                     <Col className="row-2-col-2" >
-                        <div style={{float: 'right'}} className={" grid-sort-down"} >
+                        <div style={{float: 'right'}} className={" grid-sort-down"} onClick={toggle}>
                             <span style={{paddingRight: '8px'}}>Name</span>
                             {active ? <FontAwesomeIcon className="fa-icon fa-1x" icon={faSortDown}/> : <FontAwesomeIcon className="fa-icon fa-1x" icon={faSortUp}/>}
+                            
                         </div>
                         
                     </Col>

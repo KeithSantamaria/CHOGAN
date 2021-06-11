@@ -19,5 +19,4 @@ public class Tag {
     private String projectId;
     private String tagName;
     private String tagDescription;
-    //private Map<String, List<String>> techs;
 }

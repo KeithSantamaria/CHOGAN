@@ -83,6 +83,7 @@ public class TagService implements ITagService{
     /**
      * Deletes a tag from the tag collection
      * @param tagId The tag to delete
+     * @return The list of tags left
      */
     @Override
     public List<Tag> delete(String tagId) {

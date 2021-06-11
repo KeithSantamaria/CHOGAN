@@ -16,7 +16,7 @@ function ProjectModels() {
     const getProject = () => {
         const formdata = projectAppState.createNewPojoForm;
         // Test query string works; comment when ready to test prod;
-        const queryString = `http://localhost:42069/api/read/project?projectId=60bc36b65d2b0da1deb9ada2`;
+        const queryString = `http://localhost:42069/api/read/project?projectId=60c2aecdc4c64aa2db316e6d`;
 
         // Production query string; uncomment when ready to test prod
         // const queryString = `http://localhost:42069/api/read/project?projectId=${projectId}`; 

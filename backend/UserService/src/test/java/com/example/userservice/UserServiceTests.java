@@ -60,18 +60,15 @@ public class UserServiceTests {
     @Test
     void testUpdateUser() {
         testUser.setId("test");
-        testUser.setUsername("test");
         testUser.setPassword("test");
         testUser.setEmail("test");
         testUser.setSecurityQuestionId(1);
         User userOne = testUser;
-        userOne.setUsername("User");
         userOne.setPassword("Password");
         userOne.setEmail("Email");
         userOne.setSecurityQuestionId(2);
         Mockito.when(userRepository.save(userOne)).thenReturn(userOne);
         User userTwo = userService.updateUser(userOne);
-        Assertions.assertNotEquals("test", userTwo.getUsername());
         Assertions.assertNotEquals("test", userTwo.getPassword());
         Assertions.assertNotEquals("test", userTwo.getEmail());
         Assertions.assertNotEquals(1, userTwo.getSecurityQuestionId());
@@ -96,10 +93,10 @@ public class UserServiceTests {
     void testSetFullName() {
         String firstName = "Michael";
         String lastName = "Fong";
-        testUser.setUsername("User");
+        testUser.setEmail("User");
         Mockito.when(userRepository.save(testUser)).thenReturn(testUser);
         User user = userService.newUser(testUser);
-        Mockito.when(userRepository.findByUsername("User")).thenReturn(user);
+        Mockito.when(userRepository.findByEmail("User")).thenReturn(user);
         User test = userService.setFullName("User", firstName, lastName);
         Assertions.assertEquals("Michael", test.getFirstName());
         Assertions.assertEquals("Fong", test.getLastName());
@@ -107,9 +104,9 @@ public class UserServiceTests {
 
     @Test
     void testGetUserByUsername() {
-        testUser.setUsername("test");
-        Mockito.when(userRepository.findByUsername("test")).thenReturn(testUser);
-        User testUser = userService.getUserByUsername("test");
+        testUser.setEmail("test");
+        Mockito.when(userRepository.findByEmail("test")).thenReturn(testUser);
+        User testUser = userService.getUserByEmail("test");
         Assertions.assertNotNull(testUser);
     }
 
@@ -123,11 +120,11 @@ public class UserServiceTests {
 
     @Test
     void testUserLogIn() {
-        testUser.setUsername("User");
+        testUser.setEmail("User");
         testUser.setPassword("Password");
-        Mockito.when(userRepository.findByUsername("User")).thenReturn(testUser);
-        boolean test = userService.userLogIn("User", "Password");
-        Assertions.assertTrue(test);
+        Mockito.when(userRepository.findByEmail("User")).thenReturn(testUser);
+        User testUser = userService.userLogIn("User", "Password");
+        Assertions.assertNotNull(testUser);
     }
 
     @Test

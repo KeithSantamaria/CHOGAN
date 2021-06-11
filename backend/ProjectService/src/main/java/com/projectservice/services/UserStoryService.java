@@ -44,7 +44,7 @@ public class UserStoryService implements IUserStoryService{
      */
     @Override
     public UserStory findByUserStoryId(String userStoryId) {
-        return userStoryRepo.findUserStoryById(userStoryId);
+        return userStoryRepo.findByUserStoryId(userStoryId);
     }
 
     /**
@@ -86,7 +86,7 @@ public class UserStoryService implements IUserStoryService{
      */
     @Override
     public List<UserStory> deleteUserStory(String userStoryId) {
-        UserStory foundUserStory = userStoryRepo.findUserStoryById(userStoryId);
+        UserStory foundUserStory = userStoryRepo.findByUserStoryId(userStoryId);
         if (foundUserStory == null){
             return null;
         }

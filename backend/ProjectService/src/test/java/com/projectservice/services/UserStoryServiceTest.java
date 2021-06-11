@@ -4,7 +4,6 @@ import com.projectservice.models.UserStory;
 import com.projectservice.repository.UserStoryRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ public class UserStoryServiceTest {
         String userStoryId = "Id";
         UserStory userStory = new UserStory();
 
-        Mockito.when(userStoryRepo.findUserStoryById(userStoryId)).thenReturn(userStory);
+        Mockito.when(userStoryRepo.findByUserStoryId(userStoryId)).thenReturn(userStory);
 
         UserStory foundUserStory = userStoryService.findByUserStoryId(userStoryId);
 
@@ -90,7 +89,7 @@ public class UserStoryServiceTest {
         userStory.setProjectId("pId");
         List<UserStory> list = new ArrayList<>();
 
-        Mockito.when(userStoryRepo.findUserStoryById(userStoryId)).thenReturn(userStory);
+        Mockito.when(userStoryRepo.findByUserStoryId(userStoryId)).thenReturn(userStory);
         Mockito.when(userStoryRepo.findByProjectId("pId")).thenReturn(list);
 
         List<UserStory> foundList = userStoryService.deleteUserStory(userStoryId);
@@ -102,7 +101,7 @@ public class UserStoryServiceTest {
     void deleteUserStoryFailureTest(){
         String userStoryId = "Id";
 
-        Mockito.when(userStoryRepo.findUserStoryById(userStoryId)).thenReturn(null);
+        Mockito.when(userStoryRepo.findByUserStoryId(userStoryId)).thenReturn(null);
 
         List<UserStory> foundList = userStoryService.deleteUserStory(userStoryId);
 

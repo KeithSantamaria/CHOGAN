@@ -103,4 +103,14 @@ public class WidgetController {
     * Delete
     *
     * */
+
+    /**
+     * Deletes a widget from the db
+     * @param widgetId The widget Id
+     * @return The response entity
+     */
+    @DeleteMapping("/delete/project/widget")
+    public ResponseEntity<List<Widget>> deleteWidget(@RequestParam String widgetId){
+        return null;
+    }
 }

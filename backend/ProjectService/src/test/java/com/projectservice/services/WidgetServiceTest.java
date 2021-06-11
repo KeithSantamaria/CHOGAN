@@ -79,4 +79,30 @@ public class WidgetServiceTest {
     * Delete
     *
     * */
+
+    @Test
+    void deleteWidgetSuccessTest(){
+        String widgetId = "Id";
+        Widget widget = new Widget();
+        widget.setProjectId("pId");
+        List<Widget> list = new ArrayList<>();
+
+        Mockito.when(widgetRepo.findByWidgetId(widgetId)).thenReturn(widget);
+        Mockito.when(widgetRepo.findByProjectId("pId")).thenReturn(list);
+
+        List<Widget> foundList = widgetService.deleteWidget(widgetId);
+
+        Assertions.assertEquals(foundList,list);
+    }
+
+    @Test
+    void deleteWidgetFailureTest(){
+        String widgetId = "Id";
+
+        Mockito.when(widgetRepo.findByWidgetId(widgetId)).thenReturn(null);
+
+        List<Widget> foundList = widgetService.deleteWidget(widgetId);
+
+        Assertions.assertNull(foundList);
+    }
 }

@@ -118,4 +118,28 @@ public class WidgetControllerTest {
     * Delete
     *
     * */
+
+    @Test
+    void deleteWidgetSuccessTest(){
+        String widgetId = "Id";
+        List<Widget> list = new ArrayList<>();
+        list.add(new Widget());
+
+        Mockito.when(widgetService.deleteWidget(widgetId)).thenReturn(list);
+
+        ResponseEntity<List<Widget>> response = widgetController.deleteWidget(widgetId);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
+    }
+
+    @Test
+    void deleteWidgetFailureTest(){
+        String widgetId = "Id";
+
+        Mockito.when(widgetService.deleteWidget(widgetId)).thenReturn(null);
+
+        ResponseEntity<List<Widget>> response = widgetController.deleteWidget(widgetId);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

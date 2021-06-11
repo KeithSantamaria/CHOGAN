@@ -31,7 +31,7 @@ public class WidgetController {
      * @return The response entity
      */
     @PostMapping("/create/project/widget")
-    public ResponseEntity<List<Widget>> createNewWidget(@RequestParam Widget widget){
+    public ResponseEntity<List<Widget>> createNewWidget(@RequestBody Widget widget){
       try {
           widgetService.insertWidget(widget);
       }catch (Exception e){
@@ -73,7 +73,7 @@ public class WidgetController {
     @GetMapping("/read/project/widgets")
     public ResponseEntity<List<Widget>> readWidgets(@RequestParam String projectId){
         List<Widget> foundList = widgetService.findByProjectId(projectId);
-        log.info("Succesfully retrieved widgets of projectId : {}",projectId);
+        log.info("Successfully retrieved widgets of projectId : {}",projectId);
         return new ResponseEntity<>(foundList,HttpStatus.OK);
     }
     /*
@@ -81,6 +81,16 @@ public class WidgetController {
     * Update
     *
     * */
+
+    /**
+     * Updates a widget
+     * @param widget the updated widget
+     * @return the response entity
+     */
+    @PutMapping("/update/project/widget")
+    public ResponseEntity<List<Widget>> updateWidget(@RequestBody Widget widget){
+        return null;
+    }
 
     /*
     *

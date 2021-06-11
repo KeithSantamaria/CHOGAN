@@ -91,6 +91,28 @@ public class WidgetControllerTest {
     *
     * */
 
+    @Test
+    void updateWidgetSuccessTest(){
+        Widget widget = new Widget();
+
+        Mockito.when(widgetService.updateWidget(widget)).thenReturn(widget);
+
+        ResponseEntity<List<Widget>> response = widgetController.updateWidget(widget);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
+    }
+
+    @Test
+    void updateWidgetFailureTest(){
+        Widget widget = new Widget();
+
+        Mockito.when(widgetService.updateWidget(widget)).thenReturn(null);
+
+        ResponseEntity<List<Widget>> response = widgetController.updateWidget(widget);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     /*
     *
     * Delete

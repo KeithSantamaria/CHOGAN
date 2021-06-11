@@ -63,6 +63,17 @@ public class WidgetServiceTest {
     *
     * */
 
+    @Test
+    void updateWidgetTest(){
+        Widget widget = new Widget();
+
+        Mockito.when(widgetRepo.save(widget)).thenReturn(widget);
+
+        Widget foundWidget = widgetService.updateWidget(widget);
+
+        Assertions.assertEquals(foundWidget,widget);
+    }
+
     /*
     *
     * Delete

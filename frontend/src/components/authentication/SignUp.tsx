@@ -18,46 +18,41 @@ export default function SignUp() {
     }, [currentlyLoggedUser]);
 
     const [email, setEmail] = useState("");
-    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [securityQuestionId, setSecurityQuestionId] = useState("1");
+    const [securityAnswer, setSecurityAnswer] = useState("");
 
     
 
     //Send value to database
-     const submitUser = async () => {
+     const submitUser = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
         const userPayload = {
-          id : "",
-          username: username,
           password: password, //should be hashed
           email: email,
-          firstName: "",
-          lastName: "",
-          securityQuestionId: 0,
-          securityAnswer: "" //should be hashed
+          firstName: firstName,
+          lastName: lastName,
+          securityQuestionId: Number(securityQuestionId),
+          securityAnswer: securityAnswer //should be hashed
         }
 
-        dispatchUser(setCurrentUser(userPayload));
+//        dispatchUser(setCurrentUser(userPayload));
 
-//         console.log("submitting user...");
-//
-//          axios({
-//             method: 'post',
-//                         url: "http://localhost:6969/user/add_user",
-//                         data: { username, password},
-//                         // params:{username, password},
-//                         headers : {
-//                             'Content-Type': 'application/json'
-//                         }
-//         }).then(result => {
-//             console.log(result);
-//         })
-//         .catch(error => alert(error));
+
+         axios({
+            method: 'POST',
+            url: "http://localhost:6969/user",
+            data: userPayload,
+        }).then(result => {
+            console.log(result);
+        })
+        .catch(error => alert(error));
     }
 
     return(
     <div>
-        <p>Hello Keith. I don't believe that you're really 9 foot tall...</p>
         <form onSubmit={submitUser}>
             
             <div className="form-group">
@@ -73,17 +68,6 @@ export default function SignUp() {
                 />
                 </div>
                 <div className="form-group">
-                 <input
-                    className="form-control center"
-                    name='username'
-                    id='username'
-                    type='username'
-                    placeholder='Username'
-                    onChange={e => setUsername(e.target.value)}
-                    required
-                />
-                </div>
-                <div className="form-group">
                 <input
                     className="form-control center"
                     name='password'
@@ -94,7 +78,60 @@ export default function SignUp() {
                     required
                 />
                 </div>
+
+                <div className="form-group">
+                <input
+                    className="form-control center"
+                    name='firstName'
+                    id='firstName'
+                    type='firstName'
+                    placeholder='First Name'
+                    onChange={e => setFirstName(e.target.value)}
+                    required
+                />
+                </div>
+
+                <div className="form-group">
+                <input
+                    className="form-control center"
+                    name='lastName'
+                    id='lastName'
+                    type='lastName'
+                    placeholder='Last Name'
+                    onChange={e => setLastName(e.target.value)}
+                    required
+                />
+                </div>
+
+
+                <div className="form-group">
+                    <select
+                        className="form-control"
+                        name='securityQuestionId'
+                        id='username'
+                        placeholder='Choose a security question'
+                        onChange={e => setSecurityQuestionId(e.target.value)}
+                        required
+                        value = {securityQuestionId}
+                    >
+                        <option value="1">What's your mother's maiden name?</option>
+                        <option value="2">What was the name of your first pet?</option>
+                        <option value="3">Name of the elementary school you attended?</option>
+                        <option value="4">What is the street name of your childhood home?</option>
+                    </select>
+                </div>
+                <div className="form-group">
+                 <input
+                    className="form-control center"
+                    name= 'securityAnswer'
+                    id='securityAnswer'
+                    type='securityAnswer'
+                    placeholder='Security Answer'
+                    onChange={e => setSecurityAnswer(e.target.value)}
+                    required
+                />
+                </div>
                 <button className="btn btn-primary btn-block center" type='submit'>SignUp</button>
         </form>
     </div>);
-}
+    }

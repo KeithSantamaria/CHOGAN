@@ -21,14 +21,22 @@ public class UserService {
 
     public User newUser(User user) {
         if(user.getId() == null) {
-            try {
-                user.setPassword(passwordEncoder.encode(user.getPassword()));
-                user.setSecurityAnswer(passwordEncoder.encode(user.getSecurityAnswer()));
-                return userRepository.save(user);
-            } catch (Exception exception) {
-                return null;
-            }
+            log.info("IN THE IF STATEMENT:" + user);
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setSecurityAnswer(passwordEncoder.encode(user.getSecurityAnswer()));
+            return userRepository.save(user);
+//            try {
+//                log.info("IN THE TRY STATEMENT");
+//                user.setPassword(passwordEncoder.encode(user.getPassword()));
+//                user.setSecurityAnswer(passwordEncoder.encode(user.getSecurityAnswer()));
+//                log.info("AFTER HASHING:" + user);
+//                return userRepository.save(user);
+//            } catch (Exception exception) {
+//                log.info("AFTER EXCEPTION");
+//                return null;
+//            }
         } else {
+            log.info("IN THE ELSE");
             return null;
         }
     }
@@ -38,13 +46,9 @@ public class UserService {
         if(user.getId() == null) {
             return null;
         } else {
-            try {
-                user.setPassword(passwordEncoder.encode(user.getPassword()));
-                user.setSecurityAnswer(passwordEncoder.encode(user.getSecurityAnswer()));
-                return userRepository.save(user);
-            } catch (Exception exception) {
-                return null;
-            }
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setSecurityAnswer(passwordEncoder.encode(user.getSecurityAnswer()));
+            return userRepository.save(user);
         }
     }
 
@@ -53,20 +57,21 @@ public class UserService {
     }
 
     public User getUserById(String Id) {
-        return userRepository.findById(Id);
+        return userRepository.findById(Id).orElse(null);
     }
 
     public User userLogIn(String email, String password) {
         User user = userRepository.findByEmail(email);
-        System.out.println("USER in LOGIN" + user.toString());
-        System.out.println( "SHOULD BE TRUE" + (password == user.getPassword() ) );
-        System.out.println("SHOULD BE TRUE NULL:" + (user != null ) );
+        log.info("USER in LOGIN " + user.toString());
+        log.info( "INPUT PASS " + passwordEncoder.encode(password) );
+        log.info( "FETECHED PASS " + user.getPassword());
+        log.info("SHOULD BE TRUE NULL:" + (user != null ) );
         return( user != null && passwordEncoder.matches(password, user.getPassword())) ? user : null;
     }
 
     public User changePassword(String Id, String newPassword, String response) {
         if (checkSecurityQuestion(Id, response)) {
-            User user = userRepository.findById(Id);
+            User user = userRepository.findById(Id).orElse(null);
             user.setPassword(newPassword);
             return userRepository.save(user);
         }
@@ -74,7 +79,7 @@ public class UserService {
     }
 
     public boolean checkSecurityQuestion(String Id, String response) {
-        User user = userRepository.findById(Id);
+        User user = userRepository.findById(Id).orElse(null);
         return (user.getSecurityAnswer().equals(response) ? true : false);
     }
 

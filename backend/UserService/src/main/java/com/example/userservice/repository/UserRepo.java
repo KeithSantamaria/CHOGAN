@@ -7,9 +7,8 @@ import org.bson.types.ObjectId;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepo extends MongoRepository<User, ObjectId> {
+public interface UserRepo extends MongoRepository<User, String > {
 
     /*Queries*/
     User findByEmail(String email);
-    User findById(String Id);
 }

@@ -49,6 +49,29 @@ public class WidgetControllerTest {
     *
     * */
 
+    @Test
+    void readWidgetSuccessTest(){
+        String widgetId = "Id";
+        Widget widget = new Widget();
+
+        Mockito.when(widgetService.findByWidgetId(widgetId)).thenReturn(widget);
+
+        ResponseEntity<Widget> response = widgetController.readWidget(widgetId);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
+    }
+
+    @Test
+    void readWidgetFailureTest(){
+       String widgetId = "Id";
+
+       Mockito.when(widgetService.findByWidgetId(widgetId)).thenReturn(null);
+
+       ResponseEntity<Widget> response = widgetController.readWidget(widgetId);
+
+       Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     /*
     *
     * Update

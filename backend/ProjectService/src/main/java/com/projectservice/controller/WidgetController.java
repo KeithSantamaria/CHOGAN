@@ -30,7 +30,7 @@ public class WidgetController {
      * @param widget The widget to add
      * @return The response entity
      */
-    @GetMapping("/create/project/widget")
+    @PostMapping("/create/project/widget")
     public ResponseEntity<List<Widget>> createNewWidget(@RequestParam Widget widget){
       try {
           widgetService.insertWidget(widget);
@@ -47,6 +47,16 @@ public class WidgetController {
     * Read
     *
     * */
+
+    /**
+     * Finds a widget from widget Id
+     * @param widgetId The id of the widget
+     * @return The response entity
+     */
+    @GetMapping("/read/project/widget")
+    public ResponseEntity<Widget> readWidget(@RequestParam String widgetId){
+        return null;
+    }
 
     /*
     *

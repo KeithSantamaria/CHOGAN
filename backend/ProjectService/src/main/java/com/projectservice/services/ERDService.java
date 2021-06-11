@@ -1,8 +1,11 @@
 package com.projectservice.services;
 
+import com.projectservice.models.ERD;
 import com.projectservice.repository.ERDRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Class for handling all service layer methods for ERDs
@@ -18,11 +21,39 @@ public class ERDService implements IErdService{
     *
     * */
 
+    /**
+     * Inserts an ERD into the DB
+     * @param erd The ERD to add
+     */
+    @Override
+    public void insert(ERD erd) {
+    }
+
     /*
     *
     * Read
     *
     * */
+
+    /**
+     * Finds an ERD by ERDId
+     * @param erdId The erdID
+     * @return The ERD found
+     */
+    @Override
+    public ERD findByERDId(String erdId) {
+        return null;
+    }
+
+    /**
+     * Finds a list of ERD associated with a given projectId
+     * @param projectId The projectId
+     * @return The list of ERDs
+     */
+    @Override
+    public List<ERD> findByProjectId(String projectId) {
+        return null;
+    }
 
     /*
     *
@@ -30,9 +61,29 @@ public class ERDService implements IErdService{
     *
     * */
 
+    /**
+     * Updates an ERD
+     * @param erd the updated ERD
+     * @return the updated ERD
+     */
+    @Override
+    public ERD updateERD(ERD erd) {
+        return null;
+    }
+
     /*
     *
     * Delete
     *
     * */
+
+    /**
+     * Deletes an ERD from the db
+     * @param erdID the erd to delete
+     * @return The remaining erds
+     */
+    @Override
+    public List<ERD> deleteERD(String erdID) {
+        return null;
+    }
 }

@@ -55,7 +55,13 @@ public class WidgetController {
      */
     @GetMapping("/read/project/widget")
     public ResponseEntity<Widget> readWidget(@RequestParam String widgetId){
-        return null;
+        Widget foundWidget = widgetService.findByWidgetId(widgetId);
+        if (foundWidget == null){
+            log.error("Failed to find widget of widgetId : {}",widgetId);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        log.info("Successfully retrieved widget of widgetId : {}",widgetId);
+        return new ResponseEntity<>(foundWidget,HttpStatus.OK);
     }
 
     /*

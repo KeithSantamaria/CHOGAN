@@ -44,7 +44,7 @@ public class WidgetService implements IWidgetService {
      */
     @Override
     public Widget findByWidgetId(String widgetId){
-        return null;
+        return widgetRepo.findByWidgetId(widgetId);
     }
 
     /**

@@ -29,20 +29,20 @@ export default function Home() {
 
     ]);
 
-    const [folders, setFolders] = useState([
-        {id: 1, name: 'School'},
-        {id: 2, name: 'Work'},
-        {id: 3, name: 'School'},
-        {id: 4, name: 'Work'},
-    ]);
+    // const [folders, setFolders] = useState([
+    //     {id: 1, name: 'School'},
+    //     {id: 2, name: 'Work'},
+    //     {id: 3, name: 'School'},
+    //     {id: 4, name: 'Work'},
+    // ]);
 
     const RenderTabs = () => {
         if(tabs === 'grid') {
-            return <GridView projects={projects} folders={folders}/>;
+            return <GridView projects={projects}/>;
         }
 
         if(tabs === 'list') {
-            return <HomeListView />;
+            return <HomeListView projects={projects} />;
         }
         return null;
     }

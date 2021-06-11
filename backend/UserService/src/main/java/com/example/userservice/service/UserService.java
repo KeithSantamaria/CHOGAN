@@ -28,6 +28,7 @@ public class UserService {
     }
 
     public User updateUser(User user) {
+        System.out.println(user.toString());
         if(user.getId() == null) {
             return null;
         } else {

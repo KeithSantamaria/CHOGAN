@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WidgetServiceTest {
 
     private final WidgetRepo widgetRepo = Mockito.mock(WidgetRepo.class);
@@ -40,6 +43,18 @@ public class WidgetServiceTest {
         Widget foundWidget = widgetService.findByWidgetId(widgetId);
 
         Assertions.assertEquals(foundWidget,widget);
+    }
+
+    @Test
+    void findByProjectIdTest(){
+        String projectId = "Id";
+        List<Widget> list = new ArrayList<>();
+
+        Mockito.when(widgetRepo.findByProjectId(projectId)).thenReturn(list);
+
+        List<Widget> foundList = widgetService.findByProjectId(projectId);
+
+        Assertions.assertEquals(foundList,list);
     }
 
     /*

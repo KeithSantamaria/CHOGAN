@@ -64,6 +64,16 @@ public class WidgetController {
         return new ResponseEntity<>(foundWidget,HttpStatus.OK);
     }
 
+
+    /**
+     * Finds a list of all widgets under a given project
+     * @param projectId The projectId to find
+     * @return The response entity
+     */
+    @GetMapping("/read/project/widgets")
+    public ResponseEntity<List<Widget>> readWidgets(@RequestParam String projectId){
+        return null;
+    }
     /*
     *
     * Update

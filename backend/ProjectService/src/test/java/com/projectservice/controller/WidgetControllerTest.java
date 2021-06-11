@@ -9,6 +9,7 @@ import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WidgetControllerTest {
@@ -70,6 +71,18 @@ public class WidgetControllerTest {
        ResponseEntity<Widget> response = widgetController.readWidget(widgetId);
 
        Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Test
+    void readWidgetsTest(){
+        String projectId = "Id";
+        List<Widget> list = new ArrayList<>();
+
+        Mockito.when(widgetService.findByProjectId(projectId)).thenReturn(list);
+
+        ResponseEntity<List<Widget>> response = widgetController.readWidgets(projectId);
+
+        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
     }
 
     /*

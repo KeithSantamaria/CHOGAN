@@ -40,24 +40,24 @@ public class UserService {
         }
     }
 
-    public User setFullName(String username, String firstName, String lastName) {
-        User user = userRepository.findByUsername(username);
+    public User setFullName(String email, String firstName, String lastName) {
+        User user = userRepository.findByEmail(email);
         user.setFirstName(firstName);
         user.setLastName(lastName);
         return userRepository.save(user);
     }
 
-    public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     public User getUserById(String Id) {
         return userRepository.findById(Id);
     }
 
-    public boolean userLogIn(String username, String password) {
-        User user = userRepository.findByUsername(username);
-        return( user != null && user.getPassword().equals(password)) ? true : false;
+    public User userLogIn(String email, String password) {
+        User user = userRepository.findByEmail(email);
+        return( user != null && user.getPassword().equals(password)) ? user : null;
     }
 
     public User changePassword(String Id, String newPassword, String response) {

@@ -32,4 +32,14 @@ public class UserController {
         log.info("user updated: " + userUpdated);
         return userUpdated == null ? ResponseEntity.badRequest().build() : ResponseEntity.ok(userUpdated);
     }
+
+    @GetMapping()
+    public ResponseEntity<User> loginInUser(@RequestBody User request){
+        String email = request.getEmail();
+        String password = request.getPassword();
+        User loggedInUser = service.userLogIn(email,password);
+        log.info("attempting to log in user");
+        log.info("log in updated: " + loggedInUser);
+        return loggedInUser == null ? ResponseEntity.badRequest().build() : ResponseEntity.ok(loggedInUser);
+    }
 }

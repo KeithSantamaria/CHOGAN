@@ -35,7 +35,6 @@ public class UserControllerTests {
 		testUser = new User();
 		testUser.setFirstName("testFirstName");
 		testUser.setLastName("testLastName");
-		testUser.setUsername("testUsername");
 		testUser.setPassword("testPassword");
 		testUser.setEmail("testEmail");
 		testUser.setSecurityQuestionId(1);
@@ -83,6 +82,28 @@ public class UserControllerTests {
 		Mockito.when(userService.updateUser(ArgumentMatchers.any())).thenReturn(null);
 
 		this.mockMvc.perform( put("/user")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(jsonString) )
+			.andExpect(status().isBadRequest()
+		);
+	}
+
+	@Test
+	public void shouldLoginUser () throws Exception {
+		Mockito.when(userService.userLogIn(ArgumentMatchers.any(),ArgumentMatchers.any())).thenReturn(testUser);
+
+		this.mockMvc.perform( get("/user")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(jsonString) )
+			.andExpect(status().isOk()
+		);
+	}
+
+	@Test
+	public void shouldNotLoginUser () throws Exception {
+		Mockito.when(userService.userLogIn(ArgumentMatchers.any(),ArgumentMatchers.any())).thenReturn(null);
+
+		this.mockMvc.perform( get("/user")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(jsonString) )
 			.andExpect(status().isBadRequest()

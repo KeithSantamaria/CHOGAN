@@ -32,8 +32,6 @@ public class User {
 
 	@Id
 	String id;
-	@Indexed(unique = true)
-	String username;
 	String password; // salted
 	@NotEmpty
 	@Indexed(unique = true)

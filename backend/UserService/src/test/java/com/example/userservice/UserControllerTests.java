@@ -26,12 +26,12 @@ public class UserControllerTests {
 
 	@MockBean
 	private UserService userService;
-
 	private User testUser;
 	private ObjectMapper objectMapper;
+	private String jsonString;
 
 	@BeforeEach
-	void beforeEachTest(){
+	void beforeEachTest() throws Exception {
 		testUser = new User();
 		testUser.setFirstName("testFirstName");
 		testUser.setLastName("testLastName");
@@ -41,29 +41,52 @@ public class UserControllerTests {
 		testUser.setSecurityQuestionId(1);
 		testUser.setSecurityAnswer("CHOGAN");
 		objectMapper = new ObjectMapper();
+		jsonString = objectMapper.writeValueAsString(testUser);
 	}
 
 	@Test
 	public void shouldCreateUser()  throws  Exception{
-		String jsonString = objectMapper.writeValueAsString(testUser);
+
 		Mockito.when(userService.newUser(ArgumentMatchers.any())).thenReturn(testUser);
 
 		this.mockMvc.perform( post("/user")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(jsonString) )
-			.andExpect(status().isOk());
+			.andExpect(status().isOk()
+		);
 	}
 
 	@Test
 	public void shouldNotCreateUser() throws Exception {
-		String jsonString = objectMapper.writeValueAsString(testUser);
 		Mockito.when(userService.newUser(ArgumentMatchers.any())).thenReturn(null);
 
 		this.mockMvc.perform( post("/user")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(jsonString) )
-			.andExpect(status().isBadRequest());
+			.andExpect(status().isBadRequest()
+		);
+	}
 
+	@Test
+	public  void shouldUpdateUser() throws Exception {
+		Mockito.when(userService.updateUser(ArgumentMatchers.any())).thenReturn(testUser);
+
+		this.mockMvc.perform( put("/user")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(jsonString) )
+			.andExpect(status().isOk()
+		);
+	}
+
+	@Test
+	public void shouldNotUpdateUser() throws Exception {
+		Mockito.when(userService.updateUser(ArgumentMatchers.any())).thenReturn(null);
+
+		this.mockMvc.perform( put("/user")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(jsonString) )
+			.andExpect(status().isBadRequest()
+		);
 	}
 
 }

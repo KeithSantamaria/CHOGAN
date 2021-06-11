@@ -25,5 +25,11 @@ public class UserController {
         return userCreated == null ? ResponseEntity.badRequest().build() : ResponseEntity.ok(userCreated);
     }
 
-
+    @PutMapping()
+    public ResponseEntity<User> updateUser(@RequestBody User request){
+        User userUpdated= service.updateUser(request);
+        log.info("attempting to update user");
+        log.info("user updated: " + userUpdated);
+        return userUpdated == null ? ResponseEntity.badRequest().build() : ResponseEntity.ok(userUpdated);
+    }
 }

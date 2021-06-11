@@ -28,7 +28,7 @@ public class WireframeService implements IWireframeService{
      */
     @Override
     public void insert(Wireframe wireframe) {
-
+        wireframeRepo.save(wireframe);
     }
 
     /*
@@ -44,7 +44,7 @@ public class WireframeService implements IWireframeService{
      */
     @Override
     public Wireframe findByWireframeId(String wireframeId) {
-        return null;
+        return wireframeRepo.findByWireframeId(wireframeId);
     }
 
     /**
@@ -54,7 +54,7 @@ public class WireframeService implements IWireframeService{
      */
     @Override
     public List<Wireframe> findByProjectId(String projectId) {
-        return null;
+        return wireframeRepo.findByProjectId(projectId);
     }
 
     /*
@@ -70,7 +70,7 @@ public class WireframeService implements IWireframeService{
      */
     @Override
     public Wireframe updateWireframe(Wireframe wireframe) {
-        return null;
+        return wireframeRepo.save(wireframe);
     }
 
     /*
@@ -86,6 +86,12 @@ public class WireframeService implements IWireframeService{
      */
     @Override
     public List<Wireframe> deleteWireframe(String wireframeId) {
-        return null;
+        Wireframe foundWireframe = wireframeRepo.findByWireframeId(wireframeId);
+        if (foundWireframe == null){
+            return null;
+        }
+        String projectId = foundWireframe.getProjectId();
+        wireframeRepo.deleteById(wireframeId);
+        return wireframeRepo.findByProjectId(projectId);
     }
 }

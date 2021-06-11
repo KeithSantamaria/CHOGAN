@@ -15,7 +15,7 @@ function ProjectEndpoints() {
 
   const getProject = () => {
     // Test query string works; comment when ready to test prod
-    const queryString = `http://localhost:42069/api/read/project?projectId=60bc36b65d2b0da1deb9ada2`;
+    const queryString = `http://localhost:42069/api/read/project/endpoints`;
 
     // Production query string; uncomment when ready to test prod
     // const queryString = `http://localhost:42069/api/read/project?projectId=${projectId}`;
@@ -30,44 +30,11 @@ function ProjectEndpoints() {
         console.log("There was an error: ", error);
       });
   };
-  const getWidgets = () => {
-    const queryString = `http://localhost:42069/api/read/project/widgets?projectId=60bc36b65d2b0da1deb9ada2`;
-    axios
-      .get(queryString)
-      .then((response) => {
-        console.log("response", response);
-        const widgetData = response.data;
-        dispatch(setWidgets(widgetData));
-      })
-      .catch((error) => {
-        console.log("There was an error: ", error);
-      });
-  };
 
   useMemo(() => {
     getProject();
   }, []);
 
-  const widgetModal = () => {
-    return (
-      <Modal
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-        show={modalShow}
-        onHide={handleClose}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Create New Endpoint
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <WidgetForm project={projectAppState.project} />
-        </Modal.Body>
-      </Modal>
-    );
-  };
   return (
     <div>
       <ProjectSideNav />
@@ -86,7 +53,6 @@ function ProjectEndpoints() {
       <Button variant="primary" onClick={handleOpen}>
         New Endpoint
       </Button>
-      {widgetModal()}
     </div>
   );
 }

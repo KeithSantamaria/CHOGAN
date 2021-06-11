@@ -1,5 +1,6 @@
 package com.projectservice.services;
 
+import com.projectservice.models.Widget;
 import com.projectservice.repository.WidgetRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,14 @@ public class WidgetService implements IWidgetService {
     * Create
     *
     * */
+
+    /**
+     * Adds a widget to the db
+     * @param widget The widget to add
+     */
+    public void insertWidget(Widget widget){
+
+    }
 
     /*
     *

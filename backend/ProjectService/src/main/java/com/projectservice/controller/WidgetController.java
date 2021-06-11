@@ -1,11 +1,14 @@
 package com.projectservice.controller;
 
+import com.projectservice.models.Widget;
 import com.projectservice.services.IWidgetService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -21,6 +24,16 @@ public class WidgetController {
     * Create
     *
     * */
+
+    /**
+     * Creates a new widget and adds it to the db
+     * @param widget The widget to add
+     * @return The response entity
+     */
+    @GetMapping("/create/project/widget")
+    public ResponseEntity<List<Widget>> createNewWidget(@RequestParam Widget widget){
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
 
     /*
     *

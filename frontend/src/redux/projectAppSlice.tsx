@@ -632,6 +632,11 @@ export const projectAppSlice = createSlice({
       state.createNewWidgetForm.widgetName = "";
       state.createNewWidgetForm.widgetDescription = "";
     },
+
+    resetCreateNewTagForm: (state) => {
+      state.createNewTagForm.tagName = "";
+      state.createNewTagForm.tagDescription = "";
+    },
   },
 });
 
@@ -661,6 +666,7 @@ export const {
   setCreateNewTagForm,
   setCreateNewUserStoryForm,
   resetCreateNewWidgetForm,
+  resetCreateNewTagForm,
   
 } = projectAppSlice.actions;
 

@@ -27,6 +27,7 @@ public class ERDService implements IErdService{
      */
     @Override
     public void insert(ERD erd) {
+        erdRepo.save(erd);
     }
 
     /*
@@ -42,7 +43,7 @@ public class ERDService implements IErdService{
      */
     @Override
     public ERD findByERDId(String erdId) {
-        return null;
+        return erdRepo.findByERDId(erdId);
     }
 
     /**
@@ -52,7 +53,7 @@ public class ERDService implements IErdService{
      */
     @Override
     public List<ERD> findByProjectId(String projectId) {
-        return null;
+        return erdRepo.findByProjectId(projectId);
     }
 
     /*
@@ -68,7 +69,7 @@ public class ERDService implements IErdService{
      */
     @Override
     public ERD updateERD(ERD erd) {
-        return null;
+        return erdRepo.save(erd);
     }
 
     /*
@@ -84,6 +85,12 @@ public class ERDService implements IErdService{
      */
     @Override
     public List<ERD> deleteERD(String erdID) {
-        return null;
+        ERD foundERD = erdRepo.findByERDId(erdID);
+        if (foundERD == null){
+            return null;
+        }
+        String projectId = foundERD.getProjectId();
+        erdRepo.deleteById(erdID);
+        return erdRepo.findByProjectId(projectId);
     }
 }

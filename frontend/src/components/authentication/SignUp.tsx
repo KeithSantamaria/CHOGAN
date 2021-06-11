@@ -27,7 +27,8 @@ export default function SignUp() {
     
 
     //Send value to database
-     const submitUser = async () => {
+     const submitUser = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
         const userPayload = {
           password: password, //should be hashed
           email: email,
@@ -41,12 +42,9 @@ export default function SignUp() {
 
 
          axios({
-            method: 'post',
+            method: 'POST',
             url: "http://localhost:6969/user",
             data: userPayload,
-            headers : {
-                'Content-Type': 'application/json'
-            }
         }).then(result => {
             console.log(result);
         })

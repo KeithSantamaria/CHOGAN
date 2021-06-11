@@ -10,19 +10,17 @@ export default function LoginForm(){
   const [password, setPassword] = useState("");
 
   //Send value to database
-  const submitUser = async () => {
+  const submitUser = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     const loginPayload = {
       password: password, //should be hashed
       email: email,
     }
 
     axios({
-      method: 'get',
-      url: "http://localhost:6969/user",
+      method: 'POST',
+      url: "http://localhost:6969/user/login",
       data: loginPayload,
-      headers : {
-          'Content-Type': 'application/json'
-      }
   }).then(result => {
       if(result.status == 200){
         console.log("okay");

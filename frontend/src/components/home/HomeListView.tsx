@@ -2,13 +2,13 @@ import React, {useState, useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '../../redux/hooks';
 import {store} from '../../redux/store';
 
-import {Button, Col, Container, Form, FormGroup, ListGroup, ListGroupItem, Row, Dropdown} from "react-bootstrap";
-import ProjectElipsisBtn from './modal/ProjectElipsisBtn';
-
+import {Modal, Button, Col, Container, ListGroup, Row} from "react-bootstrap";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faPlus, faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
-import "../../css/home/home-list-view.css";
+import {faPlus, faSortDown, faSortUp, faClipboardList} from "@fortawesome/free-solid-svg-icons";
 
+import ProjectElipsisBtn from './modal/ProjectElipsisBtn';
+import CreateProjectForm from "../home/form/CreateProjectForm";
+import "../../css/home/home-list-view.css";
 
 function HomeListView(){
     const projects = useAppSelector((state) => state.projectApp.sampleProjects);
@@ -26,11 +26,31 @@ function HomeListView(){
 
     }
 
+    const createModal=()=>{
+        return(
+            <Modal
+                className="modal-create-wrapper"
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+                size="lg"
+            >
+                <Modal.Header closeButton>
+                    {/* <Modal.Title>New Project</Modal.Title> */}
+                </Modal.Header>
+                <Modal.Body>
+                    <CreateProjectForm handleClose={handleClose}/>
+                </Modal.Body>
+            </Modal>
+        )
+    }
+
     const projects_list = projects.map((e: any) => {
         return (
             <ListGroup.Item className="project-list-item">
                 <Row>
                     <Col className="project-name">
+                        <FontAwesomeIcon style={{height: '40%', marginRight: '10px'}}className="fa-1x" icon={faClipboardList}/> 
                         {e.projectName}
                     </Col>
                     <Col className="project-description">
@@ -47,7 +67,7 @@ function HomeListView(){
             <Container className="list-view-container">
                 <Row className="project-container-wrapper">
                     <Col>
-                        <h2>Projects</h2>
+                        <span>Projects</span>
                     </Col>
 
                     <Col className="row-2-col-2" >
@@ -65,23 +85,41 @@ function HomeListView(){
                     <Col>
                         Name
                     </Col>
-                    <Col>
+
+                    <Col xs={7}>
                         Description
                     </Col>
-                </Row>
 
+                </Row>
+                
                 <div className="projects-list" id="projects-list-container">
-                    <Container className="project-list-item">
+                    <Container>
                         <Row className="project-list-row">
-                        <ListGroup defaultActiveKey="#link1">
-                            <br />
-                            {
-                                projects_list
-                            }
-                        </ListGroup>
+                            <Col xs={11}>
+
+                                <ListGroup defaultActiveKey="#link1">
+                                    <br />
+                                    {
+                                        projects_list
+                                    }
+                                </ListGroup>
+                            </Col>
+
+                            <Col xs={1}>
+                                <span className="fa-icon-new-proj-wrapper">
+                                    <span className="fa-icon-new-proj-wrapper-1">
+                                        <Button onClick={handleShow}>
+                                            <FontAwesomeIcon icon={faPlus} className="fa-icon-make-new-proj fa-2x" />
+                                        </Button>
+                                    </span>
+                                </span>
+                                
+                                {createModal()}
+                            </Col>
                         </Row>
                     </Container>
                 </div>
+
             </Container>
         </div>
     );

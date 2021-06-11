@@ -73,8 +73,12 @@
 }
 
 .fa-icon-new-proj-wrapper .btn:hover {
-    transition: 0.5 ease-in-out;
-    transform: scale(1.05);
+    transition: .1s ease-in-out;
+    transform: scale(1.005);
+    color: #f5f5f5;
+    background-color: #2f3545;
+    cursor: pointer;
+    opacity: 1.0;
 }
 
 .fa-icon-new-proj-wrapper .btn:active {

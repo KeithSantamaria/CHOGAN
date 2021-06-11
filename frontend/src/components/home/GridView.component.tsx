@@ -1,11 +1,10 @@
 import {useState, useEffect} from 'react';
-// import FolderCard from '../../components/home/FolderCard.component';
-import ProjectCard from '../../components/home/ProjectCard.component';
 
-import {Button, Col, Row, Modal} from 'react-bootstrap';
+import {Button, Col, Row, Modal, Container} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPlus, faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
 
+import ProjectCard from '../../components/home/ProjectCard.component';
 import CreateProjectForm from "../home/form/CreateProjectForm";
 import '../../css/home/create-new-project.css';
 
@@ -32,11 +31,11 @@ export default function GridView(props: any) {
     const toggle = () => { 
         if(active === false) {
             setActive(true);
-            console.log("Sort" + JSON.stringify(sortedArray));
+            // console.log("Sort" + JSON.stringify(sortedArray));
         }
         if(active === true) {
             setActive(false);
-            console.log("Not" + JSON.stringify(sortedArray));
+            // console.log("Not" + JSON.stringify(sortedArray));
         }
         return null;
     }
@@ -85,39 +84,41 @@ export default function GridView(props: any) {
 
             <FolderCard folders={props.folders}/> */}
 
-            <Row className="project-container-wrapper">
-                <Col>
-                    <span>Projects</span>
-                </Col>
+            <Container>
+                <Row className="project-container-wrapper">
+                    <Col>
+                        <span>Projects</span>
+                    </Col>
 
-                <Col className="row-2-col-2" >
-                    <div style={{float: 'right'}} className={className + " grid-sort-down"} onClick={toggle}>
-                        <span style={{paddingRight: '8px'}}>Name</span>
-                        {active ? <FontAwesomeIcon className="fa-icon fa-1x" icon={faSortDown}/> : <FontAwesomeIcon className="fa-icon fa-1x" icon={faSortUp}/>}
-                    </div>
-                    
-                </Col>
-            </Row>
+                    <Col className="row-2-col-2" >
+                        <div style={{float: 'right'}} className={className + " grid-sort-down"} onClick={toggle}>
+                            <span style={{paddingRight: '8px'}}>Name</span>
+                            {active ? <FontAwesomeIcon className="fa-icon fa-1x" icon={faSortDown}/> : <FontAwesomeIcon className="fa-icon fa-1x" icon={faSortUp}/>}
+                        </div>
+                        
+                    </Col>
+                </Row>
 
-            <hr/>
+                <hr/>
 
-            <Row>
-                <Col xs={11}>
-                    <ProjectCard projects= {sortedArray}/>
-                </Col>
+                <Row>
+                    <Col xs={11}>
+                        <ProjectCard projects= {sortedArray}/>
+                    </Col>
 
-                <Col xs={1}>
-                    <span className="fa-icon-new-proj-wrapper">
-                        <span className="fa-icon-new-proj-wrapper-1">
-                            <Button onClick={handleShow}>
-                                <FontAwesomeIcon icon={faPlus} className="fa-icon-make-new-proj fa-2x" />
-                            </Button>
+                    <Col xs={1}>
+                        <span className="fa-icon-new-proj-wrapper">
+                            <span className="fa-icon-new-proj-wrapper-1">
+                                <Button onClick={handleShow}>
+                                    <FontAwesomeIcon icon={faPlus} className="fa-icon-make-new-proj fa-2x" />
+                                </Button>
+                            </span>
                         </span>
-                    </span>
-                    
-                    {createModal()}
-                </Col>
-            </Row>
+                        
+                        {createModal()}
+                    </Col>
+                </Row>
+            </Container>
         </>
     );
 }

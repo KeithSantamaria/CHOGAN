@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import GridView from '../../components/home/GridView.component';
 import UserView from '../../components/home/UserView.component';
 import HomeListView from '../../components/home/HomeListView';
@@ -9,6 +9,11 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTh, faList} from "@fortawesome/free-solid-svg-icons";
 
 export default function Home() {
+    const [activeGrid, setActiveGrid] = useState(true);
+    const [activeList, setActiveList] = useState(false);
+
+    const [tabs, setTabs] = useState("grid");
+
     /**
      * Mock Data
      */
@@ -24,25 +29,36 @@ export default function Home() {
 
     ]);
 
-    const [folders, setFolders] = useState([
-        {id: 1, name: 'School'},
-        {id: 2, name: 'Work'},
-        {id: 3, name: 'School'},
-        {id: 4, name: 'Work'},
-    ]);
-
-    const [tabs, setTabs] = useState("grid");
+    // const [folders, setFolders] = useState([
+    //     {id: 1, name: 'School'},
+    //     {id: 2, name: 'Work'},
+    //     {id: 3, name: 'School'},
+    //     {id: 4, name: 'Work'},
+    // ]);
 
     const RenderTabs = () => {
         if(tabs === 'grid') {
-            return <GridView projects={projects} folders={folders}/>;
+            return <GridView projects={projects}/>;
         }
 
         if(tabs === 'list') {
-            return <HomeListView />;
+            return <HomeListView projects={projects} />;
         }
         return null;
     }
+
+    const handleGridView = () => {
+        setActiveList(false);
+        setActiveGrid(true);
+        setTabs('grid');
+    }
+
+    const handleListView = () => {
+        setActiveList(true);
+        setActiveGrid(false);
+        setTabs('list');
+    }
+  
 
   return (
     <div className="body">
@@ -50,8 +66,8 @@ export default function Home() {
             <Col sm={9} className="home-container-wrapper">
                 <Row className="tabs-container-wrapper">
                     <Col className="tabs-wrapper" >
-                        <FontAwesomeIcon className="fa-icon fa-icon-1" icon={faTh} onClick={() => setTabs('grid')}/>
-                        <FontAwesomeIcon className="fa-icon fa-icon-2" icon={faList} onClick={() => setTabs('list')}/>
+                        <FontAwesomeIcon style={activeGrid ? {color: 'black'} : {color: 'gray'}} className="fa-icon fa-icon-1" icon={faTh} onClick={() => handleGridView()}/>
+                        <FontAwesomeIcon style={activeList ? {color: 'black'} : {color: 'gray'}} className="fa-icon fa-icon-2" icon={faList} onClick={() => handleListView()}/>
                     </Col>
 
                     <Col className="proj-info-wrapper">

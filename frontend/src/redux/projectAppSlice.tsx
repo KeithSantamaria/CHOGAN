@@ -160,7 +160,7 @@ import { ESMap, Map } from "typescript";
         sampleProjects: [{
         projectId: "12345",
         projectName: "Sample Project from Store",
-        projectDescription: "This project is the base project in redux-store",
+        projectDescription: "This project is the base project in redux-store This project is the base project in redux-store This project is the base project in redux-store",
       }, {
         projectId: "22345",
         projectName: "Sample 2 from Store",

@@ -32,7 +32,14 @@ public class WidgetController {
      */
     @GetMapping("/create/project/widget")
     public ResponseEntity<List<Widget>> createNewWidget(@RequestParam Widget widget){
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+      try {
+          widgetService.insertWidget(widget);
+      }catch (Exception e){
+          log.error("Failed to add widget to the DB.");
+          return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+      log.info("Successfully added widget to the db");
+      return new ResponseEntity<>(widgetService.findByProjectId(widget.getProjectId()),HttpStatus.CREATED);
     }
 
     /*

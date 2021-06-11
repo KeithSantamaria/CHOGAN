@@ -70,7 +70,7 @@ public class WidgetService implements IWidgetService {
      */
     @Override
     public Widget updateWidget(Widget widget){
-        return null;
+        return widgetRepo.save(widget);
     }
 
     /*

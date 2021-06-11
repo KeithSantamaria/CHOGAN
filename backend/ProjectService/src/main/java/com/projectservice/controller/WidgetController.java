@@ -89,7 +89,13 @@ public class WidgetController {
      */
     @PutMapping("/update/project/widget")
     public ResponseEntity<List<Widget>> updateWidget(@RequestBody Widget widget){
-        return null;
+        Widget updatedWidget = widgetService.updateWidget(widget);
+        if (updatedWidget == null){
+            log.error("Failed to updated widget of widgetId : {}",widget.getWidgetId());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        log.info("Successfully updated widget of widgetId : {}",widget.getWidgetId());
+        return new ResponseEntity<>(widgetService.findByProjectId(widget.getProjectId()),HttpStatus.OK);
     }
 
     /*

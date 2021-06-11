@@ -111,6 +111,12 @@ public class WidgetController {
      */
     @DeleteMapping("/delete/project/widget")
     public ResponseEntity<List<Widget>> deleteWidget(@RequestParam String widgetId){
-        return null;
+        List<Widget> updatedWidgets = widgetService.deleteWidget(widgetId);
+        if (updatedWidgets == null){
+            log.error("No such widget exists of widgetId : {}",widgetId);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        log.info("Successfully delete widget of widgetId : {}",widgetId);
+        return new ResponseEntity<>(updatedWidgets,HttpStatus.OK);
     }
 }

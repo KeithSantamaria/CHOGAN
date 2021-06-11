@@ -86,6 +86,12 @@ public class WidgetService implements IWidgetService {
      */
     @Override
     public List<Widget> deleteWidget(String widgetId){
-        return null;
+        Widget foundWidget = widgetRepo.findByWidgetId(widgetId);
+        if (foundWidget == null){
+            return null;
+        }
+        String projectId = foundWidget.getProjectId();
+        widgetRepo.deleteById(widgetId);
+        return widgetRepo.findByProjectId(projectId);
     }
 }

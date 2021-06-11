@@ -72,7 +72,9 @@ public class WidgetController {
      */
     @GetMapping("/read/project/widgets")
     public ResponseEntity<List<Widget>> readWidgets(@RequestParam String projectId){
-        return null;
+        List<Widget> foundList = widgetService.findByProjectId(projectId);
+        log.info("Succesfully retrieved widgets of projectId : {}",projectId);
+        return new ResponseEntity<>(foundList,HttpStatus.OK);
     }
     /*
     *

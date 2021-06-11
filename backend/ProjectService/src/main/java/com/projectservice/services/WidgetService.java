@@ -54,7 +54,7 @@ public class WidgetService implements IWidgetService {
      */
     @Override
     public List<Widget> findByProjectId(String projectId){
-        return null;
+        return widgetRepo.findByProjectId(projectId);
     }
 
     /*

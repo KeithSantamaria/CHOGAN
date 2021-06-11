@@ -1,6 +1,7 @@
 package com.projectservice.services;
 
 import com.projectservice.repository.WireframeRepo;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class WireframeServiceTest {
@@ -15,11 +16,26 @@ public class WireframeServiceTest {
     *
     * */
 
+    @Test
+    void insertTest(){
+
+    }
+
     /*
     *
     * Read
     *
     * */
+
+    @Test
+    void findByWireframeIdTest(){
+
+    }
+
+    @Test
+    void findByProjectIdTest(){
+
+    }
 
     /*
     *
@@ -27,9 +43,24 @@ public class WireframeServiceTest {
     *
     * */
 
+    @Test
+    void updateWireframeTest(){
+
+    }
+
     /*
     *
     * Delete
     *
     * */
+
+    @Test
+    void deleteWireframeSuccessTest(){
+
+    }
+
+    @Test
+    void deleteWireframeFailureTest(){
+
+    }
 }

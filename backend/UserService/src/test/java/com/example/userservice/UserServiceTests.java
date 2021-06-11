@@ -13,6 +13,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.Assert;
 import org.springframework.util.SocketUtils;
 
@@ -28,16 +30,19 @@ public class UserServiceTests {
     @Autowired
     @InjectMocks
     UserService userService;
-
+    private PasswordEncoder passwordEncoder;
     private User testUser;
 
     @BeforeEach
     void setup() {
         testUser = new User();
+        passwordEncoder = new BCryptPasswordEncoder();
     }
 
     @Test
     void testNewUser() {
+        testUser.setPassword("123");
+        testUser.setSecurityAnswer("123");
         Mockito.when(userRepository.save(testUser)).thenReturn(testUser);
         User user = userService.newUser(testUser);
         Assertions.assertEquals(testUser, user);
@@ -52,7 +57,6 @@ public class UserServiceTests {
 
     @Test
     void testNewUserException() {
-        Mockito.when(userRepository.save(testUser)).thenThrow(new RuntimeException());
         User user = userService.newUser(testUser);
         Assertions.assertEquals(null, user);
     }
@@ -63,10 +67,12 @@ public class UserServiceTests {
         testUser.setPassword("test");
         testUser.setEmail("test");
         testUser.setSecurityQuestionId(1);
+        testUser.setSecurityAnswer("Banana");
         User userOne = testUser;
         userOne.setPassword("Password");
         userOne.setEmail("Email");
         userOne.setSecurityQuestionId(2);
+        userOne.setSecurityAnswer("Apple");
         Mockito.when(userRepository.save(userOne)).thenReturn(userOne);
         User userTwo = userService.updateUser(userOne);
         Assertions.assertNotEquals("test", userTwo.getPassword());
@@ -84,22 +90,8 @@ public class UserServiceTests {
     @Test
     void testUpdateUserException() {
         testUser.setId("test");
-        Mockito.when(userRepository.save(testUser)).thenThrow(new RuntimeException());
         User user = userService.updateUser(testUser);
         Assertions.assertNull(user);
-    }
-
-    @Test
-    void testSetFullName() {
-        String firstName = "Michael";
-        String lastName = "Fong";
-        testUser.setEmail("User");
-        Mockito.when(userRepository.save(testUser)).thenReturn(testUser);
-        User user = userService.newUser(testUser);
-        Mockito.when(userRepository.findByEmail("User")).thenReturn(user);
-        User test = userService.setFullName("User", firstName, lastName);
-        Assertions.assertEquals("Michael", test.getFirstName());
-        Assertions.assertEquals("Fong", test.getLastName());
     }
 
     @Test
@@ -122,6 +114,7 @@ public class UserServiceTests {
     void testUserLogIn() {
         testUser.setEmail("User");
         testUser.setPassword("Password");
+        testUser.setPassword( passwordEncoder.encode(testUser.getPassword()) );
         Mockito.when(userRepository.findByEmail("User")).thenReturn(testUser);
         User testUser = userService.userLogIn("User", "Password");
         Assertions.assertNotNull(testUser);

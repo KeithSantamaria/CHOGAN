@@ -42,8 +42,8 @@ public class ERDService implements IErdService{
      * @return The ERD found
      */
     @Override
-    public ERD findByERDId(String erdId) {
-        return erdRepo.findByERDId(erdId);
+    public ERD findByErdId(String erdId) {
+        return erdRepo.findByErdId(erdId);
     }
 
     /**
@@ -85,7 +85,7 @@ public class ERDService implements IErdService{
      */
     @Override
     public List<ERD> deleteERD(String erdID) {
-        ERD foundERD = erdRepo.findByERDId(erdID);
+        ERD foundERD = erdRepo.findByErdId(erdID);
         if (foundERD == null){
             return null;
         }

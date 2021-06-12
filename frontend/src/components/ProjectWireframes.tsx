@@ -21,8 +21,7 @@ function ProjectWireframes() {
     //Production
     //const projectId = projectAppState.project.projectId;
     const queryString = `http://localhost:42069/api/read/project/wireframes`;
-    
-    
+        
     const body = {
       params: {
         projectId: projectId,
@@ -78,7 +77,7 @@ function ProjectWireframes() {
       })}
 
       <Button variant="primary" onClick={handleOpen}>
-        New Endpoint
+        New Wireframe
       </Button>
       {wireframeModal()}
     </div>

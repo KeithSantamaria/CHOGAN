@@ -5,9 +5,11 @@ import {
   resetCreateNewEndpointForm,
   selectProjectApp,
   setCreateNewWireframeForm,
-  setEndpoints,
+  setWireframeImageInForm,
+  setWireframes,
 } from "../redux/projectAppSlice";
 import { Button, Form } from "react-bootstrap";
+
 const WireframeForm = () => {
   const projectAppState = useAppSelector(selectProjectApp);
   const dispatch = useAppDispatch();
@@ -30,7 +32,7 @@ const WireframeForm = () => {
     ) {
       alert("There is nothing to add");
     } else {
-      const endpoint = {
+      const wireframe = {
         wireframeName: projectAppState.createNewWireframeForm.wireframeName,
         wireframeDescription:
           projectAppState.createNewWireframeForm.wireframeDescription,
@@ -41,13 +43,13 @@ const WireframeForm = () => {
         //test
         projectId: projectId,
       };
-
+      console.log(wireframe);
       axios
-        .post(queryString, endpoint)
+        .post(queryString, wireframe)
         .then((response) => {
           console.log("response", response);
-          const endpointData = response.data;
-          dispatch(setEndpoints(endpointData));
+          const wireframeData = response.data;
+          dispatch(setWireframes(wireframeData));
           dispatch(resetCreateNewEndpointForm());
         })
         .catch((error) => {
@@ -55,6 +57,24 @@ const WireframeForm = () => {
         });
     }
   };
+
+  const encodeImageFileAsURL = (event:any) => {
+    const value = event.target.value;
+    if(value.length > 0){
+      let fileToLoad = value[0];
+      let fileReader = new FileReader();
+      fileReader.onload = (fileLoadedEvent:any) => {
+        let sourceData = fileLoadedEvent.target.result; // <--- data: base64
+        let newImage = document.createElement('img');
+        newImage.src = sourceData;
+        dispatch(setWireframeImageInForm(sourceData));
+        console.log(sourceData)
+        alert(sourceData)
+      }
+      fileReader.readAsDataURL(fileToLoad);
+    }
+  };
+
   return (
     <div>
       <Form>
@@ -73,7 +93,7 @@ const WireframeForm = () => {
             name="wireframeImg"
             type="file"
             placeholder="/api/create/endpoint"
-            onChange={formChangeHandler}
+            onChange={encodeImageFileAsURL}
           />
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlTextarea1">

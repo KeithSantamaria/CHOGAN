@@ -629,6 +629,30 @@ export const projectAppSlice = createSlice({
       };
     },
 
+    setWireframeImageInForm: (
+      state,
+      action: {
+        payload: {
+          value: string;
+        };
+      }
+    ) => {
+      const imgData = action.payload.value;
+      state.createNewWireframeForm.wireframeImg = imgData;
+    },
+
+    setERDImageInForm: (
+      state,
+      action: {
+        payload: {
+          value: string;
+        };
+      }
+    ) => {
+      const imgData = action.payload.value;
+      state.createNewERDForm.erdImg = imgData;
+    },
+
     resetCreateNewWidgetForm: (state) => {
       state.createNewWidgetForm.widgetName = "";
       state.createNewWidgetForm.widgetDescription = "";
@@ -675,6 +699,8 @@ export const {
   setTag,
   setWireframe,
   setERDiagram,
+  setERDImageInForm,
+  setWireframeImageInForm,
   setCreateNewEndpointForm,
   setCreateNewModelForm,
   setCreateNewWidgetForm,

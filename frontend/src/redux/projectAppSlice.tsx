@@ -1,152 +1,79 @@
-import {
-    // createAsyncThunk,
-    createSlice,
-
-    //  PayloadAction
-    PayloadAction
-  } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { ESMap, Map } from "typescript";
 
-  import {
-    RootState,
+import {RootState,
     //  AppThunk
   } from "./store";
 
-  export interface ProjectAppState {
-      projects : Array<{
-        project: {
-            projectId: string;
-            projectName: string;
-            projectDescription: string;
-            projectStatus: string;
-            models: Array<{
-                model:{
-                    modelId: string;
-                    modelName: string;
-                    modelMetadata:Array<{
-                        // index signature https://basarat.gitbook.io/typescript/type-system/index-signatures
-                        key: string, value: string
-                    }>                
-                }
-            }>,
-            endpoints: Array <{
-                endpoint: {
-                    endpointId: string;
-                    endpointName: string;
-                    endpointUrlPattern: string;
-                    endpointDescription: string;
-                }
-            }>,
-            tags: Array<{
-                tag:{
-                    tagId: string;
-                    tagName: string;
-                    tagDescription: string;
-                }
-            }>,
-            userStories: Array<{
-                userStory: {
-                    userStoryId: string;
-                    userStoryDescription: string;
-                }
-            }>,
-            widgets: Array<{
-                widget: {
-                    widgetName: string;
-                    widgetDescription: string;
-                }
-            }>
-        }
-      }>;
-      project: {
-        projectId: string;
-        projectName: string;
-        projectDescription: string;
-        projectStatus: string;
-        models: Array<{
-            model:{
-                modelId: string;
-                modelName: string;
-                modelMetadata:Array<{
-                    // index signature https://basarat.gitbook.io/typescript/type-system/index-signatures
-                    key: string, value: string
-                }>                
-            }
-        }>,
-        endpoints: Array <{
-            endpoint: {
-                endpointId: string;
-                endpointName: string;
-                endpointUrlPattern: string;
-                endpointDescription: string;
-            }
-        }>,
-        tags: Array<{
-            tag:{
-                tagId: string;
-                tagName: string;
-                tagDescription: string;
-            }
-        }>,
-        userStories: Array<{
-            userStory: {
-                userStoryId: string;
-                userStoryDescription: string;
-            }
-        }>,
-        widgets: Array<{
-            widget: {
-                widgetName: string;
-                widgetDescription: string;
-            }
-        }>
-      };
-      sampleProjects: Array<{
-        projectId: string;
-        projectName: string;
-        projectDescription: string;
-      }>;
-      model:{
-        modelId: string;
-        modelName: string;
-        modelMetadata: Array<{
-            // index signature https://basarat.gitbook.io/typescript/type-system/index-signatures
-            key: string, value: string
-        }>                
-      };
-      endpoint: {
-        endpointId: string;
-        endpointName: string;
-        endpointUrlPattern: string;
-        endpointDescription: string;
-      };
-      tag:{
-        tagId: string;
-        tagName: string;
-        tagDescription: string;
-      };
-      userStory: {
-        userStoryId: string;
-        userStoryDescription: string;
-      };
-      widget:{
-          widgetName: string;
-          widgetDescription: string;
-      };
-      createNewEndPointForm: {endpointName: string, urlPattern: string, endpointDescription: string};
-      createNewPojoForm: {pojoName: string};
-      createNewUserStoryForm: {userStoryName: string};
-      createNewTagForm: {tagName: string, tagDescription: string};
-      createNewWidgetForm: {widgetName: string, widgetDescription: string},
-      //Bookmark for later - need to know how to upload photos 
-      createNewProjectERDForm: {erdName: string, erdDescription: string};
-      //Bookmark for later - need to know how to upload photos 
-      createNewProjectWireframeForm: {wireframeName: string, wireframeDescription: string}
-  }
+export interface Model {
+    modelId: string;
+    modelName: string;
+    modelMetadata:Array<{
+        // index signature https://basarat.gitbook.io/typescript/type-system/index-signatures
+        key: string, value: string
+    }>
+}
 
-  const initialState: ProjectAppState = {
+export interface Endpoint {
+    endpointId: string;
+    endpointName: string;
+    endpointUrlPattern: string;
+    endpointDescription: string;
+}
+
+export interface Tag {
+    tagId: string;
+    tagName: string;
+    tagDescription: string;
+}
+
+export interface UserStory {
+    userStoryId: string;
+    userStoryDescription: string;
+}
+
+export interface Widget {
+    widgetName: string;
+    widgetDescription: string;
+}
+
+export interface Project {
+    projectId: string;
+    projectName: string;
+    projectDescription: string;
+    userId: string;
+    projectStatus: string;
+    models: Array<Model>;
+    endpoints: Array <Endpoint>;
+    tags: Array<Tag>;
+    userStories: Array<UserStory>;
+    widgets: Array<Widget>;
+}
+
+export interface ProjectAppState {
+    projects : Array<Project>;
+    project: Project;
+    sampleProjects: Array<Project>;
+    model: Model;
+    endpoint: Endpoint;
+    tag: Tag;
+    userStory: UserStory;
+    widget:Widget;
+    createNewEndPointForm: {endpointName: string, urlPattern: string, endpointDescription: string};
+    createNewPojoForm: {pojoName: string};
+    createNewUserStoryForm: {userStoryName: string};
+    createNewTagForm: {tagName: string, tagDescription: string};
+    createNewWidgetForm: {widgetName: string, widgetDescription: string},
+    //Bookmark for later - need to know how to upload photos 
+    createNewProjectERDForm: {erdName: string, erdDescription: string};
+    //Bookmark for later - need to know how to upload photos 
+    createNewProjectWireframeForm: {wireframeName: string, wireframeDescription: string}
+}
+
+const initialState: ProjectAppState = {
     projects: [],
     project: {
+        userId: "",
         projectId: "",
         projectName: "",
         projectDescription: "",
@@ -158,50 +85,56 @@ import { ESMap, Map } from "typescript";
         widgets: []
         },
         sampleProjects: [{
-        projectId: "12345",
-        projectName: "Sample Project from Store",
-        projectDescription: "This project is the base project in redux-store This project is the base project in redux-store This project is the base project in redux-store",
-      }, {
-        projectId: "22345",
-        projectName: "Sample 2 from Store",
-        projectDescription: "This project is the base project in redux-store",
-      }],
-      model:{
+            userId: "9",
+            projectId: "12345",
+            projectName: "Sample Project from Store",
+            projectDescription: "This project is the base project in redux-store This project is the base project in redux-store This project is the base project in redux-store",
+            projectStatus: "",
+            models: [], endpoints: [], tags: [], userStories: [], widgets: []
+            }, 
+            {userId: "9",
+            projectId: "22345",
+            projectName: "Sample 2 from Store",
+            projectDescription: "This project is the base project in redux-store",
+            projectStatus: "",
+            models: [], endpoints: [], tags: [], userStories: [], widgets: []
+            }],
+        model:{
         modelId: "",
         modelName: "",
         modelMetadata: [],            
-      },
-      endpoint: {
+        },
+        endpoint: {
         endpointId: "",
         endpointName: "",
         endpointUrlPattern: "",
         endpointDescription: "",
-      },
-      tag:{
+        },
+        tag:{
         tagId: "",
         tagName: "",
         tagDescription: "",
-      },
-      userStory: {
+        },
+        userStory: {
         userStoryId: "",
         userStoryDescription: "",
-      },
-      widget:{
-          widgetName: "",
-          widgetDescription: "",
-      },
-      createNewEndPointForm: {endpointName: "", urlPattern: "", endpointDescription: ""},
-      createNewPojoForm: {pojoName: ""},
-      createNewUserStoryForm: {userStoryName: ""},
-      createNewTagForm: {tagName: "", tagDescription: ""},
-      createNewWidgetForm: {widgetName: "", widgetDescription: ""},
-      //Bookmark for later - need to know how to upload photos 
-      createNewProjectERDForm: {erdName: "", erdDescription: ""},
-      //Bookmark for later - need to know how to upload photos 
-      createNewProjectWireframeForm: {wireframeName: "", wireframeDescription: ""},
-  };
+        },
+        widget:{
+            widgetName: "",
+            widgetDescription: "",
+        },
+        createNewEndPointForm: {endpointName: "", urlPattern: "", endpointDescription: ""},
+        createNewPojoForm: {pojoName: ""},
+        createNewUserStoryForm: {userStoryName: ""},
+        createNewTagForm: {tagName: "", tagDescription: ""},
+        createNewWidgetForm: {widgetName: "", widgetDescription: ""},
+        //Bookmark for later - need to know how to upload photos 
+        createNewProjectERDForm: {erdName: "", erdDescription: ""},
+        //Bookmark for later - need to know how to upload photos 
+        createNewProjectWireframeForm: {wireframeName: "", wireframeDescription: ""},
+};
 
-  const projectAppSlice = createSlice({
+const projectAppSlice = createSlice({
     name: 'projectApp',
     initialState,
     reducers: {
@@ -212,44 +145,13 @@ import { ESMap, Map } from "typescript";
                     projectId: string;
                     projectName: string;
                     projectDescription: string;
+                    userId: string;
                     projectStatus: string;
-                    models: Array<{
-                        model:{
-                            modelId: string;
-                            modelName: string;
-                            modelMetadata:Array<{
-                                // index signature https://basarat.gitbook.io/typescript/type-system/index-signatures
-                                key: string, value: string
-                            }>                
-                        }
-                    }>,
-                    endpoints: Array <{
-                        endpoint: {
-                            endpointId: string;
-                            endpointName: string;
-                            endpointUrlPattern: string;
-                            endpointDescription: string;
-                        }
-                    }>,
-                    tags: Array<{
-                        tag:{
-                            tagId: string;
-                            tagName: string;
-                            tagDescription: string;
-                        }
-                    }>,
-                    userStories: Array<{
-                        userStory: {
-                            userStoryId: string;
-                            userStoryDescription: string;
-                        }
-                    }>,
-                    widgets: Array<{
-                        widget: {
-                            widgetName: string;
-                            widgetDescription: string;
-                        }
-                    }>
+                    models: Array<Model>,
+                    endpoints: Array <Endpoint>,
+                    tags: Array<Tag>,
+                    userStories: Array<UserStory>,
+                    widgets: Array<Widget>
                 }
             }
         ) => {
@@ -313,50 +215,7 @@ import { ESMap, Map } from "typescript";
         setProjects: (
             state,
             action:{
-                payload: Array<{
-                    project: {
-                    projectId: string;
-                    projectName: string;
-                    projectDescription: string;
-                    projectStatus: string;
-                    models: Array<{
-                        model:{
-                            modelId: string;
-                            modelName: string;
-                            modelMetadata:Array<{
-                                // index signature https://basarat.gitbook.io/typescript/type-system/index-signatures
-                                key: string, value: string
-                            }>                
-                        }
-                    }>,
-                    endpoints: Array <{
-                        endpoint: {
-                            endpointId: string;
-                            endpointName: string;
-                            endpointUrlPattern: string;
-                            endpointDescription: string;
-                        }
-                    }>,
-                    tags: Array<{
-                        tag:{
-                            tagId: string;
-                            tagName: string;
-                            tagDescription: string;
-                        }
-                    }>,
-                    userStories: Array<{
-                        userStory: {
-                            userStoryId: string;
-                            userStoryDescription: string;
-                        }
-                    }>,
-                    widgets: Array<{
-                        widget:{
-                            widgetName: string;
-                            widgetDescription: string;
-                        }
-                    }>
-                }}>
+                payload: Array<Project>
             }
         ) => {
           console.log("Dispatching setProject reducer with aciton: ", action);
@@ -436,9 +295,9 @@ import { ESMap, Map } from "typescript";
             state.createNewWidgetForm.widgetDescription = "";
         }
     },
-  });
+});
 
-  export const {
+export const {
     resetCreateNewWidgetForm,
     setProjectWidgetsState,
     setProjectEndpointsState,
@@ -455,9 +314,9 @@ import { ESMap, Map } from "typescript";
     setProjects,
     setTag,
     setUserStory
-  } = projectAppSlice.actions;
+} = projectAppSlice.actions;
 
 
-  export const selectProjectApp = (state:RootState) => state.projectApp;
+export const selectProjectApp = (state:RootState) => state.projectApp;
 
-  export default projectAppSlice.reducer;
+export default projectAppSlice.reducer;

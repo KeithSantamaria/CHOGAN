@@ -14,7 +14,7 @@ const EndpointCard = ({ endpoint }: any) => {
       const queryDeleteString = `http://localhost:42069/api/delete/project/endpoint`;
       const body = {
           params: {
-              endpointId: endpoint.endpointId
+              endpointId: id
           }
       }
       console.log("request body: ", queryDeleteString, body)

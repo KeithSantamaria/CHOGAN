@@ -27,7 +27,6 @@ const ProjectGeneralInfo = () => {
     // Production
     // const queryString = `http://localhost:42069/api/read/project?projectId=${projectId}`;
 
-
     // Test
     const queryString = `http://localhost:42069/api/read/project`;
     const projectId = "60bc36b65d2b0da1deb9ada2";

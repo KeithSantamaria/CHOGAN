@@ -141,7 +141,7 @@ export interface ProjectAppState {
     urlPattern: string;
     endpointDescription: string;
   };
-  createNewPojoForm: { pojoName: string };
+  createNewModelForm: { modelName: string; modelMetadata: Array<{}> };
   createNewUserStoryForm: { userStoryName: string };
   createNewTagForm: { tagName: string; tagDescription: string };
   createNewWidgetForm: { widgetName: string; widgetDescription: string };
@@ -218,7 +218,7 @@ const initialState: ProjectAppState = {
     urlPattern: "",
     endpointDescription: "",
   },
-  createNewPojoForm: { pojoName: "" },
+  createNewModelForm: { modelName: "", modelMetadata: []},
   createNewUserStoryForm: { userStoryName: "" },
   createNewTagForm: { tagName: "", tagDescription: "" },
   createNewWidgetForm: { widgetName: "", widgetDescription: "" },
@@ -520,7 +520,7 @@ export const projectAppSlice = createSlice({
       };
     },
 
-    setCreateNewPojoForm: (
+    setCreateNewModelForm: (
       state,
       action: {
         payload: {
@@ -532,8 +532,8 @@ export const projectAppSlice = createSlice({
       const fieldName = action.payload.fieldName;
       const value = action.payload.value;
       console.log(`Setting ${fieldName} to ${value}`);
-      state.createNewPojoForm = {
-        ...state.createNewPojoForm,
+      state.createNewModelForm = {
+        ...state.createNewModelForm,
         [fieldName]: value,
       };
     },
@@ -641,6 +641,11 @@ export const projectAppSlice = createSlice({
       state.createNewEndpointForm.endpointName = "";
       state.createNewEndpointForm.endpointDescription = "";
       state.createNewEndpointForm.urlPattern = "";
+    },
+
+    resetCreateNewModelForm: (state) =>{
+      state.createNewModelForm.modelName = "";
+      state.createNewModelForm.modelMetadata = [];
     }
   },
 });
@@ -664,7 +669,7 @@ export const {
   setWireframe,
   setERDiagram,
   setCreateNewEndpointForm,
-  setCreateNewPojoForm,
+  setCreateNewModelForm,
   setCreateNewWidgetForm,
   setCreateNewProjectERDForm,
   setCreateNewProjectWireframeForm,
@@ -673,7 +678,7 @@ export const {
   resetCreateNewWidgetForm,
   resetCreateNewTagForm,
   resetCreateNewEndpointForm,
-  
+  resetCreateNewModelForm,
 } = projectAppSlice.actions;
 
 export const selectProjectApp = (state: RootState) => state.projectApp;

@@ -1,13 +1,13 @@
 import axios from "axios";
 import React from "react";
 import { Button, Form, Table } from "react-bootstrap";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   resetCreateNewModelForm,
   selectProjectApp,
   setCreateNewModelForm,
   setModels,
-} from "../redux/projectAppSlice";
+} from "../../redux/projectAppSlice";
 
 const ModelForm = () => {
   const projectAppState = useAppSelector(selectProjectApp);

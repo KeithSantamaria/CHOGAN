@@ -1,8 +1,8 @@
 import axios from "axios";
 import React from "react";
 import { Button, Card } from "react-bootstrap";
-import { useAppDispatch } from "../redux/hooks";
-import { setUserStories } from "../redux/projectAppSlice";
+import { useAppDispatch } from "../../redux/hooks";
+import { setUserStories } from "../../redux/projectAppSlice";
 
 const UserStoryCard = ({ userStory }: any) => {
   const dispatch = useAppDispatch();

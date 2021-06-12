@@ -4,7 +4,7 @@ import ProjectSideNav from './ProjectSideNav'
 function ProjectWireframes() {
     return (
         <div>
-            <ProjectSideNav />
+            {/* <ProjectSideNav /> */}
             <p>Wireframes</p>
         </div>
     )

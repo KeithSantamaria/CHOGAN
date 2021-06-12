@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setTags } from "../redux/projectAppSlice";
 import axios from "axios";
 import { Button, Card, Modal } from "react-bootstrap";
-import TagForm from "./TagForm";
+import TagForm from "./tag/TagForm";
 
 function ProjectTags() {
   const projectAppState = useAppSelector(selectProjectApp);
@@ -61,7 +61,7 @@ function ProjectTags() {
   };
   return (
     <div>
-      <ProjectSideNav />
+      {/* <ProjectSideNav /> */}
 
       {projectAppState.tags.map((tag: any) => {
         return (

@@ -4,7 +4,7 @@ import ProjectSideNav from './ProjectSideNav'
 function ProjectERDs() {
     return (
         <div>
-            <ProjectSideNav />
+            {/* <ProjectSideNav /> */}
             <p>ERDs</p>
         </div>
     )

@@ -1,13 +1,13 @@
 import axios from "axios";
 import React from "react";
 import { Button, Form } from "react-bootstrap";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   resetCreateNewWidgetForm,
   selectProjectApp,
   setCreateNewWidgetForm,
   setProject,
-} from "../redux/projectAppSlice";
+} from "../../redux/projectAppSlice";
 
 const WidgetForm = (project: any) => {
   const projectAppState = useAppSelector(selectProjectApp);

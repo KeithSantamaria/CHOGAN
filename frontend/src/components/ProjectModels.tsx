@@ -3,9 +3,9 @@ import React, { useMemo } from "react";
 import { Button, Card, Modal } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setModels } from "../redux/projectAppSlice";
-import ModelForm from "./ModelForm";
+import ModelForm from "./model/ModelForm";
 import ProjectSideNav from "./ProjectSideNav";
-import WidgetForm from "./WidgetForm";
+import WidgetForm from "./general/WidgetForm";
 
 function ProjectModels() {
   const projectAppState = useAppSelector(selectProjectApp);
@@ -64,7 +64,7 @@ function ProjectModels() {
   };
   return (
     <div>
-      <ProjectSideNav />
+      {/* <ProjectSideNav /> */}
 
       {projectAppState.models.map((model: any) => {
         return (

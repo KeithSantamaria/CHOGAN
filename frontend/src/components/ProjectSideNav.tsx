@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Button, Col, Row} from 'react-bootstrap';
-import '../css/project-sidenav.css';
+// import '../css/project-sidenav.css';
 import { useHistory } from "react-router-dom";
 
 const ProjectSideNav = () => {
@@ -28,8 +28,8 @@ const ProjectSideNav = () => {
         history.push("/user/project/tags");
     };
         return (
-        <div id="sideMenu" className="sideMenu">
-            <div className="sm-wrapper">
+        <div>
+            <div>
                 <Row>
                     <Col>
                     <p onClick={goToGeneral}> General Information </p>

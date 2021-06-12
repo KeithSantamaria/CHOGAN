@@ -4,8 +4,8 @@ import { Button, Modal } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setUserStories } from "../redux/projectAppSlice";
 import ProjectSideNav from "./ProjectSideNav";
-import UserStoryCard from "./UserStoryCard";
-import UserStoryForm from "./UserStoryForm";
+import UserStoryCard from "./userstory/UserStoryCard";
+import UserStoryForm from "./userstory/UserStoryForm";
 
 function ProjectUserStories() {
   const projectAppState = useAppSelector(selectProjectApp);
@@ -65,7 +65,7 @@ function ProjectUserStories() {
 
   return (
     <div>
-      <ProjectSideNav />
+      {/* <ProjectSideNav /> */}
       {projectAppState.userStories.map((userStory: any) => {
         return <UserStoryCard userStory={userStory} />;
       })}

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import axios from 'axios';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { selectProjectApp, setWidgets } from '../redux/projectAppSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { selectProjectApp, setWidgets } from '../../redux/projectAppSlice';
 import { Card } from 'react-bootstrap';
 
 const WidgetComponent = ({projectId}: any) => {

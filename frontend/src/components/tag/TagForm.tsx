@@ -1,13 +1,13 @@
 import axios from "axios";
 import React from "react";
 import { Button, Form } from "react-bootstrap";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
     resetCreateNewTagForm,
     selectProjectApp,
     setCreateNewTagForm,
     setTags,
-} from "../redux/projectAppSlice";
+} from "../../redux/projectAppSlice";
 
 const TagForm = (tag: any) => {
     const projectAppState = useAppSelector(selectProjectApp);

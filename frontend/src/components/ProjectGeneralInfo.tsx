@@ -1,15 +1,17 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 import axios from "axios";
 import ProjectSideNav from "./ProjectSideNav";
-import WidgetForm from "./WidgetForm";
+import WidgetForm from "./general/WidgetForm";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { Card, Button, Modal } from "react-bootstrap";
+import { Card, Button, Modal, Col, Row, CardDeck, Container} from "react-bootstrap";
 import {
   selectProjectApp,
   setProject,
   setWidgets,
 } from "../redux/projectAppSlice";
-import WidgetComponent from "./WidgetComponent";
+import WidgetComponent from "./general/WidgetComponent";
+
+import '../css/project-service/general-info.css';
 
 // For production, project will be passed as a prop from Project Card (built by Home group)
 // const ProjectGeneralInfo = ({project} : any ) => {
@@ -73,27 +75,31 @@ const ProjectGeneralInfo = () => {
   };
 
   return (
-    <div>
-      <ProjectSideNav />
-      <Card>
-        <Card.Body>
-          {/* <Card.Title>{userAppState.user.userName} - {projectName}</Card.Title> */}
-          <Card.Title>{projectAppState.project.projectName}</Card.Title>
+    <>
+      <Container >
+        <Button variant="primary" onClick={handleOpen}>
+          New Widget
+        </Button>
+      
+        <CardDeck>
+          <Card>
+            <Card.Body>
+              {/* <Card.Title>{userAppState.user.userName} - {projectName}</Card.Title> */}
+              <Card.Title>{projectAppState.project.projectName}</Card.Title>
 
-          <Card.Text>{projectAppState.project.projectDescription}</Card.Text>
-        </Card.Body>
-      </Card>
-        {/*Production*/}
-        {/* <WidgetComponent projectId={userAppState.user.userId}/> */}
-        
-        
+              <Card.Text>{projectAppState.project.projectDescription}</Card.Text>
+            </Card.Body>
+          </Card>
+          {/*Production*/}
+          {/* <WidgetComponent projectId={userAppState.user.userId}/> */}
+        </CardDeck>
+  
         {/*Test*/}
         <WidgetComponent projectId={"60bc36b65d2b0da1deb9ada2"} />
-      <Button variant="primary" onClick={handleOpen}>
-        New Widget
-      </Button>
-      {newWidgetModal()}
-    </div>
+        
+        {newWidgetModal()}
+      </Container>
+    </>
   );
 };
 

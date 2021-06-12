@@ -28,7 +28,7 @@ export default function Home() {
 
     const getProjects = () => {
         // Test query string works; comment when ready to test prod
-        const queryString = `http://localhost:42069/api/read/project?projectId=60bc36b65d2b0da1deb9ada2`;
+        const queryString = `http://localhost:42069/api/read/projects?userId=69`;
 
         // Production query string; uncomment when ready to test prod
         // const queryString = `http://localhost:42069/api/read/project?projectId=${projectId}`; 

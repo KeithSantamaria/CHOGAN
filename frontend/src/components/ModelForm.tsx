@@ -22,7 +22,7 @@ const ModelForm = () => {
   const addModel = () => {
     // Test
     const projectId = "60bc36b65d2b0da1deb9ada2";
-    
+
     const queryString = `http://localhost:42069/api/create/project/model`;
     if (
       projectAppState.createNewModelForm.modelName === "" ||
@@ -54,6 +54,10 @@ const ModelForm = () => {
     }
   };
 
+  const addRow = () => {
+
+  }
+
   return (
     <div>
       <Form>
@@ -67,14 +71,13 @@ const ModelForm = () => {
           />
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlTextarea1">
-          <Table>
+          <Table id="metadataTable" striped bordered hover size="sm">
             <tr>
               <th>Field</th>
               <th>Type</th>
             </tr>
             <tr>
               <td>
-                {" "}
                 <Form.Control
                   name="field"
                   type="text"
@@ -82,12 +85,14 @@ const ModelForm = () => {
                 />
               </td>
               <td>
-                {" "}
                 <Form.Control
                   name="type"
                   type="text"
                   onChange={formChangeHandler}
                 />
+              </td>
+              <td>
+                <Button > + </Button>
               </td>
             </tr>
           </Table>

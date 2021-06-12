@@ -15,9 +15,10 @@ spec:
       containers:
       - name: proj-service-container
         image: chogan/proj-service
+        imagePullPolicy: Always
         resources:
           limits:
-            memory: "128Mi"
+            memory: "256Mi"
             cpu: "500m"
         ports:
         - containerPort: 42069

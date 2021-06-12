@@ -1,10 +1,9 @@
 import {
-  // createAsyncThunk,
+
   createSlice,
 
   //  PayloadAction
 } from "@reduxjs/toolkit";
-import { ESMap, Map } from "typescript";
 
 import {
   RootState,
@@ -137,13 +136,13 @@ export interface ProjectAppState {
     ERDiagramImg: string;
   };
 
-  createNewEndPointForm: {
+  createNewEndpointForm: {
     endpointName: string;
     urlPattern: string;
     endpointDescription: string;
   };
-  createNewPojoForm: { pojoName: string };
-  createNewUserStoryForm: { userStoryName: string };
+  createNewModelForm: { modelName: string; modelMetadata: Array<{}> };
+  createNewUserStoryForm: { userStoryDescription: string };
   createNewTagForm: { tagName: string; tagDescription: string };
   createNewWidgetForm: { widgetName: string; widgetDescription: string };
   //Bookmark for later - need to know how to upload photos
@@ -214,13 +213,13 @@ const initialState: ProjectAppState = {
     wireframeDescription: "",
     wireframeImg: "",
   },
-  createNewEndPointForm: {
+  createNewEndpointForm: {
     endpointName: "",
     urlPattern: "",
     endpointDescription: "",
   },
-  createNewPojoForm: { pojoName: "" },
-  createNewUserStoryForm: { userStoryName: "" },
+  createNewModelForm: { modelName: "", modelMetadata: []},
+  createNewUserStoryForm: { userStoryDescription: "" },
   createNewTagForm: { tagName: "", tagDescription: "" },
   createNewWidgetForm: { widgetName: "", widgetDescription: "" },
   //Bookmark for later - need to know how to upload photos
@@ -503,7 +502,7 @@ export const projectAppSlice = createSlice({
       state.widgets = action.payload;
     },
 
-    setCreateNewEndPointForm: (
+    setCreateNewEndpointForm: (
       state,
       action: {
         payload: {
@@ -515,13 +514,13 @@ export const projectAppSlice = createSlice({
       const fieldName = action.payload.fieldName;
       const value = action.payload.value;
       console.log(`Setting ${fieldName} to ${value}`);
-      state.createNewEndPointForm = {
-        ...state.createNewEndPointForm,
+      state.createNewEndpointForm = {
+        ...state.createNewEndpointForm,
         [fieldName]: value,
       };
     },
 
-    setCreateNewPojoForm: (
+    setCreateNewModelForm: (
       state,
       action: {
         payload: {
@@ -533,8 +532,8 @@ export const projectAppSlice = createSlice({
       const fieldName = action.payload.fieldName;
       const value = action.payload.value;
       console.log(`Setting ${fieldName} to ${value}`);
-      state.createNewPojoForm = {
-        ...state.createNewPojoForm,
+      state.createNewModelForm = {
+        ...state.createNewModelForm,
         [fieldName]: value,
       };
     },
@@ -637,6 +636,22 @@ export const projectAppSlice = createSlice({
       state.createNewTagForm.tagName = "";
       state.createNewTagForm.tagDescription = "";
     },
+
+    resetCreateNewEndpointForm: (state) =>{
+      state.createNewEndpointForm.endpointName = "";
+      state.createNewEndpointForm.endpointDescription = "";
+      state.createNewEndpointForm.urlPattern = "";
+    },
+
+    resetCreateNewModelForm: (state) =>{
+      state.createNewModelForm.modelName = "";
+      state.createNewModelForm.modelMetadata = [];
+    },
+
+    resetCreateNewUserStoryForm: (state) =>{
+      state.createNewUserStoryForm.userStoryDescription = "";
+    }
+
   },
 });
 
@@ -658,8 +673,8 @@ export const {
   setTag,
   setWireframe,
   setERDiagram,
-  setCreateNewEndPointForm,
-  setCreateNewPojoForm,
+  setCreateNewEndpointForm,
+  setCreateNewModelForm,
   setCreateNewWidgetForm,
   setCreateNewProjectERDForm,
   setCreateNewProjectWireframeForm,
@@ -667,6 +682,9 @@ export const {
   setCreateNewUserStoryForm,
   resetCreateNewWidgetForm,
   resetCreateNewTagForm,
+  resetCreateNewEndpointForm,
+  resetCreateNewModelForm,
+  resetCreateNewUserStoryForm,
   
 } = projectAppSlice.actions;
 

@@ -6,7 +6,7 @@ import {
     resetCreateNewTagForm,
     selectProjectApp,
     setCreateNewTagForm,
-    setProject, setTag,
+    setTags,
 } from "../redux/projectAppSlice";
 
 const TagForm = (tag: any) => {
@@ -20,6 +20,8 @@ const TagForm = (tag: any) => {
     };
 
     const addTag = () => {
+        //Test
+        const projectId = "60bc36b65d2b0da1deb9ada2";
         const queryString = `http://localhost:42069/api/create/project/tag`;
         if (
             projectAppState.createNewTagForm.tagDescription === "" ||
@@ -30,7 +32,10 @@ const TagForm = (tag: any) => {
             const tag = {
                 tagName: projectAppState.createNewTagForm.tagName,
                 tagDescription: projectAppState.createNewTagForm.tagDescription,
-                projectId : "60c2aecdc4c64aa2db316e6d"
+                //production
+                //projectId: projectAppState.project.projectId,
+                //test
+                projectId : projectId,
             };
             console.log(tag);
 
@@ -38,7 +43,8 @@ const TagForm = (tag: any) => {
                 .post(queryString, tag)
                 .then((response) => {
                     console.log("response", response);
-                    dispatch(setTag(response.data));
+                    const tagData = response.data;
+                    dispatch(setTags(tagData));
                     dispatch(resetCreateNewTagForm());
                 })
                 .catch((error) => {

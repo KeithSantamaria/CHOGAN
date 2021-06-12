@@ -20,7 +20,8 @@ const WidgetForm = (project: any) => {
   };
 
   const addWidget = () => {
-    const queryString = `http://localhost:42069/api/create/project/widget?projectId=${projectAppState.project.projectId}`;
+    // const queryString = `http://localhost:42069/api/create/project/widget?projectId=${projectAppState.project.projectId}`;
+    const queryString = `http://localhost:42069/api/create/project/widget`;
     if (
       projectAppState.createNewWidgetForm.widgetDescription === "" ||
       projectAppState.createNewWidgetForm.widgetName === ""
@@ -29,16 +30,17 @@ const WidgetForm = (project: any) => {
     } else {
       const widget = {
         widgetName: projectAppState.createNewWidgetForm.widgetName,
-        widgetDescription:
-          projectAppState.createNewWidgetForm.widgetDescription,
+        widgetDescription: projectAppState.createNewWidgetForm.widgetDescription,
+        projectId: "60bc36b65d2b0da1deb9ada2"
       };
       console.log(widget);
 
       axios
-        .put(queryString, widget)
+        .post(queryString, widget)
         .then((response) => {
           console.log("response", response);
-          dispatch(setProject(response.data));
+          const projectData = response.data;
+          dispatch(setProject(projectData));
           dispatch(resetCreateNewWidgetForm());
         })
         .catch((error) => {
@@ -60,7 +62,7 @@ const WidgetForm = (project: any) => {
           />
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Example textarea</Form.Label>
+          <Form.Label>Widget Description</Form.Label>
           <Form.Control
             name="widgetDescription"
             as="textarea"

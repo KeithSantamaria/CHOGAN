@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useMemo } from "react";
-import { Button, Card, Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setEndpoints } from "../redux/projectAppSlice";
 import ProjectSideNav from "./ProjectSideNav";

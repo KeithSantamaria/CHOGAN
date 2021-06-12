@@ -57,8 +57,9 @@ function ProjectEndpoints() {
             <Modal.Body>
               {/* Production */}
                 {/* <EndpointForm projectId={projectAppState.project.projectId} /> */}
+
               {/* Test */}
-              <EndpointForm projectId={"60bc36b65d2b0da1deb9ada2"} />
+              <EndpointForm />
             </Modal.Body>
         </Modal>
     );

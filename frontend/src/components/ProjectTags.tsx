@@ -15,7 +15,7 @@ function ProjectTags() {
 
     const getTags = () => {
         // Test
-        const projectId = "60c2aecdc4c64aa2db316e6d";
+        const projectId = "60bc36b65d2b0da1deb9ada2";
 
         const queryString = `http://localhost:42069/api/read/project/tags`;
         const body = {

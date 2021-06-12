@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from "../redux/hooks";
 import {selectProjectApp, setTags} from "../redux/projectAppSlice";
 import axios from "axios";
 import {Button, Card, Modal} from "react-bootstrap";
-import WidgetForm from "./TagForm";
+import TagForm from "./TagForm";
 
 function ProjectTags() {
     const projectAppState = useAppSelector(selectProjectApp);
@@ -14,11 +14,13 @@ function ProjectTags() {
     const dispatch = useAppDispatch();
 
     const getTags = () => {
-        // Test query string works; comment when ready to test prod
+        // Test
+        const projectId = "60c2aecdc4c64aa2db316e6d";
+
         const queryString = `http://localhost:42069/api/read/project/tags`;
         const body = {
             params: {
-                projectId: "60c2aecdc4c64aa2db316e6d"
+                projectId: projectId,
             }
         }
         axios
@@ -38,7 +40,7 @@ function ProjectTags() {
         getTags();
     }, []);
 
-    const widgetModal = () => {
+    const tagModal = () => {
         return (
             <Modal
                 size="lg"
@@ -53,7 +55,7 @@ function ProjectTags() {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <WidgetForm project={projectAppState.project} />
+                    <TagForm project={projectAppState.project} />
                 </Modal.Body>
             </Modal>
         );
@@ -77,7 +79,7 @@ function ProjectTags() {
             <Button variant="primary" onClick={handleOpen}>
                 New Tag
             </Button>
-            {widgetModal()}
+            {tagModal()}
         </div>
     );
 

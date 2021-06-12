@@ -137,7 +137,7 @@ export interface ProjectAppState {
     ERDiagramImg: string;
   };
 
-  createNewEndPointForm: {
+  createNewEndpointForm: {
     endpointName: string;
     urlPattern: string;
     endpointDescription: string;
@@ -214,7 +214,7 @@ const initialState: ProjectAppState = {
     wireframeDescription: "",
     wireframeImg: "",
   },
-  createNewEndPointForm: {
+  createNewEndpointForm: {
     endpointName: "",
     urlPattern: "",
     endpointDescription: "",
@@ -503,7 +503,7 @@ export const projectAppSlice = createSlice({
       state.widgets = action.payload;
     },
 
-    setCreateNewEndPointForm: (
+    setCreateNewEndpointForm: (
       state,
       action: {
         payload: {
@@ -515,8 +515,8 @@ export const projectAppSlice = createSlice({
       const fieldName = action.payload.fieldName;
       const value = action.payload.value;
       console.log(`Setting ${fieldName} to ${value}`);
-      state.createNewEndPointForm = {
-        ...state.createNewEndPointForm,
+      state.createNewEndpointForm = {
+        ...state.createNewEndpointForm,
         [fieldName]: value,
       };
     },
@@ -637,6 +637,12 @@ export const projectAppSlice = createSlice({
       state.createNewTagForm.tagName = "";
       state.createNewTagForm.tagDescription = "";
     },
+
+    resetCreateNewEndpointForm: (state) =>{
+      state.createNewEndpointForm.endpointName = "";
+      state.createNewEndpointForm.endpointDescription = "";
+      state.createNewEndpointForm.urlPattern = "";
+    }
   },
 });
 
@@ -658,7 +664,7 @@ export const {
   setTag,
   setWireframe,
   setERDiagram,
-  setCreateNewEndPointForm,
+  setCreateNewEndpointForm,
   setCreateNewPojoForm,
   setCreateNewWidgetForm,
   setCreateNewProjectERDForm,
@@ -667,6 +673,7 @@ export const {
   setCreateNewUserStoryForm,
   resetCreateNewWidgetForm,
   resetCreateNewTagForm,
+  resetCreateNewEndpointForm,
   
 } = projectAppSlice.actions;
 

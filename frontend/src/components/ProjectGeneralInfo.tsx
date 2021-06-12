@@ -24,7 +24,11 @@ const ProjectGeneralInfo = () => {
   const handleClose = () => setModalShow(false);
 
   const getProject = () => {
-    // Test query string works; comment when ready to test prod
+    // Production
+    // const queryString = `http://localhost:42069/api/read/project?projectId=${projectId}`;
+
+
+    // Test
     const queryString = `http://localhost:42069/api/read/project`;
     const projectId = "60bc36b65d2b0da1deb9ada2";
     const body = {
@@ -32,8 +36,6 @@ const ProjectGeneralInfo = () => {
         projectId: projectId,
       },
     };
-    // Production query string; uncomment when ready to test prod
-    // const queryString = `http://localhost:42069/api/read/project?projectId=${projectId}`;
     axios
       .get(queryString, body)
       .then((response) => {
@@ -45,32 +47,9 @@ const ProjectGeneralInfo = () => {
         console.log("There was an error: ", error);
       });
   };
-  // const getWidgets = () => {
-  //   // Test query string works; comment when ready to test prod
-  //   const queryString = `http://localhost:42069/api/read/project/widgets`;
-  //   const projectId = "60bc36b65d2b0da1deb9ada2";
-  //   const body = {
-  //     params: {
-  //       projectId: projectId,
-  //     },
-  //   };
-  //   // Production query string; uncomment when ready to test prod
-  //   // const queryString = `http://localhost:42069/api/read/project?projectId=${projectId}`;
-  //   axios
-  //     .get(queryString, body)
-  //     .then((response) => {
-  //       console.log("response", response);
-  //       const widgetData = response.data;
-  //       dispatch(setWidgets(widgetData));
-  //     })
-  //     .catch((error) => {
-  //       console.log("There was an error: ", error);
-  //     });
-  // };
 
   useMemo(() => {
     getProject();
-    // getWidgets();
   }, []);
 
   const newWidgetModal = () => {
@@ -94,27 +73,6 @@ const ProjectGeneralInfo = () => {
     );
   };
 
-  const widgetModal = (widget: any) => {
-    return (
-      <Modal
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-        show={modalShow}
-        onHide={handleClose}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            {widget.widgetName}
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {/* <WidgetForm project={projectAppState.project}/> */}
-          {widget.widgetDescription};
-        </Modal.Body>
-      </Modal>
-    );
-  };
   return (
     <div>
       <ProjectSideNav />
@@ -126,19 +84,12 @@ const ProjectGeneralInfo = () => {
           <Card.Text>{projectAppState.project.projectDescription}</Card.Text>
         </Card.Body>
       </Card>
+        {/*Production*/}
+        {/* <WidgetComponent projectId={userAppState.user.userId}/> */}
+        
+        
+        {/*Test*/}
         <WidgetComponent projectId={"60bc36b65d2b0da1deb9ada2"} />
-      {/* {projectAppState.widgets.map( (widget: any) => {
-            return(
-              <Card >
-                <Card.Body>
-                  <Card.Title>{widget.widgetName}</Card.Title>
-                  <Card.Text>
-                    {widget.widgetDescription}
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            );
-          })} */}
       <Button variant="primary" onClick={handleOpen}>
         New Widget
       </Button>

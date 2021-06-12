@@ -142,7 +142,7 @@ export interface ProjectAppState {
     endpointDescription: string;
   };
   createNewModelForm: { modelName: string; modelMetadata: Array<{}> };
-  createNewUserStoryForm: { userStoryName: string };
+  createNewUserStoryForm: { userStoryDescription: string };
   createNewTagForm: { tagName: string; tagDescription: string };
   createNewWidgetForm: { widgetName: string; widgetDescription: string };
   //Bookmark for later - need to know how to upload photos
@@ -219,7 +219,7 @@ const initialState: ProjectAppState = {
     endpointDescription: "",
   },
   createNewModelForm: { modelName: "", modelMetadata: []},
-  createNewUserStoryForm: { userStoryName: "" },
+  createNewUserStoryForm: { userStoryDescription: "" },
   createNewTagForm: { tagName: "", tagDescription: "" },
   createNewWidgetForm: { widgetName: "", widgetDescription: "" },
   //Bookmark for later - need to know how to upload photos
@@ -646,7 +646,12 @@ export const projectAppSlice = createSlice({
     resetCreateNewModelForm: (state) =>{
       state.createNewModelForm.modelName = "";
       state.createNewModelForm.modelMetadata = [];
+    },
+
+    resetCreateNewUserStoryForm: (state) =>{
+      state.createNewUserStoryForm.userStoryDescription = "";
     }
+
   },
 });
 
@@ -679,6 +684,8 @@ export const {
   resetCreateNewTagForm,
   resetCreateNewEndpointForm,
   resetCreateNewModelForm,
+  resetCreateNewUserStoryForm,
+  
 } = projectAppSlice.actions;
 
 export const selectProjectApp = (state: RootState) => state.projectApp;

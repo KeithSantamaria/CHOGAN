@@ -100,7 +100,6 @@ function ProjectTags() {
             .catch((error) => {
                 console.log("There was an error on deleting: ", error);
             });
-
     }
 
 }

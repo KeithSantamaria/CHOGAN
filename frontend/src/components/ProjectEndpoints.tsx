@@ -11,7 +11,6 @@ function ProjectEndpoints() {
   const projectAppState = useAppSelector(selectProjectApp);
   const [modalShow, setModalShow] = React.useState(false);
   const handleOpen = () => setModalShow(true);
-  const handleClose = () => setModalShow(false);
   const dispatch = useAppDispatch();
 
   const getEndpoints= () => {

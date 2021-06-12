@@ -6,7 +6,7 @@ import {
     resetCreateNewTagForm,
     selectProjectApp,
     setCreateNewTagForm,
-    setProject, setTag,
+    setTags,
 } from "../redux/projectAppSlice";
 
 const TagForm = (tag: any) => {
@@ -38,7 +38,8 @@ const TagForm = (tag: any) => {
                 .post(queryString, tag)
                 .then((response) => {
                     console.log("response", response);
-                    dispatch(setTag(response.data));
+                    const tagData = response.data;
+                    dispatch(setTags(tagData));
                     dispatch(resetCreateNewTagForm());
                 })
                 .catch((error) => {

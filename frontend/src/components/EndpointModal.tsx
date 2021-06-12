@@ -22,7 +22,7 @@ const EndpointModal = (endpoint:any) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          
+                    
         </Modal.Body>
       </Modal>
     );

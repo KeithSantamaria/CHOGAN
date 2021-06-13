@@ -678,8 +678,19 @@ export const projectAppSlice = createSlice({
 
     resetCreateNewUserStoryForm: (state) =>{
       state.createNewUserStoryForm.userStoryDescription = "";
-    }
+    },
 
+    resetCreateNewWireframeForm: (state) => {
+      state.createNewWireframeForm.wireframeDescription = "";
+      state.createNewWireframeForm.wireframeName = "";
+      state.createNewWireframeForm.wireframeImg = "";
+    },
+
+    resetCreateNewERDiagramForm: (state) => {
+      state.createNewERDForm.erdName = "";
+      state.createNewERDForm.erdDescription = "";
+      state.createNewERDForm.erdImg = "";
+    }
   },
 });
 
@@ -715,7 +726,8 @@ export const {
   resetCreateNewEndpointForm,
   resetCreateNewModelForm,
   resetCreateNewUserStoryForm,
-  
+  resetCreateNewWireframeForm,
+  resetCreateNewERDiagramForm,
 } = projectAppSlice.actions;
 
 export const selectProjectApp = (state: RootState) => state.projectApp;

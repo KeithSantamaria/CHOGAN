@@ -2,17 +2,15 @@ import React from "react";
 import axios from "axios";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import {
-  resetCreateNewEndpointForm,
+  resetCreateNewWireframeForm,
   selectProjectApp,
   setCreateNewWireframeForm,
-  setWireframeImageInForm,
   setWireframes,
 } from "../redux/projectAppSlice";
 import { Button, Form } from "react-bootstrap";
 
 const WireframeForm = () => {
   const [imgDat, setImgDat] = React.useState("");
-
   const projectAppState = useAppSelector(selectProjectApp);
   const dispatch = useAppDispatch();
 
@@ -25,13 +23,12 @@ const WireframeForm = () => {
   const addWireframe = () => {
     // Test
     const projectId = "60bc36b65d2b0da1deb9ada2";
-
     const queryString = `http://localhost:42069/api/create/project/wireframe`;
     if (
       projectAppState.createNewWireframeForm.wireframeName === "" ||
       projectAppState.createNewWireframeForm.wireframeDescription === "" ||
       // projectAppState.createNewWireframeForm.wireframeImg === "" || 
-      imgDat == ""
+      imgDat === ""
     ) {
       alert("There is nothing to add");
     } else {
@@ -39,7 +36,6 @@ const WireframeForm = () => {
         wireframeName: projectAppState.createNewWireframeForm.wireframeName,
         wireframeDescription:
           projectAppState.createNewWireframeForm.wireframeDescription,
-        // wireframeImageUrl: projectAppState.createNewWireframeForm.wireframeImg,
         wireframeImageUrl: imgDat,
 
         //production
@@ -56,7 +52,7 @@ const WireframeForm = () => {
           console.log("response", response);
           const wireframeData = response.data;
           dispatch(setWireframes(wireframeData));
-          dispatch(resetCreateNewEndpointForm());
+          dispatch(resetCreateNewWireframeForm());
         })
         .catch((error) => {
           console.log(error);
@@ -98,17 +94,17 @@ const WireframeForm = () => {
           />
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Endpoint URL Pattern</Form.Label>
+          <Form.Label>Wireframe Image</Form.Label>
           <Form.Control
             name="wireframeImg"
             type="file"
-            value=""
+
             placeholder="/api/create/endpoint"
             onChange={encodeImageFileAsURL}
           />
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Endpoint Description</Form.Label>
+          <Form.Label>Wireframe Description</Form.Label>
           <Form.Control
             name="wireframeDescription"
             as="textarea"

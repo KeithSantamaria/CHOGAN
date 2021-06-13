@@ -7,7 +7,7 @@ import { setERDiagrams } from "../redux/projectAppSlice";
 const ERDCard = ({ erd }: any) => {
   const dispatch = useAppDispatch();
   const [erdName] = React.useState(erd.erdName);
-  const [erdImg] = React.useState(erd.erdImg);
+  const [erdImg] = React.useState(erd.erdImageUrl);
   const [erdDescription] = React.useState(erd.erdDescription);
 
   const removeERD = (id: String) => {
@@ -32,7 +32,7 @@ const ERDCard = ({ erd }: any) => {
     <Card>
       <Card.Body>
         <Card.Title>{erdName}</Card.Title>
-        <Card.Img variant="top" src="{erdImg}" />
+        <Card.Img variant="top" src={erdImg} />
       </Card.Body>
       <Button
         variant="danger"

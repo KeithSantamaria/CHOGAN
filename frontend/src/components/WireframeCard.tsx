@@ -7,7 +7,7 @@ import { setWireframes } from "../redux/projectAppSlice";
 const WireframeCard = ({ wireframe }: any) => {
   const dispatch = useAppDispatch();
   const [wireframeName] = React.useState(wireframe.wireframeName);
-  const [wireframeImg] = React.useState(wireframe.wireframeImg);
+  const [wireframeImg] = React.useState(wireframe.wireframeImageUrl);
   const [wireframeDescription] = React.useState(wireframe.wireframeDescription);
 
   const removeWireframe = (id: String) => {
@@ -35,7 +35,7 @@ const WireframeCard = ({ wireframe }: any) => {
       <Card>
         <Card.Body>
           <Card.Title>{wireframeName}</Card.Title>
-          <Card.Img variant="top" src="`url(`{wireframeImg}`)"/>
+          <Card.Img variant="top" src={wireframeImg}/>
           <Card.Text>{wireframeDescription}</Card.Text>
         </Card.Body>
         <Button

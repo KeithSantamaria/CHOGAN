@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { Button, Card, CardImg } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { useAppDispatch } from "../redux/hooks";
 import { setWireframes } from "../redux/projectAppSlice";
 
@@ -35,7 +35,7 @@ const WireframeCard = ({ wireframe }: any) => {
       <Card>
         <Card.Body>
           <Card.Title>{wireframeName}</Card.Title>
-          <Card.Img variant="top" src="{wireframeImg}"></Card.Img>
+          <Card.Img variant="top" src="{wireframeImg}"/>
           <Card.Text>{wireframeDescription}</Card.Text>
         </Card.Body>
         <Button

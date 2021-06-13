@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Container } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   resetCreateNewEndpointForm,
@@ -57,9 +57,9 @@ const EndpointForm = () => {
   };
 
   return (
-    <div>
+    <Container className="create-proj-form-container">
       <Form>
-        <Form.Group controlId="exampleForm.ControlInput1">
+        <Form.Group className="project-name-wrapper" controlId="exampleForm.ControlInput1">
           <Form.Label>Endpoint Name</Form.Label>
           <Form.Control
             name="endpointName"
@@ -80,6 +80,7 @@ const EndpointForm = () => {
         <Form.Group controlId="exampleForm.ControlTextarea1">
           <Form.Label>Endpoint Description</Form.Label>
           <Form.Control
+            className="modal-create-form-textarea"
             name="endpointDescription"
             as="textarea"
             rows={3}
@@ -88,7 +89,7 @@ const EndpointForm = () => {
         </Form.Group>
         <Button onClick={addEndpoint}>Save</Button>
       </Form>
-    </div>
+    </Container>
   );
 };
 

@@ -1,6 +1,5 @@
 import axios from "axios";
-import React from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Container } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
     resetCreateNewTagForm,
@@ -54,7 +53,7 @@ const TagForm = (tag: any) => {
     };
 
     return (
-        <div>
+        <Container className="create-proj-form-container">
             <Form>
                 <Form.Group controlId="exampleForm.ControlInput1">
                     <Form.Label>Tag Name</Form.Label>
@@ -68,6 +67,7 @@ const TagForm = (tag: any) => {
                 <Form.Group controlId="exampleForm.ControlTextarea1">
                     <Form.Label>Technologies</Form.Label>
                     <Form.Control
+                        className="modal-create-form-textarea"
                         name="tagDescription"
                         as="textarea"
                         rows={3}
@@ -76,7 +76,7 @@ const TagForm = (tag: any) => {
                 </Form.Group>
                 <Button onClick={addTag}>Save</Button>
             </Form>
-        </div>
+        </Container>
     );
 };
 

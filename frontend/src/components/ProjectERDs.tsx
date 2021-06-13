@@ -1,12 +1,16 @@
-import React from 'react'
-import ProjectSideNav from './ProjectSideNav'
+import React from 'react';
+import ProjectSideNav from './ProjectSideNav';
+import { Container } from "react-bootstrap";
+
 
 function ProjectERDs() {
     return (
-        <div>
-            {/* <ProjectSideNav /> */}
-            <p>ERDs</p>
-        </div>
+        <>
+            <ProjectSideNav active={"erd"}/>
+            <Container id="pg-content">
+                <p>ERDs</p>
+            </Container>
+        </>
     )
 }
 

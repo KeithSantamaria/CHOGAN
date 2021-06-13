@@ -1,12 +1,15 @@
 import React from 'react'
 import ProjectSideNav from './ProjectSideNav'
+import { Container } from "react-bootstrap";
 
 function ProjectWireframes() {
     return (
-        <div>
-            {/* <ProjectSideNav /> */}
-            <p>Wireframes</p>
-        </div>
+        <>
+            <ProjectSideNav active={"wire-frame"}/>
+            <Container id="pg-content">
+                <p>Wireframes</p>
+            </Container>
+        </>
     )
 }
 

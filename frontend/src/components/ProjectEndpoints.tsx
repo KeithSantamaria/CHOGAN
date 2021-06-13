@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useMemo } from "react";
-import { Button, Modal } from "react-bootstrap";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { selectProjectApp, setEndpoints } from "../../redux/projectAppSlice";
-import ProjectSideNav from "../ProjectSideNav";
-import EndpointForm from "./EndpointForm";
-import EndpointCard from "./EndpointCard";
+import { Button, Modal, Container } from "react-bootstrap";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { selectProjectApp, setEndpoints } from "../redux/projectAppSlice";
+import ProjectSideNav from "./ProjectSideNav";
+import EndpointForm from "./endpoint/EndpointForm";
+import EndpointCard from "./endpoint/EndpointCard";
 
 function ProjectEndpoints() {
   const projectAppState = useAppSelector(selectProjectApp);
@@ -43,6 +43,7 @@ function ProjectEndpoints() {
   const endpointModal = () => {
     return (
       <Modal
+        className="modal-create-wrapper"
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -66,15 +67,16 @@ function ProjectEndpoints() {
   };
   return (
     <div>
-      <ProjectSideNav />
-
-      {projectAppState.endpoints.map((endpoint: any) => {
-        return <EndpointCard endpoint={endpoint} />;
-      })}
-      <Button variant="primary" onClick={handleOpen}>
-        New Endpoint
-      </Button>
-      {endpointModal()}
+      <ProjectSideNav active={"endpoint"}/>
+        <Container id="pg-content">
+        {projectAppState.endpoints.map((endpoint: any) => {
+          return <EndpointCard endpoint={endpoint} />;
+        })}
+        <Button variant="primary" onClick={handleOpen}>
+          New Endpoint
+        </Button>
+        {endpointModal()}
+        </Container>
     </div>
   );
 }

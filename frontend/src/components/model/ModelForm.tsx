@@ -1,6 +1,5 @@
 import axios from "axios";
-import React from "react";
-import { Button, Form, Table } from "react-bootstrap";
+import { Button, Form, Table, Container } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   resetCreateNewModelForm,
@@ -8,6 +7,8 @@ import {
   setCreateNewModelForm,
   setModels,
 } from "../../redux/projectAppSlice";
+
+import '../../css/project-service/model-form.css';
 
 const ModelForm = () => {
   const projectAppState = useAppSelector(selectProjectApp);
@@ -59,9 +60,9 @@ const ModelForm = () => {
   }
 
   return (
-    <div>
+    <Container className="create-proj-form-container">
       <Form>
-        <Form.Group controlId="exampleForm.ControlInput1">
+        <Form.Group className="project-name-wrapper" controlId="exampleForm.ControlInput1">
           <Form.Label>Model Name</Form.Label>
           <Form.Control
             name="modelName"
@@ -71,7 +72,7 @@ const ModelForm = () => {
           />
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlTextarea1">
-          <Table id="metadataTable" striped bordered hover size="sm">
+          <Table id="metadataTable" size="sm">
             <tr>
               <th>Field</th>
               <th>Type</th>
@@ -99,7 +100,7 @@ const ModelForm = () => {
         </Form.Group>
         <Button onClick={addModel}>Save</Button>
       </Form>
-    </div>
+    </Container>
   );
 };
 

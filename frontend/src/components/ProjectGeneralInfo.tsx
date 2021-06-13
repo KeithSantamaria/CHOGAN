@@ -56,6 +56,7 @@ const ProjectGeneralInfo = () => {
   const newWidgetModal = () => {
     return (
       <Modal
+        className="modal-create-wrapper"
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -76,16 +77,32 @@ const ProjectGeneralInfo = () => {
 
   return (
     <>
-      <Container >
-        <Button variant="primary" onClick={handleOpen}>
-          New Widget
-        </Button>
+      <ProjectSideNav active={"general"}/>
+  
+      <Container id="pg-content">
+        <Row style={{paddingBottom: '15px'}}>
+          <Col>
+            <span style={{color: 'gray'}}>
+              <h4>John Doe - {projectAppState.project.projectName}</h4>
+            </span>
+          </Col>
+
+          <Col >
+            <span className="float-right">
+            <Button variant="outline-warning" onClick={handleOpen}>
+              New Widget
+            </Button>
+            </span>
+           
+          </Col>
+        </Row>
+       
       
-        <CardDeck>
+        <CardDeck style={{paddingBottom: '25px'}}>
           <Card>
             <Card.Body>
               {/* <Card.Title>{userAppState.user.userName} - {projectName}</Card.Title> */}
-              <Card.Title>{projectAppState.project.projectName}</Card.Title>
+              <Card.Title><h4>Project Description</h4></Card.Title>
 
               <Card.Text>{projectAppState.project.projectDescription}</Card.Text>
             </Card.Body>

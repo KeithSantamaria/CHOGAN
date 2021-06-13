@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { selectProjectApp, setWidgets } from '../../redux/projectAppSlice';
-import { Card } from 'react-bootstrap';
+import { Card, CardDeck } from 'react-bootstrap';
 
 const WidgetComponent = ({projectId}: any) => {
     const dispatch = useAppDispatch();
@@ -38,14 +38,16 @@ const WidgetComponent = ({projectId}: any) => {
         <div>
         {projectAppState.widgets.map( (widget: any) => {
             return(
-              <Card >
-                <Card.Body>
-                  <Card.Title>{widget.widgetName}</Card.Title>
-                  <Card.Text>
-                    {widget.widgetDescription}
-                  </Card.Text>
-                </Card.Body>
-              </Card>
+              <CardDeck style={{paddingBottom: '25px'}} >
+                <Card className="card-wrapper">
+                  <Card.Body>
+                    <Card.Title>{widget.widgetName}</Card.Title>
+                    <Card.Text>
+                      {widget.widgetDescription}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </CardDeck>
             );
           })}
         </div>

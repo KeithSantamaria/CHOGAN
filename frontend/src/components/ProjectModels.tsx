@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useMemo } from "react";
-import { Button, Card, Modal } from "react-bootstrap";
+import { Button, Card, Modal, Container } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setModels } from "../redux/projectAppSlice";
 import ModelForm from "./model/ModelForm";
@@ -45,6 +45,7 @@ function ProjectModels() {
   const projectModal = () => {
     return (
       <Modal
+        className="modal-create-wrapper"
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -63,23 +64,24 @@ function ProjectModels() {
     );
   };
   return (
-    <div>
-      {/* <ProjectSideNav /> */}
-
-      {projectAppState.models.map((model: any) => {
-        return (
-          <Card>
-            <Card.Body>
-              <Card.Title>{model.modelName}</Card.Title>
-            </Card.Body>
-          </Card>
-        );
-      })}
-      <Button variant="primary" onClick={handleOpen}>
-        New Model
-      </Button>
-      {projectModal()}
-    </div>
+    <>
+      <ProjectSideNav active={"model"}/>
+      <Container id="pg-content">
+        {projectAppState.models.map((model: any) => {
+          return (
+            <Card>
+              <Card.Body>
+                <Card.Title>{model.modelName}</Card.Title>
+              </Card.Body>
+            </Card>
+          );
+        })}
+        <Button variant="primary" onClick={handleOpen}>
+          New Model
+        </Button>
+        {projectModal()}
+      </Container>
+    </>
   );
 }
 

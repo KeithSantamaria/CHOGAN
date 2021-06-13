@@ -3,7 +3,7 @@ import ProjectSideNav from "./ProjectSideNav";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setTags } from "../redux/projectAppSlice";
 import axios from "axios";
-import { Button, Card, Modal } from "react-bootstrap";
+import { Button, Card, Modal, Container } from "react-bootstrap";
 import TagForm from "./tag/TagForm";
 
 function ProjectTags() {
@@ -42,6 +42,7 @@ function ProjectTags() {
   const tagModal = () => {
     return (
       <Modal
+        className="modal-create-wrapper"
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -60,34 +61,35 @@ function ProjectTags() {
     );
   };
   return (
-    <div>
-      {/* <ProjectSideNav /> */}
-
-      {projectAppState.tags.map((tag: any) => {
-        return (
-          <Card>
-            <Card.Body>
-              <Card.Title>{tag.tagName}</Card.Title>
-              <Card.Text>{tag.tagDescription}</Card.Text>
-              <Button
-                variant="danger"
-                value={tag.tagId}
-                onClick={(e) =>
-                  removeTags((e.target as HTMLButtonElement).value)
-                }
-              >
-                Delete
-              </Button>
-              <Button variant="info">Modify</Button>
-            </Card.Body>
-          </Card>
-        );
-      })}
-      <Button variant="primary" onClick={handleOpen}>
-        New Tag
-      </Button>
-      {tagModal()}
-    </div>
+    <>
+      <ProjectSideNav active={"tag"}/>
+      <Container id="pg-content">
+        {projectAppState.tags.map((tag: any) => {
+          return (
+            <Card>
+              <Card.Body>
+                <Card.Title>{tag.tagName}</Card.Title>
+                <Card.Text>{tag.tagDescription}</Card.Text>
+                <Button
+                  variant="danger"
+                  value={tag.tagId}
+                  onClick={(e) =>
+                    removeTags((e.target as HTMLButtonElement).value)
+                  }
+                >
+                  Delete
+                </Button>
+                <Button variant="info">Modify</Button>
+              </Card.Body>
+            </Card>
+          );
+        })}
+        <Button variant="primary" onClick={handleOpen}>
+          New Tag
+        </Button>
+        {tagModal()}
+      </Container>
+    </>
   );
 
   function removeTags(id: String) {

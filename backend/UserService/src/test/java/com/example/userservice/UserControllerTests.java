@@ -92,7 +92,7 @@ public class UserControllerTests {
 	public void shouldLoginUser () throws Exception {
 		Mockito.when(userService.userLogIn(ArgumentMatchers.any(),ArgumentMatchers.any())).thenReturn(testUser);
 
-		this.mockMvc.perform( get("/user")
+		this.mockMvc.perform( post("/user/login")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(jsonString) )
 			.andExpect(status().isOk()
@@ -103,7 +103,7 @@ public class UserControllerTests {
 	public void shouldNotLoginUser () throws Exception {
 		Mockito.when(userService.userLogIn(ArgumentMatchers.any(),ArgumentMatchers.any())).thenReturn(null);
 
-		this.mockMvc.perform( get("/user")
+		this.mockMvc.perform( post("/user/login")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(jsonString) )
 			.andExpect(status().isBadRequest()

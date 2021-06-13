@@ -4,10 +4,9 @@ import {Button, Container, Col} from 'react-bootstrap';
 import {useAppSelector, useAppDispatch} from '../redux/hooks';
 import {currentUser} from '../redux/userSlice';
 
-import LoginForm from '../components/authentication/loginForm';
-import SignupForm from '../components/authentication/SignUp';
+import LoginForm from '../components/authentication/LoginForm';
+import SignUpForm from '../components/authentication/SignUpForm';
 import '../css/authentication/AuthPage.css'
-import SignUp from '../components/authentication/SignUp';
 
 const AuthPage:React.FC = () => {
   const signUpText:String = "Already have an account? Log in here!";
@@ -40,7 +39,7 @@ const AuthPage:React.FC = () => {
       return <LoginForm/>
     }
     else{
-      return <SignUp/>
+      return <SignUpForm/>
     }
   }
 

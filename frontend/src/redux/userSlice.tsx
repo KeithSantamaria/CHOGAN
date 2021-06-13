@@ -41,6 +41,17 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+//TODO have verify password functionality before actually updating state
+export const updateUser = createAsyncThunk(
+  'currentUser/update',
+  async (payload: UserPackage) => {
+    const response = axios.put("http://localhost:6969/user", payload)
+      .then(response => response.data)
+      .catch(error => error)
+    return response;
+  }
+)
+
 // How the currentUser object in the store should look like
 export interface UserState {  
   id : string;
@@ -90,6 +101,14 @@ export const userSlice = createSlice({
       }
     )
 
+    //TODO probably needs to expand on this more
+    builder.addCase(
+      updateUser.fulfilled,
+      ( state, action : { payload: UserState } ) : UserState => {
+        console.log("Dispatching updateUser reducer with action: ", action);
+        return action.payload;
+      }
+    )
 
   }
 })

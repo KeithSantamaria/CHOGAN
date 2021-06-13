@@ -34,7 +34,7 @@ const ERDForm = () => {
       const erd = {
         erdName: projectAppState.createNewERDForm.erdName,
         erdDescription: projectAppState.createNewERDForm.erdDescription,
-        erdImg: imgDat,
+        erdImageUrl: imgDat,
         //production
 
         //projectId: projectAppState.project.projectId,
@@ -42,7 +42,7 @@ const ERDForm = () => {
         //test
         projectId: projectId,
       };
-    //   console.log(erd);
+      console.log(erd);
       axios
         .post(queryString, erd)
         .then((response) => {

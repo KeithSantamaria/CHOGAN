@@ -35,7 +35,7 @@ const WireframeCard = ({ wireframe }: any) => {
       <Card>
         <Card.Body>
           <Card.Title>{wireframeName}</Card.Title>
-          <Card.Img variant="top" src="{wireframeImg}"/>
+          <Card.Img variant="top" src="`url(`{wireframeImg}`)"/>
           <Card.Text>{wireframeDescription}</Card.Text>
         </Card.Body>
         <Button

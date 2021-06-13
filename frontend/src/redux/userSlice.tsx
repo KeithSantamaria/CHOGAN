@@ -25,7 +25,6 @@ export const signUpUser = createAsyncThunk(
 export interface UserState {
   currentUser : {
     id : string;
-    username: string;
     password: string; //should be hashed
     email: string;
     firstName: string;
@@ -38,7 +37,6 @@ export interface UserState {
 const initialState : UserState = {
   currentUser: {
     id : "",
-    username : "",
     password : "",
     email : "",
     firstName: "",

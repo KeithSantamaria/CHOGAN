@@ -1,10 +1,13 @@
-import react, {useState} from "react";
-import {useForm} from "./loginFormLogic"
+import {useState} from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import '../../css/authentication/login.css'
-import axios from "axios";
+import {useAppDispatch} from '../../redux/hooks';
+import {loginUser} from '../../redux/userSlice';
+
 
 export default function LoginForm(){
+
+  const dispatch = useAppDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,24 +19,9 @@ export default function LoginForm(){
       password: password, //should be hashed
       email: email,
     }
-
-    axios({
-      method: 'POST',
-      url: "http://localhost:6969/user/login",
-      data: loginPayload,
-  }).then(result => {
-      if(result.status == 200){
-        console.log("okay");
-      }
-      else{
-        console.log("not okay");
-      }
-      console.log(result);
-  })
-  .catch(error => alert(error));
+    // This is calling the redux thunk which does the axios call for us. See 'src/redux/userSlice.tsx' for details
+    dispatch(loginUser(loginPayload));
   } 
-
-
 
   return(
     <form onSubmit ={submitUser}>

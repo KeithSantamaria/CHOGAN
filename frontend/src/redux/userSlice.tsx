@@ -5,7 +5,7 @@ import axios from "axios";
 
 // interfaces used with our thunks
 
-interface SignUpPackage {
+interface UserPackage {
     email: string;
     password: string; //should be hashed
     firstName: string;
@@ -14,30 +14,42 @@ interface SignUpPackage {
     securityAnswer: string; //should be hashed
 }
 
+interface LoginPackage {
+  email: string;
+  password: string; //should be hashed
+}
+
 // thunks used for slice
 
 export const signUpUser = createAsyncThunk(
   'currentUser/create',
-  async (payload : SignUpPackage) =>{
+  async (payload : UserPackage) =>{
     const response = axios.post("http://localhost:6969/user", payload)
       .then(response => response.data )
-      .catch(error => error)
+      .catch(error => error);
     return response;
   }
 );
 
-// export const loginUser = createAsyncThunk(
-//   'currentUser/login'
-// );
+export const loginUser = createAsyncThunk(
+  'currentUser/login',
+  async (payload : LoginPackage) => {
+    const response = axios.post("http://localhost:6969/user/login", payload)
+    .then(response => response.data )
+    .catch(error => error);
+    return response;
+  }
+);
 
-export interface UserState {
-    id : string;
-    password: string; //should be hashed
-    email: string;
-    firstName: string;
-    lastName: string;
-    securityQuestionId: number;
-    securityAnswer: string; //should be hashed
+// How the currentUser object in the store should look like
+export interface UserState {  
+  id : string;
+  password: string; //should be hashed
+  email: string;
+  firstName: string;
+  lastName: string;
+  securityQuestionId: number;
+  securityAnswer: string; //should be hashed
 }
 
 const initialState : UserState = {
@@ -64,25 +76,21 @@ export const userSlice = createSlice({
   extraReducers : (builder) => {
     builder.addCase(
       signUpUser.fulfilled,
-      ( 
-        state, 
-        action : {
-          payload: {
-            id : string;
-            username: string;
-            password: string; //should be hashed
-            email: string;
-            firstName: string;
-            lastName: string;
-            securityQuestionId: number;
-            securityAnswer: string; //should be hashed
-          }
-        }
-      ) => {
+      ( state, action : { payload : UserState } ) : UserState => {
         console.log("Dispatching signUpUser reducer with action: ", action);
-        state = action.payload;
+        return action.payload;
       }
     )
+
+    builder.addCase(
+      loginUser.fulfilled,
+      ( state, action : { payload: UserState } ) : UserState => {
+        console.log("Dispatching loginUser reducer with action: ", action);
+        return action.payload;
+      }
+    )
+
+
   }
 })
 

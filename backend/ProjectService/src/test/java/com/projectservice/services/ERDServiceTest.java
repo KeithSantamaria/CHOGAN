@@ -38,9 +38,9 @@ public class ERDServiceTest {
         String erdID = "Id";
         ERD erd = new ERD();
 
-        Mockito.when(erdRepo.findByERDId(erdID)).thenReturn(erd);
+        Mockito.when(erdRepo.findByErdId(erdID)).thenReturn(erd);
 
-        ERD foundERD = erdService.findByERDId(erdID);
+        ERD foundERD = erdService.findByErdId(erdID);
 
         Assertions.assertEquals(foundERD,erd);
     }
@@ -87,7 +87,7 @@ public class ERDServiceTest {
         erd.setProjectId("pId");
         List<ERD> list = new ArrayList<>();
 
-        Mockito.when(erdRepo.findByERDId(erdId)).thenReturn(erd);
+        Mockito.when(erdRepo.findByErdId(erdId)).thenReturn(erd);
         Mockito.when(erdRepo.findByProjectId("pId")).thenReturn(list);
 
         List<ERD> foundList = erdService.deleteERD(erdId);
@@ -99,7 +99,7 @@ public class ERDServiceTest {
     void deleteERDFailureTest(){
         String erdId = "Id";
 
-        Mockito.when(erdRepo.findByERDId(erdId)).thenReturn(null);
+        Mockito.when(erdRepo.findByErdId(erdId)).thenReturn(null);
 
         List<ERD> foundList = erdService.deleteERD(erdId);
 

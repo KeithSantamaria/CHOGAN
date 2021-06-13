@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "erds")
 public class ERD {
     @Id
-    private String erdID;
+    private String ErdId;
     private String projectId;
     private String erdName;
     private String erdDescription;

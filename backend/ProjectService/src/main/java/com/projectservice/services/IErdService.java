@@ -11,7 +11,7 @@ public interface IErdService {
 
     void insert(ERD erd);
 
-    ERD findByERDId(String erdId);
+    ERD findByErdId(String erdId);
     List<ERD> findByProjectId(String projectId);
 
     ERD updateERD(ERD erd);

@@ -12,5 +12,5 @@ import java.util.List;
 @Repository
 public interface ERDRepo extends MongoRepository<ERD,String> {
     List<ERD> findByProjectId(String projectId);
-    ERD findByERDId(String erdId);
+    ERD findByErdId(String erdId);
 }

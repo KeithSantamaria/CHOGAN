@@ -3,7 +3,9 @@ import {RootState} from './store';
 import axios from "axios";
 
 
-export interface SignUpPackage {
+// interfaces used with our thunks
+
+interface SignUpPackage {
     email: string;
     password: string; //should be hashed
     firstName: string;
@@ -11,6 +13,8 @@ export interface SignUpPackage {
     securityQuestionId: number;
     securityAnswer: string; //should be hashed
 }
+
+// thunks used for slice
 
 export const signUpUser = createAsyncThunk(
   'currentUser/create',
@@ -22,8 +26,11 @@ export const signUpUser = createAsyncThunk(
   }
 );
 
+// export const loginUser = createAsyncThunk(
+//   'currentUser/login'
+// );
+
 export interface UserState {
-  currentUser : {
     id : string;
     password: string; //should be hashed
     email: string;
@@ -31,19 +38,16 @@ export interface UserState {
     lastName: string;
     securityQuestionId: number;
     securityAnswer: string; //should be hashed
-  }
 }
 
 const initialState : UserState = {
-  currentUser: {
-    id : "",
-    password : "",
-    email : "",
-    firstName: "",
-    lastName: "",
-    securityQuestionId : 1,
-    securityAnswer : ""
-  }
+  id : "",
+  password : "",
+  email : "",
+  firstName: "",
+  lastName: "",
+  securityQuestionId : 1,
+  securityAnswer : ""
 }
 
 export const userSlice = createSlice({
@@ -76,7 +80,7 @@ export const userSlice = createSlice({
         }
       ) => {
         console.log("Dispatching signUpUser reducer with action: ", action);
-        state.currentUser = action.payload;
+        state = action.payload;
       }
     )
   }

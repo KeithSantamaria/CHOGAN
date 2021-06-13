@@ -1,11 +1,8 @@
 import React, {useState} from 'react';
-import axios from "axios";
-import {useForm} from "./loginFormLogic"
 import 'bootstrap/dist/css/bootstrap.css';
 import '../../css/authentication/login.css'
-import { setProjects } from '../../redux/projectAppSlice';
 import {useAppSelector, useAppDispatch} from '../../redux/hooks';
-import {currentUser, setCurrentUser} from '../../redux/userSlice';
+import {currentUser, signUpUser} from '../../redux/userSlice';
 
 
 export default function SignUp() {
@@ -37,18 +34,8 @@ export default function SignUp() {
           securityQuestionId: Number(securityQuestionId),
           securityAnswer: securityAnswer //should be hashed
         }
-
-//        dispatchUser(setCurrentUser(userPayload));
-
-
-         axios({
-            method: 'POST',
-            url: "http://localhost:6969/user",
-            data: userPayload,
-        }).then(result => {
-            console.log(result);
-        })
-        .catch(error => alert(error));
+        // This is calling the redux thunk which does the axios call for us. See 'src/redux/userSlice.tsx' for details
+        dispatchUser(signUpUser(userPayload));
     }
 
     return(

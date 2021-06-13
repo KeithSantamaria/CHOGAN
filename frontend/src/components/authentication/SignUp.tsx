@@ -1,18 +1,12 @@
 import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../../css/authentication/login.css'
-import {useAppSelector, useAppDispatch} from '../../redux/hooks';
-import {currentUser, signUpUser} from '../../redux/userSlice';
+import {useAppDispatch} from '../../redux/hooks';
+import {signUpUser} from '../../redux/userSlice';
 
 
 export default function SignUp() {
-
-    const currentlyLoggedUser = useAppSelector(currentUser);
-    const dispatchUser = useAppDispatch();
-
-    React.useEffect(() => {
-        console.log(currentlyLoggedUser);
-    }, [currentlyLoggedUser]);
+    const dispatch = useAppDispatch();;
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -35,7 +29,7 @@ export default function SignUp() {
           securityAnswer: securityAnswer //should be hashed
         }
         // This is calling the redux thunk which does the axios call for us. See 'src/redux/userSlice.tsx' for details
-        dispatchUser(signUpUser(userPayload));
+        dispatch(signUpUser(userPayload));
     }
 
     return(

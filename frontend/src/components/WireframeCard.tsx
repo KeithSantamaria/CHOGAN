@@ -28,12 +28,14 @@ const WireframeCard = ({ wireframe }: any) => {
       });
   };
 
+
+
   return (
     <div>
       <Card>
         <Card.Body>
           <Card.Title>{wireframeName}</Card.Title>
-          <CardImg>{wireframeImg}</CardImg>
+          <Card.Img variant="top" src="{wireframeImg}"></Card.Img>
           <Card.Text>{wireframeDescription}</Card.Text>
         </Card.Body>
         <Button

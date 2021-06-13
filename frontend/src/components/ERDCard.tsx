@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ERDCard = () => {
+const ERDCard = ({erd}: any) => {
     return (
         <div>
             

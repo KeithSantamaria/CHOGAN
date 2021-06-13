@@ -11,6 +11,8 @@ import {
 import { Button, Form } from "react-bootstrap";
 
 const WireframeForm = () => {
+  const [imgDat, setImgDat] = React.useState("");
+
   const projectAppState = useAppSelector(selectProjectApp);
   const dispatch = useAppDispatch();
 
@@ -28,7 +30,8 @@ const WireframeForm = () => {
     if (
       projectAppState.createNewWireframeForm.wireframeName === "" ||
       projectAppState.createNewWireframeForm.wireframeDescription === "" ||
-      projectAppState.createNewWireframeForm.wireframeImg === ""
+      // projectAppState.createNewWireframeForm.wireframeImg === "" || 
+      imgDat == ""
     ) {
       alert("There is nothing to add");
     } else {
@@ -36,8 +39,11 @@ const WireframeForm = () => {
         wireframeName: projectAppState.createNewWireframeForm.wireframeName,
         wireframeDescription:
           projectAppState.createNewWireframeForm.wireframeDescription,
-        wireframeImg: projectAppState.createNewWireframeForm.wireframeImg,
+        // wireframeImageUrl: projectAppState.createNewWireframeForm.wireframeImg,
+        wireframeImageUrl: imgDat,
+
         //production
+        
         //projectId: projectAppState.project.projectId,
 
         //test
@@ -58,23 +64,27 @@ const WireframeForm = () => {
     }
   };
 
-  const encodeImageFileAsURL = (event:any) => {
-    const value = event.target.value;
-    if(value.length > 0){
+  const encodeImageFileAsURL = (event: any) => {
+    const value = event.target.files;
+    if (value.length > 0) {
       let fileToLoad = value[0];
       let fileReader = new FileReader();
-      fileReader.onload = (fileLoadedEvent:any) => {
+      fileReader.onload = (fileLoadedEvent: any) => {
         let sourceData = fileLoadedEvent.target.result; // <--- data: base64
-        let newImage = document.createElement('img');
-        newImage.src = sourceData;
-        dispatch(setWireframeImageInForm(sourceData));
-        console.log(sourceData)
-        alert(sourceData)
-      }
+        // dispatch(setWireframeImageInForm(sourceData));
+        setImgDat(sourceData);
+        // console.log(sourceData);
+        alert(sourceData);
+
+      };
       fileReader.readAsDataURL(fileToLoad);
     }
   };
 
+  // const imageChange = (event: any) => {
+  //     encodeImageFileAsURL(event);
+  //     formChangeHandler(event);
+  // }
   return (
     <div>
       <Form>
@@ -92,6 +102,7 @@ const WireframeForm = () => {
           <Form.Control
             name="wireframeImg"
             type="file"
+            value=""
             placeholder="/api/create/endpoint"
             onChange={encodeImageFileAsURL}
           />

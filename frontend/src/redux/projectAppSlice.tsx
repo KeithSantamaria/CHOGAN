@@ -633,6 +633,7 @@ export const projectAppSlice = createSlice({
       state,
       action: {
         payload: {
+          type: string,
           value: string;
         };
       }
@@ -645,6 +646,7 @@ export const projectAppSlice = createSlice({
       state,
       action: {
         payload: {
+          type: string;
           value: string;
         };
       }

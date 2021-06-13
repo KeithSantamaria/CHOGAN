@@ -27,7 +27,6 @@ public class UserControllerTests {
 	@MockBean
 	private UserService userService;
 	private User testUser;
-	private ObjectMapper objectMapper;
 	private String jsonString;
 
 	@BeforeEach
@@ -39,7 +38,7 @@ public class UserControllerTests {
 		testUser.setEmail("testEmail");
 		testUser.setSecurityQuestionId(1);
 		testUser.setSecurityAnswer("CHOGAN");
-		objectMapper = new ObjectMapper();
+		ObjectMapper objectMapper = new ObjectMapper();
 		jsonString = objectMapper.writeValueAsString(testUser);
 	}
 

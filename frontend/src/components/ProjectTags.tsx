@@ -3,8 +3,11 @@ import ProjectSideNav from "./ProjectSideNav";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setTags } from "../redux/projectAppSlice";
 import axios from "axios";
-import { Button, Card, Modal, Container } from "react-bootstrap";
+import { Button, Modal, Container, Col, Row, ListGroup } from "react-bootstrap";
 import TagForm from "./tag/TagForm";
+
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faTrash, faEdit} from "@fortawesome/free-solid-svg-icons";
 
 function ProjectTags() {
   const projectAppState = useAppSelector(selectProjectApp);
@@ -63,7 +66,8 @@ function ProjectTags() {
   return (
     <>
       <ProjectSideNav active={"tag"}/>
-      <Container id="pg-content">
+
+      {/* <Container id="pg-content">
         {projectAppState.tags.map((tag: any) => {
           return (
             <Card>
@@ -87,6 +91,83 @@ function ProjectTags() {
         <Button variant="primary" onClick={handleOpen}>
           New Tag
         </Button>
+        {tagModal()}
+      </Container> */}
+
+      <Container id="pg-content">
+        <Row style={{paddingBottom: '5px'}}>
+          <Col>
+            <span style={{color: 'gray'}}>
+              <h4>Technology Tags - {projectAppState.project.projectName}</h4>
+            </span>
+          </Col>
+
+          <Col>
+            <span className="float-right">
+              <Button variant="outline-warning" onClick={handleOpen}>
+                New Tag
+              </Button>
+            </span>
+          </Col>
+        </Row>
+        <hr></hr>
+
+        <Row style={{paddingBottom: '1em', fontWeight: 'bold'}}>
+          <Col>Tags</Col>
+          <Col>Description</Col>
+          <Col><span style={{paddingRight: '4em'}} className="float-right"> Action </span></Col>
+        </Row>
+
+        {projectAppState.tags.map((tag: any) => {
+          return (
+            <div style={{paddingBottom: '2vh'}}>
+          <ListGroup.Item key={tag.id} className="project-list-item" style={{borderRadius: '10px'}}>
+            <Row>
+                <Col className="project-name">
+                    {tag.tagName}
+                </Col>
+
+                <Col className="project-description">
+                    {tag.tagDescription}
+                </Col>
+
+                <Col>
+                  <span className="float-right">  
+                    <Button
+                      value={tag.tagId}
+                      onClick={(e) =>
+                        removeTags((e.target as HTMLButtonElement).value)
+                      }
+                      variant="outline-dark"
+                    >
+                      <FontAwesomeIcon
+                        style={{height: '100%'}}
+                        className="fa-1x"
+                        icon={faTrash}
+                      /> 
+                    </Button>
+
+                    <span style={{paddingRight: '1em'}}></span>
+
+                    <Button
+                       value={tag.tagId}
+                      // onClick={(e) => editTag((e.target as HTMLButtonElement).value)}
+                      variant="outline-warning"
+                    >
+                      <FontAwesomeIcon
+                        style={{height: '100%'}}
+                        className="fa-1x"
+                        icon={faEdit}
+                      /> 
+                    </Button>
+                  </span>
+                </Col>
+            </Row>
+        </ListGroup.Item>
+        </div>
+        )})}
+        <br></br>
+        
         {tagModal()}
       </Container>
     </>

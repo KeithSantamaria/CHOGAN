@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useMemo } from "react";
-import { Button, Modal, Container } from "react-bootstrap";
+import { Button, Modal, Container, Row, Col } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setEndpoints } from "../redux/projectAppSlice";
 import ProjectSideNav from "./ProjectSideNav";
@@ -66,18 +66,41 @@ function ProjectEndpoints() {
     );
   };
   return (
-    <div>
+    <>
       <ProjectSideNav active={"endpoint"}/>
-        <Container id="pg-content">
+
+      <Container id="pg-content">
+        <Row style={{paddingBottom: '5px'}}>
+          <Col>
+            <span style={{color: 'gray'}}>
+              <h4>Endpoints - {projectAppState.project.projectName}</h4>
+            </span>
+          </Col>
+
+          <Col>
+            <span className="float-right">
+              <Button variant="outline-warning" onClick={handleOpen}>
+                New Endpoint
+              </Button>
+            </span>
+          </Col>
+        </Row>
+        <hr></hr>
+
+        <Row style={{paddingBottom: '1em', fontWeight: 'bold'}}>
+          <Col>Name</Col>
+          <Col>URL</Col>
+          <Col>Description</Col>
+          <Col><span style={{paddingRight: '4em'}} className="float-right"> Action </span></Col>
+        </Row>
+
         {projectAppState.endpoints.map((endpoint: any) => {
-          return <EndpointCard endpoint={endpoint} />;
+          return <EndpointCard key={endpoint.endpointId} endpoint={endpoint} />;
         })}
-        <Button variant="primary" onClick={handleOpen}>
-          New Endpoint
-        </Button>
+        
         {endpointModal()}
-        </Container>
-    </div>
+      </Container>
+    </>
   );
 }
 

@@ -1,8 +1,12 @@
 import axios from "axios";
 import React from "react";
-import { Button, Card } from "react-bootstrap";
+import { ListGroup, Row, Col, Button } from "react-bootstrap";
 import { useAppDispatch } from "../../redux/hooks";
 import { setEndpoints } from "../../redux/projectAppSlice";
+
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faTrash, faEdit} from "@fortawesome/free-solid-svg-icons";
+import '../../css/project-service/end-point.css';
 
 const EndpointCard = ({ endpoint }: any) => {
   const dispatch = useAppDispatch();
@@ -32,7 +36,8 @@ const EndpointCard = ({ endpoint }: any) => {
   };
 
   return (
-    <div>
+    <>
+      {/* <CardDeck>
       <Card>
         <Card.Body>
           <Card.Title>{endpointName}</Card.Title>
@@ -48,7 +53,54 @@ const EndpointCard = ({ endpoint }: any) => {
         </Button>
         <Button variant="info">Modify</Button>
       </Card>
-    </div>
+      </CardDeck> */}
+      <ListGroup.Item className="project-list-item">
+            <Row>
+                <Col className="project-name">
+                    {endpointName}
+                </Col>
+
+                <Col className="project-description">
+                    {endpointUrlPattern}
+                </Col>
+
+                <Col className="project-description">
+                    {endpointDescription}
+                </Col>
+
+                <Col>
+                  <span className="float-right">  
+                    <Button
+                      value={endpoint.endpointId}
+                      onClick={(e) => removeEndpoint((e.target as HTMLButtonElement).value)}
+                      variant="outline-dark"
+                    >
+                      <FontAwesomeIcon
+                        style={{height: '100%'}}
+                        className="fa-1x"
+                        icon={faTrash}
+                      /> 
+                    </Button>
+
+                    <span style={{paddingRight: '1em'}}></span>
+
+                    <Button
+                      value={endpoint.endpointId}
+                      // onClick={(e) => editEndpoint((e.target as HTMLButtonElement).value)}
+                      variant="outline-warning"
+                    >
+                      <FontAwesomeIcon
+                        style={{height: '100%'}}
+                        className="fa-1x"
+                        icon={faEdit}
+                      /> 
+                    </Button>
+                  </span>
+                </Col>
+            </Row>
+        </ListGroup.Item>
+        <br></br>
+    </>
   );
 };
 

@@ -64,7 +64,7 @@ const EndpointForm = () => {
           <Form.Control
             name="endpointName"
             type="text"
-            placeholder="Documentation"
+            placeholder="Name"
             onChange={formChangeHandler}
           />
         </Form.Group>

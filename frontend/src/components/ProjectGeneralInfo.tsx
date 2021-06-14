@@ -80,22 +80,24 @@ const ProjectGeneralInfo = () => {
       <ProjectSideNav active={"general"}/>
   
       <Container id="pg-content">
-        <Row style={{paddingBottom: '15px'}}>
+        <Row style={{paddingBottom: '5px'}}>
           <Col>
             <span style={{color: 'gray'}}>
-              <h4>John Doe - {projectAppState.project.projectName}</h4>
+              <h4>General Information - {projectAppState.project.projectName}</h4>
             </span>
           </Col>
-
+          
           <Col >
             <span className="float-right">
-            <Button variant="outline-warning" onClick={handleOpen}>
-              New Widget
-            </Button>
+              <Button variant="outline-warning" onClick={handleOpen}>
+                New Widget
+              </Button>
             </span>
            
           </Col>
         </Row>
+
+        <hr></hr>
        
       
         <CardDeck style={{paddingBottom: '25px'}}>

@@ -38,7 +38,7 @@ const WidgetComponent = ({projectId}: any) => {
         <div>
         {projectAppState.widgets.map( (widget: any) => {
             return(
-              <CardDeck style={{paddingBottom: '25px'}} >
+              <CardDeck key={widget.widgetId} style={{paddingBottom: '25px'}} >
                 <Card className="card-wrapper">
                   <Card.Body>
                     <Card.Title>{widget.widgetName}</Card.Title>

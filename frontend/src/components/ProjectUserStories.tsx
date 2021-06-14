@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useMemo } from "react";
-import { Button, Modal, Container } from "react-bootstrap";
+import { Button, Modal, Container, Col, Row } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setUserStories } from "../redux/projectAppSlice";
 import ProjectSideNav from "./ProjectSideNav";
@@ -67,7 +67,8 @@ function ProjectUserStories() {
   return (
     <>
       <ProjectSideNav active={"user-story"}/>
-      <Container id="pg-content">
+
+      {/* <Container id="pg-content">
         {projectAppState.userStories.map((userStory: any) => {
           return <UserStoryCard userStory={userStory} />;
         })}
@@ -75,7 +76,38 @@ function ProjectUserStories() {
           New User Story
         </Button>
         {userStoryModal()}
+      </Container> */}
+
+      <Container id="pg-content">
+        <Row style={{paddingBottom: '5px'}}>
+          <Col>
+            <span style={{color: 'gray'}}>
+              <h4>User Story - {projectAppState.project.projectName}</h4>
+            </span>
+          </Col>
+
+          <Col>
+            <span className="float-right">
+              <Button variant="outline-warning" onClick={handleOpen}>
+                New User Story
+              </Button>
+            </span>
+          </Col>
+        </Row>
+        <hr></hr>
+
+        <Row style={{paddingBottom: '1em', fontWeight: 'bold'}}>
+          <Col>Features</Col>
+          <Col><span style={{paddingRight: '4em'}} className="float-right"> Action </span></Col>
+        </Row>
+
+        {projectAppState.userStories.map((userStory: any) => {
+          return <UserStoryCard key={userStory.userStoryId} userStory={userStory} />;
+        })}
+        
+        {userStoryModal()}
       </Container>
+
     </>
   );
 }

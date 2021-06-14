@@ -6,6 +6,8 @@ import AuthPage from '../pages/AuthPage';
 import Home from '../pages/home/Home';
 import AuthRoute from './AuthRoute';
 
+//TODO Make a page not found
+
 function Routes() {
   return(
     <div>
@@ -14,7 +16,7 @@ function Routes() {
           <UnAuthRoute exact = {true} path = "/" childComponent = {AuthPage} />
           <AuthRoute path = "/home" childComponent = {Home} />
           <Route path = "*">
-            <Redirect to ="/"/>
+            <p>Page not found!</p>
           </Route>
         </Switch>
       </Router>

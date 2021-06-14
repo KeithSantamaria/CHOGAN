@@ -5,12 +5,10 @@ import com.projectservice.models.Endpoint;
 import com.projectservice.services.IEndpointService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,7 +28,7 @@ public class EndpointController {
     /**
      * Creates an endpoint in the endpoints collection in MongoDB
      * @param endpoint The endpoint to add
-     * @return A response entity containing the endpoint if successfull
+     * @return A response entity containing the endpoint if successful
      */
     @PostMapping("/create/project/endpoint")
     public ResponseEntity<List<Endpoint>> createNewEndpoint(@RequestBody Endpoint endpoint){

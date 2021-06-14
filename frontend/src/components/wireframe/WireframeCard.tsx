@@ -1,8 +1,8 @@
 import axios from "axios";
 import React from "react";
 import { Button, Card } from "react-bootstrap";
-import { useAppDispatch } from "../redux/hooks";
-import { setWireframes } from "../redux/projectAppSlice";
+import { useAppDispatch } from "../../redux/hooks";
+import { setWireframes } from "../../redux/projectAppSlice";
 
 const WireframeCard = ({ wireframe }: any) => {
   const dispatch = useAppDispatch();
@@ -31,23 +31,21 @@ const WireframeCard = ({ wireframe }: any) => {
 
 
   return (
-    <div>
-      <Card>
-        <Card.Body>
-          <Card.Title>{wireframeName}</Card.Title>
-          <Card.Img variant="top" src={wireframeImg}/>
-          <Card.Text>{wireframeDescription}</Card.Text>
-        </Card.Body>
-        <Button
-          variant="danger"
-          value={wireframe.wireframeId}
-          onClick={(e) => removeWireframe((e.target as HTMLButtonElement).value)}
-        >
-          Delete
-        </Button>
-        <Button variant="info">Modify</Button>
-      </Card>
-    </div>
+    <Card>
+      <Card.Body>
+        <Card.Title>{wireframeName}</Card.Title>
+        <Card.Img variant="top" src={wireframeImg}/>
+        <Card.Text>{wireframeDescription}</Card.Text>
+      </Card.Body>
+      <Button
+        variant="danger"
+        value={wireframe.wireframeId}
+        onClick={(e) => removeWireframe((e.target as HTMLButtonElement).value)}
+      >
+        Delete
+      </Button>
+      <Button variant="info">Modify</Button>
+    </Card>
   );
 };
 

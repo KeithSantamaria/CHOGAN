@@ -1,15 +1,15 @@
 import React from "react";
 import axios from "axios";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
-  resetCreateNewWireframeForm,
+  resetCreateNewERDiagramForm,
   selectProjectApp,
-  setCreateNewWireframeForm,
-  setWireframes,
-} from "../redux/projectAppSlice";
-import { Button, Form } from "react-bootstrap";
+  setCreateNewERDForm,
+  setERDiagrams,
+} from "../../redux/projectAppSlice";
+import { Button, Form, Container } from "react-bootstrap";
 
-const WireframeForm = () => {
+const ERDForm = () => {
   const [imgDat, setImgDat] = React.useState("");
   const projectAppState = useAppSelector(selectProjectApp);
   const dispatch = useAppDispatch();
@@ -17,46 +17,43 @@ const WireframeForm = () => {
   const formChangeHandler = (event: any) => {
     const fieldName = event.target.name;
     const value = event.target.value;
-    dispatch(setCreateNewWireframeForm({ fieldName, value }));
+    dispatch(setCreateNewERDForm({ fieldName, value }));
   };
 
-  const addWireframe = () => {
+  const addERD = () => {
     // Test
     const projectId = "60bc36b65d2b0da1deb9ada2";
-    const queryString = `http://localhost:42069/api/create/project/wireframe`;
+    const queryString = `http://localhost:42069/api/create/project/ERD`;
     if (
-      projectAppState.createNewWireframeForm.wireframeName === "" ||
-      projectAppState.createNewWireframeForm.wireframeDescription === "" ||
-      // projectAppState.createNewWireframeForm.wireframeImg === "" || 
+      projectAppState.createNewERDForm.erdName === "" ||
+      projectAppState.createNewERDForm.erdDescription === "" ||
       imgDat === ""
     ) {
       alert("There is nothing to add");
     } else {
-      const wireframe = {
-        wireframeName: projectAppState.createNewWireframeForm.wireframeName,
-        wireframeDescription:
-          projectAppState.createNewWireframeForm.wireframeDescription,
-        wireframeImageUrl: imgDat,
-
+      const erd = {
+        erdName: projectAppState.createNewERDForm.erdName,
+        erdDescription: projectAppState.createNewERDForm.erdDescription,
+        erdImageUrl: imgDat,
         //production
-        
+
         //projectId: projectAppState.project.projectId,
 
         //test
         projectId: projectId,
       };
-      console.log(wireframe);
+      console.log(erd);
       axios
-        .post(queryString, wireframe)
+        .post(queryString, erd)
         .then((response) => {
-          console.log("response", response);
-          const wireframeData = response.data;
-          dispatch(setWireframes(wireframeData));
-          dispatch(resetCreateNewWireframeForm());
+            // console.log("response", response);
+            const erdData = response.data;
+            dispatch(setERDiagrams(erdData));
+            dispatch(resetCreateNewERDiagramForm());
         })
         .catch((error) => {
-          console.log(error);
-        });
+            console.log(error);
+        })
     }
   };
 
@@ -77,45 +74,41 @@ const WireframeForm = () => {
     }
   };
 
-  // const imageChange = (event: any) => {
-  //     encodeImageFileAsURL(event);
-  //     formChangeHandler(event);
-  // }
   return (
-    <div>
+    <Container className="create-proj-form-container">
       <Form>
-        <Form.Group controlId="exampleForm.ControlInput1">
-          <Form.Label>Wireframe Name</Form.Label>
+        <Form.Group className="project-name-wrapper" controlId="exampleForm.ControlInput1">
+          <Form.Label>ERD Name</Form.Label>
           <Form.Control
-            name="wireframeName"
+            name="erdName"
             type="text"
-            placeholder="Documentation"
+            placeholder="Name"
             onChange={formChangeHandler}
           />
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Wireframe Image</Form.Label>
+          <Form.Label>ERD Image</Form.Label>
           <Form.Control
-            name="wireframeImg"
+            name="erdImg"
             type="file"
-
             placeholder="/api/create/endpoint"
             onChange={encodeImageFileAsURL}
           />
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Wireframe Description</Form.Label>
+          <Form.Label>ERD Description</Form.Label>
           <Form.Control
-            name="wireframeDescription"
+            className="modal-create-form-textarea"
+            name="erdDescription"
             as="textarea"
             rows={3}
             onChange={formChangeHandler}
           />
         </Form.Group>
-        <Button onClick={addWireframe}>Save</Button>
+        <Button onClick={addERD}>Save</Button>
       </Form>
-    </div>
-  );
+    </Container>
+    );
 };
 
-export default WireframeForm;
+export default ERDForm;

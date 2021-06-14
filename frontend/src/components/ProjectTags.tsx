@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import ProjectSideNav from "./ProjectSideNav";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setTags } from "../redux/projectAppSlice";
@@ -14,6 +14,13 @@ function ProjectTags() {
   const [modalShow, setModalShow] = React.useState(false);
   const handleOpen = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
+
+  const [modalShowUpdate, setModalShowUpdate] = React.useState(false);
+  const handleOpenUpdate = () => setModalShowUpdate(true);
+  const handleCloseUpdate = () => setModalShowUpdate(false);
+
+  const [tagID, setTag] = React.useState("");
+
   const dispatch = useAppDispatch();
 
   const getTags = () => {
@@ -59,6 +66,55 @@ function ProjectTags() {
         </Modal.Header>
         <Modal.Body>
           <TagForm project={projectAppState.project} />
+        </Modal.Body>
+      </Modal>
+    );
+  };
+
+  const removeTags = (id: String) => {
+    const queryDeleteString = `http://localhost:42069/api/delete/project/tag`;
+    const body = {
+      params: {
+        tagId: id,
+      },
+    };
+    console.log("request body: ", queryDeleteString, body);
+
+    axios
+      .delete(queryDeleteString, body)
+      .then((response) => {
+        console.log("response", response);
+        const tagData = response.data;
+        dispatch(setTags(tagData));
+      })
+      .catch((error) => {
+        console.log("There was an error on deleting: ", error);
+      });
+  }
+
+  const editTag = useCallback((e:any) => {
+    setTag(e.target.value);
+    console.log(e.target.value);
+  },[ ])
+
+  const tagModalUpdate = () => {
+    return (
+      <Modal
+        className="modal-create-wrapper"
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={modalShowUpdate}
+        onHide={handleCloseUpdate}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Edit Tag
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {tagID}
+          {/* <TagForm project={projectAppState.project} /> */}
         </Modal.Body>
       </Modal>
     );
@@ -120,8 +176,8 @@ function ProjectTags() {
 
         {projectAppState.tags.map((tag: any) => {
           return (
-            <div style={{paddingBottom: '2vh'}}>
-          <ListGroup.Item key={tag.id} className="project-list-item" style={{borderRadius: '10px'}}>
+          <div style={{paddingBottom: '2vh'}}>
+          <ListGroup.Item key={tag.tagId} className="project-list-item" style={{borderRadius: '10px'}}>
             <Row>
                 <Col className="project-name">
                     {tag.tagName}
@@ -150,8 +206,8 @@ function ProjectTags() {
                     <span style={{paddingRight: '1em'}}></span>
 
                     <Button
-                       value={tag.tagId}
-                      // onClick={(e) => editTag((e.target as HTMLButtonElement).value)}
+                      value={tag.tagId}
+                      onClick={editTag}
                       variant="outline-warning"
                     >
                       <FontAwesomeIcon
@@ -169,30 +225,10 @@ function ProjectTags() {
         <br></br>
         
         {tagModal()}
+        {tagModalUpdate()}
       </Container>
     </>
   );
-
-  function removeTags(id: String) {
-    const queryDeleteString = `http://localhost:42069/api/delete/project/tag`;
-    const body = {
-      params: {
-        tagId: id,
-      },
-    };
-    console.log("request body: ", queryDeleteString, body);
-
-    axios
-      .delete(queryDeleteString, body)
-      .then((response) => {
-        console.log("response", response);
-        const tagData = response.data;
-        dispatch(setTags(tagData));
-      })
-      .catch((error) => {
-        console.log("There was an error on deleting: ", error);
-      });
-  }
 }
 
 export default ProjectTags;

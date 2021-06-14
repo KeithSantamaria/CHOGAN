@@ -1,8 +1,8 @@
 import axios from "axios";
 import React from "react";
 import { Button, Card } from "react-bootstrap";
-import { useAppDispatch } from "../redux/hooks";
-import { setERDiagrams } from "../redux/projectAppSlice";
+import { useAppDispatch } from "../../redux/hooks";
+import { setERDiagrams } from "../../redux/projectAppSlice";
 
 const ERDCard = ({ erd }: any) => {
   const dispatch = useAppDispatch();

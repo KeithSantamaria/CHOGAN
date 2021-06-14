@@ -146,11 +146,12 @@ export interface ProjectAppState {
   createNewTagForm: { tagName: string; tagDescription: string };
   createNewWidgetForm: { widgetName: string; widgetDescription: string };
   //Bookmark for later - need to know how to upload photos
-  createNewProjectERDForm: { erdName: string; erdDescription: string };
+  createNewERDForm: { erdName: string; erdDescription: string; erdImg: string};
   //Bookmark for later - need to know how to upload photos
-  createNewProjectWireframeForm: {
+  createNewWireframeForm: {
     wireframeName: string;
     wireframeDescription: string;
+    wireframeImg: string;
   };
 }
 
@@ -223,11 +224,12 @@ const initialState: ProjectAppState = {
   createNewTagForm: { tagName: "", tagDescription: "" },
   createNewWidgetForm: { widgetName: "", widgetDescription: "" },
   //Bookmark for later - need to know how to upload photos
-  createNewProjectERDForm: { erdName: "", erdDescription: "" },
+  createNewERDForm: { erdName: "", erdDescription: "", erdImg: ""},
   //Bookmark for later - need to know how to upload photos
-  createNewProjectWireframeForm: {
+  createNewWireframeForm: {
     wireframeName: "",
     wireframeDescription: "",
+    wireframeImg: ""
   },
 };
 
@@ -575,7 +577,7 @@ export const projectAppSlice = createSlice({
     },
 
     //Bookmark for later - need to know how to upload photos
-    setCreateNewProjectERDForm: (
+    setCreateNewERDForm: (
       state,
       action: {
         payload: {
@@ -587,14 +589,14 @@ export const projectAppSlice = createSlice({
       const fieldName = action.payload.fieldName;
       const value = action.payload.value;
       console.log(`Setting ${fieldName} to ${value}`);
-      state.createNewProjectERDForm = {
-        ...state.createNewProjectERDForm,
+      state.createNewERDForm = {
+        ...state.createNewERDForm,
         [fieldName]: value,
       };
     },
 
     //Bookmark for later - need to know how to upload photos
-    setCreateNewProjectWireframeForm: (
+    setCreateNewWireframeForm: (
       state,
       action: {
         payload: {
@@ -606,8 +608,8 @@ export const projectAppSlice = createSlice({
       const fieldName = action.payload.fieldName;
       const value = action.payload.value;
       console.log(`Setting ${fieldName} to ${value}`);
-      state.createNewProjectWireframeForm = {
-        ...state.createNewProjectWireframeForm,
+      state.createNewWireframeForm = {
+        ...state.createNewWireframeForm,
         [fieldName]: value,
       };
     },
@@ -625,6 +627,32 @@ export const projectAppSlice = createSlice({
         ...state.createNewWidgetForm,
         [fieldName]: value,
       };
+    },
+
+    setWireframeImageInForm: (
+      state,
+      action: {
+        payload: {
+          type: string,
+          value: string;
+        };
+      }
+    ) => {
+      const imgData = action.payload.value;
+      state.createNewWireframeForm.wireframeImg = imgData;
+    },
+
+    setERDImageInForm: (
+      state,
+      action: {
+        payload: {
+          type: string;
+          value: string;
+        };
+      }
+    ) => {
+      const imgData = action.payload.value;
+      state.createNewERDForm.erdImg = imgData;
     },
 
     resetCreateNewWidgetForm: (state) => {
@@ -650,8 +678,19 @@ export const projectAppSlice = createSlice({
 
     resetCreateNewUserStoryForm: (state) =>{
       state.createNewUserStoryForm.userStoryDescription = "";
-    }
+    },
 
+    resetCreateNewWireframeForm: (state) => {
+      state.createNewWireframeForm.wireframeDescription = "";
+      state.createNewWireframeForm.wireframeName = "";
+      state.createNewWireframeForm.wireframeImg = "";
+    },
+
+    resetCreateNewERDiagramForm: (state) => {
+      state.createNewERDForm.erdName = "";
+      state.createNewERDForm.erdDescription = "";
+      state.createNewERDForm.erdImg = "";
+    }
   },
 });
 
@@ -673,11 +712,13 @@ export const {
   setTag,
   setWireframe,
   setERDiagram,
+  setERDImageInForm,
+  setWireframeImageInForm,
   setCreateNewEndpointForm,
   setCreateNewModelForm,
   setCreateNewWidgetForm,
-  setCreateNewProjectERDForm,
-  setCreateNewProjectWireframeForm,
+  setCreateNewERDForm,
+  setCreateNewWireframeForm,
   setCreateNewTagForm,
   setCreateNewUserStoryForm,
   resetCreateNewWidgetForm,
@@ -685,7 +726,8 @@ export const {
   resetCreateNewEndpointForm,
   resetCreateNewModelForm,
   resetCreateNewUserStoryForm,
-  
+  resetCreateNewWireframeForm,
+  resetCreateNewERDiagramForm,
 } = projectAppSlice.actions;
 
 export const selectProjectApp = (state: RootState) => state.projectApp;

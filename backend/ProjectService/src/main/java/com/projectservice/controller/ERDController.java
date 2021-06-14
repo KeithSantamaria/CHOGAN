@@ -58,7 +58,7 @@ public class ERDController {
      */
     @GetMapping("/read/project/ERD")
     public ResponseEntity<ERD> readERD(@RequestParam String erdId){
-        ERD foundERD = erdService.findByERDId(erdId);
+        ERD foundERD = erdService.findByErdId(erdId);
         if (foundERD == null){
             log.error("Failed to find ERD of erdId : {}",erdId);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -94,10 +94,10 @@ public class ERDController {
     public ResponseEntity<List<ERD>> updateERD(@RequestBody ERD erd){
         ERD updatedERD = erdService.updateERD(erd);
         if (updatedERD == null){
-            log.error("Failed to update ERD of erdId : {}",erd.getErdID());
+            log.error("Failed to update ERD of erdId : {}",erd.getErdId());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        log.info("Successfully updated ERD of erdId : {}",erd.getErdID());
+        log.info("Successfully updated ERD of erdId : {}",erd.getErdId());
         return new ResponseEntity<>(erdService.findByProjectId(erd.getProjectId()),HttpStatus.OK);
     }
 

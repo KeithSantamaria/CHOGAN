@@ -1,13 +1,21 @@
 import React from 'react';
-import { Counter } from './redux/Counter';
+
+import AuthPage from './pages/AuthPage';
+import ProjectsHome from './components/ProjectsHome';
 import './Chogan.css';
+import Home from './pages/home/Home';
+import Routes from './routes/Routes';
+
 
 function Chogan() {
   return (
     <div className="App">
-      <Counter />
+      <Routes/>
     </div>
   );
 }
 
 export default Chogan;
+
+//<Home/>
+//<AuthPage/>

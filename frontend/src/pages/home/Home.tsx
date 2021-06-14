@@ -4,7 +4,7 @@ import UserView from '../../components/home/UserView.component';
 import HomeListView from '../../components/home/HomeListView';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { selectProjectApp, setProjects, setProjectEndpointsState } from '../../redux/projectAppSlice';
+import { selectProjectApp, setProjects} from '../../redux/projectAppSlice';
 import { store } from '../../redux/store';
 import axios from 'axios';
 
@@ -24,7 +24,7 @@ export default function Home() {
 
     const [tabs, setTabs] = useState("grid");
 
-    const projects = useAppSelector((state) => state.projectApp.sampleProjects);
+    const projects = useAppSelector((state) => state.projectApp.projects);
 
     const getProjects = () => {
         // Test query string works; comment when ready to test prod

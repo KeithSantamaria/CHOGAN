@@ -54,29 +54,28 @@ const ProjectERDs = () => {
     )
 }
 
-export default ProjectERDs
-      <Modal
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-        show={modalShow}
-        onHide={handleClose}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Create New ERD
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {/* Production */}
-          {/* <EndpointForm projectId={projectAppState.project.projectId} /> */}
+// export default ProjectERDs 
+      // <Modal
+      //   size="lg"
+      //   aria-labelledby="contained-modal-title-vcenter"
+      //   centered
+      //   show={modalShow}
+      //   onHide={handleClose}
+      // >
+      //   <Modal.Header closeButton>
+      //     <Modal.Title id="contained-modal-title-vcenter">
+      //       Create New ERD
+      //     </Modal.Title>
+      //   </Modal.Header>
+      //   <Modal.Body>
+      //     {/* Production */}
+      //     {/* <EndpointForm projectId={projectAppState.project.projectId} /> */}
 
-          {/* Test */}
-          <ERDForm />
-        </Modal.Body>
-      </Modal>
-    );
-  };
+      //     {/* Test */}
+      //     <ERDForm />
+      //   </Modal.Body>
+      // </Modal>
+  // };
 
   return (
     <div>

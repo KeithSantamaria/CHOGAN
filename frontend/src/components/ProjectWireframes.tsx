@@ -46,13 +46,14 @@ function ProjectWireframes() {
 
   const wireframeModal = () => {
     return (
+      <>
         <>
-            <ProjectSideNav active={"wire-frame"}/>
-            <Container id="pg-content">
-                <p>Wireframes</p>
-            </Container>
+          <ProjectSideNav active={"wire-frame"}/>
+          <Container id="pg-content">
+              <p>Wireframes</p>
+          </Container>
         </>
-    )
+    
       <Modal
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
@@ -73,7 +74,8 @@ function ProjectWireframes() {
           <WireframeForm />
         </Modal.Body>
       </Modal>
-    );
+    </>
+    )
   };
 
   return (

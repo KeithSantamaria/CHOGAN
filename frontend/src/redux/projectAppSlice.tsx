@@ -684,7 +684,7 @@ export const projectAppSlice = createSlice({
 });
 
 export const {
-  
+
   setWidgets,
   setProjects,
   setEndpoints,
@@ -715,7 +715,7 @@ export const {
   resetCreateNewEndpointForm,
   resetCreateNewModelForm,
   resetCreateNewUserStoryForm,
-  
+
 } = projectAppSlice.actions;
 
 export const selectProjectApp = (state: RootState) => state.projectApp;

@@ -1,0 +1,58 @@
+.list-group {
+    width: 100%;
+    border-radius: 25px;
+
+}
+
+.project-list-item {
+    margin: 0px 0px 10px 0px;
+    border-radius: 25px;
+    transition: .8s ease-in-out;
+   
+}
+
+.project-list-item:hover {
+    transition: .8s ease-in-out;
+    transform: scale(1.005);
+    color: #f5f5f5;
+    background-color: #2f3545;
+    cursor: pointer;
+    opacity: 1.0;
+}
+
+.project-name {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+
+.project-description {
+    /* width: 100%; */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.list-group-item {
+    border: none;
+    padding: 3vh 2vh 1.5vh 2vh;
+    box-shadow:
+    0 0.6px 0.7px -1px rgba(0, 0, 0, 0.012),
+    0 1.5px 1.7px -1px rgba(0, 0, 0, 0.022),
+    0 3px 3.5px -1px rgba(0, 0, 0, 0.029),
+    0 6.2px 7.3px -1px rgba(0, 0, 0, 0.036),
+    0 17px 20px -1px rgba(0, 0, 0, 0.05)
+  ;
+  
+}
+
+.project-list-item:hover .fa-ellipsis-h{
+    color: #f5f5f5;
+    transition: 0.2s ease-in-out;
+    background-color: #2f3545;
+    cursor: pointer;
+    transform: scale(1.1);
+    opacity: 1.0;
+    border-radius: 25px;
+}

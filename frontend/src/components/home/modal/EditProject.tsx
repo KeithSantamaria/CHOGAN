@@ -1,21 +1,27 @@
 import React, {useState} from 'react';
 import {Button, Modal, Form} from "react-bootstrap";
 import "../../../css/home/PopUpModal/editProject.css"
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { selectProjectApp, setProject, setProjectEndpointsState } from '../../../redux/projectAppSlice';
 
-type ProjectProp = {
-    title: string,
-    description: string
-}
+// type ProjectProp = {
+//     title: string,
+//     description: string
+// }
 
-export default function EditProject({title, description }: ProjectProp) {
-    const [currTitle, setCurrTitle] = useState(title);
-    const [currDescription, setCurrDescription] = useState(description);
+export default function EditProject(props:any) {
+    console.log(props.project.projectName+ "what is here");
+    const [currTitle, setCurrTitle] = useState(props.project.projectName);
+    const [currDescription, setCurrDescription] = useState(props.project.projectDescription);
     // onChange={(e)=>{currTitle=e.target.value}}
     // onChange={(e)=>{currDescription=e.target.value}}
-
-
+    const projectAppState= useAppSelector(selectProjectApp);
+    const dispatch = useAppDispatch();
     function saveChanges() {
-        alert("save this shizzz");
+        props.project.projectName=currTitle;
+        props.project.projectDescription=currDescription;
+        dispatch(setProject(props.project));
+
     }
 
     return (

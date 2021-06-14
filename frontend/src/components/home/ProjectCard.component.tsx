@@ -23,16 +23,16 @@ export default function ProjectCard(props:any) {
                 
               </Card.Body>
               <Card.Footer className="text-right">
-                <div className="text-left">
-                  {project.tags.slice(0,4).map((t:any, index: number) => (
-                      <span key={index} className="proj-card-wrapper-tags">
-                        <span className="proj-card-tags">
-                          {t}
-                        </span>
-                      </span>
-                    ))}
-                </div>
-                <span><ProjectElipsisBtn/></span>
+                {/*<div className="text-left">*/}
+                {/*  {project.tags.slice(0,4).map((t:any, index: number) => (*/}
+                {/*      <span key={index} className="proj-card-wrapper-tags">*/}
+                {/*        <span className="proj-card-tags">*/}
+                {/*          {t}*/}
+                {/*        </span>*/}
+                {/*      </span>*/}
+                {/*    ))}*/}
+                {/*</div>*/}
+                <span><ProjectElipsisBtn project={project}/></span>
               </Card.Footer>
             </Card>
           </CardDeck>

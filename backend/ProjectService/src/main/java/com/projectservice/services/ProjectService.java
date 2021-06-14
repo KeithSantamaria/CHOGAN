@@ -45,7 +45,7 @@ public class ProjectService implements IProjectService {
      */
     @Override
     public List<Project> findAllByUserId(String userId) {
-        return null;
+        return projectRepo.findAllByUserId(userId);
     }
 
 

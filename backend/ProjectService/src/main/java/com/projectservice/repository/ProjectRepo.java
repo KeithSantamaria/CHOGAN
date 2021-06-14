@@ -10,6 +10,6 @@ import java.util.List;
  */
 @Repository
 public interface ProjectRepo extends MongoRepository<Project, String> {
-    List<Project> findByUserId(String userId);
+    List<Project> findAllByUserId(String userId);
     Project findByProjectId(String projectId);
 }

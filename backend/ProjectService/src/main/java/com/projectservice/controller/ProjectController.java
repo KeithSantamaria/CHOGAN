@@ -2,12 +2,16 @@ package com.projectservice.controller;
 
 import com.projectservice.models.Project;
 import com.projectservice.models.Widget;
+import com.projectservice.repository.ProjectRepo;
 import com.projectservice.services.IProjectService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 /**
@@ -69,6 +73,29 @@ public class ProjectController {
         log.info("Retrieved project with id: {}.", projectId);
         return new ResponseEntity<>(project, HttpStatus.OK);
     }
+
+
+    /**
+     * Reads array of projects based off of a projects Id
+     *
+     * @param userId The Id of the project to read
+     * @return The status of the project
+     */
+    @GetMapping("/read/projects")
+    public ResponseEntity<List<Project>> readProjects(@RequestParam String userId) {
+        System.out.println("----------------here where it should be --------------");
+        System.out.println(userId + " this is the userID");
+        List<Project> projects = projectService.findAllByUserId(userId);
+        System.out.println("projects:" + projects);
+        if (projects == null) {
+            log.error("Cannot retrieve project with id: {}. Projects don't exist for user.", userId);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        log.info("Retrieved projects for user: ", userId);
+        return new ResponseEntity<>(projects, HttpStatus.OK);
+    }
+
+
     /*
      *
      * Update

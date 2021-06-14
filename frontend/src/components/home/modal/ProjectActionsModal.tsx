@@ -3,7 +3,7 @@ import {Button, Modal, Form} from "react-bootstrap";
 import "../../../css/home/PopUpModal/popUpModal.css";
 import EditProject from "./EditProject";
 
-export default function ProjectActionsModal() {
+export default function ProjectActionsModal(props:any) {
 
     const [show, setShow] = useState(false);
     const [edit, setEdit] = useState(false);
@@ -32,7 +32,7 @@ export default function ProjectActionsModal() {
             </Modal.Body>
 
             <Modal show={edit} onHide={handleCloseEdit}>
-                <EditProject title="sample project" description="this is not a legit project."/>
+                <EditProject project={props.project}/>
             </Modal>
             
         </div>

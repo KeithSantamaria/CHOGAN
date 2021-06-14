@@ -4,7 +4,7 @@ import {faEllipsisH} from '@fortawesome/free-solid-svg-icons';
 import {Button, Modal} from "react-bootstrap";
 import ProjectActionsModal from "./ProjectActionsModal";
 
-export default function ProjectElipsisBtn() {
+export default function ProjectElipsisBtn(props:any) {
 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -17,7 +17,7 @@ export default function ProjectElipsisBtn() {
             </Button>
             
             <Modal show={show} onHide={handleClose}>
-                <ProjectActionsModal/>
+                <ProjectActionsModal project={props.project}/>
             </Modal>
             
         </div>

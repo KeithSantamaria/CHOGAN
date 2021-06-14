@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useMemo } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Container } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setERDiagrams } from "../redux/projectAppSlice";
 import ERDCard from "./ERDCard";
@@ -45,6 +45,16 @@ const ProjectERDs = () => {
 
   const ERDModal = () => {
     return (
+        <>
+            <ProjectSideNav active={"erd"}/>
+            <Container id="pg-content">
+                <p>ERDs</p>
+            </Container>
+        </>
+    )
+}
+
+export default ProjectERDs
       <Modal
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"

@@ -1,14 +1,13 @@
 import axios from "axios";
-import React from "react";
-import { Button, Form } from "react-bootstrap";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { Button, Form, Container } from "react-bootstrap";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   resetCreateNewUserStoryForm,
   selectProjectApp,
   setCreateNewEndpointForm,
   setCreateNewUserStoryForm,
   setUserStories,
-} from "../redux/projectAppSlice";
+} from "../../redux/projectAppSlice";
 
 const UserStoryForm = () => {
   const projectAppState = useAppSelector(selectProjectApp);
@@ -49,11 +48,12 @@ const UserStoryForm = () => {
   };
 
   return (
-    <div>
+    <Container className="create-proj-form-container">
       <Form>
         <Form.Group controlId="exampleForm.ControlInput1">
           <Form.Label>User Story Description</Form.Label>
           <Form.Control
+            className="modal-create-form-textarea"
             name="userStoryDescription"
             as="textarea"
             rows={3}
@@ -63,7 +63,7 @@ const UserStoryForm = () => {
         </Form.Group>
         <Button onClick={addUserStory}>Save</Button>
       </Form>
-    </div>
+    </Container>
   );
 };
 

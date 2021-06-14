@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useMemo } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Container } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setWireframes } from "../redux/projectAppSlice";
 import ProjectSideNav from "./ProjectSideNav";
@@ -46,6 +46,13 @@ function ProjectWireframes() {
 
   const wireframeModal = () => {
     return (
+        <>
+            <ProjectSideNav active={"wire-frame"}/>
+            <Container id="pg-content">
+                <p>Wireframes</p>
+            </Container>
+        </>
+    )
       <Modal
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"

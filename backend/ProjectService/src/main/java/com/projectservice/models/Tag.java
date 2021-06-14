@@ -12,19 +12,11 @@ import java.util.Map;
  * map example: Map<"Frontend", ["React", "Redux", "Bootstrap"]>;
  */
 @Data
-@Document
+@Document(collection = "tags")
 public class Tag {
 //    @Id
     private String tagId;
+    private String projectId;
     private String tagName;
-    private Map<String, List<String>> techs;
-    /*
-    frontend
-
-    react/redux/boostrap
-
-    frontend: ["react/redux/bootstrap"]
-
-    frontend: ["react","redux","bootstrap"]
-    */
+    private String tagDescription;
 }

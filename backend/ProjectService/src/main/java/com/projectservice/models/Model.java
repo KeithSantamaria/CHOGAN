@@ -11,10 +11,11 @@ import java.util.Map;
  * Map<key:pojo name, value:pojo types>
  */
 @Data
-@Document
+@Document(collection = "models")
 public class Model {
 //    @Id
     private String modelId;
+    private String projectId;
     private String modelName;
     private Map<String, String> modelMetadata;
 }

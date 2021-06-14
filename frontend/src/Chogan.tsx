@@ -9,12 +9,12 @@ import Home from './pages/home/Home';
 function Chogan() {
   return (
     <div className="App">
-      <Home/>
+      <ProjectsHome />
     </div>
   );
 }
 
 export default Chogan;
 
-
+//<Home/>
 //<AuthPage/>

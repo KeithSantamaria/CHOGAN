@@ -46,14 +46,13 @@ function ProjectWireframes() {
 
   const wireframeModal = () => {
     return (
-        <>
-            <ProjectSideNav active={"wire-frame"}/>
-            <Container id="pg-content">
-                <p>Wireframes</p>
-            </Container>
-        </>
-    )
-      <Modal
+        // <>
+        //     <ProjectSideNav active={"wire-frame"}/>
+        //     <Container id="pg-content">
+        //         <p>Wireframes</p>
+        //     </Container>
+        // </>
+        <Modal
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -73,12 +72,12 @@ function ProjectWireframes() {
           <WireframeForm />
         </Modal.Body>
       </Modal>
-    );
-  };
+      )
+    }
 
   return (
     <div>
-      <ProjectSideNav />
+      <ProjectSideNav active={"wire-frame"}/>
       {projectAppState.wireframes.map((wireframe: any) => {
         return <WireframeCard wireframe={wireframe} />;
       })}
@@ -89,6 +88,6 @@ function ProjectWireframes() {
       {wireframeModal()}
     </div>
   );
-}
+};
 
 export default ProjectWireframes;

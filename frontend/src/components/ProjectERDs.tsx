@@ -45,17 +45,13 @@ const ProjectERDs = () => {
 
   const ERDModal = () => {
     return (
-        <>
-            <ProjectSideNav active={"erd"}/>
-            <Container id="pg-content">
-                <p>ERDs</p>
-            </Container>
-        </>
-    )
-}
-
-export default ProjectERDs
-      <Modal
+        // <>
+        //     <ProjectSideNav active={"erd"}/>
+        //     <Container id="pg-content">
+        //         <p>ERDs</p>
+        //     </Container>
+        // </>
+        <Modal
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -75,12 +71,12 @@ export default ProjectERDs
           <ERDForm />
         </Modal.Body>
       </Modal>
-    );
-  };
+    )
+  }
 
   return (
     <div>
-      <ProjectSideNav />
+       <ProjectSideNav active={"erd"}/>
       {projectAppState.ERDiagrams.map((erd: any) => {
         return <ERDCard erd={erd} />;
       })}

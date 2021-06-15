@@ -14,11 +14,11 @@ const EndpointCard = ({ endpoint }: any) => {
   const [endpointDescription] = React.useState(endpoint.endpointDescription);
   const [endpointUrlPattern] = React.useState(endpoint.endpointUrlPattern);
 
-  const removeEndpoint = (id:String) => {
+  const removeEndpoint = (id:string) => {
       const queryDeleteString = `http://localhost:42069/api/delete/project/endpoint`;
       const body = {
           params: {
-              endpointId: id
+              endpointId: endpoint.endpointId
           }
       }
       console.log("request body: ", queryDeleteString, body)

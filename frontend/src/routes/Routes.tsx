@@ -27,32 +27,15 @@ function Routes() {
         <Switch>
           <UnAuthRoute exact={true} path="/" childComponent={AuthPage} />
           <AuthRoute path="/home" childComponent={Home} />
-          {/* <Route path="*">
+          <AuthRoute path="/user/project/general" childComponent={ProjectGeneralInfo} />
+          <AuthRoute path="/user/project/wireframes" childComponent={ProjectWireframes} />
+          <AuthRoute path="/user/project/ERDs" childComponent={ProjectERDs} />
+          <AuthRoute path="/user/project/endpoints" childComponent={ProjectEndpoints} />
+          <AuthRoute path="/user/project/models" childComponent={ProjectModels} />
+          <AuthRoute path="/user/project/userstories" childComponent={ProjectUserStories} />
+          <AuthRoute path="/user/project/tags" childComponent={ProjectTags} />
+          <Route path="*">
             <p>Page not found!</p>
-          </Route> */}
-          {/* <Route exact path="/">
-                        <ProjectGeneralInfo />
-                    </Route> */}
-          <Route exact path={"/user/project/general"}>
-            <ProjectGeneralInfo />
-          </Route>
-          <Route exact path="/user/project/wireframes">
-            <ProjectWireframes />
-          </Route>
-          <Route exact path="/user/project/ERDs">
-            <ProjectERDs />
-          </Route>
-          <Route exact path="/user/project/endpoints">
-            <ProjectEndpoints />
-          </Route>
-          <Route exact path="/user/project/models">
-            <ProjectModels />
-          </Route>
-          <Route exact path="/user/project/userstories">
-            <ProjectUserStories />
-          </Route>
-          <Route exact path="/user/project/tags">
-            <ProjectTags />
           </Route>
         </Switch>
       </Router>

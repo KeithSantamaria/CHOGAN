@@ -32,7 +32,8 @@ export default function Home() {
     const getProjects = () => {
         // Test query string works; comment when ready to test prod
         const queryString = `http://localhost:42069/api/read/projects`;
-        const body = {params:{userId: "60c7f7afcfa7eb6bf04a410c"}};
+        // const body = {params:{userId: "60c7f7afcfa7eb6bf04a410c"}};
+        const body ={params:{userId: userAppState.id}};
 
         // Production query string; uncomment when ready to test prod
         // const queryString = `http://localhost:42069/api/read/projects`;

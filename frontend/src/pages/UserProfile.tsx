@@ -40,7 +40,7 @@ export default function UserProfile(){
 
     return(
       
-        <div className="content"> 
+        <div className="profile-content"> 
           <h2>{title}</h2>
           <Button onClick= { e => flagSetter() }>{btnString}</Button>{' '}
           <div><RenderProfile/></div>

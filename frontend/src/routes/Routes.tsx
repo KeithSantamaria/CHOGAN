@@ -17,6 +17,7 @@ import ProjectEndpoints from "../components/ProjectEndpoints";
 import ProjectModels from "../components/ProjectModels";
 import ProjectUserStories from "../components/ProjectUserStories";
 import ProjectTags from "../components/ProjectTags";
+import UserProfile from "../pages/UserProfile";
 
 //TODO Make a page not found
 
@@ -34,6 +35,7 @@ function Routes() {
           <AuthRoute path="/user/project/models" childComponent={ProjectModels} />
           <AuthRoute path="/user/project/userstories" childComponent={ProjectUserStories} />
           <AuthRoute path="/user/project/tags" childComponent={ProjectTags} />
+          <AuthRoute path="/profile" childComponent={UserProfile} />
           <Route path="*">
             <p>Page not found!</p>
           </Route>

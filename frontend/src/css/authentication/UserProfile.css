@@ -2,7 +2,7 @@
     padding-left: 10px;
 }
 
-div{
+/* div{
     border: solid black 1px;
    
 }
@@ -10,7 +10,7 @@ div{
 table {
     border-collapse: separate;
     border-spacing: 0 15px;
-  }
+  } */
 
   tr:nth-child(even){
     background-color: gray;

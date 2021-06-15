@@ -5,9 +5,7 @@ import HomeListView from '../../components/home/HomeListView';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { selectProjectApp, setProjects} from '../../redux/projectAppSlice';
-import { store } from '../../redux/store';
 import axios from 'axios';
-
 import '../../css/home/home.css';
 
 import {Col, Row} from 'react-bootstrap';

@@ -1,6 +1,6 @@
 import React from "react";
 import {useAppSelector, useAppDispatch} from '../../redux/hooks';
-import {currentUser, setCurrentUser} from '../../redux/userSlice';
+import {currentUser, updateUser} from '../../redux/userSlice';
 
 export default function Profile(){
     const currentlyLoggedUser = useAppSelector(currentUser);
@@ -19,11 +19,11 @@ export default function Profile(){
     }
 
     function makeUser(){ 
-        userDispatch(setCurrentUser(payload));
+        userDispatch(updateUser(payload));
     }
 
     React.useEffect(() => {
-        console.log(currentlyLoggedUser.currentUser.id);
+        console.log(currentlyLoggedUser.id);
       },[currentlyLoggedUser])
 
     return(

@@ -71,6 +71,11 @@ public class ProjectController {
         return new ResponseEntity<>(project, HttpStatus.OK);
     }
 
+    /**
+     *  Reads all projects based off the user Id
+     * @param userId
+     * @return The list of projects
+     */
 
     @GetMapping("/read/projects")
     public ResponseEntity<List<Project>> readProjects(@RequestParam String userId) {

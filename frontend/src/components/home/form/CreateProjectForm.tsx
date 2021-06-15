@@ -13,11 +13,11 @@ import axios from "axios";
 export default function CreateProjectForm(props: any) {
   const projectAppState = useAppSelector(selectProjectApp);
   const userAppState = useAppSelector(currentUser);
-  const [projectName, setProjectName] = useState("");
-  const [description, setDescription] = useState("");
   const dispatch = useAppDispatch();
 
   const formChangeHandler = (event: any) => {
+    console.log(event.target.name);
+    console.log(event.target.value);
     const fieldName = event.target.name;
     const value = event.target.value;
     dispatch(setCreateNewProjectForm({ fieldName, value }));
@@ -33,8 +33,8 @@ export default function CreateProjectForm(props: any) {
       alert("There is nothing to add");
     } else {
       const project = {
-        tagName: projectAppState.createNewProjectForm.projectName,
-        tagDescription: projectAppState.createNewProjectForm.projectDescription,
+        projectName: projectAppState.createNewProjectForm.projectName,
+        projectDescription: projectAppState.createNewProjectForm.projectDescription,
         userId: userAppState.id,
       };
       console.log(project);
@@ -57,8 +57,8 @@ export default function CreateProjectForm(props: any) {
     <Container className="create-proj-form-container">
       <Form>
         <h4>New Project</h4>
-        <div>Create new project name and Description</div>
-        <div>Manage your project</div>
+        {/* <div>Create new project name and Description</div>
+        <div>Manage your project</div> */}
 
         <Form.Group className="project-name-wrapper">
           <Form.Label>Project Name</Form.Label>

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from 'axios';
 import {useAppSelector, useAppDispatch} from '../../redux/hooks';
-import {currentUser, setCurrentUser} from '../../redux/userSlice';
+import {currentUser, updateUser} from '../../redux/userSlice';
  import {Button, Container, Col} from 'react-bootstrap';
  
 

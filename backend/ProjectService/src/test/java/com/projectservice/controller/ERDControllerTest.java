@@ -55,7 +55,7 @@ public class ERDControllerTest {
         String erdId = "Id";
         ERD erd = new ERD();
 
-        Mockito.when(erdService.findByERDId(erdId)).thenReturn(erd);
+        Mockito.when(erdService.findByErdId(erdId)).thenReturn(erd);
 
         ResponseEntity<ERD> response = erdController.readERD(erdId);
 
@@ -66,7 +66,7 @@ public class ERDControllerTest {
     void readERDFailureTest(){
         String erdId = "Id";
 
-        Mockito.when(erdService.findByERDId(erdId)).thenReturn(null);
+        Mockito.when(erdService.findByErdId(erdId)).thenReturn(null);
 
         ResponseEntity<ERD> response = erdController.readERD(erdId);
 

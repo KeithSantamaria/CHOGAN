@@ -18,10 +18,4 @@ public class Project {
     private String projectName;
     private String projectStatus;
     private String projectDescription;
-
-//    private List<Model> models;
-//    private List<Endpoint> endpoints;
-//    private List<Tag> tags;
-//    private List<UserStory> userStories;
-//    private List<Widget> widgets;
 }

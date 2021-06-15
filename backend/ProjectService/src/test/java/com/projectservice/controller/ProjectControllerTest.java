@@ -1,9 +1,8 @@
-package com.projectservice.controller;
+package com.example.projectservice.controller;
 
 import com.projectservice.controller.ProjectController;
 import com.projectservice.models.Project;
 import com.projectservice.services.IProjectService;
-import com.projectservice.services.ProjectService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -11,12 +10,10 @@ import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import javax.xml.ws.Response;
-
 @SpringBootConfiguration
 class ProjectControllerTest {
 
-    private final IProjectService projectService = Mockito.mock(ProjectService.class);
+    private final IProjectService projectService = Mockito.mock(IProjectService.class);
 
     private final ProjectController projectController = new ProjectController(projectService);
 
@@ -25,9 +22,8 @@ class ProjectControllerTest {
     * Create
     *
     * */
-
     @Test
-    void createNewProjectSuccessTest(){
+    public void createNewProjectSuccess(){
         Project project = new Project();
 
         ResponseEntity<Project> response = projectController.createNewProject(project);
@@ -36,7 +32,7 @@ class ProjectControllerTest {
     }
 
     @Test
-    void createNewProjectFailureTest(){
+    public void createNewProjectFailure(){
         Project project = new Project();
 
         Mockito.doThrow(new Exception());
@@ -53,7 +49,7 @@ class ProjectControllerTest {
     * */
 
     @Test
-    void readProjectSuccessTest(){
+    public void readProjectSuccessTest(){
         Project project = new Project();
         String projectId = "Id";
         project.setProjectId(projectId);
@@ -66,7 +62,7 @@ class ProjectControllerTest {
     }
 
     @Test
-    void readProjectFailureTest(){
+    public void readProjectFailureTest(){
         String projectId = "Id";
 
         Mockito.when(projectService.findByProjectId(projectId)).thenReturn(null);
@@ -75,6 +71,8 @@ class ProjectControllerTest {
 
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    
+    //TODO - ADD public void readAllProjectSuccess & Failure Tests
 
     /*
     *
@@ -83,7 +81,7 @@ class ProjectControllerTest {
     * */
 
     @Test
-    void updateProjectTest(){
+    public void updateProjectTest(){
         Project project = new Project();
 
         Mockito.when(projectService.update(project)).thenReturn(project);
@@ -100,7 +98,7 @@ class ProjectControllerTest {
     * */
 
     @Test
-    void deleteProjectTest(){
+    public void deleteProjectTest(){
         String projectId = "Id";
 
         ResponseEntity<Project> response = projectController.deleteProject(projectId);

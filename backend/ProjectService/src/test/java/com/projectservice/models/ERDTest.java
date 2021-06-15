@@ -15,8 +15,8 @@ public class ERDTest {
 
     @Test
     void erdIDTest(){
-        erd.setErdID("Id");
-        String id = erd.getErdID();
+        erd.setErdId("Id");
+        String id = erd.getErdId();
         Assertions.assertEquals(id,"Id");
     }
 

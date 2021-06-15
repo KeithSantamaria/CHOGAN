@@ -1,9 +1,11 @@
-package com.projectservice.models;
+package com.example.projectservice.models;
 
+import com.projectservice.models.UserStory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
 
 class UserStoryTest {
 
@@ -15,21 +17,14 @@ class UserStoryTest {
     }
 
     @Test
-    void userStoryIdTest(){
+    void getUserStoryId() {
         userStory.setUserStoryId("Id");
         String id = userStory.getUserStoryId();
         Assertions.assertEquals(id,"Id");
     }
 
     @Test
-    void projectIdTest(){
-        userStory.setProjectId("Id");
-        String id = userStory.getProjectId();
-        Assertions.assertEquals(id,"Id");
-    }
-
-    @Test
-    void userStoryDescriptionTest(){
+    void getUserStoryDescription() {
         userStory.setUserStoryDescription("Desc");
         String desc = userStory.getUserStoryDescription();
         Assertions.assertEquals(desc,"Desc");

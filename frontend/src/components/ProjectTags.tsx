@@ -3,7 +3,7 @@ import ProjectSideNav from "./ProjectSideNav";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setTags } from "../redux/projectAppSlice";
 import axios from "axios";
-import { Button, Modal, Container, Col, Row, ListGroup } from "react-bootstrap";
+import { Button, Modal, Container, Col, Row, ListGroup, Card } from "react-bootstrap";
 import TagForm from "./tag/TagForm";
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
@@ -191,7 +191,7 @@ function ProjectTags() {
                     <Button
                       value={tag.tagId}
                       onClick={(e) =>
-                        removeTags((e.target as HTMLButtonElement).value)
+                        removeTags(tag.tagId)
                       }
                       variant="outline-dark"
                     >

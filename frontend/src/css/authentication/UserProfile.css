@@ -1,0 +1,31 @@
+.content{
+    padding-left: 10px;
+}
+
+div{
+    border: solid black 1px;
+   
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0 15px;
+  }
+
+  tr:nth-child(even){
+    background-color: gray;
+    color: white;
+  }
+
+td{
+    width: 150px;
+    text-align: center;
+    border: 1px solid black;
+    padding: 5px;
+  }
+
+  .btn-primary{
+    
+    background-color: #F26925;
+    border-color: #F26925;
+  }

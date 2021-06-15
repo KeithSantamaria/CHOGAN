@@ -1,13 +1,11 @@
-import {useState, useEffect, useMemo} from 'react';
+import {useState, useMemo} from 'react';
 import GridView from '../../components/home/GridView.component';
 import UserView from '../../components/home/UserView.component';
 import HomeListView from '../../components/home/HomeListView';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { selectProjectApp, setProjects} from '../../redux/projectAppSlice';
-import { store } from '../../redux/store';
 import axios from 'axios';
-
 import '../../css/home/home.css';
 
 import {Col, Row} from 'react-bootstrap';
@@ -32,7 +30,8 @@ export default function Home() {
     const getProjects = () => {
         // Test query string works; comment when ready to test prod
         const queryString = `http://localhost:42069/api/read/projects`;
-        const body = {params:{userId: "60c7f7afcfa7eb6bf04a410c"}};
+        // const body = {params:{userId: "60c7f7afcfa7eb6bf04a410c"}};
+        const body ={params:{userId: userAppState.id}};
 
         // Production query string; uncomment when ready to test prod
         // const queryString = `http://localhost:42069/api/read/projects`;

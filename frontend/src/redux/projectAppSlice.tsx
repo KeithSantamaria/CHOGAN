@@ -8,6 +8,7 @@ import {RootState,
 export interface Model {
     modelId: string;
     modelName: string;
+    projectId: string;
     modelMetadata:Array<{
         // index signature https://basarat.gitbook.io/typescript/type-system/index-signatures
         key: string, value: string
@@ -19,17 +20,20 @@ export interface Endpoint {
     endpointName: string;
     endpointUrlPattern: string;
     endpointDescription: string;
+    projectId: string;
 }
 
 export interface Tag {
     tagId: string;
     tagName: string;
     tagDescription: string;
+    projectId: string;
 }
 
 export interface UserStory {
     userStoryId: string;
     userStoryDescription: string;
+    projectId: string;
 }
 
 export interface Widget {
@@ -81,6 +85,7 @@ export interface ProjectAppState {
   wireframes: Array<Wireframe>;
   erd: ERDiagram;
   erds: Array<ERDiagram>;
+  createNewProjectForm: {projectName: string; projectDescription: string};
   createNewEndpointForm: {endpointName: string, urlPattern: string, endpointDescription: string};
   createNewModelForm: {modelName: string; modelMetadata:Array<{}>};
   createNewUserStoryForm: { userStoryName: string; userStoryDescription: string };
@@ -149,6 +154,10 @@ const initialState: ProjectAppState = {
     wireframeName: "",
     wireframeDescription: "",
     wireframeImg: "",
+  },
+  createNewProjectForm: {
+    projectName: "",
+    projectDescription: "",
   },
   createNewEndpointForm: {
     endpointName: "",
@@ -425,6 +434,24 @@ export const projectAppSlice = createSlice({
       state.widgets = action.payload;
     },
 
+    setCreateNewProjectForm: (     
+      state,
+      action: {
+        payload: {
+          fieldName: string;
+          value: string;
+        };
+      }
+    ) => {
+      const fieldName = action.payload.fieldName;
+      const value = action.payload.value;
+      // console.log(`Setting ${fieldName} to ${value}`);
+      state.createNewProjectForm = {
+        ...state.createNewProjectForm, 
+        [fieldName]: value,
+      }
+    },
+
     setCreateNewEndpointForm: (
       state,
       action: {
@@ -641,6 +668,7 @@ export const {
   setCreateNewWireframeForm,
   setCreateNewTagForm,
   setCreateNewUserStoryForm,
+  setCreateNewProjectForm,
   resetCreateNewWidgetForm,
   resetCreateNewTagForm,
   resetCreateNewEndpointForm,
@@ -648,6 +676,7 @@ export const {
   resetCreateNewUserStoryForm,
   resetCreateNewWireframeForm,
   resetCreateNewERDiagramForm,
+  
 } = projectAppSlice.actions;
 
 export const selectProjectApp = (state: RootState) => state.projectApp;

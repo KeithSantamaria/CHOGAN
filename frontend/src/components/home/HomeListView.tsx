@@ -1,21 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import {useAppDispatch, useAppSelector} from '../../redux/hooks';
-import {store} from '../../redux/store';
 
 import {Modal, Button, Col, Container, ListGroup, Row} from "react-bootstrap";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faPlus, faSortDown, faSortUp, faClipboardList} from "@fortawesome/free-solid-svg-icons";
+import {faPlus, faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
 
-import ProjectElipsisBtn from './modal/ProjectElipsisBtn';
 import CreateProjectForm from "../home/form/CreateProjectForm";
 import ProjectList from "./ProjectList.component";
 import "../../css/home/home-list-view.css";
 
 function HomeListView(props: any){
-    const projects = useAppSelector((state) => state.projectApp.sampleProjects);
 
     const [active, setActive] = useState(false);
-    const [sortedArray, setSortedArray] = useState([]);
     let array = [...props.projects];
 
     const [show, setShow] = useState(false);
@@ -71,6 +66,8 @@ function HomeListView(props: any){
             </Modal>
         )
     }
+
+    
 
     const tsx = (
         <div>

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: client-app-container
-        image: chogan/client-test:0.0.1
+        image: chogan/client-app
         imagePullPolicy: Always
         resources:
           limits:
@@ -34,6 +34,5 @@ spec:
   ports:
   - port: 80
     targetPort: 80
-    nodePort: 31000
-  type: NodePort
+    protocol: TCP
 

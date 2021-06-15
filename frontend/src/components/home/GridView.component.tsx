@@ -10,7 +10,9 @@ import '../../css/home/create-new-project.css';
 
 export default function GridView(props: any) {
     const [active, setActive] = useState(false);
-    const [sortedArray, setSortedArray] = useState([]);
+    let array = [...props.projects];
+
+    console.log(props.projects);
 
     const [show, setShow] = useState(false);
 
@@ -19,23 +21,20 @@ export default function GridView(props: any) {
 
     useEffect(() => {
         if(active) {
-            props.projects.sort((a:any, b:any) => a.name > b.name ? 1 : -1)
-            setSortedArray(props.projects);
-        } else {
-            props.projects.sort((a:any, b:any) => a.name > b.name ? -1 : 1)
-            setSortedArray(props.projects);
+            array.sort((a:any, b:any) => a.projectName > b.projectName ? 1 : -1)
+        } 
+        else {
+            array.sort((a:any, b:any) => a.projectName > b.projectName ? -1 : 1)
         }
 
-    },[active, props.projects]);
+    },[active, array]);
 
     const toggle = () => { 
         if(active === false) {
             setActive(true);
-            // console.log("Sort" + JSON.stringify(sortedArray));
         }
         if(active === true) {
             setActive(false);
-            // console.log("Not" + JSON.stringify(sortedArray));
         }
         return null;
     }
@@ -55,6 +54,7 @@ export default function GridView(props: any) {
                 onHide={handleClose}
                 backdrop="static"
                 size="lg"
+                centered
             >
                 <Modal.Header closeButton>
                     {/* <Modal.Title>New Project</Modal.Title> */}
@@ -103,7 +103,7 @@ export default function GridView(props: any) {
 
                 <Row>
                     <Col xs={11}>
-                        <ProjectCard projects= {sortedArray}/>
+                        <ProjectCard projects= {array}/>
                     </Col>
 
                     <Col xs={1}>

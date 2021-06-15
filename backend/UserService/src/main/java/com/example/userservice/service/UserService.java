@@ -21,34 +21,38 @@ public class UserService {
 
     public User newUser(User user) {
         if(user.getId() == null) {
-            log.info("IN THE IF STATEMENT:" + user);
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setSecurityAnswer(passwordEncoder.encode(user.getSecurityAnswer()));
-            return userRepository.save(user);
-//            try {
-//                log.info("IN THE TRY STATEMENT");
-//                user.setPassword(passwordEncoder.encode(user.getPassword()));
-//                user.setSecurityAnswer(passwordEncoder.encode(user.getSecurityAnswer()));
-//                log.info("AFTER HASHING:" + user);
-//                return userRepository.save(user);
-//            } catch (Exception exception) {
-//                log.info("AFTER EXCEPTION");
-//                return null;
-//            }
+            log.info("ATTEMPTING TO CREATE USER");
+            if ( user.getPassword() != null || user.getEmail() != null || user.getSecurityAnswer() != null ){
+                log.info("ATTEMPTING TO ENCRYPT SENSITIVE INFORMATION");
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+                user.setSecurityAnswer(passwordEncoder.encode(user.getSecurityAnswer()));
+                log.info("ATTEMPTING SAVING NEW USER");
+                return userRepository.save(user);
+            } else {
+                log.info("ABORTING CREATION: INVALID USER");
+                return null;
+            }
         } else {
-            log.info("IN THE ELSE");
+            log.info("ABORTING CREATION: USER ALREADY EXISTS");
             return null;
         }
     }
 
     public User updateUser(User user) {
-        System.out.println(user.toString());
         if(user.getId() == null) {
+            log.info("ABORTING UPDATE: USER DOES NOT EXIST");
             return null;
         } else {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setSecurityAnswer(passwordEncoder.encode(user.getSecurityAnswer()));
-            return userRepository.save(user);
+            log.info("ATTEMPTING TO ENCRYPT SENSITIVE INFORMATION");
+            if ( user.getPassword() != null || user.getEmail() != null || user.getSecurityAnswer() != null ) {
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+                user.setSecurityAnswer(passwordEncoder.encode(user.getSecurityAnswer()));
+                log.info("ATTEMPTING SAVING UPDATED USER");
+                return userRepository.save(user);
+            } else {
+                log.info("ABORTING CREATION: INVALID USER");
+                return null;
+            }
         }
     }
 

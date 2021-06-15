@@ -85,6 +85,7 @@ export interface ProjectAppState {
   wireframes: Array<Wireframe>;
   erd: ERDiagram;
   erds: Array<ERDiagram>;
+  createNewProjectForm: {userId: string; projectName: string; projectDescription: string}
   createNewEndpointForm: {endpointName: string, urlPattern: string, endpointDescription: string};
   createNewModelForm: {modelName: string; modelMetadata:Array<{}>};
   createNewUserStoryForm: { userStoryName: string; userStoryDescription: string };
@@ -153,6 +154,11 @@ const initialState: ProjectAppState = {
     wireframeName: "",
     wireframeDescription: "",
     wireframeImg: "",
+  },
+  createNewProjectForm: {
+    userId: "",
+    projectName: "",
+    projectDescription: "",
   },
   createNewEndpointForm: {
     endpointName: "",
@@ -427,6 +433,22 @@ export const projectAppSlice = createSlice({
     ) => {
       console.log("Dispatching setProject reducer with aciton: ", action);
       state.widgets = action.payload;
+    },
+
+    setCreateNewProjectForm: (     state,
+      action: {
+        payload: {
+          fieldName: string;
+          value: string;
+        };
+      }
+    ) => {
+      const fieldName = action.payload.fieldName;
+      const value = action.payload.value;
+      console.log(`Setting ${fieldName} to ${value}`);
+      state.createNewProjectForm = {
+        ...state.createNewProjectForm, [fieldName]: value,
+      }
     },
 
     setCreateNewEndpointForm: (

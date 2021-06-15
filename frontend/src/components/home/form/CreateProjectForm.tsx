@@ -1,14 +1,47 @@
 import {Button, Form} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import {FormEvent, useState} from "react";
+import { selectProjectApp, setProjects } from "../../../redux/projectAppSlice";
+import {  useAppDispatch,useAppSelector } from "../../../redux/hooks";
+import { currentUser } from "../../../redux/userSlice";
+import axios from "axios";
 
 export default function CreateProjectForm(props:any){
+    const projectAppState= useAppSelector(selectProjectApp);
+    const userAppState= useAppSelector(currentUser);
     const [projectName, setProjectName] = useState("");
     const [description, setDescription]= useState("");
+    const dispatch = useAppDispatch();
+    
+    const submit =() => {
+        const queryString = "https://localhost:42069/api/create/project";
 
-    const submit =(e:FormEvent)=> {
-        e.preventDefault();
-    }
+        if (
+            projectAppState.createNewProjectForm.projectName === "" ||
+            projectAppState.createNewProjectForm.projectDescription === ""
+        ) {
+            alert("There is nothing to add");
+        } else {
+            const project = {
+                tagName: projectAppState.createNewProjectForm.projectName,
+                tagDescription: projectAppState.createNewProjectForm.projectDescription,
+                userId: userAppState.id
+            };
+            console.log(project);
+
+            axios
+                .post(queryString, project)
+                .then((response) => {
+                    console.log("response", response);
+                    const projectData = response.data;
+                    dispatch(setProjects(projectData));
+                    // dispatch(resetCreateNewTagForm());
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    };
 
     return(
     <Container className="create-proj-form-container">

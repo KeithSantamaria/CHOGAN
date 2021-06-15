@@ -25,7 +25,7 @@ const ModelForm = () => {
   const dispatch = useAppDispatch();
   const fieldRef= React.createRef() as any;
   const typeRef= React.createRef() as any;
-
+  const projectId = projectAppState.project.projectId;
   //added
   //1. change input boxes to empty on on addRow() DONE
   //2. send tempData JSON to modelData through dispatch
@@ -45,9 +45,6 @@ const ModelForm = () => {
   };
 
   const addModel = () => {
-    // Test
-    const projectId = "60bc36b65d2b0da1deb9ada2";
-
     const queryString = `http://localhost:42069/api/create/project/model`;
     if (
       projectAppState.createNewModelForm.modelName === "" ||
@@ -58,10 +55,6 @@ const ModelForm = () => {
       const model = {
         modelName: projectAppState.createNewModelForm.modelName,
         modelMetadata: tempData,
-        //production
-        //projectId: projectAppState.project.projectId,
-
-        //test
         projectId: projectId,
       };
       console.log(model);

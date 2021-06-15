@@ -14,19 +14,14 @@ function ProjectTags() {
   const [modalShow, setModalShow] = React.useState(false);
   const handleOpen = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
-
   const [modalShowUpdate, setModalShowUpdate] = React.useState(false);
   const handleOpenUpdate = () => setModalShowUpdate(true);
   const handleCloseUpdate = () => setModalShowUpdate(false);
-
   const [tagID, setTag] = React.useState("");
-
   const dispatch = useAppDispatch();
+  const projectId = projectAppState.project.projectId;
 
   const getTags = () => {
-    // Test
-    const projectId = "60bc36b65d2b0da1deb9ada2";
-
     const queryString = `http://localhost:42069/api/read/project/tags`;
     const body = {
       params: {

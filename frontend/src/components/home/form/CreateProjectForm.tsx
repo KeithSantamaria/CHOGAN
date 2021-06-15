@@ -15,7 +15,6 @@ export default function CreateProjectForm(props: any) {
   const projectAppState = useAppSelector(selectProjectApp);
   const userAppState = useAppSelector(currentUser);
   const dispatch = useAppDispatch();
-
   const formChangeHandler = (event: any) => {
     console.log(event.target.name);
     console.log(event.target.value);

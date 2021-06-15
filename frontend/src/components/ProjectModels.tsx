@@ -13,14 +13,10 @@ function ProjectModels() {
   const handleOpen = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
   const dispatch = useAppDispatch();
+  const projectId = projectAppState.project.projectId;
 
   const getModels = () => {
-    // Production
-    // const queryString = `http://localhost:42069/api/read/project?projectId=${projectId}`;
-
-    // Test
-    const queryString = `http://localhost:42069/api/read/models`;
-    const projectId = "60bc36b65d2b0da1deb9ada2";
+    const queryString = `http://localhost:42069/api/read/project/models`;
     const body = {
       params: {
         projectId: projectId,

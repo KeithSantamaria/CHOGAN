@@ -97,7 +97,6 @@ const ProjectGeneralInfo = () => {
         <CardDeck style={{paddingBottom: '25px'}}>
           <Card>
             <Card.Body>
-              {/* <Card.Title>{userAppState.user.userName} - {projectName}</Card.Title> */}
               <Card.Title><h4>Project Description</h4></Card.Title>
 
               <Card.Text>{projectAppState.project.projectDescription}</Card.Text>

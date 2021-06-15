@@ -32,6 +32,7 @@ public class User {
 
 	@Id
 	String id;
+	@NotEmpty
 	String password; // salted
 	@NotEmpty
 	@Indexed(unique = true)

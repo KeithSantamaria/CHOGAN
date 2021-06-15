@@ -8,7 +8,6 @@ export default function CreateProjectForm(props:any){
 
     const submit =(e:FormEvent)=> {
         e.preventDefault();
-        alert("qye pasosoo" + projectName+description);
     }
 
     return(

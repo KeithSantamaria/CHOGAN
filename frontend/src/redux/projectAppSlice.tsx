@@ -15,6 +15,22 @@ interface createProjectPayload {
   projectDescription : string;
 }
 
+interface createWidgetPayload {
+  projectId: string;
+  widgetName: string;
+  widgetDescription : string;
+}
+
+export const createWidget = createAsyncThunk (
+  'projects/createWidget',
+  async (payload : createWidgetPayload) => {
+    const response = axios.post("http://localhost:42069/api/create/project/widget", payload)
+    .then( (response) => response.data)
+    .catch( (error) => {console.log(error)});
+  return response;
+  }
+);
+
 export const createProject = createAsyncThunk (
   'projects/createProject',
   async (payload : createProjectPayload) => {
@@ -34,19 +50,6 @@ export const getAllProjects = createAsyncThunk(
     return response;
   }
 );
-
-
-// //        axios
-// .get(queryString, body)
-// .then((response) => {
-//   console.log("response", response);
-//   const projectData = response.data;
-//   dispatch(setProjects(projectData));
-// })
-// .catch((error) => {
-//   console.log("There was an error: ", error);
-// });
-
 
 export interface Model {
     modelId: string;
@@ -701,6 +704,15 @@ export const projectAppSlice = createSlice({
       (state, action) => {
         console.log("Dispatching createProject reducer with action: ", action);
         state.projects.push(action.payload);
+        return state;
+      }
+    )
+
+    builder.addCase(
+      createWidget.fulfilled,
+      (state, action) => {
+        console.log("Dispatching createWidget reducer with action: ", action);
+        state.widgets.push(action.payload);
         return state;
       }
     )

@@ -1,63 +1,38 @@
+import {useState} from 'react';
 import axios from "axios";
 import { Button, Form, Container } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import {
-  resetCreateNewWidgetForm,
-  selectProjectApp,
-  setCreateNewWidgetForm,
-  setProject,
-} from "../../redux/projectAppSlice";
+import {createWidget,selectProjectApp,} from "../../redux/projectAppSlice";
 
 const WidgetForm = (project: any) => {
+  const [widgetName, setWidgetName] = useState("");
+  const [widgetDescription, setDescription] = useState("");
+
   const projectAppState = useAppSelector(selectProjectApp);
   const dispatch = useAppDispatch();
   const projectId = projectAppState.project.projectId;
 
-  const formChangeHandler = (event: any) => {
-    const fieldName = event.target.name;
-    const value = event.target.value;
-    dispatch(setCreateNewWidgetForm({ fieldName, value }));
-  };
-
-  const addWidget = () => {
-    const queryString = `http://localhost:42069/api/create/project/widget`;
-    if (
-      projectAppState.createNewWidgetForm.widgetDescription === "" ||
-      projectAppState.createNewWidgetForm.widgetName === ""
-    ) {
-      alert("There is nothing to add");
-    } else {
-      const widget = {
-        widgetName: projectAppState.createNewWidgetForm.widgetName,
-        widgetDescription: projectAppState.createNewWidgetForm.widgetDescription,
-        projectId: projectId,
-      };
-      console.log(widget);
-
-      axios
-        .post(queryString, widget)
-        .then((response) => {
-          console.log("response", response);
-          const projectData = response.data;
-          dispatch(setProject(projectData));
-          dispatch(resetCreateNewWidgetForm());
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+  const submit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const widget = {
+      widgetName :widgetName,
+      widgetDescription : widgetDescription,
+      projectId : projectId
     }
-  };
+    dispatch(createWidget(widget));
+  }
 
   return (
     <Container className="create-proj-form-container">
-      <Form>
+      <Form onSubmit = {submit}>
         <Form.Group className="project-name-wrapper" controlId="exampleForm.ControlInput1">
           <Form.Label>Widget Name</Form.Label>
           <Form.Control
             name="widgetName"
             type="text"
             placeholder="Documentation"
-            onChange={formChangeHandler}
+            onChange={(e) => {setWidgetName(e.target.value)}}
+            required
           />
         </Form.Group>
         <Form.Group controlId="exampleForm.ControlTextarea1">
@@ -67,10 +42,11 @@ const WidgetForm = (project: any) => {
             name="widgetDescription"
             as="textarea"
             rows={3}
-            onChange={formChangeHandler}
+            onChange={(e) => {setDescription(e.target.value)}}
+            required
           />
         </Form.Group>
-        <Button onClick={addWidget}>Save</Button>
+        <Button type='submit'>Save</Button>
       </Form>
     </Container>
   );

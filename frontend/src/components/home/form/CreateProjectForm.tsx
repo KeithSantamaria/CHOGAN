@@ -2,6 +2,7 @@ import { Button, Form } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import { FormEvent, useState } from "react";
 import {
+  resetCreateNewProjectForm,
   selectProjectApp,
   setCreateNewProjectForm,
   setProjects,
@@ -32,20 +33,25 @@ export default function CreateProjectForm(props: any) {
     ) {
       alert("There is nothing to add");
     } else {
+      // const project = {
+      //   projectName: projectAppState.createNewProjectForm.projectName,
+      //   projectDescription: projectAppState.createNewProjectForm.projectDescription,
+      //   userId: userAppState.id,
+      // };
       const project = {
-        projectName: projectAppState.createNewProjectForm.projectName,
-        projectDescription: projectAppState.createNewProjectForm.projectDescription,
-        userId: userAppState.id,
+        userId: "60c821007f3524412756f4f8",
+        projectName: "Project 2",
+        projectDescription: "This is the description of project 2.",
       };
-      console.log(project);
 
+      console.log(project);
       axios
         .post(queryString, project)
         .then((response) => {
           console.log("response", response);
           const projectData = response.data;
           dispatch(setProjects(projectData));
-          // dispatch(resetCreateNewTagForm());
+          dispatch(resetCreateNewProjectForm());
         })
         .catch((error) => {
           console.log(error);
@@ -64,6 +70,7 @@ export default function CreateProjectForm(props: any) {
           <Form.Label>Project Name</Form.Label>
           <Form.Control
             name="projectName"
+            type="text"
             placeholder="Enter project name"
             onChange={formChangeHandler}
           />
@@ -72,6 +79,7 @@ export default function CreateProjectForm(props: any) {
           <Form.Label>Description</Form.Label>
           <Form.Control
             as="textarea"
+            type="text"
             name="projectDescription"
             className="modal-create-form-textarea"
             rows={5}

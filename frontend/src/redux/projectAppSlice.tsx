@@ -638,6 +638,11 @@ export const projectAppSlice = createSlice({
       state.createNewERDForm.erdName = "";
       state.createNewERDForm.erdDescription = "";
       state.createNewERDForm.erdImageUrl = "";
+    },
+
+    resetCreateNewProjectForm: (state)=> {
+      state.createNewProjectForm.projectDescription = "";
+      state.createNewProjectForm.projectName = ""
     }
   },
 });
@@ -676,7 +681,7 @@ export const {
   resetCreateNewUserStoryForm,
   resetCreateNewWireframeForm,
   resetCreateNewERDiagramForm,
-  
+  resetCreateNewProjectForm,
 } = projectAppSlice.actions;
 
 export const selectProjectApp = (state: RootState) => state.projectApp;

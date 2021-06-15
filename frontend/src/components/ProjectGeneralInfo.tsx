@@ -13,11 +13,10 @@ import WidgetComponent from "./general/WidgetComponent";
 
 import '../css/project-service/general-info.css';
 
-// For production, project will be passed as a prop from Project Card (built by Home group)
-// const ProjectGeneralInfo = ({project} : any ) => {
 const ProjectGeneralInfo = () => {
   const dispatch = useAppDispatch();
   const projectAppState = useAppSelector(selectProjectApp);
+  const project = projectAppState.project;
   const [modalShow, setModalShow] = React.useState(false);
 
   // Code for grabbing user from User Slice
@@ -27,14 +26,14 @@ const ProjectGeneralInfo = () => {
 
   const getProject = () => {
     // Production
-    // const queryString = `http://localhost:42069/api/read/project?projectId=${projectId}`;
+    const queryString = `http://localhost:42069/api/read/project`;
 
     // Test
-    const queryString = `http://localhost:42069/api/read/project`;
-    const projectId = "60bc36b65d2b0da1deb9ada2";
+    // const queryString = `http://localhost:42069/api/read/project`;
+    // const projectId = "60bc36b65d2b0da1deb9ada2";
     const body = {
       params: {
-        projectId: projectId,
+        projectId: project.projectId,
       },
     };
     axios

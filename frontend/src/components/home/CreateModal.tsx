@@ -24,7 +24,7 @@ export default function CreateModal() {
                 {/* <Modal.Title>New Project</Modal.Title> */}
             </Modal.Header>
             <Modal.Body>
-                <CreateProjectForm />
+                <CreateProjectForm handleClose={handleClose}/>
             </Modal.Body>
         </Modal>
     )

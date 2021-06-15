@@ -5,23 +5,26 @@ import { selectProjectApp, setTags } from "../redux/projectAppSlice";
 import axios from "axios";
 import { Button, Modal, Container, Col, Row, ListGroup, Card } from "react-bootstrap";
 import TagForm from "./tag/TagForm";
+import UpdateTag from "./UpdateTag";
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faTrash, faEdit} from "@fortawesome/free-solid-svg-icons";
 
 function ProjectTags() {
   const projectAppState = useAppSelector(selectProjectApp);
+  const [propertyId, setPropertyId] = React.useState("");
   const [modalShow, setModalShow] = React.useState(false);
+  const [updateShow, setUpdateShow] = React.useState(false);
   const handleOpen = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
-  const [modalShowUpdate, setModalShowUpdate] = React.useState(false);
-  const handleOpenUpdate = () => setModalShowUpdate(true);
-  const handleCloseUpdate = () => setModalShowUpdate(false);
-  const [tagID, setTag] = React.useState("");
+
+  const handleUpdateOpen = () => setUpdateShow(true);
+  const handleUpdateClose = () => setUpdateShow(false);
   const dispatch = useAppDispatch();
-  const projectId = projectAppState.project.projectId;
+  const names = ProjectTags.name;
 
   const getTags = () => {
+    const projectId = "60c2aecdc4c64aa2db316e6d";
     const queryString = `http://localhost:42069/api/read/project/tags`;
     const body = {
       params: {
@@ -66,7 +69,29 @@ function ProjectTags() {
     );
   };
 
-  const removeTags = (id: String) => {
+  const tagUpdate = () => {
+    return (
+        <Modal
+            className="modal-create-wrapper"
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            show={updateShow}
+            onHide={handleUpdateClose}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-vcenter">
+              Update
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <UpdateTag id = {propertyId} funcName ={names}/>
+
+          </Modal.Body>
+        </Modal>
+    );
+  };
+  function removeTags(id: string) {
     const queryDeleteString = `http://localhost:42069/api/delete/project/tag`;
     const body = {
       params: {
@@ -76,73 +101,33 @@ function ProjectTags() {
     console.log("request body: ", queryDeleteString, body);
 
     axios
-      .delete(queryDeleteString, body)
-      .then((response) => {
-        console.log("response", response);
-        const tagData = response.data;
-        dispatch(setTags(tagData));
-      })
-      .catch((error) => {
-        console.log("There was an error on deleting: ", error);
-      });
+        .delete(queryDeleteString, body)
+        .then((response) => {
+          console.log("response", response);
+          const tagData = response.data;
+          dispatch(setTags(tagData));
+        })
+        .catch((error) => {
+          console.log("There was an error on deleting: ", error);
+        });
   }
 
-  const editTag = (e: any) => {
-    console.log(e.target.value);
-  }
+  // function callUpdate(tid: string) {
+  //   var promise = new Promise( () => {
+  //     setPropertyId(tid);
+  //   });
+  //   promise.then(() => {handleUpdateOpen()})
+  //   console.log("update 1231231231", propertyId)
+  //
+  // }
 
-  const tagModalUpdate = () => {
-    return (
-      <Modal
-        className="modal-create-wrapper"
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-        show={modalShowUpdate}
-        onHide={handleCloseUpdate}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Edit Tag
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {tagID}
-          {/* <TagForm project={projectAppState.project} /> */}
-        </Modal.Body>
-      </Modal>
-    );
-  };
+  function callUpdate(tid: string) {
+    setPropertyId(tid);
+    handleUpdateOpen();
+  }
   return (
     <>
       <ProjectSideNav active={"tag"}/>
-
-      {/* <Container id="pg-content">
-        {projectAppState.tags.map((tag: any) => {
-          return (
-            <Card>
-              <Card.Body>
-                <Card.Title>{tag.tagName}</Card.Title>
-                <Card.Text>{tag.tagDescription}</Card.Text>
-                <Button
-                  variant="danger"
-                  value={tag.tagId}
-                  onClick={(e) =>
-                    removeTags((e.target as HTMLButtonElement).value)
-                  }
-                >
-                  Delete
-                </Button>
-                <Button variant="info">Modify</Button>
-              </Card.Body>
-            </Card>
-          );
-        })}
-        <Button variant="primary" onClick={handleOpen}>
-          New Tag
-        </Button>
-        {tagModal()}
-      </Container> */}
 
       <Container id="pg-content">
         <Row style={{paddingBottom: '5px'}}>
@@ -185,7 +170,8 @@ function ProjectTags() {
                   <span className="float-right">  
                     <Button
                       value={tag.tagId}
-                      onClick={(e) =>
+                      onClick={(a) =>
+
                         removeTags(tag.tagId)
                       }
                       variant="outline-dark"
@@ -200,8 +186,10 @@ function ProjectTags() {
                     <span style={{paddingRight: '1em'}}></span>
 
                     <Button
-                      value={tag.tagId}
-                      onClick={editTag}
+                       value={tag.tagId}
+                       onClick={(e) =>
+                           callUpdate(tag.tagId)}
+                      // onClick={(e) => editTag((e.target as HTMLButtonElement).value)}
                       variant="outline-warning"
                     >
                       <FontAwesomeIcon
@@ -219,7 +207,7 @@ function ProjectTags() {
         <br></br>
         
         {tagModal()}
-        {tagModalUpdate()}
+        {tagUpdate()}
       </Container>
     </>
   );

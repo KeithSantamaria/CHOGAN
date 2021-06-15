@@ -1,16 +1,49 @@
 .content{
     padding-left: 10px;
+
 }
 
-div{
-    border: solid black 1px;
+.user-background{
+  margin-left:2em;
+  background: #2f3545 !important;
+  border-radius: 10px 10px 0 0;
+  height: 97vh;
+  overflow: scroll;
+  top: 0; 
+  left: 0;
+}
+
+.profile-box{
+  background-color: white;
+  border-radius: 10px;
+  min-width: 690px;
+  min-height: 440px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% , -50%);
+  position: absolute;
+  text-align: center;
    
 }
 
+.profile-content{
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% , -50%);
+  position: absolute;
+}
+
+.edit-profile-button{
+  top: 90%;
+  left: 50%;
+  transform: translate(-50% , -50%);
+  position: absolute;
+}
+
+
 table {
     border-collapse: separate;
-    border-spacing: 0 15px;
-  }
+  } 
 
   tr:nth-child(even){
     background-color: gray;

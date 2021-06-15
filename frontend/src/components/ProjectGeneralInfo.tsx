@@ -25,7 +25,6 @@ const ProjectGeneralInfo = () => {
   const getProject = () => {
     // Production
     const queryString = `http://localhost:42069/api/read/project`;
-
     const body = {
       params: {
         projectId: project.projectId,

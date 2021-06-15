@@ -1,61 +1,29 @@
 import { Button, Form } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import { FormEvent, useState } from "react";
-import {
-  resetCreateNewProjectForm,
-  selectProjectApp,
-  setCreateNewProjectForm,
-  setProjects,
-} from "../../../redux/projectAppSlice";
+import { useState } from "react";
+import {createProject} from "../../../redux/projectAppSlice";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { currentUser } from "../../../redux/userSlice";
-import axios from "axios";
 
 export default function CreateProjectForm(props: any) {
-  const projectAppState = useAppSelector(selectProjectApp);
-  const userAppState = useAppSelector(currentUser);
+  const currentlyLoggedUser = useAppSelector(currentUser);
+  const [projectName, setProjectName] = useState("");
+  const [description, setDescription] = useState("");
   const dispatch = useAppDispatch();
 
-
-
-  // const formChangeHandler = (event: any) => {
-  //   const fieldName = event.target.name;
-  //   const value = event.target.value;
-  //   dispatch(setCreateNewProjectForm({ fieldName, value }));
-  // };
-
-  const submit = () => {
-    const queryString = "https://localhost:42069/api/create/project";
-    if (
-      projectAppState.createNewProjectForm.projectName === "" ||
-      projectAppState.createNewProjectForm.projectDescription === ""
-    ) {
-      alert("There is nothing to add");
-    } else {
-      const project = {
-        projectName: projectAppState.createNewProjectForm.projectName,
-        projectDescription: projectAppState.createNewProjectForm.projectDescription,
-        userId: userAppState.id,
-      };
-      console.log(project);
-
-      axios
-        .post(queryString, project)
-        .then((response) => {
-          console.log("response", response);
-          const projectData = response.data;
-          dispatch(setProjects(projectData));
-          dispatch(resetCreateNewProjectForm());
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+  const submit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const payload = {
+      userId : currentlyLoggedUser.id,
+      projectName : projectName,
+      projectDescription : description
     }
+    dispatch(createProject(payload));
   };
 
   return (
     <Container className="create-proj-form-container">
-      <Form>
+      <Form onSubmit = {submit}>
         <h4>New Project</h4>
         <Form.Group className="project-name-wrapper">
           <Form.Label>Project Name</Form.Label>
@@ -63,7 +31,8 @@ export default function CreateProjectForm(props: any) {
             name="projectName"
             type="text"
             placeholder="Enter project name"
-            // onChange={formChangeHandler}
+            onChange={(e) => {setProjectName(e.target.value)}}
+            required
           />
         </Form.Group>
         <Form.Group>
@@ -74,7 +43,8 @@ export default function CreateProjectForm(props: any) {
             name="projectDescription"
             className="modal-create-form-textarea"
             rows={5}
-            // onChange={formChangeHandler}
+            onChange={(e) => {setDescription(e.target.value)}}
+            required
           />
         </Form.Group>
 
@@ -84,7 +54,7 @@ export default function CreateProjectForm(props: any) {
               Close
             </Button>
           </span>
-          <Button variant="primary" onClick={submit}>
+          <Button variant="primary" type='submit'>
             Create
           </Button>
         </span>

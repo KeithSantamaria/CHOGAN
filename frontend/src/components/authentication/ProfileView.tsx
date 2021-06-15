@@ -32,19 +32,15 @@ export default function Profile(){
                 <table>
                     <tr>
                         <td>email: </td>
-                        <td>{payload.email}</td> 
-                    </tr>
-                    <tr>
-                        <td>username: </td>
-                        <td>{payload.username}</td> 
+                        <td>{currentlyLoggedUser.email}</td> 
                     </tr>
                     <tr>
                         <td>First Name:</td> 
-                        <td>{payload.firstName}</td>
+                        <td>{currentlyLoggedUser.firstName}</td>
                     </tr>
                     <tr>
                         <td>Last Name:</td> 
-                        <td>{payload.lastName}</td>
+                        <td>{currentlyLoggedUser.lastName}</td>
                     </tr>
                 </table>
             </div>

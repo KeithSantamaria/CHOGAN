@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   resetCreateNewUserStoryForm,
   selectProjectApp,
-  setCreateNewEndpointForm,
   setCreateNewUserStoryForm,
   setUserStories,
 } from "../../redux/projectAppSlice";

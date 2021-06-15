@@ -8,6 +8,8 @@ import com.example.userservice.repository.UserRepo;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
+
 @Log4j2
 @Service
 public class UserService {
@@ -43,16 +45,19 @@ public class UserService {
             log.info("ABORTING UPDATE: USER DOES NOT EXIST");
             return null;
         } else {
-            log.info("ATTEMPTING TO ENCRYPT SENSITIVE INFORMATION");
-            if ( user.getPassword() != null || user.getEmail() != null || user.getSecurityAnswer() != null ) {
-                user.setPassword(passwordEncoder.encode(user.getPassword()));
-                user.setSecurityAnswer(passwordEncoder.encode(user.getSecurityAnswer()));
-                log.info("ATTEMPTING SAVING UPDATED USER");
-                return userRepository.save(user);
-            } else {
-                log.info("ABORTING CREATION: INVALID USER");
-                return null;
+            //this should always be true, not clean but sometimes you gotta get dirty
+            User currentUser = userRepository.findById(user.getId()).orElse(null) ;
+
+            if ( user.getPassword() == null){
+                user.setPassword( currentUser.getPassword());
             }
+            if (user.getSecurityAnswer() == null){
+                user.setSecurityAnswer( currentUser.getSecurityAnswer() );
+            }
+
+            log.info("USER in LOGIN " + currentUser.toString());
+            log.info("ATTEMPTING SAVING UPDATED USER");
+            return userRepository.save(user);
         }
     }
 

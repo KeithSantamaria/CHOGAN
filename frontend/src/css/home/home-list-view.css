@@ -48,6 +48,7 @@
 }
 
 .project-list-item:hover .fa-ellipsis-h{
+    z-index: 1000;
     color: #f5f5f5;
     transition: 0.2s ease-in-out;
     background-color: #2f3545;
@@ -55,5 +56,9 @@
     transform: scale(1.1);
     opacity: 1.0;
     border-radius: 25px;
+}
+
+.project-list-item .project-name:hover {
+    text-decoration: underline;
 }
 

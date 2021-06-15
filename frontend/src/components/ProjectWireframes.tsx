@@ -40,6 +40,7 @@ function ProjectWireframes() {
     getWireframes();
   }, []);
 
+
   const wireframeModal = () => {
     return (
       <Modal

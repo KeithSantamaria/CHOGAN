@@ -64,7 +64,6 @@ const ProjectERDs = () => {
     )
   }
 
-
   return (
     <>
       <ProjectSideNav active={"erd"} style={{paddingRight: "1000px"}}/>

@@ -4,7 +4,7 @@ import UserView from '../../components/home/UserView.component';
 import HomeListView from '../../components/home/HomeListView';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { selectProjectApp, setProjects} from '../../redux/projectAppSlice';
+import { getAllProjects, selectProjectApp, setProjects} from '../../redux/projectAppSlice';
 import axios from 'axios';
 import '../../css/home/home.css';
 
@@ -35,18 +35,8 @@ export default function Home() {
 
         // Production query string; uncomment when ready to test prod
         // const queryString = `http://localhost:42069/api/read/projects`;
-        
-        axios
-          .get(queryString, body)
-          .then((response) => {
-            console.log("response", response);
-            const projectData = response.data;
-            dispatch(setProjects(projectData));
-          })
-          .catch((error) => {
-            console.log("There was an error: ", error);
-          });
-      };
+        dispatch(getAllProjects(body));
+    };
 
       useMemo(() => {
         getProjects();

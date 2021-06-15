@@ -1,9 +1,52 @@
-import { createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import { ESMap, Map } from "typescript";
+import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import axios from "axios";
+import {RootState,} from "./store";
 
-import {RootState,
-    //  AppThunk
-  } from "./store";
+
+interface userIdPayload {
+  params:{
+    userId: string;
+  }
+};
+
+interface createProjectPayload {
+  userId : string;
+  projectName : string;
+  projectDescription : string;
+}
+
+export const createProject = createAsyncThunk (
+  'projects/createProject',
+  async (payload : createProjectPayload) => {
+    const response = axios.post("http://localhost:42069/api/create/project", payload)
+      .then( (response) => response.data)
+      .catch( (error) => {console.log(error)});
+    return response;
+  }
+);
+
+export const getAllProjects = createAsyncThunk(
+  'projects/getAllProjects',
+  async (payload : userIdPayload) => {
+    const response = axios.get("http://localhost:42069/api/read/projects", payload)
+      .then( (response) => response.data)
+      .catch(error => {console.log(error)});
+    return response;
+  }
+);
+
+
+// //        axios
+// .get(queryString, body)
+// .then((response) => {
+//   console.log("response", response);
+//   const projectData = response.data;
+//   dispatch(setProjects(projectData));
+// })
+// .catch((error) => {
+//   console.log("There was an error: ", error);
+// });
+
 
 export interface Model {
     modelId: string;
@@ -195,7 +238,6 @@ export const projectAppSlice = createSlice({
       console.log("Dispatching setEndPoint reudcer with action: ", action);
       state.project = action.payload;
     },
-
     setEndpoint: (
       state,
       action: {
@@ -644,6 +686,25 @@ export const projectAppSlice = createSlice({
       state.createNewProjectForm.projectName = ""
     }
   },
+  extraReducers : (builder) => {
+    builder.addCase(
+      getAllProjects.fulfilled,
+      (state, action) => {
+        console.log("Dispatching getAllProjects reducer with action: ", action);
+        state.projects = action.payload;
+        return state;
+      }
+    )
+
+    builder.addCase(
+      createProject.fulfilled,
+      (state, action) => {
+        console.log("Dispatching createProject reducer with action: ", action);
+        state.projects.push(action.payload);
+        return state;
+      }
+    )
+  }
 });
 
 export const {

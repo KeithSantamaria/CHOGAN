@@ -1,7 +1,6 @@
 import React, {useState} from "react";
-import axios from 'axios';
-import {useAppSelector, useAppDispatch} from '../redux/hooks';
-import {currentUser, setCurrentUser} from '../redux/userSlice';
+import {useAppSelector} from '../redux/hooks';
+import {currentUser} from '../redux/userSlice';
 import {Button, Container, Col} from 'react-bootstrap';
 import '../css/authentication/UserProfile.css';
 import Profile from "../components/authentication/Profile";
@@ -10,7 +9,6 @@ import ProfileForm from "../components/authentication/ProfileForm";
 
 export default function UserProfile(){
     const currentlyLoggedUser = useAppSelector(currentUser);
-    const userDispatch = useAppDispatch();
 
     const [profileFlag, setFlag] = useState(false);
     const[title, setTitle] = useState("User Profile");
@@ -18,7 +16,7 @@ export default function UserProfile(){
 
 
     React.useEffect(() => {
-        console.log(currentlyLoggedUser.currentUser.id);
+        console.log(currentlyLoggedUser.id);
       },[currentlyLoggedUser])
 
 

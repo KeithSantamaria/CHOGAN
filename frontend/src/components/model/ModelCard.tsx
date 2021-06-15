@@ -6,9 +6,6 @@ const ModelCard = ({model}:any) => {
         <Card>
         <Card.Body>
           <Card.Title>{model.modelName}</Card.Title>
-          {/* {model.modelMetadata.map((key:string, value:string) => {
-            <Card.Text>{key} : {value}</Card.Text>
-          })} */}
         </Card.Body>
       </Card>
     )

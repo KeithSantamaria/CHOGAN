@@ -16,16 +16,15 @@ export default function CreateProjectForm(props: any) {
   const userAppState = useAppSelector(currentUser);
   const dispatch = useAppDispatch();
 
-  const formChangeHandler = (event: any) => {
-    console.log(event.target.name);
-    console.log(event.target.value);
-    const fieldName = event.target.name;
-    const value = event.target.value;
-    dispatch(setCreateNewProjectForm({ fieldName, value }));
-  };
+
+
+  // const formChangeHandler = (event: any) => {
+  //   const fieldName = event.target.name;
+  //   const value = event.target.value;
+  //   dispatch(setCreateNewProjectForm({ fieldName, value }));
+  // };
 
   const submit = () => {
-    // console.log("Why is this submitting?");
     const queryString = "https://localhost:42069/api/create/project";
     if (
       projectAppState.createNewProjectForm.projectName === "" ||
@@ -64,7 +63,7 @@ export default function CreateProjectForm(props: any) {
             name="projectName"
             type="text"
             placeholder="Enter project name"
-            onChange={formChangeHandler}
+            // onChange={formChangeHandler}
           />
         </Form.Group>
         <Form.Group>
@@ -75,7 +74,7 @@ export default function CreateProjectForm(props: any) {
             name="projectDescription"
             className="modal-create-form-textarea"
             rows={5}
-            onChange={formChangeHandler}
+            // onChange={formChangeHandler}
           />
         </Form.Group>
 

@@ -1,0 +1,14 @@
+.card-wrapper {
+    box-shadow:
+    0 0px 0.7px -1px rgba(0, 0, 0, 0.024),
+    0 0px 1.7px -1px rgba(0, 0, 0, 0.044),
+    0 0px 3.5px -1px rgba(0, 0, 0, 0.058),
+    0 0px 7.3px -1px rgba(0, 0, 0, 0.071),
+    0 0px 20px -1px rgba(0, 0, 0, 0.1)
+  ;
+  
+}
+
+.card {
+    border: none;
+}

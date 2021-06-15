@@ -13,7 +13,7 @@ import java.util.Map;
 @Data
 @Document(collection = "models")
 public class Model {
-//    @Id
+    @Id
     private String modelId;
     private String projectId;
     private String modelName;

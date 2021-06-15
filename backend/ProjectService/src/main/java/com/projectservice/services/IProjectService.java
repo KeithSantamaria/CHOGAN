@@ -13,7 +13,11 @@ public interface IProjectService {
 
     Project findByProjectId(String projectId);
 
+    List<Project> getAllProjectsByUserId(String userId);
+
     Project update(Project project);
 
     void delete(String projectId);
+
+
 }

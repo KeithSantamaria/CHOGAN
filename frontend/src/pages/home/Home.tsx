@@ -13,9 +13,11 @@ import '../../css/home/home.css';
 import {Col, Row} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTh, faList} from "@fortawesome/free-solid-svg-icons";
+import { currentUser } from '../../redux/userSlice';
 
 export default function Home() {
     const projectAppState= useAppSelector(selectProjectApp);
+    const userAppState= useAppSelector(currentUser);
     const dispatch = useAppDispatch();
 
 
@@ -31,7 +33,7 @@ export default function Home() {
         const queryString = `http://localhost:42069/api/read/projects?userId=69`;
 
         // Production query string; uncomment when ready to test prod
-        // const queryString = `http://localhost:42069/api/read/project?projectId=${projectId}`; 
+        // const queryString = `http://localhost:42069/api/read/projects?userId=${currentUser.}`; 
         axios
           .get(queryString)
           .then((response) => {

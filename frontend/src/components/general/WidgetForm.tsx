@@ -1,13 +1,12 @@
 import axios from "axios";
-import React from "react";
-import { Button, Form } from "react-bootstrap";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { Button, Form, Container } from "react-bootstrap";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   resetCreateNewWidgetForm,
   selectProjectApp,
   setCreateNewWidgetForm,
   setProject,
-} from "../redux/projectAppSlice";
+} from "../../redux/projectAppSlice";
 
 const WidgetForm = (project: any) => {
   const projectAppState = useAppSelector(selectProjectApp);
@@ -50,9 +49,9 @@ const WidgetForm = (project: any) => {
   };
 
   return (
-    <div>
+    <Container className="create-proj-form-container">
       <Form>
-        <Form.Group controlId="exampleForm.ControlInput1">
+        <Form.Group className="project-name-wrapper" controlId="exampleForm.ControlInput1">
           <Form.Label>Widget Name</Form.Label>
           <Form.Control
             name="widgetName"
@@ -64,6 +63,7 @@ const WidgetForm = (project: any) => {
         <Form.Group controlId="exampleForm.ControlTextarea1">
           <Form.Label>Widget Description</Form.Label>
           <Form.Control
+            className="modal-create-form-textarea"
             name="widgetDescription"
             as="textarea"
             rows={3}
@@ -72,7 +72,7 @@ const WidgetForm = (project: any) => {
         </Form.Group>
         <Button onClick={addWidget}>Save</Button>
       </Form>
-    </div>
+    </Container>
   );
 };
 

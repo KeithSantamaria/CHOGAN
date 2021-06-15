@@ -33,6 +33,8 @@ export interface UserStory {
 }
 
 export interface Widget {
+    widgetId: string;
+    projectId: string;
     widgetName: string;
     widgetDescription: string;
 }
@@ -43,85 +45,49 @@ export interface Project {
     projectDescription: string;
     userId: string;
     projectStatus: string;
-    models: Array<Model>;
-    endpoints: Array <Endpoint>;
-    tags: Array<Tag>;
-    userStories: Array<UserStory>;
-    widgets: Array<Widget>;
 }
 
 export interface Wireframe {
-    wireframeId: string;
-    projectId: string;
-    wireframeName: string;
-    wireframeDescription: string;
-    wireframeImg: string;
+  wireframeId: string;
+  projectId: string;
+  wireframeName: string;
+  wireframeDescription: string;
+  wireframeImg: string;
 }
 
 export interface ERDiagram {
-    ERDiagramId: string;
-    projectId: string;
-    ERDiagramName: string;
-    ERDiagramDescription: string;
-    ERDiagramImg: string;
+  ERDiagramId: string;
+  projectId: string;
+  ERDiagramName: string;
+  ERDiagramDescription: string;
+  ERDiagramImageUrl: string;
 }
 
 export interface ProjectAppState {
-    projects : Array<Project>;
-    project: Project;
-    sampleProjects: Array<Project>;
-    model: Model;
-    endpoint: Endpoint;
-    tag: Tag;
-    userStory: UserStory;
-    widget:Widget;
-    ERDiagram: ERDiagram;
-    createNewEndPointForm: {endpointName: string, urlPattern: string, endpointDescription: string};
-    createNewPojoForm: {pojoName: string};
-    createNewUserStoryForm: {userStoryName: string};
-    createNewTagForm: {tagName: string, tagDescription: string};
-    createNewWidgetForm: {widgetName: string, widgetDescription: string},
-    //Bookmark for later - need to know how to upload photos 
-    createNewProjectERDForm: {erdName: string, erdDescription: string};
-    //Bookmark for later - need to know how to upload photos 
-    createNewProjectWireframeForm: {wireframeName: string, wireframeDescription: string}
-}
-
-export interface ProjectAppState {
-  projects: Array<Project>;
-  models: Array<Model>;
-  endpoints: Array<Endpoint>;
-  tags: Array<Tag>;
-  userStories: Array<UserStory>;
-  widgets: Array<Widget>;
-  wireframes: Array<Wireframe>;
-  ERDiagrams: Array<ERDiagram>;
+  projects : Array<Project>;
   project: Project;
+  // sampleProjects: Array<Project>;
   model: Model;
+  models: Array<Model>;
   endpoint: Endpoint;
+  endpoints: Array<Endpoint>;
   tag: Tag;
+  tags: Array<Tag>;
   userStory: UserStory;
+  userStories: Array<UserStory>;
   widget: Widget;
+  widgets: Array<Widget>;
   wireframe: Wireframe;
-  ERDiagram: ERDiagram;
-
-  createNewEndpointForm: {
-    endpointName: string;
-    urlPattern: string;
-    endpointDescription: string;
-  };
-  createNewModelForm: { modelName: string; modelMetadata: Array<{}> };
-  createNewUserStoryForm: { userStoryDescription: string };
-  createNewTagForm: { tagName: string; tagDescription: string };
-  createNewWidgetForm: { widgetName: string; widgetDescription: string };
-  //Bookmark for later - need to know how to upload photos
-  createNewERDForm: { erdName: string; erdDescription: string; erdImg: string};
-  //Bookmark for later - need to know how to upload photos
-  createNewWireframeForm: {
-    wireframeName: string;
-    wireframeDescription: string;
-    wireframeImg: string;
-  };
+  wireframes: Array<Wireframe>;
+  erd: ERDiagram;
+  erds: Array<ERDiagram>;
+  createNewEndpointForm: {endpointName: string, urlPattern: string, endpointDescription: string};
+  createNewModelForm: {modelName: string; modelMetadata:Array<{}>};
+  createNewUserStoryForm: { userStoryName: string; userStoryDescription: string };
+  createNewTagForm: {tagName: string, tagDescription: string};
+  createNewWidgetForm: {widgetName: string, widgetDescription: string},
+  createNewERDForm: {erdName: string, erdDescription: string; erdImageUrl: string};
+  createNewWireframeForm: {wireframeName: string, wireframeDescription: string; wireframeImageUrl: string}
 }
 
 const initialState: ProjectAppState = {
@@ -132,9 +98,10 @@ const initialState: ProjectAppState = {
   userStories: [],
   widgets: [],
   wireframes: [],
-  ERDiagrams: [],
+  erds: [],
   project: {
     projectId: "",
+    userId: "",
     projectName: "",
     projectDescription: "",
     projectStatus: "",
@@ -169,12 +136,12 @@ const initialState: ProjectAppState = {
     widgetName: "",
     widgetDescription: "",
   },
-  ERDiagram: {
+  erd: {
     ERDiagramId: "",
     projectId: "",
     ERDiagramName: "",
     ERDiagramDescription: "",
-    ERDiagramImg: "",
+    ERDiagramImageUrl: "",
   },
   wireframe: {
     wireframeId: "",
@@ -189,16 +156,14 @@ const initialState: ProjectAppState = {
     endpointDescription: "",
   },
   createNewModelForm: { modelName: "", modelMetadata: []},
-  createNewUserStoryForm: { userStoryDescription: "" },
+  createNewUserStoryForm: { userStoryName: "", userStoryDescription: "" },
   createNewTagForm: { tagName: "", tagDescription: "" },
   createNewWidgetForm: { widgetName: "", widgetDescription: "" },
-  //Bookmark for later - need to know how to upload photos
-  createNewERDForm: { erdName: "", erdDescription: "", erdImg: ""},
-  //Bookmark for later - need to know how to upload photos
+  createNewERDForm: { erdName: "", erdDescription: "", erdImageUrl: ""},
   createNewWireframeForm: {
     wireframeName: "",
     wireframeDescription: "",
-    wireframeImg: ""
+    wireframeImageUrl: ""
   },
 };
 
@@ -211,6 +176,7 @@ export const projectAppSlice = createSlice({
       action: {
         payload: {
           projectId: string;
+          userId: string;
           projectName: string;
           projectDescription: string;
           projectStatus: string;
@@ -292,12 +258,12 @@ export const projectAppSlice = createSlice({
           projectId: string;
           ERDiagramName: string;
           ERDiagramDescription: string;
-          ERDiagramImg: string;
+          ERDiagramImageUrl: string;
         };
       }
     ) => {
       console.log("Dispatching setModel reducer with action:", action);
-      state.ERDiagram = action.payload;
+      state.erd = action.payload;
     },
 
     setWireframe: (
@@ -335,12 +301,11 @@ export const projectAppSlice = createSlice({
       state,
       action: {
         payload: Array<{
-          project: {
             projectId: string;
+            userId: string;
             projectName: string;
             projectDescription: string;
             projectStatus: string;
-          };
         }>;
       }
     ) => {
@@ -352,13 +317,11 @@ export const projectAppSlice = createSlice({
       state,
       action: {
         payload: Array<{
-          endpoint: {
             endpointId: string;
             projectId: string;
             endpointName: string;
             endpointUrlPattern: string;
             endpointDescription: string;
-          };
         }>;
       }
     ) => {
@@ -370,11 +333,9 @@ export const projectAppSlice = createSlice({
       state,
       action: {
         payload: Array<{
-          userStory: {
             userStoryId: string;
             projectId: string;
             userStoryDescription: string;
-          };
         }>;
       }
     ) => {
@@ -386,7 +347,7 @@ export const projectAppSlice = createSlice({
       state,
       action: {
         payload: Array<{
-          model: {
+
             modelId: string;
             projectId: string;
             modelName: string;
@@ -395,7 +356,6 @@ export const projectAppSlice = createSlice({
               key: string;
               value: string;
             }>;
-          };
         }>;
       }
     ) => {
@@ -407,12 +367,10 @@ export const projectAppSlice = createSlice({
       state,
       action: {
         payload: Array<{
-          tag: {
             tagId: string;
             projectId: string;
             tagName: string;
             tagDescription: string;
-          };
         }>;
       }
     ) => {
@@ -424,31 +382,27 @@ export const projectAppSlice = createSlice({
       state,
       action: {
         payload: Array<{
-          ERDiagram: {
             ERDiagramId: string;
             projectId: string;
             ERDiagramName: string;
             ERDiagramDescription: string;
-            ERDiagramImg: string;
-          };
+            ERDiagramImageUrl: string;
         }>;
       }
     ) => {
       console.log("Dispatching setProject reducer with aciton: ", action);
-      state.ERDiagrams = action.payload;
+      state.erds = action.payload;
     },
 
     setWireframes: (
       state,
       action: {
         payload: Array<{
-          wireframe: {
             wireframeId: string;
             projectId: string;
             wireframeName: string;
             wireframeDescription: string;
             wireframeImg: string;
-          };
         }>;
       }
     ) => {
@@ -460,12 +414,10 @@ export const projectAppSlice = createSlice({
       state,
       action: {
         payload: Array<{
-          widget: {
             widgetId: string;
             projectId: string;
             widgetName: string;
             widgetDescription: string;
-          };
         }>;
       }
     ) => {
@@ -608,7 +560,7 @@ export const projectAppSlice = createSlice({
       }
     ) => {
       const imgData = action.payload.value;
-      state.createNewWireframeForm.wireframeImg = imgData;
+      state.createNewWireframeForm.wireframeImageUrl = imgData;
     },
 
     setERDImageInForm: (
@@ -621,7 +573,7 @@ export const projectAppSlice = createSlice({
       }
     ) => {
       const imgData = action.payload.value;
-      state.createNewERDForm.erdImg = imgData;
+      state.createNewERDForm.erdImageUrl = imgData;
     },
 
     resetCreateNewWidgetForm: (state) => {
@@ -652,19 +604,18 @@ export const projectAppSlice = createSlice({
     resetCreateNewWireframeForm: (state) => {
       state.createNewWireframeForm.wireframeDescription = "";
       state.createNewWireframeForm.wireframeName = "";
-      state.createNewWireframeForm.wireframeImg = "";
+      state.createNewWireframeForm.wireframeImageUrl = "";
     },
 
     resetCreateNewERDiagramForm: (state) => {
       state.createNewERDForm.erdName = "";
       state.createNewERDForm.erdDescription = "";
-      state.createNewERDForm.erdImg = "";
+      state.createNewERDForm.erdImageUrl = "";
     }
   },
 });
 
 export const {
-  
   setWidgets,
   setProjects,
   setEndpoints,

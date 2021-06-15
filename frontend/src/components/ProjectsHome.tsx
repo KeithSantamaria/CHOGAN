@@ -1,6 +1,4 @@
-import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import ProjectSideNav from './ProjectSideNav';
 import ProjectGeneralInfo from './ProjectGeneralInfo';
 import ProjectWireframes from './ProjectWireframes';
 import ProjectERDs from './ProjectERDs';
@@ -8,11 +6,13 @@ import ProjectModels from './ProjectModels';
 import ProjectUserStories from './ProjectUserStories';
 import ProjectTags from './ProjectTags';
 
+import '../css/project-service/project-sidenav.css';
+import '../css/project-service/modal-create.css';
+
 function ProjectsHome() {
 
     return (
-        <div>
-            <ProjectSideNav />
+        <>           
             <Router>
                 <Switch>
                 <Route exact path="/user/project/general">
@@ -35,8 +35,7 @@ function ProjectsHome() {
                 </Route>
                 </Switch>
             </Router>
-
-        </div>
+        </>
     )
 }
 

@@ -18,9 +18,7 @@ const ProjectGeneralInfo = () => {
   const projectAppState = useAppSelector(selectProjectApp);
   const project = projectAppState.project;
   const [modalShow, setModalShow] = React.useState(false);
-
-  // Code for grabbing user from User Slice
-
+  
   const handleOpen = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
 
@@ -28,9 +26,6 @@ const ProjectGeneralInfo = () => {
     // Production
     const queryString = `http://localhost:42069/api/read/project`;
 
-    // Test
-    // const queryString = `http://localhost:42069/api/read/project`;
-    // const projectId = "60bc36b65d2b0da1deb9ada2";
     const body = {
       params: {
         projectId: project.projectId,
@@ -108,12 +103,8 @@ const ProjectGeneralInfo = () => {
               <Card.Text>{projectAppState.project.projectDescription}</Card.Text>
             </Card.Body>
           </Card>
-          {/*Production*/}
-          {/* <WidgetComponent projectId={userAppState.user.userId}/> */}
         </CardDeck>
-  
-        {/*Test*/}
-        <WidgetComponent projectId={"60bc36b65d2b0da1deb9ada2"} />
+        <WidgetComponent />
         
         {newWidgetModal()}
       </Container>

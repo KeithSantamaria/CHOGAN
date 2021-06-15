@@ -4,17 +4,18 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { selectProjectApp, setWidgets } from '../../redux/projectAppSlice';
 import { Card, CardDeck } from 'react-bootstrap';
 
-const WidgetComponent = ({projectId}: any) => {
+// const WidgetComponent = ({projectId}: any) => {
+const WidgetComponent = () => {
+
     const dispatch = useAppDispatch();
     const projectAppState= useAppSelector(selectProjectApp);
-
+    const project = projectAppState.project;
     const getWidgets = () => {
         // Test query string works; comment when ready to test prod
         const queryString = `http://localhost:42069/api/read/project/widgets`;
-        const projectId = "60bc36b65d2b0da1deb9ada2";
         const body = {
           params:{
-            projectId: projectId,
+            projectId: project.projectId,
           }
         }
         // Production query string; uncomment when ready to test prod

@@ -58,7 +58,7 @@ const UserStoryCard = ({ userStory }: any) => {
             <span className="float-right">
               <Button
                 value={userStory.userStoryId}
-                onClick={(e) => removeUserStory((e.target as HTMLButtonElement).value)}
+                onClick={(e) => removeUserStory(userStory.userStoryId)}
                 variant="outline-dark"
               >
                 <FontAwesomeIcon

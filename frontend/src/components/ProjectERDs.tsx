@@ -43,39 +43,44 @@ const ProjectERDs = () => {
     getERDs();
   }, []);
 
-  const ERDModal = () => {
-    return (
-        <>
-            <ProjectSideNav />
-            <Container id="pg-content">
-                <p>ERDs</p>
-            </Container>
-        </>
-    )
-}
+//   const ERDModal = () => {
+//     return (
+//         <>
+//             <ProjectSideNav />
+//             <Container id="pg-content">
+//                 <p>ERDs</p>
+//             </Container>
+//         </>
+//     )
+// }
 
 // export default ProjectERDs 
-      // <Modal
-      //   size="lg"
-      //   aria-labelledby="contained-modal-title-vcenter"
-      //   centered
-      //   show={modalShow}
-      //   onHide={handleClose}
-      // >
-      //   <Modal.Header closeButton>
-      //     <Modal.Title id="contained-modal-title-vcenter">
-      //       Create New ERD
-      //     </Modal.Title>
-      //   </Modal.Header>
-      //   <Modal.Body>
-      //     {/* Production */}
-      //     {/* <EndpointForm projectId={projectAppState.project.projectId} /> */}
+const ERDModal = () => {
+  return(
 
-      //     {/* Test */}
-      //     <ERDForm />
-      //   </Modal.Body>
-      // </Modal>
-  // };
+      <Modal
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={modalShow}
+        onHide={handleClose}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Create New ERD
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {/* Production */}
+          {/* <EndpointForm projectId={projectAppState.project.projectId} /> */}
+
+          {/* Test */}
+          <ERDForm />
+        </Modal.Body>
+      </Modal>
+  )
+  };
+
 
   return (
     <div>

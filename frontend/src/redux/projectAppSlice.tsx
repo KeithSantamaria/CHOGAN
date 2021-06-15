@@ -445,7 +445,6 @@ export const projectAppSlice = createSlice({
     ) => {
       const fieldName = action.payload.fieldName;
       const value = action.payload.value;
-      // console.log(`Setting ${fieldName} to ${value}`);
       state.createNewProjectForm = {
         ...state.createNewProjectForm, 
         [fieldName]: value,

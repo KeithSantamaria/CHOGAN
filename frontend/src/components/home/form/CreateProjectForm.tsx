@@ -15,6 +15,7 @@ export default function CreateProjectForm(props: any) {
   const projectAppState = useAppSelector(selectProjectApp);
   const userAppState = useAppSelector(currentUser);
   const dispatch = useAppDispatch();
+
   const formChangeHandler = (event: any) => {
     console.log(event.target.name);
     console.log(event.target.value);
@@ -32,18 +33,13 @@ export default function CreateProjectForm(props: any) {
     ) {
       alert("There is nothing to add");
     } else {
-      // const project = {
-      //   projectName: projectAppState.createNewProjectForm.projectName,
-      //   projectDescription: projectAppState.createNewProjectForm.projectDescription,
-      //   userId: userAppState.id,
-      // };
       const project = {
-        userId: "60c821007f3524412756f4f8",
-        projectName: "Project 2",
-        projectDescription: "This is the description of project 2.",
+        projectName: projectAppState.createNewProjectForm.projectName,
+        projectDescription: projectAppState.createNewProjectForm.projectDescription,
+        userId: userAppState.id,
       };
-
       console.log(project);
+
       axios
         .post(queryString, project)
         .then((response) => {
@@ -62,9 +58,6 @@ export default function CreateProjectForm(props: any) {
     <Container className="create-proj-form-container">
       <Form>
         <h4>New Project</h4>
-        {/* <div>Create new project name and Description</div>
-        <div>Manage your project</div> */}
-
         <Form.Group className="project-name-wrapper">
           <Form.Label>Project Name</Form.Label>
           <Form.Control

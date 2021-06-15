@@ -15,10 +15,9 @@ function ProjectsHome() {
         <>           
             <Router>
                 <Switch>
-                    {/*This will change once Project Services is hooked up to home*/}
-                    <Route exact path="/">
+                    {/* <Route exact path="/">
                         <ProjectGeneralInfo />
-                    </Route>
+                    </Route> */}
                     <Route exact path={"/user/project/general"}>
                         <ProjectGeneralInfo />
                     </Route>

@@ -76,7 +76,7 @@ const ERDCard = ({ erd }: any) => {
         </Modal.Header>
 
         <Modal.Body>
-          <img onClick={handleOpenImg} src={erdImg} alt={erdImg} style={{maxHeight: '80rem', maxWidth: '60rem'}}/>
+          <img onClick={handleOpenImg} src={erdImg} alt={erdImg} style={{maxHeight: '40rem', maxWidth: '50rem'}}/>
         </Modal.Body>
       </Modal>
     );
@@ -105,8 +105,8 @@ const ERDCard = ({ erd }: any) => {
           <span className="float-right">  
             <Button
               variant="danger"
-              value={erd.erdId}
-              onClick={(e) => removeERD((e.target as HTMLButtonElement).value)}
+              value={erd.ERDiagramId}
+              onClick={(e) => removeERD(erd.ERDiagramId)}
             >
               <FontAwesomeIcon
                 style={{height: '100%'}}

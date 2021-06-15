@@ -9,6 +9,22 @@ interface userIdPayload {
   }
 };
 
+interface createProjectPayload {
+  userId : string;
+  projectName : string;
+  projectDescription : string;
+}
+
+export const createProject = createAsyncThunk (
+  'projects/createProject',
+  async (payload : createProjectPayload) => {
+    const response = axios.post("http://localhost:42069/api/create/project", payload)
+      .then( (response) => response.data)
+      .catch( (error) => {console.log(error)});
+    return response;
+  }
+);
+
 export const getAllProjects = createAsyncThunk(
   'projects/getAllProjects',
   async (payload : userIdPayload) => {
@@ -672,6 +688,15 @@ export const projectAppSlice = createSlice({
       (state, action) => {
         console.log("Dispatching getAllProjects reducer with action: ", action);
         state.projects = action.payload;
+        return state;
+      }
+    )
+
+    builder.addCase(
+      createProject.fulfilled,
+      (state, action) => {
+        console.log("Dispatching createProject reducer with action: ", action);
+        state.projects.push(action.payload);
         return state;
       }
     )

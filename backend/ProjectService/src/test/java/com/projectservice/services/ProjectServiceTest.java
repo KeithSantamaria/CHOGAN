@@ -45,6 +45,14 @@ class ProjectServiceTest {
         Assertions.assertEquals(foundProject,project);
     }
 
+    @Test
+    public void findByUserId(){
+        List<Project> projects = new ArrayList<Project>();
+        String userId = "Id";
+        Mockito.when(projectRepo.findByUserId(userId)).thenReturn(projects);
+        List<Project> foundProjects = projectService.findByUserId(userId);
+        Assertions.assertEquals(foundProjects, projects);
+    }
     /*
     *
     * Update

@@ -14,7 +14,7 @@ import java.util.Map;
 @Data
 @Document(collection = "tags")
 public class Tag {
-//    @Id
+    @Id
     private String tagId;
     private String projectId;
     private String tagName;

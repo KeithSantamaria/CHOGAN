@@ -13,9 +13,12 @@ import '../../css/home/home.css';
 import {Col, Row} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTh, faList} from "@fortawesome/free-solid-svg-icons";
+import { currentUser } from '../../redux/userSlice';
+import ProjectCard from '../../components/home/ProjectCard.component';
 
 export default function Home() {
     const projectAppState= useAppSelector(selectProjectApp);
+    const userAppState= useAppSelector(currentUser);
     const dispatch = useAppDispatch();
 
 
@@ -28,12 +31,15 @@ export default function Home() {
 
     const getProjects = () => {
         // Test query string works; comment when ready to test prod
-        const queryString = `http://localhost:42069/api/read/projects?userId=69`;
+        const queryString = `http://localhost:42069/api/read/projects`;
+        // const body = {params:{userId: "60c7f7afcfa7eb6bf04a410c"}};
+        const body ={params:{userId: userAppState.id}};
 
         // Production query string; uncomment when ready to test prod
-        // const queryString = `http://localhost:42069/api/read/project?projectId=${projectId}`; 
+        // const queryString = `http://localhost:42069/api/read/projects`;
+        
         axios
-          .get(queryString)
+          .get(queryString, body)
           .then((response) => {
             console.log("response", response);
             const projectData = response.data;
@@ -47,6 +53,7 @@ export default function Home() {
       useMemo(() => {
         getProjects();
       }, []);
+
 
     const RenderTabs = () => {
         if(tabs === 'grid') {
@@ -86,6 +93,9 @@ export default function Home() {
                         <div style={{float: 'right'}}>
                             <span>Projects {projects.length}</span>
                             {/* <span>Folders 2</span> */}
+                            {projectAppState.projects.map(({project}:any) => {
+                                <ProjectCard project={project} />
+                            })}
                         </div>
                     </Col>
                 </Row>

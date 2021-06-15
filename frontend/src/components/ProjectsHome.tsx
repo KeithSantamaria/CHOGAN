@@ -15,24 +15,30 @@ function ProjectsHome() {
         <>           
             <Router>
                 <Switch>
-                <Route exact path="/user/project/general">
-                    <ProjectGeneralInfo />
-                </Route>
-                <Route exact path={"/user/project/wireframes"}>
-                    <ProjectWireframes />
-                </Route>
-                <Route exact path="/user/project/ERDs">
-                    <ProjectERDs />
-                </Route>
-                <Route exact path="/user/project/models">
-                    <ProjectModels/>
-                </Route>
-                <Route exact path="/user/project/userstories">
-                    <ProjectUserStories />
-                </Route>
-                <Route exact path="/user/project/tags">
-                    <ProjectTags />
-                </Route>
+                    {/* <Route exact path="/">
+                        <ProjectGeneralInfo />
+                    </Route> */}
+                    <Route exact path={"/user/project/general"}>
+                        <ProjectGeneralInfo />
+                    </Route>
+                    <Route exact path="/user/project/wireframes">
+                        <ProjectWireframes />
+                    </Route>
+                    <Route exact path="/user/project/ERDs">
+                        <ProjectERDs />
+                    </Route>
+                    <Route exact path="/user/project/endpoints">
+                        <ProjectEndpoints />
+                    </Route>
+                    <Route exact path="/user/project/models">
+                        <ProjectModels/>
+                    </Route>
+                    <Route exact path="/user/project/userstories">
+                        <ProjectUserStories />
+                    </Route>
+                    <Route exact path="/user/project/tags">
+                        <ProjectTags />
+                    </Route>
                 </Switch>
             </Router>
         </>

@@ -12,6 +12,12 @@ export default function CreateProjectForm(props:any){
     const [projectName, setProjectName] = useState("");
     const [description, setDescription]= useState("");
     const dispatch = useAppDispatch();
+
+    const formChangeHandler = (event: any) => {
+        const fieldName = event.target.name;
+        const value = event.target.value;
+        dispatch(setCreateNewProjectForm({ fieldName, value }));
+      };
     
     const submit =() => {
         const queryString = "https://localhost:42069/api/create/project";
@@ -53,16 +59,18 @@ export default function CreateProjectForm(props:any){
             <Form.Group className="project-name-wrapper">
                 <Form.Label>Project Name</Form.Label>
                 <Form.Control
+                    name="projectName"
                     placeholder="Enter project name"
-                    onChange={(e)=>setProjectName(e.target.value)}/>
+                    onChange={formChangeHandler}/>
             </Form.Group>
             <Form.Group>
                 <Form.Label>Description</Form.Label>
                 <Form.Control
                     as="textarea"
+                    name="projectDescription"
                     className="modal-create-form-textarea"
                     rows={5}
-                    onChange={(e)=>setDescription(e.target.value)}
+                    onChange={formChangeHandler}
                 />
             </Form.Group>
 
@@ -78,3 +86,7 @@ export default function CreateProjectForm(props:any){
     </Container>
 );
 }
+function setCreateNewProjectForm(arg0: { fieldName: any; value: any; }): any {
+    throw new Error("Function not implemented.");
+}
+

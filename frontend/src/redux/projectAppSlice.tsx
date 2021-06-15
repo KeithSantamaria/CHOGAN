@@ -85,7 +85,7 @@ export interface ProjectAppState {
   wireframes: Array<Wireframe>;
   erd: ERDiagram;
   erds: Array<ERDiagram>;
-  createNewProjectForm: {userId: string; projectName: string; projectDescription: string}
+  createNewProjectForm: {projectName: string; projectDescription: string}
   createNewEndpointForm: {endpointName: string, urlPattern: string, endpointDescription: string};
   createNewModelForm: {modelName: string; modelMetadata:Array<{}>};
   createNewUserStoryForm: { userStoryName: string; userStoryDescription: string };
@@ -156,7 +156,7 @@ const initialState: ProjectAppState = {
     wireframeImg: "",
   },
   createNewProjectForm: {
-    userId: "",
+
     projectName: "",
     projectDescription: "",
   },
@@ -435,7 +435,8 @@ export const projectAppSlice = createSlice({
       state.widgets = action.payload;
     },
 
-    setCreateNewProjectForm: (     state,
+    setCreateNewProjectForm: (     
+      state,
       action: {
         payload: {
           fieldName: string;
@@ -667,6 +668,7 @@ export const {
   setCreateNewWireframeForm,
   setCreateNewTagForm,
   setCreateNewUserStoryForm,
+  setCreateNewProjectForm,
   resetCreateNewWidgetForm,
   resetCreateNewTagForm,
   resetCreateNewEndpointForm,

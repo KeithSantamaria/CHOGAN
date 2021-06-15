@@ -61,14 +61,14 @@ const AuthPage:React.FC = () => {
 
       <Col xs = {9} md = {5} className = "auth-page-right-pane">
         <div className = "render-right-pane">
-        <div className = "render-form"><RenderForm/></div>
-        <Button 
-          className ="switch-auth-mode-button" 
-          onClick = {() => handleModeButtonClick() }
-          variant = "link"
-        >
-          {switchModeText}
-        </Button>
+          <div className = "render-form"><RenderForm/></div>
+            <Button 
+              className ="switch-auth-mode-button" 
+              onClick = {() => handleModeButtonClick() }
+              variant = "link"
+            >
+            {switchModeText}
+          </Button>
         </div>
       </Col>
     </Container>

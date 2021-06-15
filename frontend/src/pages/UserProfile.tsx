@@ -3,7 +3,7 @@ import {useAppSelector} from '../redux/hooks';
 import {currentUser} from '../redux/userSlice';
 import {Button, Container, Col} from 'react-bootstrap';
 import '../css/authentication/UserProfile.css';
-import Profile from "../components/authentication/Profile";
+import Profile from "../components/authentication/ProfileView";
 import ProfileForm from "../components/authentication/ProfileForm";
 
 
@@ -39,11 +39,14 @@ export default function UserProfile(){
       }
 
     return(
-      
-        <div className="profile-content"> 
+        <div className="user-background">
           <h2>{title}</h2>
-          <Button onClick= { e => flagSetter() }>{btnString}</Button>{' '}
-          <div><RenderProfile/></div>
+          <div className="profile-box"> 
+            <div className="profile-content">
+              <div><RenderProfile/></div>
+            </div>
+            <Button className = "edit-profile-button" onClick= { e => flagSetter() }>{btnString}</Button>
+          </div>
         </div>      
     );
 }

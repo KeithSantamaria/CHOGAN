@@ -26,7 +26,7 @@ export const signUpUser = createAsyncThunk(
   async (payload : UserPackage) =>{
     const response = axios.post("http://localhost:6969/user", payload)
       .then(response => response.data )
-      .catch(error => error);
+      .catch(error => console.log(error));
     return response;
   }
 );
@@ -36,7 +36,7 @@ export const loginUser = createAsyncThunk(
   async (payload : LoginPackage) => {
     const response = axios.post("http://localhost:6969/user/login", payload)
     .then(response => response.data )
-    .catch(error => error);
+    .catch(error =>  console.log(error));
     return response;
   }
 );
@@ -47,7 +47,7 @@ export const updateUser = createAsyncThunk(
   async (payload: UserPackage) => {
     const response = axios.put("http://localhost:6969/user", payload)
       .then(response => response.data)
-      .catch(error => error)
+      .catch(error =>  console.log(error));
     return response;
   }
 )

@@ -8,76 +8,58 @@ import {currentUser, updateUser} from '../../redux/userSlice';
 export default function ProfileForm(){
     
     //currentUser hooks
-    // const currentlyLoggedUser = useAppSelector(currentUser);
-    // const userDispatch = useAppDispatch();
+    const currentlyLoggedUser = useAppSelector(currentUser);
+    const dispatch = useAppDispatch();
 
     //useState
-    const [email, setEmail] = useState("adambosch8@gmail.com"); 
-    const [username, setUsername] = useState(""); 
-    const [firstName, setFirst] = useState(""); 
-    const [lastName, setLast] = useState("");
-
-
-    //Temporary Payload
-    let payload ={
-        id: "12344",
-        username: "boschaw",
-        password: "password",
-        email: "adambosch8@gmail.com",
-        firstName: "Adam",
-        lastName: "Bosch",
-        securityQuestionId: 1,
-        securityAnswer: "bruh"
-    }
+    const [email, setEmail] = useState(currentlyLoggedUser.email);
+    const [firstName, setFirst] = useState(currentlyLoggedUser.firstName); 
+    const [lastName, setLast] = useState(currentlyLoggedUser.lastName);
 
     //axios call to change user values
-    function submitForm(){
-        alert("function submitForm()")
-        console.log(payload.email);
+    const submitUser = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        const payload = {
+            id: currentlyLoggedUser.id,
+            password: currentlyLoggedUser.password,
+            email: email,
+            firstName: firstName,
+            lastName: lastName,
+            securityQuestionId: currentlyLoggedUser.securityQuestionId,
+            securityAnswer: currentlyLoggedUser.securityAnswer //should be hashed
+        };
+
+        dispatch(updateUser(payload));
+
     }
 
 
  //return html
     return(
         <div>
-            <form onSubmit={submitForm}  className="row justify-content-center">
+            <form onSubmit={submitUser}  className="row justify-content-center">
                 <table >
                     <tr>
-                        <th>Value-Type</th>
-                        <th>Original-Value</th>
-                        <th>Input-Value</th> 
-                    </tr>
-                    <tr>
                         <td>email: </td>
-                        <td>{payload.email}</td>
                         <td>
-                            <input type="text" onChange={e => setEmail(e.target.value)}/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>username: </td>
-                        <td>{payload.username}</td>
-                        <td>
-                            <input type="text" onChange={e => setUsername(e.target.value)}/>
+                            <input type="text" placeholder = {currentlyLoggedUser.email} onChange={e => setEmail(e.target.value)}/>
                         </td>
                     </tr>
                     <tr>
                         <td>First Name: </td>
-                        <td>{payload.firstName}</td>
                         <td>
-                            <input type="text" onChange={e => setFirst(e.target.value)}/>
+                            <input type="text" placeholder = {currentlyLoggedUser.firstName}  onChange={e => setFirst(e.target.value)}/>
                         </td>
                     </tr>
                     <tr>
                         <td>Last Name: </td>
-                        <td>{payload.lastName}</td>
                         <td>
-                            <input type="text" onChange={e => setLast(e.target.value)}/>
+                            <input type="text" placeholder = {currentlyLoggedUser.lastName}  onChange={e => setLast(e.target.value)}/>
                         </td>
                     </tr>
                 </table>
                 
-                <Button variant="primary">Submit Changes</Button>{' '}
+                <Button variant="primary" type= "submit">Submit Changes</Button>
             </form>
         </div>
     );

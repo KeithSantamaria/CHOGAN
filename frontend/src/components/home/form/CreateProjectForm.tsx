@@ -25,13 +25,11 @@ export default function CreateProjectForm(props: any) {
     <Container className="create-proj-form-container">
       <Form onSubmit = {submit}>
         <h4>New Project</h4>
-        <div>Create new project name and Description</div>
-        <div>Manage your project</div>
-
         <Form.Group className="project-name-wrapper">
           <Form.Label>Project Name</Form.Label>
           <Form.Control
             name="projectName"
+            type="text"
             placeholder="Enter project name"
             onChange={(e) => {setProjectName(e.target.value)}}
             required
@@ -41,6 +39,7 @@ export default function CreateProjectForm(props: any) {
           <Form.Label>Description</Form.Label>
           <Form.Control
             as="textarea"
+            type="text"
             name="projectDescription"
             className="modal-create-form-textarea"
             rows={5}

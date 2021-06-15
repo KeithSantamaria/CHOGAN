@@ -128,7 +128,7 @@ export interface ProjectAppState {
   wireframes: Array<Wireframe>;
   erd: ERDiagram;
   erds: Array<ERDiagram>;
-  createNewProjectForm: {projectName: string; projectDescription: string}
+  createNewProjectForm: {projectName: string; projectDescription: string};
   createNewEndpointForm: {endpointName: string, urlPattern: string, endpointDescription: string};
   createNewModelForm: {modelName: string; modelMetadata:Array<{}>};
   createNewUserStoryForm: { userStoryName: string; userStoryDescription: string };
@@ -199,7 +199,6 @@ const initialState: ProjectAppState = {
     wireframeImg: "",
   },
   createNewProjectForm: {
-
     projectName: "",
     projectDescription: "",
   },
@@ -488,9 +487,9 @@ export const projectAppSlice = createSlice({
     ) => {
       const fieldName = action.payload.fieldName;
       const value = action.payload.value;
-      console.log(`Setting ${fieldName} to ${value}`);
       state.createNewProjectForm = {
-        ...state.createNewProjectForm, [fieldName]: value,
+        ...state.createNewProjectForm, 
+        [fieldName]: value,
       }
     },
 
@@ -680,6 +679,11 @@ export const projectAppSlice = createSlice({
       state.createNewERDForm.erdName = "";
       state.createNewERDForm.erdDescription = "";
       state.createNewERDForm.erdImageUrl = "";
+    },
+
+    resetCreateNewProjectForm: (state)=> {
+      state.createNewProjectForm.projectDescription = "";
+      state.createNewProjectForm.projectName = ""
     }
   },
   extraReducers : (builder) => {
@@ -737,6 +741,7 @@ export const {
   resetCreateNewUserStoryForm,
   resetCreateNewWireframeForm,
   resetCreateNewERDiagramForm,
+  resetCreateNewProjectForm,
 } = projectAppSlice.actions;
 
 export const selectProjectApp = (state: RootState) => state.projectApp;

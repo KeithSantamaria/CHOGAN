@@ -13,13 +13,8 @@ const ProjectERDs = () => {
   const handleOpen = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
   const dispatch = useAppDispatch();
-
+  const projectId = projectAppState.project.projectId;
   const getERDs = () => {
-    //Test
-    const projectId = "60bc36b65d2b0da1deb9ada2";
-
-    //Production
-    //const projectId = projectAppState.project.projectId;
     const queryString = `http://localhost:42069/api/read/project/ERDs`;
 
     const body = {

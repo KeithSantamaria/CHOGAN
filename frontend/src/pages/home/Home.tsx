@@ -6,7 +6,6 @@ import HomeListView from '../../components/home/HomeListView';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getAllProjects, selectProjectApp, setProjects} from '../../redux/projectAppSlice';
 import axios from 'axios';
-
 import '../../css/home/home.css';
 
 import {Col, Row} from 'react-bootstrap';

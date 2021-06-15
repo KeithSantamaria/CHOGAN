@@ -11,6 +11,7 @@ import {
 const WidgetForm = (project: any) => {
   const projectAppState = useAppSelector(selectProjectApp);
   const dispatch = useAppDispatch();
+  const projectId = projectAppState.project.projectId;
 
   const formChangeHandler = (event: any) => {
     const fieldName = event.target.name;
@@ -19,7 +20,6 @@ const WidgetForm = (project: any) => {
   };
 
   const addWidget = () => {
-    // const queryString = `http://localhost:42069/api/create/project/widget?projectId=${projectAppState.project.projectId}`;
     const queryString = `http://localhost:42069/api/create/project/widget`;
     if (
       projectAppState.createNewWidgetForm.widgetDescription === "" ||
@@ -30,7 +30,7 @@ const WidgetForm = (project: any) => {
       const widget = {
         widgetName: projectAppState.createNewWidgetForm.widgetName,
         widgetDescription: projectAppState.createNewWidgetForm.widgetDescription,
-        projectId: "60bc36b65d2b0da1deb9ada2"
+        projectId: projectId,
       };
       console.log(widget);
 

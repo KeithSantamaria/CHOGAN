@@ -12,7 +12,7 @@ import {
 const EndpointForm = () => {
   const projectAppState = useAppSelector(selectProjectApp);
   const dispatch = useAppDispatch();
-
+  const projectId = projectAppState.project.projectId;
   const formChangeHandler = (event: any) => {
     const fieldName = event.target.name;
     const value = event.target.value;
@@ -20,9 +20,6 @@ const EndpointForm = () => {
   };
 
   const addEndpoint = () => {
-    // Test
-    const projectId = "60bc36b65d2b0da1deb9ada2";
-
     const queryString = `http://localhost:42069/api/create/project/endpoint`;
     if (
       projectAppState.createNewEndpointForm.endpointDescription === "" ||
@@ -35,10 +32,6 @@ const EndpointForm = () => {
         endpointName: projectAppState.createNewEndpointForm.endpointName,
         endpointDescription: projectAppState.createNewEndpointForm.endpointDescription,
         endpointUrlPattern: projectAppState.createNewEndpointForm.urlPattern,
-        //production
-        //projectId: projectAppState.project.projectId,
-
-        //test
         projectId: projectId,
       };
 

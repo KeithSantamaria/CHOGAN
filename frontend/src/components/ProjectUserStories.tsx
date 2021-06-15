@@ -13,12 +13,13 @@ function ProjectUserStories() {
   const handleOpen = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
   const dispatch = useAppDispatch();
-
+  const projectId = projectAppState.project.projectId;
+  
   const getUserStories = () => {
     const queryString = `http://localhost:42069/api/read/project/userstories`;
     const body = {
       params: {
-        projectId: projectAppState.project.projectId,
+        projectId: projectId
       },
     };
 

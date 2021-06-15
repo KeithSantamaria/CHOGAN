@@ -22,15 +22,15 @@ export default function ProjectList(props:any) {
     <>
       {renderCard.map((project:any) => (
          <ListGroup.Item className="project-list-item">
-            <Row  onClick={goToProject}>
-                <Col className="project-name">
-                    <FontAwesomeIcon style={{height: '40%', marginRight: '10px'}}className="fa-1x" icon={faClipboardList}/> 
-                    {project.projectName}
-                </Col>
-                <Col className="project-description">
-                    {project.projectDescription}
-                </Col>
-            <span><ProjectElipsisBtn/></span>
+            <Row>
+              <Col className="project-name" onClick={goToProject}>
+                  <FontAwesomeIcon style={{height: '40%', marginRight: '10px'}}className="fa-1x" icon={faClipboardList}/> 
+                  {project.projectName}
+              </Col>
+              <Col className="project-description">
+                  {project.projectDescription}
+              </Col>
+              <span><ProjectElipsisBtn/></span>
             </Row>
         </ListGroup.Item>
       ))}

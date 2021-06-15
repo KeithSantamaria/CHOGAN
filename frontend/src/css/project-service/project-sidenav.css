@@ -142,26 +142,6 @@
   
   }
 
-  /* .sm-wrapper .fa-icon {
-    margin-left: auto;
-    display: flex;
-    margin-left: 20px;
-  }
-
-  .sm-wrapper .fa-icon:hover {
-    text-decoration: none;
-    transition: 0.20s ease-in-out;
-    color: #e85e4f;
-    transform: scale(1.5);
-  } */
-  
-
-  .fa-icon {
-    color: white;
-    height: 4vh;
-    width: 4vh;
-    cursor: pointer;
-  }
   
   /* Contents */
   

@@ -38,7 +38,7 @@ export default function GridView(props: any) {
 
     let className='sort';
     if(active) {
-        className += ' sort-active';
+        className += 'sort-active ';
     } else {
         className='sort';
     }
@@ -88,7 +88,7 @@ export default function GridView(props: any) {
                     </Col>
 
                     <Col className="row-2-col-2" >
-                        <div style={{float: 'right'}} className={className + " grid-sort-down"} onClick={toggle}>
+                        <div style={{float: 'right'}} className={className + "grid-sort-down"} onClick={toggle}>
                             <span style={{paddingRight: '8px'}}>Name</span>
                             {active ? <FontAwesomeIcon className="fa-icon fa-1x" icon={faSortDown}/> : <FontAwesomeIcon className="fa-icon fa-1x" icon={faSortUp}/>}
                         </div>

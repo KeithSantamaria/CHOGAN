@@ -1,0 +1,82 @@
+.erd-card-wrapper {
+    box-shadow:
+    0 0px 0.7px -1px rgba(0, 0, 0, 0.024),
+    0 0px 1.7px -1px rgba(0, 0, 0, 0.044),
+    0 0px 3.5px -1px rgba(0, 0, 0, 0.058),
+    0 0px 7.3px -1px rgba(0, 0, 0, 0.071),
+    0 0px 20px -1px rgba(0, 0, 0, 0.1)
+    ;
+
+}
+
+.img-card-wrapper {
+    max-width: 40%;
+    max-height: 40%;
+    padding-bottom: 1em;
+}
+
+.name-card-wrapper {
+    font-size: 1.5rem;
+}
+
+.erd-card-center {
+    width: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.project-description .des-container {
+    /* overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto; */
+    width: 300px; 
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.erd-wrapper-container {
+    box-shadow:
+    0 0px 0.7px -1px rgba(0, 0, 0, 0.024),
+    0 0px 1.7px -1px rgba(0, 0, 0, 0.044),
+    0 0px 3.5px -1px rgba(0, 0, 0, 0.058),
+    0 0px 7.3px -1px rgba(0, 0, 0, 0.071),
+    0 0px 20px -1px rgba(0, 0, 0, 0.1)
+    ;
+    transition: 0.5s ease-in-out;
+}
+
+.erd-wrapper-container:hover {
+    transition: 0.5s ease-in-out;
+    color: #f5f5f5;
+    background-color: #2f3545;
+    cursor: pointer;
+}
+
+.project-description img:hover {
+    transition: 0.5s ease-in-out;
+    /* width: 1000px;
+    height: 1000px; */
+
+    transform: scale(2);
+    z-index: 1000;
+    position: absolute;
+    display: flex;
+    /* transform: translate(-50%, -50%); */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; */
+    margin: auto;
+
+    /* min-height: 100vh; */
+}
+
+.modal-content {
+    width: 90vw;
+    height: 90vh;
+}

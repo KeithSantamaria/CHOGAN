@@ -71,17 +71,7 @@ const ProjectERDs = () => {
 
   return (
     <>
-      {/* <ProjectSideNav active={"erd"}/>
-
-      {projectAppState.ERDiagrams.map((erd: any) => {
-        return <ERDCard erd={erd} />;
-      })}
-      <Button variant="primary" onClick={handleOpen}>
-        New ERD
-      </Button>
-      {ERDModal()} */}
-
-      <ProjectSideNav active={"erd"}/>
+      <ProjectSideNav active={"erd"} style={{paddingRight: "1000px"}}/>
         
         <Container id="pg-content">
           <Row style={{paddingBottom: '5px'}}>

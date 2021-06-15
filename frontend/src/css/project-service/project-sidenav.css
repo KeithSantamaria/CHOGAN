@@ -169,5 +169,23 @@
     text-align: left;
     transition: margin-left 0.2s;
     padding: 16px;
-    padding-left: 100px;
+    padding-left: 15vh;
+  }
+
+  @media only screen and (max-width: 800px) {
+    #pg-content {
+      text-align: left;
+      transition: margin-left 0.2s;
+      padding: 16px;
+      padding-left: 25vh;
+    }
+  }
+
+  @media only screen and (max-width: 850px) {
+    #pg-content {
+      text-align: left;
+      transition: margin-left 0.2s;
+      padding: 16px;
+      padding-left: 20vh;
+    }
   }

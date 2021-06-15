@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, FormEvent } from "react";
 import ProjectSideNav from "./ProjectSideNav";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setTags } from "../redux/projectAppSlice";
@@ -92,10 +92,9 @@ function ProjectTags() {
       });
   }
 
-  const editTag = useCallback((e:any) => {
-    setTag(e.target.value);
+  const editTag = (e: any) => {
     console.log(e.target.value);
-  },[ ])
+  }
 
   const tagModalUpdate = () => {
     return (
@@ -174,8 +173,8 @@ function ProjectTags() {
           <Col><span style={{paddingRight: '4em'}} className="float-right"> Action </span></Col>
         </Row>
 
-        {projectAppState.tags.map((tag: any) => {
-          return (
+        {projectAppState.tags.map((tag: any) => (
+          
           <div style={{paddingBottom: '2vh'}}>
           <ListGroup.Item key={tag.tagId} className="project-list-item" style={{borderRadius: '10px'}}>
             <Row>
@@ -221,7 +220,7 @@ function ProjectTags() {
             </Row>
         </ListGroup.Item>
         </div>
-        )})}
+  ))}
         <br></br>
         
         {tagModal()}

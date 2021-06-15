@@ -16,9 +16,9 @@ export default function ProjectCard(props:any) {
           <CardDeck className="card-project-wrapper" style={{display: 'inline-flex', flexDirection: 'row' }}>
             <Card style={{ width: '18rem', flex: 1}} className="card-project">
               <Card.Body>
-                <Card.Title>{project.name}</Card.Title>
+                <Card.Title>{project.projectName}</Card.Title>
                 <Card.Text>
-                  <span className="proj-card-des">{project.des}</span>
+                  <span className="proj-card-des">{project.projectDescription}</span>
                 </Card.Text >
                 
               </Card.Body>

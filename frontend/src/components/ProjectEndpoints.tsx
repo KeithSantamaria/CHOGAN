@@ -1,86 +1,82 @@
-import axios from 'axios';
-import React, { useMemo } from 'react'
-import { Button, Card, Modal } from 'react-bootstrap';
-import { useAppDispatch, useAppSelector } from "../redux/hooks"
-import { selectProjectApp, setProject, setProjectEndpointsState } from '../redux/projectAppSlice';
-import ProjectSideNav from './ProjectSideNav'
-import WidgetForm from './WidgetForm';
+import axios from "axios";
+import React, { useMemo } from "react";
+import { Button, Modal } from "react-bootstrap";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { selectProjectApp, setEndpoints } from "../redux/projectAppSlice";
+import ProjectSideNav from "./ProjectSideNav";
+import EndpointForm from "./EndpointForm";
+import EndpointCard from "./EndpointCard";
 
 function ProjectEndpoints() {
-    const projectAppState= useAppSelector(selectProjectApp);
-    const [modalShow, setModalShow] = React.useState(false);
-    const handleOpen = () => setModalShow(true);
-    const handleClose = () => setModalShow(false);
-    const dispatch = useAppDispatch();
+  const projectAppState = useAppSelector(selectProjectApp);
+  const [modalShow, setModalShow] = React.useState(false);
+  const handleOpen = () => setModalShow(true);
+  const handleClose = () => setModalShow(false);
+  const dispatch = useAppDispatch();
 
-    const getProject = () => {
-        // Test query string works; comment when ready to test prod
-        const queryString = `http://localhost:42069/api/read/project?projectId=60bc36b65d2b0da1deb9ada2`;
+  const getEndpoints = () => {
+    // Test query string works; comment when ready to test prod
+    const queryString = `http://localhost:42069/api/read/project/endpoints`;
+    const body = {
+      params: {
+        projectId: "60bc36b65d2b0da1deb9ada2",
+      },
+    };
+    // Production query string; uncomment when ready to test prod
+    // const queryString = `http://localhost:42069/api/read/project?projectId=${projectId}`;
+    axios
+      .get(queryString, body)
+      .then((response) => {
+        console.log("response", response);
+        const endpointData = response.data;
+        dispatch(setEndpoints(endpointData));
+      })
+      .catch((error) => {
+        console.log("There was an error: ", error);
+      });
+  };
 
-        // Production query string; uncomment when ready to test prod
-        // const queryString = `http://localhost:42069/api/read/project?projectId=${projectId}`; 
-        axios
-          .get(queryString)
-          .then((response) => {
-            console.log("response", response);
-            const projectData = response.data;
-            dispatch(setProject(projectData));
-          })
-          .catch((error) => {
-            console.log("There was an error: ", error);
-          });
-      };
+  useMemo(() => {
+    getEndpoints();
+  }, []);
 
-      useMemo(() => {
-        getProject();
-      }, []);
-
-      
-    const widgetModal = () => {        
-        return (
-            <Modal
-                size="lg"   
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
-                show={modalShow}
-                onHide={handleClose}
-            >
-                <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
-                    Create New Endpoint
-                </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <WidgetForm project={projectAppState.project}/>
-                </Modal.Body>
-          </Modal>
-        )
-    }
+  const endpointModal = () => {
     return (
-        <div>
-          <ProjectSideNav />
+      <Modal
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={modalShow}
+        onHide={handleClose}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Create New Endpoint
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {/* Production */}
+          {/* <EndpointForm projectId={projectAppState.project.projectId} /> */}
 
-          {projectAppState.project.endpoints.map( (endpoint:any) => {
-          return(
-            <Card>
-              <Card.Body>
-              <Card.Title>{endpoint.endpointName}</Card.Title>
-                <Card.Text>
-                {endpoint.endpointDescription}                
-              </Card.Text>
-              <Card.Text>
-                {endpoint.endpointUrlPattern}
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          );
-          })}
-          <Button variant="primary" onClick={handleOpen}>
-            New Endpoint
-          </Button>
-          {widgetModal()}
-        </div>
-    )
+          {/* Test */}
+          <EndpointForm />
+        </Modal.Body>
+      </Modal>
+    );
+  };
+  return (
+    <div>
+      <ProjectSideNav />
+
+      {projectAppState.endpoints.map((endpoint: any) => {
+        return <EndpointCard endpoint={endpoint} />;
+      })}
+      <Button variant="primary" onClick={handleOpen}>
+        New Endpoint
+      </Button>
+      {endpointModal()}
+    </div>
+  );
 }
 
-export default ProjectEndpoints
+export default ProjectEndpoints;

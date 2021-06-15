@@ -1,7 +1,13 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useMemo} from 'react';
 import GridView from '../../components/home/GridView.component';
 import UserView from '../../components/home/UserView.component';
 import HomeListView from '../../components/home/HomeListView';
+
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { selectProjectApp, setProjects} from '../../redux/projectAppSlice';
+import { store } from '../../redux/store';
+import axios from 'axios';
+
 import '../../css/home/home.css';
 
 import {Col, Row} from 'react-bootstrap';
@@ -9,32 +15,38 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTh, faList} from "@fortawesome/free-solid-svg-icons";
 
 export default function Home() {
+    const projectAppState= useAppSelector(selectProjectApp);
+    const dispatch = useAppDispatch();
+
+
     const [activeGrid, setActiveGrid] = useState(true);
     const [activeList, setActiveList] = useState(false);
 
     const [tabs, setTabs] = useState("grid");
 
-    /**
-     * Mock Data
-     */
-    const [projects, setProjects] = useState([
-        {id: 1, name: 'xroject Chogan', des: 'xroject Chogandas ', tags: ["React"]},
-        {id: 2, name: 'cProject1', des: 'Project Chogansadasdasdasda', tags: ["React", "Docker", "Java"]},
-        {id: 3, name: 'bProject1', des: 'Project Chogan', tags: ["React", "Docker"]},
-        {id: 4, name: 'aProject1', des: 'Project Chogan', tags: ["React", "Java"]},
-        {id: 5, name: 'aProject1', des: 'Project Chogan', tags: ["React", "Java"]},
-        {id: 6, name: 'aProject1', des: 'Project Chogan', tags: ["React", "Java"]},
-        {id: 7, name: 'aProject1', des: 'Project Chogan', tags: ["React", "Java"]},
-        {id: 8, name: 'aProject1', des: 'Project Chogan', tags: ["React", "Java"]},
+    const projects = useAppSelector((state) => state.projectApp.projects);
 
-    ]);
+    const getProjects = () => {
+        // Test query string works; comment when ready to test prod
+        const queryString = `http://localhost:42069/api/read/projects?userId=69`;
 
-    // const [folders, setFolders] = useState([
-    //     {id: 1, name: 'School'},
-    //     {id: 2, name: 'Work'},
-    //     {id: 3, name: 'School'},
-    //     {id: 4, name: 'Work'},
-    // ]);
+        // Production query string; uncomment when ready to test prod
+        // const queryString = `http://localhost:42069/api/read/project?projectId=${projectId}`; 
+        axios
+          .get(queryString)
+          .then((response) => {
+            console.log("response", response);
+            const projectData = response.data;
+            dispatch(setProjects(projectData));
+          })
+          .catch((error) => {
+            console.log("There was an error: ", error);
+          });
+      };
+
+      useMemo(() => {
+        getProjects();
+      }, []);
 
     const RenderTabs = () => {
         if(tabs === 'grid') {

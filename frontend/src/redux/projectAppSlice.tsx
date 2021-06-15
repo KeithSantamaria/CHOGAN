@@ -1,20 +1,35 @@
 import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-
-import {RootState,
-    //  AppThunk
-  } from "./store";
+import axios from "axios";
+import {RootState,} from "./store";
 
 
-// interface userIdPayload {
-//   params:{
-//     userId: string;
-//   }
-// };
+interface userIdPayload {
+  params:{
+    userId: string;
+  }
+};
 
-// export const getAllProjects = createAsyncThunk(
-//   'projects/getAllProjects',
-//   async (payload : userIdPayload)
-// );
+export const getAllProjects = createAsyncThunk(
+  'projects/getAllProjects',
+  async (payload : userIdPayload) => {
+    const response = axios.get("http://localhost:42069/api/read/projects", payload)
+      .then( (response) => response.data)
+      .catch(error => {console.log(error)});
+    return response;
+  }
+);
+
+
+// //        axios
+// .get(queryString, body)
+// .then((response) => {
+//   console.log("response", response);
+//   const projectData = response.data;
+//   dispatch(setProjects(projectData));
+// })
+// .catch((error) => {
+//   console.log("There was an error: ", error);
+// });
 
 
 export interface Model {
@@ -208,7 +223,6 @@ export const projectAppSlice = createSlice({
       console.log("Dispatching setEndPoint reudcer with action: ", action);
       state.project = action.payload;
     },
-
     setEndpoint: (
       state,
       action: {
@@ -652,6 +666,16 @@ export const projectAppSlice = createSlice({
       state.createNewERDForm.erdImageUrl = "";
     }
   },
+  extraReducers : (builder) => {
+    builder.addCase(
+      getAllProjects.fulfilled,
+      (state, action) => {
+        console.log("Dispatching getAllProjects reducer with action: ", action);
+        state.projects = action.payload;
+        return state;
+      }
+    )
+  }
 });
 
 export const {

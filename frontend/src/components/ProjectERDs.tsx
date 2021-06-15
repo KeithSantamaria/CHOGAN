@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useMemo } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Container } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setERDiagrams } from "../redux/projectAppSlice";
 import ERDCard from "./ERDCard";
@@ -45,28 +45,37 @@ const ProjectERDs = () => {
 
   const ERDModal = () => {
     return (
-      <Modal
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-        show={modalShow}
-        onHide={handleClose}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Create New ERD
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {/* Production */}
-          {/* <EndpointForm projectId={projectAppState.project.projectId} /> */}
+        <>
+            <ProjectSideNav />
+            <Container id="pg-content">
+                <p>ERDs</p>
+            </Container>
+        </>
+    )
+}
 
-          {/* Test */}
-          <ERDForm />
-        </Modal.Body>
-      </Modal>
-    );
-  };
+// export default ProjectERDs 
+      // <Modal
+      //   size="lg"
+      //   aria-labelledby="contained-modal-title-vcenter"
+      //   centered
+      //   show={modalShow}
+      //   onHide={handleClose}
+      // >
+      //   <Modal.Header closeButton>
+      //     <Modal.Title id="contained-modal-title-vcenter">
+      //       Create New ERD
+      //     </Modal.Title>
+      //   </Modal.Header>
+      //   <Modal.Body>
+      //     {/* Production */}
+      //     {/* <EndpointForm projectId={projectAppState.project.projectId} /> */}
+
+      //     {/* Test */}
+      //     <ERDForm />
+      //   </Modal.Body>
+      // </Modal>
+  // };
 
   return (
     <div>

@@ -22,8 +22,10 @@ const ERDForm = () => {
 
   const addERD = () => {
     // Test
-    const projectId = "60bc36b65d2b0da1deb9ada2";
+    // const projectId = "60bc36b65d2b0da1deb9ada2";
+    
     const queryString = `http://localhost:42069/api/create/project/ERD`;
+
     if (
       projectAppState.createNewERDForm.erdName === "" ||
       projectAppState.createNewERDForm.erdDescription === "" ||
@@ -37,10 +39,10 @@ const ERDForm = () => {
         erdImageUrl: imgDat,
         //production
 
-        //projectId: projectAppState.project.projectId,
+        projectId: projectAppState.project.projectId,
 
         //test
-        projectId: projectId,
+        // projectId: projectId,
       };
       console.log(erd);
       axios

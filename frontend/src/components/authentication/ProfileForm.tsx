@@ -5,7 +5,7 @@ import {currentUser, updateUser} from '../../redux/userSlice';
  import {Button, Container, Col} from 'react-bootstrap';
  
 
-export default function ProfileForm(){
+export default function ProfileForm( props:any ){
     
     //currentUser hooks
     const currentlyLoggedUser = useAppSelector(currentUser);
@@ -19,6 +19,7 @@ export default function ProfileForm(){
     //axios call to change user values
     const submitUser = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        props.setFlag(false);
         const payload = {
             id: currentlyLoggedUser.id,
             password: currentlyLoggedUser.password,

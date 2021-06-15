@@ -23,7 +23,7 @@ export default function UserProfile(){
       function flagSetter(){
         if(profileFlag === false){
           setFlag(true);
-          setBtn("Finish");
+          setBtn("View Profile");
           setTitle("Edit Profile");
         }
         if(profileFlag === true){
@@ -34,8 +34,12 @@ export default function UserProfile(){
       }
 
       const RenderProfile = () => {
-        if(profileFlag === true){return <ProfileForm/>}
-        else{return <Profile/>}  
+        if(profileFlag === true){
+          return <ProfileForm setFlag = {setFlag}/>
+        }
+        else{
+          return <Profile/>
+        }  
       }
 
     return(

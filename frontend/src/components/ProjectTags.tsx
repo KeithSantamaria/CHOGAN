@@ -1,9 +1,9 @@
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo, FormEvent } from "react";
 import ProjectSideNav from "./ProjectSideNav";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setTags } from "../redux/projectAppSlice";
 import axios from "axios";
-import { Button, Modal, Container, Col, Row, ListGroup } from "react-bootstrap";
+import { Button, Modal, Container, Col, Row, ListGroup, Card } from "react-bootstrap";
 import TagForm from "./tag/TagForm";
 import UpdateTag from "./UpdateTag";
 
@@ -126,8 +126,6 @@ function ProjectTags() {
     setPropertyId(tid);
     handleUpdateOpen();
   }
-
-
   return (
     <>
       <ProjectSideNav active={"tag"}/>
@@ -156,10 +154,10 @@ function ProjectTags() {
           <Col><span style={{paddingRight: '4em'}} className="float-right"> Action </span></Col>
         </Row>
 
-        {projectAppState.tags.map((tag: any) => {
-          return (
-            <div style={{paddingBottom: '2vh'}}>
-          <ListGroup.Item key={tag.id} className="project-list-item" style={{borderRadius: '10px'}}>
+        {projectAppState.tags.map((tag: any) => (
+          
+          <div style={{paddingBottom: '2vh'}}>
+          <ListGroup.Item key={tag.tagId} className="project-list-item" style={{borderRadius: '10px'}}>
             <Row>
                 <Col className="project-name">
                     {tag.tagName}
@@ -174,6 +172,7 @@ function ProjectTags() {
                     <Button
                       value={tag.tagId}
                       onClick={(a) =>
+
                         removeTags(tag.tagId)
                       }
                       variant="outline-dark"
@@ -205,7 +204,7 @@ function ProjectTags() {
             </Row>
         </ListGroup.Item>
         </div>
-        )})}
+  ))}
         <br></br>
         
         {tagModal()}

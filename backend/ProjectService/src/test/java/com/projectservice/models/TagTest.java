@@ -22,17 +22,17 @@ class TagTest {
 
 
     @Test
-    void tagIdTest() {
+    void getTagId() {
         tag.setTagId("Id");
         String id = tag.getTagId();
-        Assertions.assertEquals(id,"Id");
+        Assertions.assertEquals(id, "Id");
     }
 
     @Test
-    void projectIdTest(){
-        tag.setProjectId("Id");
-        String id = tag.getProjectId();
-        Assertions.assertEquals(id,"Id");
+    void getTagName() {
+        tag.setTagName("Name");
+        String name = tag.getTagName();
+        Assertions.assertEquals(name, "Name");
     }
 
     @Test

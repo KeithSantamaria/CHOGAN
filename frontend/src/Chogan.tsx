@@ -1,13 +1,22 @@
 import React from 'react';
-import ProjectsHome from './components/ProjectsHome';
+
+import AuthPage from './pages/AuthPage';
 import './Chogan.css';
+import Home from './pages/home/Home';
+import Routes from './routes/Routes';
+import ProjectGeneralInfo from './components/ProjectGeneralInfo';
+
 
 function Chogan() {
   return (
     <div className="App">
-      <ProjectsHome />
+      <Routes/>
+      {/* <ProjectGeneralInfo /> */}
     </div>
   );
 }
 
 export default Chogan;
+
+//<Home/>
+//<AuthPage/>

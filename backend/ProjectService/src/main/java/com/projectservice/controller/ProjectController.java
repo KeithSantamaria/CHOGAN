@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 /**
  * Controller for handling all project related endpoints
@@ -67,6 +69,23 @@ public class ProjectController {
         }
         log.info("Retrieved project with id: {}.", projectId);
         return new ResponseEntity<>(project, HttpStatus.OK);
+    }
+
+    /**
+     *  Reads all projects based off the user Id
+     * @param userId
+     * @return The list of projects
+     */
+
+    @GetMapping("/read/projects")
+    public ResponseEntity<List<Project>> readProjects(@RequestParam String userId) {
+        List<Project> projects = projectService.getAllProjectsByUserId(userId);
+        if (projects == null) {
+            log.error("Cannot retrieve project with id: {}. Project does not exist.", userId);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        log.info("Retrieved project with id: {}.", userId);
+        return new ResponseEntity<>(projects, HttpStatus.OK);
     }
 
     /*

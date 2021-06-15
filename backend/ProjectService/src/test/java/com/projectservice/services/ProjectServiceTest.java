@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.SpringBootConfiguration;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootConfiguration
 class ProjectServiceTest {
 
@@ -45,6 +48,14 @@ class ProjectServiceTest {
         Assertions.assertEquals(foundProject,project);
     }
 
+    @Test
+    public void findByUserId(){
+        List<Project> projects = new ArrayList<Project>();
+        String userId = "Id";
+        Mockito.when(projectRepo.findByUserId(userId)).thenReturn(projects);
+        List<Project> foundProjects = projectService.getAllProjectsByUserId(userId);
+        Assertions.assertEquals(foundProjects, projects);
+    }
     /*
     *
     * Update

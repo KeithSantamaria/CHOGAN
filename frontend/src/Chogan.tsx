@@ -5,12 +5,14 @@ import ProjectsHome from './components/ProjectsHome';
 import './Chogan.css';
 import Home from './pages/home/Home';
 import Routes from './routes/Routes';
+import ProjectGeneralInfo from './components/ProjectGeneralInfo';
 
 
 function Chogan() {
   return (
     <div className="App">
-      <Routes/>
+      {/* <Routes/> */}
+      <ProjectGeneralInfo />
     </div>
   );
 }

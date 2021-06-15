@@ -71,7 +71,7 @@ const ProjectERDs = () => {
   return (
     <div>
       <ProjectSideNav />
-      {projectAppState.ERDiagrams.map((erd: any) => {
+      {projectAppState.erds.map((erd: any) => {
         return <ERDCard erd={erd} />;
       })}
       <Button variant="primary" onClick={handleOpen}>

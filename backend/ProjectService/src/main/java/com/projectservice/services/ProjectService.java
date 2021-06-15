@@ -53,7 +53,8 @@ public class ProjectService implements IProjectService {
         return projectRepo.findByProjectId(projectId);
     }
 
-
+    @Override
+    public List<Project> getAllProjectsByUserId(String userId) { return projectRepo.findByUserId(userId); }
     /*
      *
      * Update

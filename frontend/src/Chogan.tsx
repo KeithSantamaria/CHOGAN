@@ -11,8 +11,8 @@ import ProjectGeneralInfo from './components/ProjectGeneralInfo';
 function Chogan() {
   return (
     <div className="App">
-      {/* <Routes/> */}
-      <ProjectGeneralInfo />
+      <Routes/>
+      {/* <ProjectGeneralInfo /> */}
     </div>
   );
 }

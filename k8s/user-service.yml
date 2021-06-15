@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+      - name: user-service-container
+        image: chogan/user-service
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 6969
+        env:
+          - name: MONGO_USER
+            valueFrom:
+              secretKeyRef:
+                name: chogan-secret
+                key: mongoUser
+          - name: MONGO_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: chogan-secret
+                key: mongoPassword
+          - name: MONGO_URL
+            valueFrom:
+              secretKeyRef:
+                name: chogan-secret
+                key: mongoUrl
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service-svc
+spec:
+  selector:
+    app: user-service
+  ports:
+  - port: 8080
+    nodePort: 31001
+    targetPort: 6969
+  type: NodePort

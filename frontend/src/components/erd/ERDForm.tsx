@@ -1,13 +1,13 @@
 import React from "react";
 import axios from "axios";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
-    resetCreateNewERDiagramForm,
+  resetCreateNewERDiagramForm,
   selectProjectApp,
   setCreateNewERDForm,
   setERDiagrams,
-} from "../redux/projectAppSlice";
-import { Button, Form } from "react-bootstrap";
+} from "../../redux/projectAppSlice";
+import { Button, Form, Container } from "react-bootstrap";
 
 const ERDForm = () => {
   const [imgDat, setImgDat] = React.useState("");
@@ -77,14 +77,14 @@ const ERDForm = () => {
   };
 
   return (
-    <div>
+    <Container className="create-proj-form-container">
       <Form>
-        <Form.Group controlId="exampleForm.ControlInput1">
+        <Form.Group className="project-name-wrapper" controlId="exampleForm.ControlInput1">
           <Form.Label>ERD Name</Form.Label>
           <Form.Control
             name="erdName"
             type="text"
-            placeholder="Documentation"
+            placeholder="Name"
             onChange={formChangeHandler}
           />
         </Form.Group>
@@ -100,6 +100,7 @@ const ERDForm = () => {
         <Form.Group controlId="exampleForm.ControlTextarea1">
           <Form.Label>ERD Description</Form.Label>
           <Form.Control
+            className="modal-create-form-textarea"
             name="erdDescription"
             as="textarea"
             rows={3}
@@ -108,7 +109,7 @@ const ERDForm = () => {
         </Form.Group>
         <Button onClick={addERD}>Save</Button>
       </Form>
-    </div>
+    </Container>
     );
 };
 

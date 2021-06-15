@@ -1,13 +1,13 @@
 import React from "react";
 import axios from "axios";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   resetCreateNewWireframeForm,
   selectProjectApp,
   setCreateNewWireframeForm,
   setWireframes,
-} from "../redux/projectAppSlice";
-import { Button, Form } from "react-bootstrap";
+} from "../../redux/projectAppSlice";
+import { Button, Form, Container } from "react-bootstrap";
 
 const WireframeForm = () => {
   const [imgDat, setImgDat] = React.useState("");
@@ -82,9 +82,9 @@ const WireframeForm = () => {
   //     formChangeHandler(event);
   // }
   return (
-    <div>
+    <Container className="create-proj-form-container">
       <Form>
-        <Form.Group controlId="exampleForm.ControlInput1">
+        <Form.Group className="project-name-wrapper" controlId="exampleForm.ControlInput1">
           <Form.Label>Wireframe Name</Form.Label>
           <Form.Control
             name="wireframeName"
@@ -114,7 +114,7 @@ const WireframeForm = () => {
         </Form.Group>
         <Button onClick={addWireframe}>Save</Button>
       </Form>
-    </div>
+    </Container>
   );
 };
 

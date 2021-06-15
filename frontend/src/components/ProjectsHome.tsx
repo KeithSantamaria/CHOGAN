@@ -5,12 +5,12 @@ import ProjectERDs from './ProjectERDs';
 import ProjectModels from './ProjectModels';
 import ProjectUserStories from './ProjectUserStories';
 import ProjectTags from './ProjectTags';
-import ProjectEndpoints from './ProjectEndpoints';
 
 import '../css/project-service/project-sidenav.css';
 import '../css/project-service/modal-create.css';
 
 function ProjectsHome() {
+
     return (
         <>           
             <Router>

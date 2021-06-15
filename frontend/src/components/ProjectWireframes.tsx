@@ -44,37 +44,39 @@ function ProjectWireframes() {
     getWireframes();
   }, []);
 
-  const wireframeModal = () => {
-    return (
-        <>
-            <ProjectSideNav active={"wire-frame"}/>
-            <Container id="pg-content">
-                <p>Wireframes</p>
-            </Container>
-        </>
-    )
-      <Modal
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-        show={modalShow}
-        onHide={handleClose}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Create New Wireframe
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {/* Production */}
-          {/* <EndpointForm projectId={projectAppState.project.projectId} /> */}
+    const wireframeModal = () => {
+        return (
+            <>
+                <>
+                    <ProjectSideNav active={"wire-frame"}/>
+                    <Container id="pg-content">
+                        <p>Wireframes</p>
+                    </Container>
+                </>
 
-          {/* Test */}
-          <WireframeForm />
-        </Modal.Body>
-      </Modal>
-    );
-  };
+                <Modal
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                    show={modalShow}
+                    onHide={handleClose}
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title id="contained-modal-title-vcenter">
+                            Create New Wireframe
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        {/* Production */}
+                        {/* <EndpointForm projectId={projectAppState.project.projectId} /> */}
+
+                        {/* Test */}
+                        <WireframeForm />
+                    </Modal.Body>
+                </Modal>
+            </>
+        )
+    };
 
   return (
     <div>

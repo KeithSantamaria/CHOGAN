@@ -12,8 +12,6 @@ export default function GridView(props: any) {
     const [active, setActive] = useState(false);
     let array = [...props.projects];
 
-    console.log(props.projects);
-
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);

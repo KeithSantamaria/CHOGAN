@@ -5,7 +5,6 @@ import HomeListView from '../../components/home/HomeListView';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { selectProjectApp, setProjects} from '../../redux/projectAppSlice';
-import { store } from '../../redux/store';
 import axios from 'axios';
 
 import '../../css/home/home.css';
@@ -48,7 +47,7 @@ export default function Home() {
           .catch((error) => {
             console.log("There was an error: ", error);
           });
-      };
+    };
 
       useMemo(() => {
         getProjects();

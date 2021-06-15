@@ -5,7 +5,7 @@ import { useAppDispatch } from "../../redux/hooks";
 import { setWireframes } from "../../redux/projectAppSlice";
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faTrash, faEdit} from "@fortawesome/free-solid-svg-icons";
+import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import '../../css/project-service/wire-frame.css';
 
 const WireframeCard = ({ wireframe }: any) => {

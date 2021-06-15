@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useAppSelector} from '../redux/hooks';
 import {currentUser} from '../redux/userSlice';
-import {Button, Container, Col} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import '../css/authentication/UserProfile.css';
 import Profile from "../components/authentication/ProfileView";
 import ProfileForm from "../components/authentication/ProfileForm";

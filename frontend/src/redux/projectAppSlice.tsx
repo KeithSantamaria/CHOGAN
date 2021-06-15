@@ -1,9 +1,21 @@
-import { createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import { ESMap, Map } from "typescript";
+import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
 import {RootState,
     //  AppThunk
   } from "./store";
+
+
+// interface userIdPayload {
+//   params:{
+//     userId: string;
+//   }
+// };
+
+// export const getAllProjects = createAsyncThunk(
+//   'projects/getAllProjects',
+//   async (payload : userIdPayload)
+// );
+
 
 export interface Model {
     modelId: string;

@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from "react";
-import axios from 'axios';
+import React, {useState} from "react";
 import {useAppSelector, useAppDispatch} from '../../redux/hooks';
 import {currentUser, updateUser} from '../../redux/userSlice';
- import {Button, Container, Col} from 'react-bootstrap';
+ import {Button} from 'react-bootstrap';
  
 
 export default function ProfileForm( props:any ){

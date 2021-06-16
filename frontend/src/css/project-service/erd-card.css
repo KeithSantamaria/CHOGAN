@@ -50,18 +50,6 @@
     cursor: pointer;
 }
 
-.project-description img:hover {
-    transition: 0.5s ease-in-out;
-    transform: scale(2);
-    z-index: 1000;
-    position: absolute;
-    display: flex;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-}
 
 /* .modal-content {
     width: 90vw;

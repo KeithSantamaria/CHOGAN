@@ -4,9 +4,6 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
-import java.util.Map;
-
 /**
  * project tag pojo;
  * map example: Map<"Frontend", ["React", "Redux", "Bootstrap"]>;
@@ -14,7 +11,7 @@ import java.util.Map;
 @Data
 @Document(collection = "tags")
 public class Tag {
-//    @Id
+    @Id
     private String tagId;
     private String projectId;
     private String tagName;

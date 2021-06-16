@@ -1,12 +1,14 @@
-package com.example.projectservice.services;
+package com.projectservice.services;
 
 import com.projectservice.models.Project;
 import com.projectservice.repository.ProjectRepo;
-import com.projectservice.services.ProjectService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.SpringBootConfiguration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootConfiguration
 class ProjectServiceTest {
@@ -34,7 +36,7 @@ class ProjectServiceTest {
     *
     * */
     @Test
-    public void findByProjectId(){
+    public void findByProjectIdTest(){
         Project project = new Project();
         String projectId = "id";
 
@@ -43,6 +45,18 @@ class ProjectServiceTest {
         Project foundProject = projectService.findByProjectId(projectId);
 
         Assertions.assertEquals(foundProject,project);
+    }
+
+    @Test
+    void findByUserIdTest(){
+        List<Project> list = new ArrayList<>();
+        String userId = "Id";
+
+        Mockito.when(projectRepo.findByUserId(userId)).thenReturn(list);
+
+        List<Project> foundList = projectService.findByUserId(userId);
+
+        Assertions.assertEquals(foundList,list);
     }
 
     /*

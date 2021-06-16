@@ -53,8 +53,13 @@ public class ProjectService implements IProjectService {
         return projectRepo.findByProjectId(projectId);
     }
 
+    /**
+     * Reads all projects by a given userId
+     * @param userId the userId to read by
+     * @return The list of projects
+     */
     @Override
-    public List<Project> getAllProjectsByUserId(String userId) { return projectRepo.findByUserId(userId); }
+    public List<Project> findByUserId(String userId) { return projectRepo.findByUserId(userId); }
     /*
      *
      * Update

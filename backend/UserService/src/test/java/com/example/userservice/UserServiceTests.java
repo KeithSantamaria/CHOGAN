@@ -105,7 +105,7 @@ public class UserServiceTests {
     @Test
     void testGetUserById() {
         testUser.setId("test");
-        Mockito.when(userRepository.findById(testUser.getId())).thenReturn(testUser);
+        Mockito.when(userRepository.findById(testUser.getId())).thenReturn(java.util.Optional.ofNullable(testUser));
         User testUser = userService.getUserById("test");
         Assertions.assertNotNull(testUser);
     }
@@ -124,7 +124,7 @@ public class UserServiceTests {
     void testChangePassword() {
         testUser.setId("test");
         testUser.setSecurityAnswer("Answer");
-        Mockito.when(userRepository.findById("test")).thenReturn(testUser);
+        Mockito.when(userRepository.findById("test")).thenReturn(java.util.Optional.ofNullable(testUser));
         Mockito.when(userRepository.save(testUser)).thenReturn(testUser);
         User user = userService.changePassword("test", "Password", "Answer");
         Assertions.assertEquals("Password", user.getPassword());
@@ -135,7 +135,7 @@ public class UserServiceTests {
     void testFailChangePassword() {
         testUser.setId("test");
         testUser.setSecurityAnswer("NotAnAnswer");
-        Mockito.when(userRepository.findById("test")).thenReturn(testUser);
+        Mockito.when(userRepository.findById("test")).thenReturn(java.util.Optional.ofNullable(testUser));
         User user = userService.changePassword("test", "Password", "Answer");
         Assertions.assertNull(user);
     }
@@ -144,7 +144,7 @@ public class UserServiceTests {
     void testCheckSecurityQuestion() {
         testUser.setId("test");
         testUser.setSecurityAnswer("Answer");
-        Mockito.when(userRepository.findById("test")).thenReturn(testUser);
+        Mockito.when(userRepository.findById("test")).thenReturn(java.util.Optional.ofNullable(testUser));
         boolean test = userService.checkSecurityQuestion("test","Answer");
         Assertions.assertTrue(test);
     }

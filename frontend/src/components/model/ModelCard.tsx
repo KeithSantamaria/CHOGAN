@@ -7,9 +7,18 @@ const ModelCard = ({ model }: any) => {
     <Card>
       <Card.Body>
         <Card.Title>{model.modelName}</Card.Title>
-        {Object.entries(metadata).forEach((entry:any) => {
-          return <Card.Text>{entry}</Card.Text>;
+        {/* {Object.values(metadata).forEach( (value:any) => {
+          <Card.Text>{value}</Card.Text>
+        })} */}
+        {Object.keys(metadata).forEach( (key:any) => {
+          <Card.Text>{metadata[key]}</Card.Text>
         })}
+        {/* {Object.keys(metadata).forEach( key => {
+          return <Card.Text>{metadata[key]}</Card.Text>
+        })} */}
+        {/* {Object.entries(metadata).forEach((entry:any) => {
+          return <Card.Text>{entry}</Card.Text>;
+        })} */}
       </Card.Body>
     </Card>
   );

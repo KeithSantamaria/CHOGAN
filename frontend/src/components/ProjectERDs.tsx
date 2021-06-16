@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useMemo } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Container, Col, Row} from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setERDiagrams } from "../redux/projectAppSlice";
-import ERDCard from "./ERDCard";
-import ERDForm from "./ERDForm";
+import ERDCard from "./erd/ERDCard";
+import ERDForm from "./erd/ERDForm";
 import ProjectSideNav from "./ProjectSideNav";
+import TopNavbar from '../components/TopNavbar';
 
 const ProjectERDs = () => {
   const projectAppState = useAppSelector(selectProjectApp);
@@ -13,13 +14,8 @@ const ProjectERDs = () => {
   const handleOpen = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
   const dispatch = useAppDispatch();
-
+  const projectId = projectAppState.project.projectId;
   const getERDs = () => {
-    //Test
-    const projectId = "60bc36b65d2b0da1deb9ada2";
-
-    //Production
-    //const projectId = projectAppState.project.projectId;
     const queryString = `http://localhost:42069/api/read/project/ERDs`;
 
     const body = {
@@ -46,6 +42,7 @@ const ProjectERDs = () => {
   const ERDModal = () => {
     return (
       <Modal
+        className="modal-create-wrapper"
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -65,20 +62,42 @@ const ProjectERDs = () => {
           <ERDForm />
         </Modal.Body>
       </Modal>
-    );
-  };
+    )
+  }
 
   return (
-    <div>
-      <ProjectSideNav />
-      {projectAppState.ERDiagrams.map((erd: any) => {
-        return <ERDCard erd={erd} />;
-      })}
-      <Button variant="primary" onClick={handleOpen}>
-        New ERD
-      </Button>
-      {ERDModal()}
-    </div>
+    <>
+      <TopNavbar/>
+      <ProjectSideNav active={"erd"} style={{paddingRight: "1000px"}}/>
+        
+        <Container id="pg-content">
+          <Row style={{paddingBottom: '5px'}}>
+            <Col>
+              <span style={{color: 'gray'}}>
+                <h4>ER Diagram - {projectAppState.project.projectName}</h4>
+              </span>
+            </Col>
+            
+            <Col >
+              <span className="float-right">
+                <Button variant="outline-warning" onClick={handleOpen}>
+                  New ERD
+                </Button>
+              </span>
+            
+            </Col>
+          </Row>
+
+          <hr></hr>
+
+          {/*Test*/}
+          {projectAppState.erds.map((erd: any) => {
+            return <ERDCard key={erd.ERDiagramId} erd={erd} />;
+          })}
+          
+          {ERDModal()}
+        </Container>
+    </>
   );
 };
 

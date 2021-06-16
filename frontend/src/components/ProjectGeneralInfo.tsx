@@ -1,38 +1,34 @@
 import React, { useMemo } from "react";
 import axios from "axios";
 import ProjectSideNav from "./ProjectSideNav";
-import WidgetForm from "./WidgetForm";
+import WidgetForm from "./general/WidgetForm";
+import TopNavbar from '../components/TopNavbar';
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { Card, Button, Modal } from "react-bootstrap";
+import { Card, Button, Modal, Col, Row, CardDeck, Container} from "react-bootstrap";
 import {
   selectProjectApp,
   setProject,
   setWidgets,
 } from "../redux/projectAppSlice";
-import WidgetComponent from "./WidgetComponent";
+import WidgetComponent from "./general/WidgetComponent";
 
-// For production, project will be passed as a prop from Project Card (built by Home group)
-// const ProjectGeneralInfo = ({project} : any ) => {
+import '../css/project-service/general-info.css';
+
 const ProjectGeneralInfo = () => {
   const dispatch = useAppDispatch();
   const projectAppState = useAppSelector(selectProjectApp);
+  const project = projectAppState.project;
   const [modalShow, setModalShow] = React.useState(false);
-
-  // Code for grabbing user from User Slice
-
+  
   const handleOpen = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
 
   const getProject = () => {
     // Production
-    // const queryString = `http://localhost:42069/api/read/project?projectId=${projectId}`;
-
-    // Test
     const queryString = `http://localhost:42069/api/read/project`;
-    const projectId = "60bc36b65d2b0da1deb9ada2";
     const body = {
       params: {
-        projectId: projectId,
+        projectId: project.projectId,
       },
     };
     axios
@@ -54,6 +50,7 @@ const ProjectGeneralInfo = () => {
   const newWidgetModal = () => {
     return (
       <Modal
+        className="modal-create-wrapper"
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -73,27 +70,45 @@ const ProjectGeneralInfo = () => {
   };
 
   return (
-    <div>
-      <ProjectSideNav />
-      <Card>
-        <Card.Body>
-          {/* <Card.Title>{userAppState.user.userName} - {projectName}</Card.Title> */}
-          <Card.Title>{projectAppState.project.projectName}</Card.Title>
+    <>
+      <TopNavbar/>
+      <ProjectSideNav active={"general"}/>
+      
+      <Container id="pg-content">
+        <Row style={{paddingBottom: '5px'}}>
+          <Col>
+            <span style={{color: 'gray'}}>
+              <h4>General Information - {projectAppState.project.projectName}</h4>
+            </span>
+          </Col>
+          
+          <Col >
+            <span className="float-right">
+              <Button variant="outline-warning" onClick={handleOpen}>
+                New Widget
+              </Button>
+            </span>
+           
+          </Col>
+        </Row>
 
-          <Card.Text>{projectAppState.project.projectDescription}</Card.Text>
-        </Card.Body>
-      </Card>
-        {/*Production*/}
-        {/* <WidgetComponent projectId={userAppState.user.userId}/> */}
+        <hr></hr>
+       
+      
+        <CardDeck style={{paddingBottom: '25px'}}>
+          <Card>
+            <Card.Body>
+              <Card.Title><h4>Project Description</h4></Card.Title>
+
+              <Card.Text>{projectAppState.project.projectDescription}</Card.Text>
+            </Card.Body>
+          </Card>
+        </CardDeck>
+        <WidgetComponent />
         
-        
-        {/*Test*/}
-        <WidgetComponent projectId={"60bc36b65d2b0da1deb9ada2"} />
-      <Button variant="primary" onClick={handleOpen}>
-        New Widget
-      </Button>
-      {newWidgetModal()}
-    </div>
+        {newWidgetModal()}
+      </Container>
+    </>
   );
 };
 

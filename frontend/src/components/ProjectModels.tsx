@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useMemo } from "react";
-import { Button, Card, Modal } from "react-bootstrap";
+import { Button, Card, Modal, Container } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setModels } from "../redux/projectAppSlice";
-import ModelForm from "./ModelForm";
+import ModelForm from "./model/ModelForm";
 import ProjectSideNav from "./ProjectSideNav";
-import WidgetForm from "./WidgetForm";
+import WidgetForm from "./general/WidgetForm";
+import TopNavbar from '../components/TopNavbar';
 
 function ProjectModels() {
   const projectAppState = useAppSelector(selectProjectApp);
@@ -13,14 +14,10 @@ function ProjectModels() {
   const handleOpen = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
   const dispatch = useAppDispatch();
+  const projectId = projectAppState.project.projectId;
 
   const getModels = () => {
-    // Production
-    // const queryString = `http://localhost:42069/api/read/project?projectId=${projectId}`;
-
-    // Test
-    const queryString = `http://localhost:42069/api/read/models`;
-    const projectId = "60bc36b65d2b0da1deb9ada2";
+    const queryString = `http://localhost:42069/api/read/project/models`;
     const body = {
       params: {
         projectId: projectId,
@@ -45,6 +42,7 @@ function ProjectModels() {
   const projectModal = () => {
     return (
       <Modal
+        className="modal-create-wrapper"
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -63,23 +61,25 @@ function ProjectModels() {
     );
   };
   return (
-    <div>
-      <ProjectSideNav />
-
-      {projectAppState.models.map((model: any) => {
-        return (
-          <Card>
-            <Card.Body>
-              <Card.Title>{model.modelName}</Card.Title>
-            </Card.Body>
-          </Card>
-        );
-      })}
-      <Button variant="primary" onClick={handleOpen}>
-        New Model
-      </Button>
-      {projectModal()}
-    </div>
+    <>
+      <TopNavbar/>
+      <ProjectSideNav active={"model"}/>
+      <Container id="pg-content">
+        {projectAppState.models.map((model: any) => {
+          return (
+            <Card>
+              <Card.Body>
+                <Card.Title>{model.modelName}</Card.Title>
+              </Card.Body>
+            </Card>
+          );
+        })}
+        <Button variant="primary" onClick={handleOpen}>
+          New Model
+        </Button>
+        {projectModal()}
+      </Container>
+    </>
   );
 }
 

@@ -1,158 +1,160 @@
-import {
+import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import axios from "axios";
+import {RootState,} from "./store";
 
-  createSlice,
 
-  //  PayloadAction
-} from "@reduxjs/toolkit";
+interface userIdPayload {
+  params:{
+    userId: string;
+  }
+};
 
-import {
-  RootState,
-  //  AppThunk
-} from "./store";
+interface projectIdPayload {
+  params: {
+    projectId: string; 
+  }
+}
 
-export interface ProjectAppState {
-  projects: Array<{
-    project: {
-      projectId: string;
-      projectName: string;
-      projectDescription: string;
-      projectStatus: string;
-    };
-  }>;
-  models: Array<{
-    model: {
-      modelId: string;
-      projectId: string;
-      modelName: string;
-      modelMetadata: Array<{
-        // index signature https://basarat.gitbook.io/typescript/type-system/index-signatures
-        key: string;
-        value: string;
-      }>;
-    };
-  }>;
-  endpoints: Array<{
-    endpoint: {
-      endpointId: string;
-      projectId: string;
-      endpointName: string;
-      endpointUrlPattern: string;
-      endpointDescription: string;
-    };
-  }>;
-  tags: Array<{
-    tag: {
-      tagId: string;
-      projectId: string;
-      tagName: string;
-      tagDescription: string;
-    };
-  }>;
-  userStories: Array<{
-    userStory: {
-      userStoryId: string;
-      projectId: string;
-      userStoryDescription: string;
-    };
-  }>;
-  widgets: Array<{
-    widget: {
-      widgetId: string;
-      projectId: string;
-      widgetName: string;
-      widgetDescription: string;
-    };
-  }>;
-  wireframes: Array<{
-    wireframe: {
-      wireframeId: string;
-      projectId: string;
-      wireframeName: string;
-      wireframeDescription: string;
-      wireframeImg: string;
-    };
-  }>;
-  ERDiagrams: Array<{
-    ERDiagram: {
-      ERDiagramId: string;
-      projectId: string;
-      ERDiagramName: string;
-      ERDiagramDescription: string;
-      ERDiagramImg: string;
-    };
-  }>;
-  project: {
-    projectId: string;
-    projectName: string;
-    projectDescription: string;
-    projectStatus: string;
-  };
-  model: {
+interface createProjectPayload {
+  userId : string;
+  projectName : string;
+  projectDescription : string;
+}
+
+interface createWidgetPayload {
+  projectId: string;
+  widgetName: string;
+  widgetDescription : string;
+}
+
+export const getAllWidgetsByProjectId = createAsyncThunk (
+  'projects/getAllWidgets',
+  async (payload : projectIdPayload) => {
+    const response = axios.get("http://localhost:42069/api/read/project/widgets", payload)
+    .then( (response) => response.data)
+    .catch( error => {console.log(error)});
+    return response;
+  }
+)
+
+export const createWidget = createAsyncThunk (
+  'projects/createWidget',
+  async (payload : createWidgetPayload) => {
+    const response = axios.post("http://localhost:42069/api/create/project/widget", payload)
+    .then( (response) => response.data)
+    .catch( (error) => {console.log(error)});
+    return response;
+  }
+);
+
+export const createProject = createAsyncThunk (
+  'projects/createProject',
+  async (payload : createProjectPayload) => {
+    const response = axios.post("http://localhost:42069/api/create/project", payload)
+      .then( (response) => response.data)
+      .catch( (error) => {console.log(error)});
+    return response;
+  }
+);
+
+export const getAllProjects = createAsyncThunk(
+  'projects/getAllProjects',
+  async (payload : userIdPayload) => {
+    const response = axios.get("http://localhost:42069/api/read/projects", payload)
+      .then( (response) => response.data)
+      .catch(error => {console.log(error)});
+    return response;
+  }
+);
+
+export interface Model {
     modelId: string;
     projectId: string;
     modelName: string;
-    modelMetadata: Array<{
-      // index signature https://basarat.gitbook.io/typescript/type-system/index-signatures
-      key: string;
-      value: string;
-    }>;
-  };
-  endpoint: {
+    modelMetadata:Array<{
+        // index signature https://basarat.gitbook.io/typescript/type-system/index-signatures
+        key: string, value: string
+    }>
+}
+
+export interface Endpoint {
     endpointId: string;
     projectId: string;
     endpointName: string;
     endpointUrlPattern: string;
     endpointDescription: string;
-  };
-  tag: {
+}
+
+export interface Tag {
     tagId: string;
     projectId: string;
     tagName: string;
     tagDescription: string;
-  };
-  userStory: {
+}
+
+export interface UserStory {
     userStoryId: string;
     projectId: string;
     userStoryDescription: string;
-  };
-  widget: {
+}
+
+export interface Widget {
     widgetId: string;
     projectId: string;
     widgetName: string;
     widgetDescription: string;
-  };
-  wireframe: {
-    wireframeId: string;
-    projectId: string;
-    wireframeName: string;
-    wireframeDescription: string;
-    wireframeImg: string;
-  };
-  ERDiagram: {
-    ERDiagramId: string;
-    projectId: string;
-    ERDiagramName: string;
-    ERDiagramDescription: string;
-    ERDiagramImg: string;
-  };
+}
 
-  createNewEndpointForm: {
-    endpointName: string;
-    urlPattern: string;
-    endpointDescription: string;
-  };
-  createNewModelForm: { modelName: string; modelMetadata: Array<{}> };
-  createNewUserStoryForm: { userStoryDescription: string };
-  createNewTagForm: { tagName: string; tagDescription: string };
-  createNewWidgetForm: { widgetName: string; widgetDescription: string };
-  //Bookmark for later - need to know how to upload photos
-  createNewERDForm: { erdName: string; erdDescription: string; erdImg: string};
-  //Bookmark for later - need to know how to upload photos
-  createNewWireframeForm: {
-    wireframeName: string;
-    wireframeDescription: string;
-    wireframeImg: string;
-  };
+export interface Project {
+    projectId: string;
+    projectName: string;
+    projectDescription: string;
+    userId: string;
+    projectStatus: string;
+}
+
+export interface Wireframe {
+  wireframeId: string;
+  projectId: string;
+  wireframeName: string;
+  wireframeDescription: string;
+  wireframeImg: string;
+}
+
+export interface ERDiagram {
+  ERDiagramId: string;
+  projectId: string;
+  ERDiagramName: string;
+  ERDiagramDescription: string;
+  ERDiagramImageUrl: string;
+}
+
+export interface ProjectAppState {
+  projects : Array<Project>;
+  project: Project;
+  // sampleProjects: Array<Project>;
+  model: Model;
+  models: Array<Model>;
+  endpoint: Endpoint;
+  endpoints: Array<Endpoint>;
+  tag: Tag;
+  tags: Array<Tag>;
+  userStory: UserStory;
+  userStories: Array<UserStory>;
+  widget: Widget;
+  widgets: Array<Widget>;
+  wireframe: Wireframe;
+  wireframes: Array<Wireframe>;
+  erd: ERDiagram;
+  erds: Array<ERDiagram>;
+  createNewProjectForm: {projectName: string; projectDescription: string};
+  createNewEndpointForm: {endpointName: string, urlPattern: string, endpointDescription: string};
+  createNewModelForm: {modelName: string; modelMetadata:Array<{}>};
+  createNewUserStoryForm: { userStoryName: string; userStoryDescription: string };
+  createNewTagForm: {tagName: string, tagDescription: string};
+  createNewWidgetForm: {widgetName: string, widgetDescription: string},
+  createNewERDForm: {erdName: string, erdDescription: string; erdImageUrl: string};
+  createNewWireframeForm: {wireframeName: string, wireframeDescription: string; wireframeImageUrl: string}
 }
 
 const initialState: ProjectAppState = {
@@ -163,9 +165,10 @@ const initialState: ProjectAppState = {
   userStories: [],
   widgets: [],
   wireframes: [],
-  ERDiagrams: [],
+  erds: [],
   project: {
     projectId: "",
+    userId: "",
     projectName: "",
     projectDescription: "",
     projectStatus: "",
@@ -200,12 +203,12 @@ const initialState: ProjectAppState = {
     widgetName: "",
     widgetDescription: "",
   },
-  ERDiagram: {
+  erd: {
     ERDiagramId: "",
     projectId: "",
     ERDiagramName: "",
     ERDiagramDescription: "",
-    ERDiagramImg: "",
+    ERDiagramImageUrl: "",
   },
   wireframe: {
     wireframeId: "",
@@ -214,22 +217,24 @@ const initialState: ProjectAppState = {
     wireframeDescription: "",
     wireframeImg: "",
   },
+  createNewProjectForm: {
+    projectName: "",
+    projectDescription: "",
+  },
   createNewEndpointForm: {
     endpointName: "",
     urlPattern: "",
     endpointDescription: "",
   },
   createNewModelForm: { modelName: "", modelMetadata: []},
-  createNewUserStoryForm: { userStoryDescription: "" },
+  createNewUserStoryForm: { userStoryName: "", userStoryDescription: "" },
   createNewTagForm: { tagName: "", tagDescription: "" },
   createNewWidgetForm: { widgetName: "", widgetDescription: "" },
-  //Bookmark for later - need to know how to upload photos
-  createNewERDForm: { erdName: "", erdDescription: "", erdImg: ""},
-  //Bookmark for later - need to know how to upload photos
+  createNewERDForm: { erdName: "", erdDescription: "", erdImageUrl: ""},
   createNewWireframeForm: {
     wireframeName: "",
     wireframeDescription: "",
-    wireframeImg: ""
+    wireframeImageUrl: ""
   },
 };
 
@@ -242,6 +247,7 @@ export const projectAppSlice = createSlice({
       action: {
         payload: {
           projectId: string;
+          userId: string;
           projectName: string;
           projectDescription: string;
           projectStatus: string;
@@ -251,7 +257,6 @@ export const projectAppSlice = createSlice({
       console.log("Dispatching setEndPoint reudcer with action: ", action);
       state.project = action.payload;
     },
-
     setEndpoint: (
       state,
       action: {
@@ -323,12 +328,12 @@ export const projectAppSlice = createSlice({
           projectId: string;
           ERDiagramName: string;
           ERDiagramDescription: string;
-          ERDiagramImg: string;
+          ERDiagramImageUrl: string;
         };
       }
     ) => {
       console.log("Dispatching setModel reducer with action:", action);
-      state.ERDiagram = action.payload;
+      state.erd = action.payload;
     },
 
     setWireframe: (
@@ -366,12 +371,11 @@ export const projectAppSlice = createSlice({
       state,
       action: {
         payload: Array<{
-          project: {
             projectId: string;
+            userId: string;
             projectName: string;
             projectDescription: string;
             projectStatus: string;
-          };
         }>;
       }
     ) => {
@@ -383,13 +387,11 @@ export const projectAppSlice = createSlice({
       state,
       action: {
         payload: Array<{
-          endpoint: {
             endpointId: string;
             projectId: string;
             endpointName: string;
             endpointUrlPattern: string;
             endpointDescription: string;
-          };
         }>;
       }
     ) => {
@@ -401,11 +403,9 @@ export const projectAppSlice = createSlice({
       state,
       action: {
         payload: Array<{
-          userStory: {
             userStoryId: string;
             projectId: string;
             userStoryDescription: string;
-          };
         }>;
       }
     ) => {
@@ -417,7 +417,7 @@ export const projectAppSlice = createSlice({
       state,
       action: {
         payload: Array<{
-          model: {
+
             modelId: string;
             projectId: string;
             modelName: string;
@@ -426,7 +426,6 @@ export const projectAppSlice = createSlice({
               key: string;
               value: string;
             }>;
-          };
         }>;
       }
     ) => {
@@ -438,12 +437,10 @@ export const projectAppSlice = createSlice({
       state,
       action: {
         payload: Array<{
-          tag: {
             tagId: string;
             projectId: string;
             tagName: string;
             tagDescription: string;
-          };
         }>;
       }
     ) => {
@@ -455,31 +452,27 @@ export const projectAppSlice = createSlice({
       state,
       action: {
         payload: Array<{
-          ERDiagram: {
             ERDiagramId: string;
             projectId: string;
             ERDiagramName: string;
             ERDiagramDescription: string;
-            ERDiagramImg: string;
-          };
+            ERDiagramImageUrl: string;
         }>;
       }
     ) => {
       console.log("Dispatching setProject reducer with aciton: ", action);
-      state.ERDiagrams = action.payload;
+      state.erds = action.payload;
     },
 
     setWireframes: (
       state,
       action: {
         payload: Array<{
-          wireframe: {
             wireframeId: string;
             projectId: string;
             wireframeName: string;
             wireframeDescription: string;
             wireframeImg: string;
-          };
         }>;
       }
     ) => {
@@ -491,17 +484,32 @@ export const projectAppSlice = createSlice({
       state,
       action: {
         payload: Array<{
-          widget: {
             widgetId: string;
             projectId: string;
             widgetName: string;
             widgetDescription: string;
-          };
         }>;
       }
     ) => {
       console.log("Dispatching setProject reducer with aciton: ", action);
       state.widgets = action.payload;
+    },
+
+    setCreateNewProjectForm: (     
+      state,
+      action: {
+        payload: {
+          fieldName: string;
+          value: string;
+        };
+      }
+    ) => {
+      const fieldName = action.payload.fieldName;
+      const value = action.payload.value;
+      state.createNewProjectForm = {
+        ...state.createNewProjectForm, 
+        [fieldName]: value,
+      }
     },
 
     setCreateNewEndpointForm: (
@@ -639,7 +647,7 @@ export const projectAppSlice = createSlice({
       }
     ) => {
       const imgData = action.payload.value;
-      state.createNewWireframeForm.wireframeImg = imgData;
+      state.createNewWireframeForm.wireframeImageUrl = imgData;
     },
 
     setERDImageInForm: (
@@ -652,7 +660,7 @@ export const projectAppSlice = createSlice({
       }
     ) => {
       const imgData = action.payload.value;
-      state.createNewERDForm.erdImg = imgData;
+      state.createNewERDForm.erdImageUrl = imgData;
     },
 
     resetCreateNewWidgetForm: (state) => {
@@ -683,19 +691,61 @@ export const projectAppSlice = createSlice({
     resetCreateNewWireframeForm: (state) => {
       state.createNewWireframeForm.wireframeDescription = "";
       state.createNewWireframeForm.wireframeName = "";
-      state.createNewWireframeForm.wireframeImg = "";
+      state.createNewWireframeForm.wireframeImageUrl = "";
     },
 
     resetCreateNewERDiagramForm: (state) => {
       state.createNewERDForm.erdName = "";
       state.createNewERDForm.erdDescription = "";
-      state.createNewERDForm.erdImg = "";
+      state.createNewERDForm.erdImageUrl = "";
+    },
+
+    resetCreateNewProjectForm: (state)=> {
+      state.createNewProjectForm.projectDescription = "";
+      state.createNewProjectForm.projectName = ""
     }
   },
+  extraReducers : (builder) => {
+    builder.addCase(
+      getAllProjects.fulfilled,
+      (state, action) => {
+        console.log("Dispatching getAllProjects reducer with action: ", action);
+        state.projects = action.payload;
+        return state;
+      }
+    )
+
+    builder.addCase(
+      createProject.fulfilled,
+      (state, action) => {
+        console.log("Dispatching createProject reducer with action: ", action);
+        state.projects.push(action.payload);
+        return state;
+      }
+    )
+
+    builder.addCase(
+      createWidget.fulfilled,
+      (state, action) => {
+        console.log("Dispatching createWidget reducer with action: ", action);
+        // currently create Widget returns a list of widgets
+        state.widgets = action.payload;
+        return state;
+      }
+    )
+
+    builder.addCase(
+      getAllWidgetsByProjectId.fulfilled,
+      (state, action) => {
+        console.log("Dispatching getAllWidgetsByProjectId reducer with action: ", action);
+        state.widgets = action.payload;
+        return state;
+      }
+    )
+  }
 });
 
 export const {
-  
   setWidgets,
   setProjects,
   setEndpoints,
@@ -721,6 +771,7 @@ export const {
   setCreateNewWireframeForm,
   setCreateNewTagForm,
   setCreateNewUserStoryForm,
+  setCreateNewProjectForm,
   resetCreateNewWidgetForm,
   resetCreateNewTagForm,
   resetCreateNewEndpointForm,
@@ -728,6 +779,7 @@ export const {
   resetCreateNewUserStoryForm,
   resetCreateNewWireframeForm,
   resetCreateNewERDiagramForm,
+  resetCreateNewProjectForm,
 } = projectAppSlice.actions;
 
 export const selectProjectApp = (state: RootState) => state.projectApp;

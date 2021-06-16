@@ -1,5 +1,5 @@
 import { Route, Redirect } from 'react-router';
-import {useAppSelector, useAppDispatch} from '../redux/hooks';
+import {useAppSelector} from '../redux/hooks';
 
 import {currentUser} from '../redux/userSlice';
 

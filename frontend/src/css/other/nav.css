@@ -1,0 +1,49 @@
+.nav-wrapper {
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    background-color: #1c2331;
+    
+}
+
+.navbar {
+    box-shadow:
+    0 4.5px -3.7px -60px rgba(0, 0, 0, 0.015),
+    0 10.1px -0.3px -60px rgba(0, 0, 0, 0.047),
+    0 19.7px 19px -60px rgba(0, 0, 0, 0.111),
+    0 58px 108px -60px rgba(0, 0, 0, 0.26)
+    ;
+}
+.navbar-light .navbar-text a {
+    color: white;
+}
+
+.logout-wrapper {
+    border-radius: 10px;
+    background-color: #2f3545;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    transition: all 0.2 ease-in-out;
+}
+
+.logout-wrapper:hover {
+    transition: all 0.2 ease-in-out;
+    cursor: pointer;
+    color: black;
+    background-color: #faede8;
+}
+
+.logout-wrapper a {
+    text-decoration: none;
+    font-weight: 200;
+}
+
+.navbar h3 {
+    cursor: pointer;
+    color: #f5f5f5;
+    font-family:cursive;
+    font-weight: bold;
+}
+
+.navbar h3:hover {
+    transform: scale(1.1);
+}

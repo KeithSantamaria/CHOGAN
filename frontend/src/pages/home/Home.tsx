@@ -2,20 +2,23 @@ import {useState, useMemo} from 'react';
 import GridView from '../../components/home/GridView.component';
 import UserView from '../../components/home/UserView.component';
 import HomeListView from '../../components/home/HomeListView';
+import TopNavbar from '../../components/TopNavbar';
+
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { selectProjectApp, setProjects} from '../../redux/projectAppSlice';
-import { store } from '../../redux/store';
+import { getAllProjects, selectProjectApp, setProjects} from '../../redux/projectAppSlice';
 import axios from 'axios';
-
 import '../../css/home/home.css';
 
-import {Col, Row} from 'react-bootstrap';
+import {Col, Row, Container} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTh, faList} from "@fortawesome/free-solid-svg-icons";
+import { currentUser } from '../../redux/userSlice';
+import ProjectCard from '../../components/home/ProjectCard.component';
 
 export default function Home() {
     const projectAppState= useAppSelector(selectProjectApp);
+    const userAppState= useAppSelector(currentUser);
     const dispatch = useAppDispatch();
 
 
@@ -28,25 +31,19 @@ export default function Home() {
 
     const getProjects = () => {
         // Test query string works; comment when ready to test prod
-        const queryString = `http://localhost:42069/api/read/projects?userId=69`;
+        const queryString = `http://localhost:42069/api/read/projects`;
+        // const body = {params:{userId: "60c7f7afcfa7eb6bf04a410c"}};
+        const body ={params:{userId: userAppState.id}};
 
         // Production query string; uncomment when ready to test prod
-        // const queryString = `http://localhost:42069/api/read/project?projectId=${projectId}`; 
-        axios
-          .get(queryString)
-          .then((response) => {
-            console.log("response", response);
-            const projectData = response.data;
-            dispatch(setProjects(projectData));
-          })
-          .catch((error) => {
-            console.log("There was an error: ", error);
-          });
-      };
+        // const queryString = `http://localhost:42069/api/read/projects`;
+        dispatch(getAllProjects(body));
+    };
 
       useMemo(() => {
         getProjects();
       }, []);
+
 
     const RenderTabs = () => {
         if(tabs === 'grid') {
@@ -73,32 +70,38 @@ export default function Home() {
   
 
   return (
-    <div className="body">
-        <Row>
-            <Col sm={9} className="home-container-wrapper">
-                <Row className="tabs-container-wrapper">
-                    <Col className="tabs-wrapper" >
-                        <FontAwesomeIcon style={activeGrid ? {color: 'black'} : {color: 'gray'}} className="fa-icon fa-icon-1" icon={faTh} onClick={() => handleGridView()}/>
-                        <FontAwesomeIcon style={activeList ? {color: 'black'} : {color: 'gray'}} className="fa-icon fa-icon-2" icon={faList} onClick={() => handleListView()}/>
-                    </Col>
+      <>
+        <TopNavbar/>
+        <div className="body">
+            <Row>
+                <Col sm={9} className="home-container-wrapper">
+                    <Row className="tabs-container-wrapper">
+                        <Col className="tabs-wrapper" >
+                            <FontAwesomeIcon style={activeGrid ? {color: 'black'} : {color: 'gray'}} className="fa-icon fa-icon-1" icon={faTh} onClick={() => handleGridView()}/>
+                            <FontAwesomeIcon style={activeList ? {color: 'black'} : {color: 'gray'}} className="fa-icon fa-icon-2" icon={faList} onClick={() => handleListView()}/>
+                        </Col>
 
-                    <Col className="proj-info-wrapper">
-                        <div style={{float: 'right'}}>
-                            <span>Projects {projects.length}</span>
-                            {/* <span>Folders 2</span> */}
-                        </div>
-                    </Col>
-                </Row>
+                        <Col className="proj-info-wrapper">
+                            <div style={{float: 'right'}}>
+                                <span>Projects {projects.length}</span>
+                                {/* <span>Folders 2</span> */}
+                                {projectAppState.projects.map(({project}:any) => {
+                                    <ProjectCard project={project} />
+                                })}
+                            </div>
+                        </Col>
+                    </Row>
 
-                <RenderTabs/>
-            </Col>
+                    <RenderTabs/>
+                </Col>
 
-            <Col sm >
-                <span className="user-container-wrapper">
-                    <UserView projects={projects}/>
-                </span>
-            </Col>
-        </Row>
-    </div>
+                <Col sm >
+                    <span className="user-container-wrapper">
+                        <UserView projects={projects}/>
+                    </span>
+                </Col>
+            </Row>
+        </div>
+    </>
   );
 }

@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useMemo } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Container, Col, Row } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setWireframes } from "../redux/projectAppSlice";
 import ProjectSideNav from "./ProjectSideNav";
-import WireframeCard from "./WireframeCard";
-import WireframeForm from "./WireframeForm";
+import WireframeCard from "./wireframe/WireframeCard";
+import WireframeForm from "./wireframe/WireframeForm";
+import TopNavbar from '../components/TopNavbar';
 
 function ProjectWireframes() {
   const projectAppState = useAppSelector(selectProjectApp);
@@ -13,13 +14,9 @@ function ProjectWireframes() {
   const handleOpen = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
   const dispatch = useAppDispatch();
-
+  const projectId = projectAppState.project.projectId;
+  
   const getWireframes = () => {
-    //Test
-    const projectId = "60bc36b65d2b0da1deb9ada2";
-
-    //Production
-    //const projectId = projectAppState.project.projectId;
     const queryString = `http://localhost:42069/api/read/project/wireframes`;
         
     const body = {
@@ -44,9 +41,11 @@ function ProjectWireframes() {
     getWireframes();
   }, []);
 
+
   const wireframeModal = () => {
     return (
       <Modal
+        className="modal-create-wrapper"
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -66,22 +65,43 @@ function ProjectWireframes() {
           <WireframeForm />
         </Modal.Body>
       </Modal>
-    );
-  };
+      )
+    }
 
   return (
-    <div>
-      <ProjectSideNav />
-      {projectAppState.wireframes.map((wireframe: any) => {
-        return <WireframeCard wireframe={wireframe} />;
-      })}
+    <>
+      <TopNavbar/>
+      <ProjectSideNav active={"wire-frame"}/>
+        
+        <Container id="pg-content">
+          <Row style={{paddingBottom: '5px'}}>
+            <Col>
+              <span style={{color: 'gray'}}>
+                <h4>Wireframe - {projectAppState.project.projectName}</h4>
+              </span>
+            </Col>
+            
+            <Col >
+              <span className="float-right">
+                <Button variant="outline-warning" onClick={handleOpen}>
+                  New Wireframe
+                </Button>
+              </span>
+            
+            </Col>
+          </Row>
 
-      <Button variant="primary" onClick={handleOpen}>
-        New Wireframe
-      </Button>
-      {wireframeModal()}
-    </div>
+          <hr></hr>
+
+          {/*Test*/}
+          {projectAppState.wireframes.map((wireframe: any) => {
+            return <WireframeCard key={wireframe.wireframeId} wireframe={wireframe} />;
+          })}
+          
+          {wireframeModal()}
+        </Container>
+    </>
   );
-}
+};
 
 export default ProjectWireframes;

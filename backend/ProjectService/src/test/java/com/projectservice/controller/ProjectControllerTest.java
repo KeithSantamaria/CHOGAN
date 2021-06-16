@@ -71,8 +71,6 @@ class ProjectControllerTest {
 
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    
-    //TODO - ADD public void readAllProjectSuccess & Failure Tests
 
     /*
     *

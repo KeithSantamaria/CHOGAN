@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proj-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: proj-service
+  template:
+    metadata:
+      labels:
+        app: proj-service
+    spec:
+      containers:
+      - name: proj-service-container
+        image: chogan/proj-service
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 42069
+        env:
+          - name: MONGO_USER
+            valueFrom:
+              secretKeyRef:
+                name: chogan-secret
+                key: mongoUser
+          - name: MONGO_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: chogan-secret
+                key: mongoPassword
+          - name: MONGO_URL
+            valueFrom:
+              secretKeyRef:
+                name: chogan-secret
+                key: mongoUrl
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: proj-service-svc
+spec:
+  selector:
+    app: proj-service
+  ports:
+  - port: 8080
+    targetPort: 42069
+    protocol: TCP

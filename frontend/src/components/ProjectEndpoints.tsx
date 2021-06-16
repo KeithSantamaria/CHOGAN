@@ -6,6 +6,7 @@ import { selectProjectApp, setEndpoints } from "../redux/projectAppSlice";
 import ProjectSideNav from "./ProjectSideNav";
 import EndpointForm from "./endpoint/EndpointForm";
 import EndpointCard from "./endpoint/EndpointCard";
+import TopNavbar from '../components/TopNavbar';
 
 function ProjectEndpoints() {
   const projectAppState = useAppSelector(selectProjectApp);
@@ -67,6 +68,7 @@ function ProjectEndpoints() {
   };
   return (
     <>
+      <TopNavbar/>
       <ProjectSideNav active={"endpoint"}/>
 
       <Container id="pg-content">

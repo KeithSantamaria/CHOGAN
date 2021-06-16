@@ -2,13 +2,15 @@ import {useState, useMemo} from 'react';
 import GridView from '../../components/home/GridView.component';
 import UserView from '../../components/home/UserView.component';
 import HomeListView from '../../components/home/HomeListView';
+import TopNavbar from '../../components/TopNavbar';
+
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getAllProjects, selectProjectApp, setProjects} from '../../redux/projectAppSlice';
 import axios from 'axios';
 import '../../css/home/home.css';
 
-import {Col, Row} from 'react-bootstrap';
+import {Col, Row, Container} from 'react-bootstrap';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTh, faList} from "@fortawesome/free-solid-svg-icons";
 import { currentUser } from '../../redux/userSlice';
@@ -68,35 +70,38 @@ export default function Home() {
   
 
   return (
-    <div className="body">
-        <Row>
-            <Col sm={9} className="home-container-wrapper">
-                <Row className="tabs-container-wrapper">
-                    <Col className="tabs-wrapper" >
-                        <FontAwesomeIcon style={activeGrid ? {color: 'black'} : {color: 'gray'}} className="fa-icon fa-icon-1" icon={faTh} onClick={() => handleGridView()}/>
-                        <FontAwesomeIcon style={activeList ? {color: 'black'} : {color: 'gray'}} className="fa-icon fa-icon-2" icon={faList} onClick={() => handleListView()}/>
-                    </Col>
+      <>
+        <TopNavbar/>
+        <div className="body">
+            <Row>
+                <Col sm={9} className="home-container-wrapper">
+                    <Row className="tabs-container-wrapper">
+                        <Col className="tabs-wrapper" >
+                            <FontAwesomeIcon style={activeGrid ? {color: 'black'} : {color: 'gray'}} className="fa-icon fa-icon-1" icon={faTh} onClick={() => handleGridView()}/>
+                            <FontAwesomeIcon style={activeList ? {color: 'black'} : {color: 'gray'}} className="fa-icon fa-icon-2" icon={faList} onClick={() => handleListView()}/>
+                        </Col>
 
-                    <Col className="proj-info-wrapper">
-                        <div style={{float: 'right'}}>
-                            <span>Projects {projects.length}</span>
-                            {/* <span>Folders 2</span> */}
-                            {projectAppState.projects.map(({project}:any) => {
-                                <ProjectCard project={project} />
-                            })}
-                        </div>
-                    </Col>
-                </Row>
+                        <Col className="proj-info-wrapper">
+                            <div style={{float: 'right'}}>
+                                <span>Projects {projects.length}</span>
+                                {/* <span>Folders 2</span> */}
+                                {projectAppState.projects.map(({project}:any) => {
+                                    <ProjectCard project={project} />
+                                })}
+                            </div>
+                        </Col>
+                    </Row>
 
-                <RenderTabs/>
-            </Col>
+                    <RenderTabs/>
+                </Col>
 
-            <Col sm >
-                <span className="user-container-wrapper">
-                    <UserView projects={projects}/>
-                </span>
-            </Col>
-        </Row>
-    </div>
+                <Col sm >
+                    <span className="user-container-wrapper">
+                        <UserView projects={projects}/>
+                    </span>
+                </Col>
+            </Row>
+        </div>
+    </>
   );
 }

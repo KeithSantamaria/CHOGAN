@@ -1,7 +1,8 @@
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo } from "react";
 import axios from "axios";
 import ProjectSideNav from "./ProjectSideNav";
 import WidgetForm from "./general/WidgetForm";
+import TopNavbar from '../components/TopNavbar';
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { Card, Button, Modal, Col, Row, CardDeck, Container} from "react-bootstrap";
 import {
@@ -70,8 +71,9 @@ const ProjectGeneralInfo = () => {
 
   return (
     <>
+      <TopNavbar/>
       <ProjectSideNav active={"general"}/>
-  
+      
       <Container id="pg-content">
         <Row style={{paddingBottom: '5px'}}>
           <Col>

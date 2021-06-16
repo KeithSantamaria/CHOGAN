@@ -1,9 +1,8 @@
-import {Button, Col, Row} from 'react-bootstrap';
+import {Row} from 'react-bootstrap';
 import '../css/project-service/project-sidenav.css';
 import { useHistory } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faBook, faWindowRestore} from "@fortawesome/free-solid-svg-icons";
-
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faHome, faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
 
 const ProjectSideNav = (props: any) => {
 
@@ -29,13 +28,15 @@ const ProjectSideNav = (props: any) => {
     const goToTags = () => {
         history.push("/user/project/tags");
     };
+    const goToHome = () => {
+        history.push("/home");
+    };
 
         return (
             <div id="sideMenu" className="sideMenu">
                 <div className="sm-wrapper">
                     <Row>
                         <span className={props.active === 'general' ? " active-general " : ""}><p onClick={goToGeneral}> General </p></span>
-                        
                         {/* <FontAwesomeIcon onClick={goToGeneral} className="fa-icon" icon={faBook} /> */}
                     </Row>
 
@@ -62,6 +63,12 @@ const ProjectSideNav = (props: any) => {
 
                     <Row>
                         <span className={props.active === 'tag' ? " active-tag " : ""}><p onClick={goToTags}> Tags </p></span>
+                    </Row>
+
+                    <Row>
+                        <span><p onClick={goToHome}><FontAwesomeIcon className="" icon={faHome} /> Home</p></span>
+                                                
+
                     </Row>
                 </div>
             </div>

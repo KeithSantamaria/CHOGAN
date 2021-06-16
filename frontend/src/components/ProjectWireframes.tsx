@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useMemo } from "react";
-import { Button, Modal, Container, Col, Row, Card, CardDeck } from "react-bootstrap";
+import { Button, Modal, Container, Col, Row } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setWireframes } from "../redux/projectAppSlice";
 import ProjectSideNav from "./ProjectSideNav";
 import WireframeCard from "./wireframe/WireframeCard";
 import WireframeForm from "./wireframe/WireframeForm";
+import TopNavbar from '../components/TopNavbar';
 
 function ProjectWireframes() {
   const projectAppState = useAppSelector(selectProjectApp);
@@ -69,17 +70,7 @@ function ProjectWireframes() {
 
   return (
     <>
-      {/* <ProjectSideNav active={"wire-frame"}/>
-
-      {projectAppState.wireframes.map((wireframe: any) => {
-        return <WireframeCard wireframe={wireframe} />;
-      })}
-
-      <Button variant="primary" onClick={handleOpen}>
-        New Wireframe
-      </Button>
-      {wireframeModal()} */}
-
+      <TopNavbar/>
       <ProjectSideNav active={"wire-frame"}/>
         
         <Container id="pg-content">
@@ -104,7 +95,7 @@ function ProjectWireframes() {
 
           {/*Test*/}
           {projectAppState.wireframes.map((wireframe: any) => {
-            return <WireframeCard wireframe={wireframe} />;
+            return <WireframeCard key={wireframe.wireframeId} wireframe={wireframe} />;
           })}
           
           {wireframeModal()}

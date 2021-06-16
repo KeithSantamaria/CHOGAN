@@ -6,6 +6,7 @@ import { selectProjectApp, setUserStories } from "../redux/projectAppSlice";
 import ProjectSideNav from "./ProjectSideNav";
 import UserStoryCard from "./userstory/UserStoryCard";
 import UserStoryForm from "./userstory/UserStoryForm";
+import TopNavbar from '../components/TopNavbar';
 
 function ProjectUserStories() {
   const projectAppState = useAppSelector(selectProjectApp);
@@ -67,17 +68,8 @@ function ProjectUserStories() {
 
   return (
     <>
+      <TopNavbar/>
       <ProjectSideNav active={"user-story"}/>
-
-      {/* <Container id="pg-content">
-        {projectAppState.userStories.map((userStory: any) => {
-          return <UserStoryCard userStory={userStory} />;
-        })}
-        <Button variant="primary" onClick={handleOpen}>
-          New User Story
-        </Button>
-        {userStoryModal()}
-      </Container> */}
 
       <Container id="pg-content">
         <Row style={{paddingBottom: '5px'}}>

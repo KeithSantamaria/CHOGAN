@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useMemo } from "react";
-import { Button, Modal, Container, Col, Row, Card, CardDeck } from "react-bootstrap";
+import { Button, Modal, Container, Col, Row} from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setERDiagrams } from "../redux/projectAppSlice";
 import ERDCard from "./erd/ERDCard";
 import ERDForm from "./erd/ERDForm";
 import ProjectSideNav from "./ProjectSideNav";
+import TopNavbar from '../components/TopNavbar';
 
 const ProjectERDs = () => {
   const projectAppState = useAppSelector(selectProjectApp);
@@ -66,6 +67,7 @@ const ProjectERDs = () => {
 
   return (
     <>
+      <TopNavbar/>
       <ProjectSideNav active={"erd"} style={{paddingRight: "1000px"}}/>
         
         <Container id="pg-content">
@@ -90,7 +92,7 @@ const ProjectERDs = () => {
 
           {/*Test*/}
           {projectAppState.erds.map((erd: any) => {
-            return <ERDCard erd={erd} />;
+            return <ERDCard key={erd.ERDiagramId} erd={erd} />;
           })}
           
           {ERDModal()}

@@ -9,6 +9,12 @@ interface userIdPayload {
   }
 };
 
+interface projectIdPayload {
+  params: {
+    projectId: string; 
+  }
+}
+
 interface createProjectPayload {
   userId : string;
   projectName : string;
@@ -21,13 +27,23 @@ interface createWidgetPayload {
   widgetDescription : string;
 }
 
+export const getAllWidgetsByProjectId = createAsyncThunk (
+  'projects/getAllWidgets',
+  async (payload : projectIdPayload) => {
+    const response = axios.get("http://localhost:42069/api/read/project/widgets", payload)
+    .then( (response) => response.data)
+    .catch( error => {console.log(error)});
+    return response;
+  }
+)
+
 export const createWidget = createAsyncThunk (
   'projects/createWidget',
   async (payload : createWidgetPayload) => {
     const response = axios.post("http://localhost:42069/api/create/project/widget", payload)
     .then( (response) => response.data)
     .catch( (error) => {console.log(error)});
-  return response;
+    return response;
   }
 );
 
@@ -712,7 +728,17 @@ export const projectAppSlice = createSlice({
       createWidget.fulfilled,
       (state, action) => {
         console.log("Dispatching createWidget reducer with action: ", action);
-        state.widgets.push(action.payload);
+        // currently create Widget returns a list of widgets
+        state.widgets = action.payload;
+        return state;
+      }
+    )
+
+    builder.addCase(
+      getAllWidgetsByProjectId.fulfilled,
+      (state, action) => {
+        console.log("Dispatching getAllWidgetsByProjectId reducer with action: ", action);
+        state.widgets = action.payload;
         return state;
       }
     )

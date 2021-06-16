@@ -13,6 +13,7 @@ const WireframeForm = () => {
   const [imgDat, setImgDat] = React.useState("");
   const projectAppState = useAppSelector(selectProjectApp);
   const dispatch = useAppDispatch();
+  const projectId = projectAppState.project.projectId;
 
   const formChangeHandler = (event: any) => {
     const fieldName = event.target.name;
@@ -21,13 +22,10 @@ const WireframeForm = () => {
   };
 
   const addWireframe = () => {
-    // Test
-    const projectId = "60bc36b65d2b0da1deb9ada2";
     const queryString = `http://localhost:42069/api/create/project/wireframe`;
     if (
       projectAppState.createNewWireframeForm.wireframeName === "" ||
       projectAppState.createNewWireframeForm.wireframeDescription === "" ||
-      // projectAppState.createNewWireframeForm.wireframeImg === "" || 
       imgDat === ""
     ) {
       alert("There is nothing to add");
@@ -37,12 +35,6 @@ const WireframeForm = () => {
         wireframeDescription:
           projectAppState.createNewWireframeForm.wireframeDescription,
         wireframeImageUrl: imgDat,
-
-        //production
-        
-        //projectId: projectAppState.project.projectId,
-
-        //test
         projectId: projectId,
       };
       console.log(wireframe);
@@ -66,21 +58,13 @@ const WireframeForm = () => {
       let fileToLoad = value[0];
       let fileReader = new FileReader();
       fileReader.onload = (fileLoadedEvent: any) => {
-        let sourceData = fileLoadedEvent.target.result; // <--- data: base64
-        // dispatch(setWireframeImageInForm(sourceData));
+        let sourceData = fileLoadedEvent.target.result;
         setImgDat(sourceData);
-        // console.log(sourceData);
-        alert(sourceData);
-
       };
       fileReader.readAsDataURL(fileToLoad);
     }
   };
-
-  // const imageChange = (event: any) => {
-  //     encodeImageFileAsURL(event);
-  //     formChangeHandler(event);
-  // }
+  
   return (
     <Container className="create-proj-form-container">
       <Form>

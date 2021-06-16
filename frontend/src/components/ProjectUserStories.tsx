@@ -52,10 +52,6 @@ function ProjectUserStories() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {/* Production */}
-          {/* <EndpointForm projectId={projectAppState.project.projectId} /> */}
-
-          {/* Test */}
           <UserStoryForm />
         </Modal.Body>
       </Modal>

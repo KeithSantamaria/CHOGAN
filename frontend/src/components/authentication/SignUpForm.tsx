@@ -37,7 +37,7 @@ export default function SignUp() {
       <form onSubmit={submitUser}>
 
         <div className="form-group">
-          <p className = "text-center">SignUp</p>
+          <h3 className = "text-center">Sign Up</h3>
           <input
             className="form-control center"
             name='email'

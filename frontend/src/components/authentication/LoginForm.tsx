@@ -26,7 +26,7 @@ export default function LoginForm(){
   return(
     <form onSubmit ={submitUser}>
       <div className="form-group">
-        <label className = "text-center">Login</label>
+        <h3 className = "text-center">Login</h3>
         <input
           className="form-control center"
           name='email'

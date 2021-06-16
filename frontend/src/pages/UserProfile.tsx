@@ -5,6 +5,7 @@ import {Button} from 'react-bootstrap';
 import '../css/authentication/UserProfile.css';
 import Profile from "../components/authentication/ProfileView";
 import ProfileForm from "../components/authentication/ProfileForm";
+import TopNavbar from "../components/TopNavbar";
 
 
 export default function UserProfile(){
@@ -43,14 +44,17 @@ export default function UserProfile(){
       }
 
     return(
+      <div>
+        <TopNavbar/>
         <div className="user-background">
-          <h2>{title}</h2>
           <div className="profile-box"> 
+            <h2>{title}</h2>
             <div className="profile-content">
               <div><RenderProfile/></div>
             </div>
             <Button className = "edit-profile-button" onClick= { e => flagSetter() }>{btnString}</Button>
           </div>
-        </div>      
+        </div>   
+      </div>   
     );
 }

@@ -4,7 +4,7 @@ import { Button, Form, Container } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {createWidget,selectProjectApp, getAllWidgetsByProjectId} from "../../redux/projectAppSlice";
 
-const WidgetForm = () => {
+const WidgetForm = (project:any) => {
   const [widgetName, setWidgetName] = useState("");
   const [widgetDescription, setDescription] = useState("");
 

@@ -33,7 +33,7 @@ public class ModelController {
     @PostMapping("/create/project/model")
     public ResponseEntity<List<Model>> createNewModel(@RequestBody Model model){
         try{
-            Model savedModel = modelService.insert(model);
+            modelService.insert(model);
             log.info("Successfully added new model to the DB.");
             return new ResponseEntity<>(modelService.findByProjectId(model.getProjectId()),HttpStatus.CREATED);
         }catch (Exception e){
@@ -94,7 +94,7 @@ public class ModelController {
             log.error("Failed to update model of modelId : {}",model.getModelId());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        log.info("Successfullly updated model of modelId : {}",model.getModelId());
+        log.info("Successfully updated model of modelId : {}",model.getModelId());
         return new ResponseEntity<>(modelService.findByProjectId(updatedModel.getProjectId()),HttpStatus.OK);
     }
 

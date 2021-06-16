@@ -73,13 +73,13 @@ public class ProjectController {
 
     /**
      *  Reads all projects based off the user Id
-     * @param userId
+     * @param userId The id for the user
      * @return The list of projects
      */
 
     @GetMapping("/read/projects")
     public ResponseEntity<List<Project>> readProjects(@RequestParam String userId) {
-        List<Project> projects = projectService.getAllProjectsByUserId(userId);
+        List<Project> projects = projectService.findByUserId(userId);
         if (projects == null) {
             log.error("Cannot retrieve project with id: {}. Project does not exist.", userId);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

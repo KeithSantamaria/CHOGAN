@@ -23,7 +23,7 @@ public class UserStoryService implements IUserStoryService{
     * */
 
     /**
-     * Inserts a userstory into the collcetion
+     * Inserts a userstory into the collection
      * @param userStory inserted userstory
      */
     @Override

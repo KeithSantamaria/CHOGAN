@@ -1,7 +1,6 @@
 package com.projectservice.controller;
 
 import com.projectservice.models.Model;
-import com.projectservice.models.Project;
 import com.projectservice.services.IModelService;
 import com.projectservice.services.ModelService;
 import org.junit.jupiter.api.Assertions;

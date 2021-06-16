@@ -26,8 +26,8 @@ public class UserStoryController {
     * */
 
     /**
-     * Creates a new userstory and adds it to the repo
-     * @param userStory The userstory to add
+     * Creates a new user story and adds it to the repo
+     * @param userStory The user story to add
      * @return The response entity
      */
     @PostMapping("/create/project/userstory")

@@ -1,4 +1,4 @@
-package com.projectservice.models;
+package com.example.projectservice.models;
 
 import com.projectservice.models.Tag;
 import org.junit.jupiter.api.Assertions;
@@ -25,27 +25,21 @@ class TagTest {
     void getTagId() {
         tag.setTagId("Id");
         String id = tag.getTagId();
-        Assertions.assertEquals(id, "Id");
+        Assertions.assertEquals(id,"Id");
     }
 
     @Test
-    void getTagName() {
-        tag.setTagName("Name");
-        String name = tag.getTagName();
-        Assertions.assertEquals(name, "Name");
-    }
-
-    @Test
-    void tagNameTest(){
+    void getTagName(){
         tag.setTagName("Name");
         String name = tag.getTagName();
         Assertions.assertEquals(name,"Name");
     }
 
     @Test
-    void tagDescriptionTest() {
-        tag.setTagDescription("Desc");
-        String desc = tag.getTagDescription();
-        Assertions.assertEquals(desc,"Desc");
+    void getTechs() {
+        Map<String, List<String>> map = new HashMap<>();
+        tag.setTechs(map);
+        Map<String, List<String>> foundMap = tag.getTechs();
+        Assertions.assertEquals(foundMap,map);
     }
 }

@@ -1,4 +1,4 @@
-package com.projectservice.controller;
+package com.example.projectservice.controller;
 
 import com.projectservice.controller.ProjectController;
 import com.projectservice.models.Project;
@@ -9,9 +9,6 @@ import org.mockito.Mockito;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @SpringBootConfiguration
 class ProjectControllerTest {
@@ -71,29 +68,6 @@ class ProjectControllerTest {
         Mockito.when(projectService.findByProjectId(projectId)).thenReturn(null);
 
         ResponseEntity<Project> response = projectController.readProject(projectId);
-
-        Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-    @Test
-    void readProjectsSuccessTest(){
-        String userId = "Id";
-        List<Project> list = new ArrayList<>();
-
-        Mockito.when(projectService.getAllProjectsByUserId(userId)).thenReturn(list);
-
-        ResponseEntity<List<Project>> response = projectController.readProjects(userId);
-
-        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
-    }
-
-    @Test
-    void readProjectsFailureTest(){
-        String userId = "Id";
-
-        Mockito.when(projectService.getAllProjectsByUserId(userId)).thenReturn(null);
-
-        ResponseEntity<List<Project>> response = projectController.readProjects(userId);
 
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
     }

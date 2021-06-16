@@ -1,4 +1,4 @@
-package com.projectservice.models;
+package com.example.projectservice.models;
 
 import com.projectservice.models.UserStory;
 import org.junit.jupiter.api.Assertions;

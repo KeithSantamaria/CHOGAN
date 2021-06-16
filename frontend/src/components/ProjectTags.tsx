@@ -6,6 +6,7 @@ import axios from "axios";
 import { Button, Modal, Container, Col, Row, ListGroup, Card } from "react-bootstrap";
 import TagForm from "./tag/TagForm";
 import UpdateTag from "./UpdateTag";
+import TopNavbar from '../components/TopNavbar';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faTrash, faEdit} from "@fortawesome/free-solid-svg-icons";
@@ -127,6 +128,7 @@ function ProjectTags() {
   }
   return (
     <>
+      <TopNavbar/>
       <ProjectSideNav active={"tag"}/>
 
       <Container id="pg-content">

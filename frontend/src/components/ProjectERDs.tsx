@@ -6,6 +6,7 @@ import { selectProjectApp, setERDiagrams } from "../redux/projectAppSlice";
 import ERDCard from "./erd/ERDCard";
 import ERDForm from "./erd/ERDForm";
 import ProjectSideNav from "./ProjectSideNav";
+import TopNavbar from '../components/TopNavbar';
 
 const ProjectERDs = () => {
   const projectAppState = useAppSelector(selectProjectApp);
@@ -66,6 +67,7 @@ const ProjectERDs = () => {
 
   return (
     <>
+      <TopNavbar/>
       <ProjectSideNav active={"erd"} style={{paddingRight: "1000px"}}/>
         
         <Container id="pg-content">

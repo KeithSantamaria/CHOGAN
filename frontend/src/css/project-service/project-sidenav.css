@@ -36,7 +36,7 @@
   }
   
   .sm-wrapper {
-    margin-top: 2em; 
+    margin-top: 6em; 
   }
 
   .sm-wrapper p {
@@ -150,6 +150,7 @@
     transition: margin-left 0.2s;
     padding: 16px;
     padding-left: 15vh;
+    padding-top: 6em;
   }
 
   @media only screen and (max-width: 800px) {

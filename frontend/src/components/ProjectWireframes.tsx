@@ -6,6 +6,7 @@ import { selectProjectApp, setWireframes } from "../redux/projectAppSlice";
 import ProjectSideNav from "./ProjectSideNav";
 import WireframeCard from "./wireframe/WireframeCard";
 import WireframeForm from "./wireframe/WireframeForm";
+import TopNavbar from '../components/TopNavbar';
 
 function ProjectWireframes() {
   const projectAppState = useAppSelector(selectProjectApp);
@@ -69,17 +70,7 @@ function ProjectWireframes() {
 
   return (
     <>
-      {/* <ProjectSideNav active={"wire-frame"}/>
-
-      {projectAppState.wireframes.map((wireframe: any) => {
-        return <WireframeCard wireframe={wireframe} />;
-      })}
-
-      <Button variant="primary" onClick={handleOpen}>
-        New Wireframe
-      </Button>
-      {wireframeModal()} */}
-
+      <TopNavbar/>
       <ProjectSideNav active={"wire-frame"}/>
         
         <Container id="pg-content">

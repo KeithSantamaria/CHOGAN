@@ -6,6 +6,7 @@ import { selectProjectApp, setModels } from "../redux/projectAppSlice";
 import ModelForm from "./model/ModelForm";
 import ProjectSideNav from "./ProjectSideNav";
 import WidgetForm from "./general/WidgetForm";
+import TopNavbar from '../components/TopNavbar';
 
 function ProjectModels() {
   const projectAppState = useAppSelector(selectProjectApp);
@@ -61,6 +62,7 @@ function ProjectModels() {
   };
   return (
     <>
+      <TopNavbar/>
       <ProjectSideNav active={"model"}/>
       <Container id="pg-content">
         {projectAppState.models.map((model: any) => {

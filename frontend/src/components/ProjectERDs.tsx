@@ -55,10 +55,6 @@ const ProjectERDs = () => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {/* Production */}
-          {/* <EndpointForm projectId={projectAppState.project.projectId} /> */}
-
-          {/* Test */}
           <ERDForm />
         </Modal.Body>
       </Modal>

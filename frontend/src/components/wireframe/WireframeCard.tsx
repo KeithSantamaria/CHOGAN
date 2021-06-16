@@ -26,7 +26,7 @@ const WireframeCard = ({ wireframe }: any) => {
     const queryString = `http://localhost:42069/api/delete/project/wireframe`;
     const body = {
       params: {
-        wireframeId: id,
+        wireframeId: wireframe.wireframeId,
       },
     };
     axios
@@ -74,7 +74,6 @@ const WireframeCard = ({ wireframe }: any) => {
       >
         <Modal.Header closeButton>
         </Modal.Header>
-
         <Modal.Body>
           <img onClick={handleOpenImg} src={wireframeImg} alt={wireframeImg} style={{maxHeight: '40rem', maxWidth: '50rem'}}/>
         </Modal.Body>
@@ -107,9 +106,6 @@ const WireframeCard = ({ wireframe }: any) => {
             <span className="float-right">  
               <Button
                 variant="danger"
-                /**
-                 * Is wireframe.wireframeId right?
-                 */
                 value={wireframe.wireframeId}
                 onClick={(e) => removeWireframe(wireframe.wireframeId)}
               >
@@ -119,7 +115,6 @@ const WireframeCard = ({ wireframe }: any) => {
                   icon={faTrash}
                 /> 
               </Button>
-
               <span style={{paddingRight: '1em'}}></span>
             </span>
           </Col>

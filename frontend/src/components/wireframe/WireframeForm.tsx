@@ -58,21 +58,13 @@ const WireframeForm = () => {
       let fileToLoad = value[0];
       let fileReader = new FileReader();
       fileReader.onload = (fileLoadedEvent: any) => {
-        let sourceData = fileLoadedEvent.target.result; // <--- data: base64
-        // dispatch(setWireframeImageInForm(sourceData));
+        let sourceData = fileLoadedEvent.target.result;
         setImgDat(sourceData);
-        // console.log(sourceData);
-        alert(sourceData);
-
       };
       fileReader.readAsDataURL(fileToLoad);
     }
   };
-
-  // const imageChange = (event: any) => {
-  //     encodeImageFileAsURL(event);
-  //     formChangeHandler(event);
-  // }
+  
   return (
     <Container className="create-proj-form-container">
       <Form>

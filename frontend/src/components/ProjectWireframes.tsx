@@ -58,10 +58,6 @@ function ProjectWireframes() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {/* Production */}
-          {/* <EndpointForm projectId={projectAppState.project.projectId} /> */}
-
-          {/* Test */}
           <WireframeForm />
         </Modal.Body>
       </Modal>
@@ -90,12 +86,9 @@ function ProjectWireframes() {
             
             </Col>
           </Row>
-
           <hr></hr>
-
-          {/*Test*/}
           {projectAppState.wireframes.map((wireframe: any) => {
-            return <WireframeCard key={wireframe.wireframeId} wireframe={wireframe} />;
+            return <WireframeCard wireframe={wireframe} />;
           })}
           
           {wireframeModal()}

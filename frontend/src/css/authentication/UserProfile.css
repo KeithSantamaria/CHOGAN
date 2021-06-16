@@ -4,11 +4,8 @@
 }
 
 .user-background{
-  margin-left:2em;
   background: #2f3545 !important;
-  border-radius: 10px 10px 0 0;
-  height: 97vh;
-  overflow: scroll;
+  height: 100vh;
   top: 0; 
   left: 0;
 }

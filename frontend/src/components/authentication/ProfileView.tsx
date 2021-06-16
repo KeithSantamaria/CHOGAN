@@ -6,20 +6,8 @@ export default function Profile(){
     const currentlyLoggedUser = useAppSelector(currentUser);
     const userDispatch = useAppDispatch();
 
-    //temporary payload
-    const payload ={
-        id: "12344",
-        username: "boschaw",
-        password: "password",
-        email: "adambosch8@gmail.com",
-        firstName: "Adam",
-        lastName: "Bosch",
-        securityQuestionId: 1,
-        securityAnswer: "bruh"
-    }
-
     function makeUser(){ 
-        userDispatch(updateUser(payload));
+        userDispatch(updateUser(currentlyLoggedUser));
     }
 
     React.useEffect(() => {

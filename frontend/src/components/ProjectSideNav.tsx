@@ -1,9 +1,6 @@
-import {Button, Col, Row} from 'react-bootstrap';
+import {Row} from 'react-bootstrap';
 import '../css/project-service/project-sidenav.css';
 import { useHistory } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faBook, faWindowRestore} from "@fortawesome/free-solid-svg-icons";
-
 
 const ProjectSideNav = (props: any) => {
 
@@ -35,7 +32,6 @@ const ProjectSideNav = (props: any) => {
                 <div className="sm-wrapper">
                     <Row>
                         <span className={props.active === 'general' ? " active-general " : ""}><p onClick={goToGeneral}> General </p></span>
-                        
                         {/* <FontAwesomeIcon onClick={goToGeneral} className="fa-icon" icon={faBook} /> */}
                     </Row>
 

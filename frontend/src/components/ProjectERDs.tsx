@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useMemo } from "react";
-import { Button, Modal, Container, Col, Row, Card, CardDeck } from "react-bootstrap";
+import { Button, Modal, Container, Col, Row} from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setERDiagrams } from "../redux/projectAppSlice";
 import ERDCard from "./erd/ERDCard";
@@ -95,7 +95,7 @@ const ProjectERDs = () => {
 
           {/*Test*/}
           {projectAppState.erds.map((erd: any) => {
-            return <ERDCard erd={erd} />;
+            return <ERDCard key={erd.ERDiagramId} erd={erd} />;
           })}
           
           {ERDModal()}

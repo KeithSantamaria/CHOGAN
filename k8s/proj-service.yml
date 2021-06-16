@@ -49,5 +49,6 @@ spec:
     app: proj-service
   ports:
   - port: 8080
+    nodePort: 31002
     targetPort: 42069
-    protocol: TCP
+  type: NodePort

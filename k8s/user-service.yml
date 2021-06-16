@@ -49,4 +49,6 @@ spec:
     app: user-service
   ports:
   - port: 8080
+    nodePort: 31001
     targetPort: 6969
+  type: NodePort

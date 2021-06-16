@@ -10,39 +10,35 @@ import '../../css/home/create-new-project.css';
 
 export default function GridView(props: any) {
     const [active, setActive] = useState(false);
-    const [sortedArray, setSortedArray] = useState([]);
+    let array = [...props.projects];
 
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     useEffect(() => {
         if(active) {
-            props.projects.sort((a:any, b:any) => a.name > b.name ? 1 : -1)
-            setSortedArray(props.projects);
-        } else {
-            props.projects.sort((a:any, b:any) => a.name > b.name ? -1 : 1)
-            setSortedArray(props.projects);
+            array.sort((a:any, b:any) => a.projectName > b.projectName ? 1 : -1)
+        } 
+        else {
+            array.sort((a:any, b:any) => a.projectName > b.projectName ? -1 : 1)
         }
 
-    },[active, props.projects]);
+    },[active, array]);
 
     const toggle = () => { 
         if(active === false) {
             setActive(true);
-            // console.log("Sort" + JSON.stringify(sortedArray));
         }
         if(active === true) {
             setActive(false);
-            // console.log("Not" + JSON.stringify(sortedArray));
         }
         return null;
     }
 
     let className='sort';
     if(active) {
-        className += ' sort-active';
+        className += 'sort-active ';
     } else {
         className='sort';
     }
@@ -55,6 +51,7 @@ export default function GridView(props: any) {
                 onHide={handleClose}
                 backdrop="static"
                 size="lg"
+                centered
             >
                 <Modal.Header closeButton>
                     {/* <Modal.Title>New Project</Modal.Title> */}
@@ -91,7 +88,7 @@ export default function GridView(props: any) {
                     </Col>
 
                     <Col className="row-2-col-2" >
-                        <div style={{float: 'right'}} className={className + " grid-sort-down"} onClick={toggle}>
+                        <div style={{float: 'right'}} className={className + "grid-sort-down"} onClick={toggle}>
                             <span style={{paddingRight: '8px'}}>Name</span>
                             {active ? <FontAwesomeIcon className="fa-icon fa-1x" icon={faSortDown}/> : <FontAwesomeIcon className="fa-icon fa-1x" icon={faSortUp}/>}
                         </div>
@@ -103,7 +100,7 @@ export default function GridView(props: any) {
 
                 <Row>
                     <Col xs={11}>
-                        <ProjectCard projects= {sortedArray}/>
+                        <ProjectCard projects= {array}/>
                     </Col>
 
                     <Col xs={1}>

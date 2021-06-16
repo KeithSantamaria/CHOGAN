@@ -18,6 +18,12 @@ public class UserController {
     UserService service;
 
     //Methods
+
+    /**
+     *
+     * @param request Posts a Request of object user.
+     * @return Returns a bad request if the user was not created and a status of OK if the user was created
+     */
     @PostMapping()
     public ResponseEntity<User> create(@RequestBody User request){
         User userCreated = service.newUser(request);
@@ -25,6 +31,11 @@ public class UserController {
         return userCreated == null ? ResponseEntity.badRequest().build() : ResponseEntity.ok(userCreated);
     }
 
+    /**
+     * 
+     * @param request
+     * @return Returns a bad request if the user was not updated and a status of OK if it was
+     */
     @PutMapping()
     public ResponseEntity<User> updateUser(@RequestBody User request){
         User userUpdated= service.updateUser(request);

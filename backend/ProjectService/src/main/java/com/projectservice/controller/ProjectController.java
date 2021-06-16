@@ -1,13 +1,14 @@
 package com.projectservice.controller;
 
 import com.projectservice.models.Project;
-import com.projectservice.models.Widget;
 import com.projectservice.services.IProjectService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 /**
@@ -69,6 +70,24 @@ public class ProjectController {
         log.info("Retrieved project with id: {}.", projectId);
         return new ResponseEntity<>(project, HttpStatus.OK);
     }
+
+    /**
+     *  Reads all projects based off the user Id
+     * @param userId
+     * @return The list of projects
+     */
+
+    @GetMapping("/read/projects")
+    public ResponseEntity<List<Project>> readProjects(@RequestParam String userId) {
+        List<Project> projects = projectService.getAllProjectsByUserId(userId);
+        if (projects == null) {
+            log.error("Cannot retrieve project with id: {}. Project does not exist.", userId);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        log.info("Retrieved project with id: {}.", userId);
+        return new ResponseEntity<>(projects, HttpStatus.OK);
+    }
+
     /*
      *
      * Update
@@ -83,24 +102,10 @@ public class ProjectController {
      */
     @PutMapping("/update/project")
     public ResponseEntity<Project> updateProject(@RequestBody Project project) {
-        System.out.println("b4 = " + project.toString());
         Project updatedProject = projectService.update(project);
-        System.out.println("after = " + updatedProject.toString());
         return new ResponseEntity<>(updatedProject, HttpStatus.OK);
     }
 
-    @PutMapping("/update/project/widget")
-    public ResponseEntity<Project> updateProjectWidgets(@RequestParam String projectId, @RequestBody Widget widget) {
-        System.out.println("projectId = " + projectId);
-        System.out.println("widget = " + widget.toString());
-        Project updatedProject = projectService.addWidget(projectId, widget);
-        if (updatedProject == null) {
-            log.error("Cannot add widget to project with id: {}. Project does not exist.", projectId);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        log.info("Successfully added widget to project id: {}", projectId);
-        return new ResponseEntity<>(updatedProject, HttpStatus.OK);
-    }
     /*
      *
      * Delete

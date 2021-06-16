@@ -1,21 +1,71 @@
 import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-
-import {RootState,
-    //  AppThunk
-  } from "./store";
+import axios from "axios";
+import {RootState,} from "./store";
 
 
-// interface userIdPayload {
-//   params:{
-//     userId: string;
-//   }
-// };
+interface userIdPayload {
+  params:{
+    userId: string;
+  }
+};
 
-// export const getAllProjects = createAsyncThunk(
-//   'projects/getAllProjects',
-//   async (payload : userIdPayload)
-// );
+interface projectIdPayload {
+  params: {
+    projectId: string; 
+  }
+}
 
+interface createProjectPayload {
+  userId : string;
+  projectName : string;
+  projectDescription : string;
+}
+
+interface createWidgetPayload {
+  projectId: string;
+  widgetName: string;
+  widgetDescription : string;
+}
+
+export const getAllWidgetsByProjectId = createAsyncThunk (
+  'projects/getAllWidgets',
+  async (payload : projectIdPayload) => {
+    const response = axios.get("http://localhost:42069/api/read/project/widgets", payload)
+    .then( (response) => response.data)
+    .catch( error => {console.log(error)});
+    return response;
+  }
+)
+
+export const createWidget = createAsyncThunk (
+  'projects/createWidget',
+  async (payload : createWidgetPayload) => {
+    const response = axios.post("http://localhost:42069/api/create/project/widget", payload)
+    .then( (response) => response.data)
+    .catch( (error) => {console.log(error)});
+    return response;
+  }
+);
+
+export const createProject = createAsyncThunk (
+  'projects/createProject',
+  async (payload : createProjectPayload) => {
+    const response = axios.post("http://localhost:42069/api/create/project", payload)
+      .then( (response) => response.data)
+      .catch( (error) => {console.log(error)});
+    return response;
+  }
+);
+
+export const getAllProjects = createAsyncThunk(
+  'projects/getAllProjects',
+  async (payload : userIdPayload) => {
+    const response = axios.get("http://localhost:42069/api/read/projects", payload)
+      .then( (response) => response.data)
+      .catch(error => {console.log(error)});
+    return response;
+  }
+);
 
 export interface Model {
     modelId: string;
@@ -97,7 +147,7 @@ export interface ProjectAppState {
   wireframes: Array<Wireframe>;
   erd: ERDiagram;
   erds: Array<ERDiagram>;
-  createNewProjectForm: {projectName: string; projectDescription: string}
+  createNewProjectForm: {projectName: string; projectDescription: string};
   createNewEndpointForm: {endpointName: string, urlPattern: string, endpointDescription: string};
   createNewModelForm: {modelName: string; modelMetadata:Array<{}>};
   createNewUserStoryForm: { userStoryName: string; userStoryDescription: string };
@@ -168,7 +218,6 @@ const initialState: ProjectAppState = {
     wireframeImg: "",
   },
   createNewProjectForm: {
-
     projectName: "",
     projectDescription: "",
   },
@@ -208,7 +257,6 @@ export const projectAppSlice = createSlice({
       console.log("Dispatching setEndPoint reudcer with action: ", action);
       state.project = action.payload;
     },
-
     setEndpoint: (
       state,
       action: {
@@ -458,9 +506,9 @@ export const projectAppSlice = createSlice({
     ) => {
       const fieldName = action.payload.fieldName;
       const value = action.payload.value;
-      console.log(`Setting ${fieldName} to ${value}`);
       state.createNewProjectForm = {
-        ...state.createNewProjectForm, [fieldName]: value,
+        ...state.createNewProjectForm, 
+        [fieldName]: value,
       }
     },
 
@@ -650,8 +698,51 @@ export const projectAppSlice = createSlice({
       state.createNewERDForm.erdName = "";
       state.createNewERDForm.erdDescription = "";
       state.createNewERDForm.erdImageUrl = "";
+    },
+
+    resetCreateNewProjectForm: (state)=> {
+      state.createNewProjectForm.projectDescription = "";
+      state.createNewProjectForm.projectName = ""
     }
   },
+  extraReducers : (builder) => {
+    builder.addCase(
+      getAllProjects.fulfilled,
+      (state, action) => {
+        console.log("Dispatching getAllProjects reducer with action: ", action);
+        state.projects = action.payload;
+        return state;
+      }
+    )
+
+    builder.addCase(
+      createProject.fulfilled,
+      (state, action) => {
+        console.log("Dispatching createProject reducer with action: ", action);
+        state.projects.push(action.payload);
+        return state;
+      }
+    )
+
+    builder.addCase(
+      createWidget.fulfilled,
+      (state, action) => {
+        console.log("Dispatching createWidget reducer with action: ", action);
+        // currently create Widget returns a list of widgets
+        state.widgets = action.payload;
+        return state;
+      }
+    )
+
+    builder.addCase(
+      getAllWidgetsByProjectId.fulfilled,
+      (state, action) => {
+        console.log("Dispatching getAllWidgetsByProjectId reducer with action: ", action);
+        state.widgets = action.payload;
+        return state;
+      }
+    )
+  }
 });
 
 export const {
@@ -688,6 +779,7 @@ export const {
   resetCreateNewUserStoryForm,
   resetCreateNewWireframeForm,
   resetCreateNewERDiagramForm,
+  resetCreateNewProjectForm,
 } = projectAppSlice.actions;
 
 export const selectProjectApp = (state: RootState) => state.projectApp;

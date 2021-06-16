@@ -87,7 +87,7 @@ export const userSlice = createSlice({
   extraReducers : (builder) => {
     builder.addCase(
       signUpUser.fulfilled,
-      ( state, action : { payload : UserState } ) : UserState => {
+      ( state, action : { payload : UserState } ) => {
         console.log("Dispatching signUpUser reducer with action: ", action);
         return action.payload;
       }

@@ -13,6 +13,7 @@ const ERDForm = () => {
   const [imgDat, setImgDat] = React.useState("");
   const projectAppState = useAppSelector(selectProjectApp);
   const dispatch = useAppDispatch();
+  const projectId = projectAppState.project.projectId;
 
   const formChangeHandler = (event: any) => {
     const fieldName = event.target.name;
@@ -21,9 +22,6 @@ const ERDForm = () => {
   };
 
   const addERD = () => {
-    // Test
-    // const projectId = "60bc36b65d2b0da1deb9ada2";
-    
     const queryString = `http://localhost:42069/api/create/project/ERD`;
 
     if (
@@ -37,12 +35,7 @@ const ERDForm = () => {
         erdName: projectAppState.createNewERDForm.erdName,
         erdDescription: projectAppState.createNewERDForm.erdDescription,
         erdImageUrl: imgDat,
-        //production
-
-        projectId: projectAppState.project.projectId,
-
-        //test
-        // projectId: projectId,
+        projectId: projectId,
       };
       console.log(erd);
       axios

@@ -2,15 +2,22 @@ import {useEffect, useState} from 'react';
 import {Card, CardDeck} from 'react-bootstrap';
 import ProjectElipsisBtn from './modal/ProjectElipsisBtn';
 import { useHistory } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { selectProjectApp, setProject } from '../../redux/projectAppSlice';
 
 export default function ProjectCard(props:any) {
+  const projectAppState = useAppSelector(selectProjectApp);
+  const dispatch = useAppDispatch();
+
   const [renderCard, setRenderCard] = useState([]);
   const history = useHistory();
+
   useEffect(() => {
     setRenderCard(props.projects)
   }, [props.projects]);
 
-  const goToProject = () => {
+  const goToProject = (project:any) => {
+    dispatch(setProject(project));
     history.push("/user/project/general");    
   };   
 
@@ -20,7 +27,7 @@ export default function ProjectCard(props:any) {
         <span key={project.id}  className="card-container-wrapper" >
           <CardDeck className="card-project-wrapper" style={{display: 'inline-flex', flexDirection: 'row' }}>
             <Card style={{ width: '18rem', flex: 1}} className="card-project" >
-              <Card.Body onClick={goToProject}>
+              <Card.Body onClick={ () => goToProject(project)}>
                 <Card.Title>{project.projectName}</Card.Title>
                 <Card.Text>
                   <span className="proj-card-des">{project.projectDescription}</span>

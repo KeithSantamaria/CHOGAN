@@ -17,15 +17,14 @@ function ProjectTags() {
   const [updateShow, setUpdateShow] = React.useState(false);
   const handleOpen = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
+
   const handleUpdateOpen = () => setUpdateShow(true);
   const handleUpdateClose = () => setUpdateShow(false);
   const dispatch = useAppDispatch();
   const names = ProjectTags.name;
 
   const getTags = () => {
-    // Test
     const projectId = "60c2aecdc4c64aa2db316e6d";
-
     const queryString = `http://localhost:42069/api/read/project/tags`;
     const body = {
       params: {

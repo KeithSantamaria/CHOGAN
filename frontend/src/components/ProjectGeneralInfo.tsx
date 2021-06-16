@@ -13,28 +13,21 @@ import WidgetComponent from "./general/WidgetComponent";
 
 import '../css/project-service/general-info.css';
 
-// For production, project will be passed as a prop from Project Card (built by Home group)
-// const ProjectGeneralInfo = ({project} : any ) => {
 const ProjectGeneralInfo = () => {
   const dispatch = useAppDispatch();
   const projectAppState = useAppSelector(selectProjectApp);
+  const project = projectAppState.project;
   const [modalShow, setModalShow] = React.useState(false);
-
-  // Code for grabbing user from User Slice
-
+  
   const handleOpen = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
 
   const getProject = () => {
     // Production
-    // const queryString = `http://localhost:42069/api/read/project?projectId=${projectId}`;
-
-    // Test
     const queryString = `http://localhost:42069/api/read/project`;
-    const projectId = "60c2aecdc4c64aa2db316e6d";
     const body = {
       params: {
-        projectId: projectId,
+        projectId: project.projectId,
       },
     };
     axios
@@ -103,18 +96,13 @@ const ProjectGeneralInfo = () => {
         <CardDeck style={{paddingBottom: '25px'}}>
           <Card>
             <Card.Body>
-              {/* <Card.Title>{userAppState.user.userName} - {projectName}</Card.Title> */}
               <Card.Title><h4>Project Description</h4></Card.Title>
 
               <Card.Text>{projectAppState.project.projectDescription}</Card.Text>
             </Card.Body>
           </Card>
-          {/*Production*/}
-          {/* <WidgetComponent projectId={userAppState.user.userId}/> */}
         </CardDeck>
-  
-        {/*Test*/}
-        <WidgetComponent projectId={"60bc36b65d2b0da1deb9ada2"} />
+        <WidgetComponent />
         
         {newWidgetModal()}
       </Container>

@@ -4,7 +4,7 @@ import {Modal, Button, Col, Container, ListGroup, Row} from "react-bootstrap";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPlus, faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
 
-import CreateProjectForm from "../home/form/CreateProjectForm";
+import CreateProjectForm from "./form/CreateProjectForm";
 import ProjectList from "./ProjectList.component";
 import "../../css/home/home-list-view.css";
 

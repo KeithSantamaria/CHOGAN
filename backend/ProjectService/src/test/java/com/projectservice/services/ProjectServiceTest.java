@@ -13,9 +13,9 @@ import java.util.List;
 @SpringBootConfiguration
 class ProjectServiceTest {
 
-    private ProjectRepo projectRepo = Mockito.mock(ProjectRepo.class);
+    private final ProjectRepo projectRepo = Mockito.mock(ProjectRepo.class);
 
-    private ProjectService projectService = new ProjectService(projectRepo);
+    private final ProjectService projectService = new ProjectService(projectRepo);
 
     /*
     *

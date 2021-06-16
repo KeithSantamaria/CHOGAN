@@ -35,7 +35,7 @@ class ModelTest {
     void modelMetadataTest() {
         Map<String,String> map = new HashMap<>();
         model.setModelMetadata(map);
-        Map foundMap = model.getModelMetadata();
+        Map<String,String> foundMap = model.getModelMetadata();
         Assertions.assertEquals(foundMap,map);
     }
 }

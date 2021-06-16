@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useMemo } from "react";
-import { Button, Card, Modal, Container } from "react-bootstrap";
+import { Button, Modal, Container, Col, Row } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { selectProjectApp, setModels } from "../redux/projectAppSlice";
 import ModelForm from "./model/ModelForm";
 import ProjectSideNav from "./ProjectSideNav";
-import WidgetForm from "./general/WidgetForm";
-import TopNavbar from '../components/TopNavbar';
+import ModelCard from "./model/ModelCard";
+import TopNavbar from "../components/TopNavbar";
 
 function ProjectModels() {
   const projectAppState = useAppSelector(selectProjectApp);
@@ -62,21 +62,36 @@ function ProjectModels() {
   };
   return (
     <>
-      <TopNavbar/>
-      <ProjectSideNav active={"model"}/>
+      <TopNavbar />
+      <ProjectSideNav active={"model"} />
+
+      
       <Container id="pg-content">
+        <Row style={{paddingBottom: '5px'}}>
+          <Col>
+            <span style={{color: 'gray'}}>
+              <h4>Models - {projectAppState.project.projectName}</h4>
+            </span>
+          </Col>
+
+          <Col>
+            <span className="float-right">
+              <Button variant="outline-warning" onClick={handleOpen}>
+                New Model
+              </Button>
+            </span>
+          </Col>
+        </Row>
+        <hr></hr>
+
+        <Row style={{paddingBottom: '1em', fontWeight: 'bold'}}>
+          <Col>Model</Col>
+          <Col><span style={{paddingRight: '4em'}} className="float-right"> Action </span></Col>
+        </Row>
+
         {projectAppState.models.map((model: any) => {
-          return (
-            <Card>
-              <Card.Body>
-                <Card.Title>{model.modelName}</Card.Title>
-              </Card.Body>
-            </Card>
-          );
+          return <ModelCard model={model} />;
         })}
-        <Button variant="primary" onClick={handleOpen}>
-          New Model
-        </Button>
         {projectModal()}
       </Container>
     </>

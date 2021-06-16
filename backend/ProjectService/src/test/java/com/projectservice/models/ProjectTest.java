@@ -1,4 +1,4 @@
-package com.projectservice.models;
+package com.example.projectservice.models;
 
 import com.projectservice.models.*;
 import org.junit.jupiter.api.Assertions;
@@ -51,5 +51,37 @@ class ProjectTest {
         project.setProjectDescription("Desc");
         String description = project.getProjectDescription();
         Assertions.assertEquals(description,"Desc");
+    }
+
+    @Test
+    void getModels() {
+        List<Model> list = new ArrayList<>();
+        project.setModels(list);
+        List<Model> foundList = project.getModels();
+        Assertions.assertEquals(foundList,list);
+    }
+
+    @Test
+    void getEndpoints() {
+        List<Endpoint> list = new ArrayList<>();
+        project.setEndpoints(list);
+        List<Endpoint> foundList = project.getEndpoints();
+        Assertions.assertEquals(foundList,list);
+    }
+
+    @Test
+    void getTags() {
+        List<Tag> list = new ArrayList<>();
+        project.setTags(list);
+        List<Tag> foundList = project.getTags();
+        Assertions.assertEquals(foundList,list);
+    }
+
+    @Test
+    void getUserStories() {
+        List<UserStory> list = new ArrayList<>();
+        project.setUserStories(list);
+        List<UserStory> foundList = project.getUserStories();
+        Assertions.assertEquals(foundList,list);
     }
 }

@@ -32,6 +32,3 @@ spec:
             name: user-service-svc
             port:
               number: 8080
-
-  
-      

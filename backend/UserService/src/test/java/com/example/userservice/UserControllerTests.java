@@ -27,6 +27,7 @@ public class UserControllerTests {
 	@MockBean
 	private UserService userService;
 	private User testUser;
+	private ObjectMapper objectMapper;
 	private String jsonString;
 
 	@BeforeEach
@@ -38,7 +39,7 @@ public class UserControllerTests {
 		testUser.setEmail("testEmail");
 		testUser.setSecurityQuestionId(1);
 		testUser.setSecurityAnswer("CHOGAN");
-		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper = new ObjectMapper();
 		jsonString = objectMapper.writeValueAsString(testUser);
 	}
 
@@ -91,7 +92,7 @@ public class UserControllerTests {
 	public void shouldLoginUser () throws Exception {
 		Mockito.when(userService.userLogIn(ArgumentMatchers.any(),ArgumentMatchers.any())).thenReturn(testUser);
 
-		this.mockMvc.perform( post("/user/login")
+		this.mockMvc.perform( get("/user")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(jsonString) )
 			.andExpect(status().isOk()
@@ -102,7 +103,7 @@ public class UserControllerTests {
 	public void shouldNotLoginUser () throws Exception {
 		Mockito.when(userService.userLogIn(ArgumentMatchers.any(),ArgumentMatchers.any())).thenReturn(null);
 
-		this.mockMvc.perform( post("/user/login")
+		this.mockMvc.perform( get("/user")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(jsonString) )
 			.andExpect(status().isBadRequest()

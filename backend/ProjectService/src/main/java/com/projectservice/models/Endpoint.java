@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Document(collection = "endpoints")
 public class Endpoint {
-    @Id
+//    @Id
     private String endpointId;
     private String projectId;
     private String endpointName;

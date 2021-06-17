@@ -1,14 +1,12 @@
-import axios from "axios";
 import React from "react";
 //added
 import {useState} from "react";
 import { Button, Form, Table } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
-  resetCreateNewModelForm,
   selectProjectApp,
   setCreateNewModelForm,
-  setModels,
+  createModel
 } from "../../redux/projectAppSlice";
 
 //added
@@ -45,30 +43,18 @@ const ModelForm = () => {
   };
 
   const addModel = () => {
-    const queryString = `http://localhost:42069/api/create/project/model`;
     if (
       projectAppState.createNewModelForm.modelName === "" ||
       tempData === {}
     ) {
-      alert("There is nothing to add.");
+      console.log("ERROR: There is nothing to add.");
     } else {
       const model = {
         modelName: projectAppState.createNewModelForm.modelName,
         modelMetadata: tempData,
         projectId: projectId,
       };
-      console.log(model);
-      axios
-        .post(queryString, model)
-        .then((response) => {
-          console.log("response", response);
-          const modelData = response.data;
-          dispatch(setModels(modelData));
-          dispatch(resetCreateNewModelForm());
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      dispatch(createModel(model));
     }
   };
 

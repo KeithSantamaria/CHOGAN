@@ -1,10 +1,9 @@
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
 import React from "react";
 import { Button, Card } from "react-bootstrap";
 import { useAppDispatch } from "../../redux/hooks";
-import { setModels } from "../../redux/projectAppSlice";
+import { deleteModel } from "../../redux/projectAppSlice";
 
 const ModelCard = ({ model }: any) => {
   const [modelName] = React.useState(model.modelName);
@@ -13,23 +12,8 @@ const ModelCard = ({ model }: any) => {
   const dispatch = useAppDispatch();
 
   const removeModel = (id: string) => {
-    const queryDeleteString = `http://localhost:42069/api/delete/project/model`;
-    const body = {
-      params: {
-        modelId: modelId,
-      },
-    };
-    console.log(body);
-    axios
-      .delete(queryDeleteString, body)
-      .then((response) => {
-        console.log("response", response);
-        const modelData = response.data;
-        dispatch(setModels(modelData));
-      })
-      .catch((error) => {
-        console.log("There was an error on deleting: ", error);
-      });
+    const body = { params: { modelId: modelId } };
+    dispatch(deleteModel(body));
   };
 
   return (

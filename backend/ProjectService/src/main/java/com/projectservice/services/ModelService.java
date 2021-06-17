@@ -3,10 +3,8 @@ package com.projectservice.services;
 import com.projectservice.models.Model;
 import com.projectservice.repository.ModelRepo;
 import lombok.AllArgsConstructor;
-import org.springframework.data.mongodb.core.aggregation.ArithmeticOperators;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

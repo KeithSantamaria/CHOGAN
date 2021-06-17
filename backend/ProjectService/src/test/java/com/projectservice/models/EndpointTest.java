@@ -1,6 +1,5 @@
 package com.projectservice.models;
 
-import com.projectservice.models.Endpoint;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,28 +14,28 @@ class EndpointTest {
     }
 
     @Test
-    void getEndpointId() {
+    void endpointIdTest() {
         endpoint.setEndpointId("Id");
         String id = endpoint.getEndpointId();
         Assertions.assertEquals(id, "Id");
     }
 
     @Test
-    void getEndpointName() {
+    void endpointNameTest() {
         endpoint.setEndpointName("Name");
         String name = endpoint.getEndpointName();
         Assertions.assertEquals(name, "Name");
     }
 
     @Test
-    void getEndpointUrlPattern() {
+    void endpointUrlPatternTest() {
         endpoint.setEndpointUrlPattern("URL");
         String url = endpoint.getEndpointUrlPattern();
         Assertions.assertEquals(url, "URL");
     }
 
     @Test
-    void getEndpointDescription() {
+    void endpointDescriptionTest() {
         endpoint.setEndpointDescription("Desc");
         String desc = endpoint.getEndpointDescription();
         Assertions.assertEquals(desc, "Desc");

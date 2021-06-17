@@ -1,6 +1,5 @@
 package com.projectservice.controller;
 
-import com.projectservice.controller.ProjectController;
 import com.projectservice.models.Project;
 import com.projectservice.services.IProjectService;
 import org.junit.jupiter.api.Assertions;
@@ -26,7 +25,7 @@ class ProjectControllerTest {
     *
     * */
     @Test
-    public void createNewProjectSuccess(){
+    void createNewProjectSuccess(){
         Project project = new Project();
 
         ResponseEntity<Project> response = projectController.createNewProject(project);
@@ -35,7 +34,7 @@ class ProjectControllerTest {
     }
 
     @Test
-    public void createNewProjectFailure(){
+    void createNewProjectFailure(){
         Project project = new Project();
 
         Mockito.doThrow(new Exception());
@@ -52,7 +51,7 @@ class ProjectControllerTest {
     * */
 
     @Test
-    public void readProjectSuccessTest(){
+    void readProjectSuccessTest(){
         Project project = new Project();
         String projectId = "Id";
         project.setProjectId(projectId);
@@ -65,7 +64,7 @@ class ProjectControllerTest {
     }
 
     @Test
-    public void readProjectFailureTest(){
+    void readProjectFailureTest(){
         String projectId = "Id";
 
         Mockito.when(projectService.findByProjectId(projectId)).thenReturn(null);
@@ -80,7 +79,7 @@ class ProjectControllerTest {
         String userId = "Id";
         List<Project> list = new ArrayList<>();
 
-        Mockito.when(projectService.getAllProjectsByUserId(userId)).thenReturn(list);
+        Mockito.when(projectService.findByUserId(userId)).thenReturn(list);
 
         ResponseEntity<List<Project>> response = projectController.readProjects(userId);
 
@@ -91,13 +90,12 @@ class ProjectControllerTest {
     void readProjectsFailureTest(){
         String userId = "Id";
 
-        Mockito.when(projectService.getAllProjectsByUserId(userId)).thenReturn(null);
+        Mockito.when(projectService.findByUserId(userId)).thenReturn(null);
 
         ResponseEntity<List<Project>> response = projectController.readProjects(userId);
 
         Assertions.assertEquals(response.getStatusCode(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
     /*
     *
     * Update
@@ -105,7 +103,7 @@ class ProjectControllerTest {
     * */
 
     @Test
-    public void updateProjectTest(){
+    void updateProjectTest(){
         Project project = new Project();
 
         Mockito.when(projectService.update(project)).thenReturn(project);
@@ -122,7 +120,7 @@ class ProjectControllerTest {
     * */
 
     @Test
-    public void deleteProjectTest(){
+    void deleteProjectTest(){
         String projectId = "Id";
 
         ResponseEntity<Project> response = projectController.deleteProject(projectId);

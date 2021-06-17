@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: proj-service-container
-        image: chogan/proj-service
+        image: chogan/proj-service:0.0.7
         imagePullPolicy: Always
         resources:
           limits:
@@ -49,6 +49,5 @@ spec:
     app: proj-service
   ports:
   - port: 8080
-    nodePort: 31002
     targetPort: 42069
-  type: NodePort
+    protocol: TCP

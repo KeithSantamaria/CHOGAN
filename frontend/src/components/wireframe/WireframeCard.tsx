@@ -1,8 +1,7 @@
-import axios from "axios";
 import React from "react";
 import { ListGroup, Row, Col, Button, Container, Modal } from "react-bootstrap";
 import { useAppDispatch } from "../../redux/hooks";
-import { setWireframes } from "../../redux/projectAppSlice";
+import { deleteWireframe } from "../../redux/projectAppSlice";
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
@@ -23,21 +22,8 @@ const WireframeCard = ({ wireframe }: any) => {
   const handleCloseImg = () => setModalImg(false);
 
   const removeWireframe = (id: String) => {
-    const queryString = `http://localhost:42069/api/delete/project/wireframe`;
-    const body = {
-      params: {
-        wireframeId: id,
-      },
-    };
-    axios
-      .delete(queryString, body)
-      .then((response) => {
-        const wireframeData = response.data;
-        dispatch(setWireframes(wireframeData));
-      })
-      .catch((error) => {
-        console.log("There was an error on deleting: ", error);
-      });
+    const body = { params: { wireframeId: wireframe.wireframeId }};
+    dispatch(deleteWireframe(body));
   };
 
   const detailModal = () => {
@@ -74,7 +60,6 @@ const WireframeCard = ({ wireframe }: any) => {
       >
         <Modal.Header closeButton>
         </Modal.Header>
-
         <Modal.Body>
           <img onClick={handleOpenImg} src={wireframeImg} alt={wireframeImg} style={{maxHeight: '40rem', maxWidth: '50rem'}}/>
         </Modal.Body>
@@ -107,9 +92,6 @@ const WireframeCard = ({ wireframe }: any) => {
             <span className="float-right">  
               <Button
                 variant="danger"
-                /**
-                 * Is wireframe.wireframeId right?
-                 */
                 value={wireframe.wireframeId}
                 onClick={(e) => removeWireframe(wireframe.wireframeId)}
               >
@@ -119,7 +101,6 @@ const WireframeCard = ({ wireframe }: any) => {
                   icon={faTrash}
                 /> 
               </Button>
-
               <span style={{paddingRight: '1em'}}></span>
             </span>
           </Col>

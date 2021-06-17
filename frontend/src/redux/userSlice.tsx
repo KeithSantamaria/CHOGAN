@@ -24,7 +24,7 @@ interface LoginPackage {
 export const signUpUser = createAsyncThunk(
   'currentUser/create',
   async (payload : UserPackage) =>{
-    const response = axios.post("http://localhost:6969/user", payload)
+    const response = axios.post("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/user/user", payload)
       .then(response => response.data )
       .catch(error => console.log(error));
     return response;
@@ -34,7 +34,7 @@ export const signUpUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   'currentUser/login',
   async (payload : LoginPackage) => {
-    const response = axios.post("http://localhost:6969/user/login", payload)
+    const response = axios.post("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/user/user/login", payload)
     .then(response => response.data )
     .catch(error =>  console.log(error));
     return response;
@@ -45,7 +45,7 @@ export const loginUser = createAsyncThunk(
 export const updateUser = createAsyncThunk(
   'currentUser/update',
   async (payload: UserPackage) => {
-    const response = axios.put("http://localhost:6969/user", payload)
+    const response = axios.put("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/user/user", payload)
       .then(response => response.data)
       .catch(error =>  console.log(error));
     return response;

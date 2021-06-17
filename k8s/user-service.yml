@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: user-service-container
-        image: chogan/user-service
+        image: chogan/user-service:0.0.7.2
         imagePullPolicy: Always
         resources:
           limits:
@@ -38,7 +38,6 @@ spec:
               secretKeyRef:
                 name: chogan-secret
                 key: mongoUrl
-
 ---
 apiVersion: v1
 kind: Service
@@ -49,6 +48,4 @@ spec:
     app: user-service
   ports:
   - port: 8080
-    nodePort: 31001
     targetPort: 6969
-  type: NodePort

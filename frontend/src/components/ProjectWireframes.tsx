@@ -1,11 +1,11 @@
-import axios from "axios";
 import React, { useMemo } from "react";
-import { Button, Modal, Container, Col, Row, Card, CardDeck } from "react-bootstrap";
+import { Button, Modal, Container, Col, Row } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { selectProjectApp, setWireframes } from "../redux/projectAppSlice";
+import { selectProjectApp, getAllWireframes } from "../redux/projectAppSlice";
 import ProjectSideNav from "./ProjectSideNav";
 import WireframeCard from "./wireframe/WireframeCard";
 import WireframeForm from "./wireframe/WireframeForm";
+import TopNavbar from '../components/TopNavbar';
 
 function ProjectWireframes() {
   const projectAppState = useAppSelector(selectProjectApp);
@@ -16,24 +16,8 @@ function ProjectWireframes() {
   const projectId = projectAppState.project.projectId;
   
   const getWireframes = () => {
-    const queryString = `http://localhost:42069/api/read/project/wireframes`;
-        
-    const body = {
-      params: {
-        projectId: projectId,
-      },
-    };
-
-    axios
-      .get(queryString, body)
-      .then((response) => {
-        console.log("response", response);
-        const wireframeData = response.data;
-        dispatch(setWireframes(wireframeData));
-      })
-      .catch((error) => {
-        console.log("There was an error: ", error);
-      });
+    const body = { params: { projectId: projectId }};
+    dispatch(getAllWireframes(body));
   };
 
   useMemo(() => {
@@ -57,10 +41,6 @@ function ProjectWireframes() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {/* Production */}
-          {/* <EndpointForm projectId={projectAppState.project.projectId} /> */}
-
-          {/* Test */}
           <WireframeForm />
         </Modal.Body>
       </Modal>
@@ -69,17 +49,7 @@ function ProjectWireframes() {
 
   return (
     <>
-      {/* <ProjectSideNav active={"wire-frame"}/>
-
-      {projectAppState.wireframes.map((wireframe: any) => {
-        return <WireframeCard wireframe={wireframe} />;
-      })}
-
-      <Button variant="primary" onClick={handleOpen}>
-        New Wireframe
-      </Button>
-      {wireframeModal()} */}
-
+      <TopNavbar/>
       <ProjectSideNav active={"wire-frame"}/>
         
         <Container id="pg-content">
@@ -99,10 +69,7 @@ function ProjectWireframes() {
             
             </Col>
           </Row>
-
           <hr></hr>
-
-          {/*Test*/}
           {projectAppState.wireframes.map((wireframe: any) => {
             return <WireframeCard wireframe={wireframe} />;
           })}

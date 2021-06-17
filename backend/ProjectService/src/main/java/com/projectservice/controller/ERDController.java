@@ -68,14 +68,14 @@ public class ERDController {
     }
 
     /**
-     * Finds a list of all erds with the projectId
+     * Finds a list of all ERD with the projectId
      * @param projectId The id to find by
      * @return The response entity
      */
     @GetMapping("/read/project/ERDs")
     public ResponseEntity<List<ERD>> readERDs(@RequestParam String projectId){
         List<ERD> foundList = erdService.findByProjectId(projectId);
-        log.info("Successfully found ERDS of projectId : {}",projectId);
+        log.info("Successfully found ERD of projectId : {}",projectId);
         return new ResponseEntity<>(foundList,HttpStatus.OK);
     }
 

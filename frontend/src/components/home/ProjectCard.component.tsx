@@ -27,7 +27,7 @@ export default function ProjectCard(props:any) {
         <span key={project.id}  className="card-container-wrapper" >
           <CardDeck className="card-project-wrapper" style={{display: 'inline-flex', flexDirection: 'row' }}>
             <Card style={{ width: '18rem', flex: 1}} className="card-project" >
-              <Card.Body onClick={goToProject}>
+              <Card.Body onClick={ () => goToProject(project)}>
                 <Card.Title>{project.projectName}</Card.Title>
                 <Card.Text>
                   <span className="proj-card-des">{project.projectDescription}</span>
@@ -35,16 +35,7 @@ export default function ProjectCard(props:any) {
                 
               </Card.Body>
               <Card.Footer className="text-right">
-                {/* <div className="text-left">
-                  {project.tags.slice(0,4).map((t:any, index: number) => (
-                      <span key={index} className="proj-card-wrapper-tags">
-                        <span className="proj-card-tags">
-                          {t}
-                        </span>
-                      </span>
-                    ))}
-                </div> */}
-                <span><ProjectElipsisBtn/></span>
+                {/* <span><ProjectElipsisBtn/></span> */}
               </Card.Footer>
             </Card>
           </CardDeck>

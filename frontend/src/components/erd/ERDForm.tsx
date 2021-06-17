@@ -1,11 +1,9 @@
 import React from "react";
-import axios from "axios";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
-  resetCreateNewERDiagramForm,
   selectProjectApp,
   setCreateNewERDForm,
-  setERDiagrams,
+  createERD
 } from "../../redux/projectAppSlice";
 import { Button, Form, Container } from "react-bootstrap";
 
@@ -22,14 +20,12 @@ const ERDForm = () => {
   };
 
   const addERD = () => {
-    const queryString = `http://localhost:42069/api/create/project/ERD`;
-
     if (
       projectAppState.createNewERDForm.erdName === "" ||
       projectAppState.createNewERDForm.erdDescription === "" ||
       imgDat === ""
     ) {
-      alert("There is nothing to add");
+      console.log("ERROR: There is nothing to add");
     } else {
       const erd = {
         erdName: projectAppState.createNewERDForm.erdName,
@@ -37,18 +33,7 @@ const ERDForm = () => {
         erdImageUrl: imgDat,
         projectId: projectId,
       };
-      console.log(erd);
-      axios
-        .post(queryString, erd)
-        .then((response) => {
-            // console.log("response", response);
-            const erdData = response.data;
-            dispatch(setERDiagrams(erdData));
-            dispatch(resetCreateNewERDiagramForm());
-        })
-        .catch((error) => {
-            console.log(error);
-        })
+      dispatch(createERD(erd));
     }
   };
 
@@ -58,11 +43,8 @@ const ERDForm = () => {
       let fileToLoad = value[0];
       let fileReader = new FileReader();
       fileReader.onload = (fileLoadedEvent: any) => {
-        let sourceData = fileLoadedEvent.target.result; // <--- data: base64
-        // dispatch(setWireframeImageInForm(sourceData));
+        let sourceData = fileLoadedEvent.target.result;
         setImgDat(sourceData);
-        // console.log(sourceData);
-        alert(sourceData);
 
       };
       fileReader.readAsDataURL(fileToLoad);

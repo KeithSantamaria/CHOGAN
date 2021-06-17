@@ -1,11 +1,10 @@
-import axios from "axios";
 import React from "react";
 import { ListGroup, Row, Col, Button, Container, Modal } from "react-bootstrap";
 import { useAppDispatch } from "../../redux/hooks";
-import { setERDiagrams } from "../../redux/projectAppSlice";
+import { deleteERD } from "../../redux/projectAppSlice";
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faTrash, faEdit} from "@fortawesome/free-solid-svg-icons";
+import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import '../../css/project-service/erd-card.css';
 
 const ERDCard = ({ erd }: any) => {
@@ -22,22 +21,9 @@ const ERDCard = ({ erd }: any) => {
   const handleOpenImg = () => setModalImg(true);
   const handleCloseImg = () => setModalImg(false);
 
-  const removeERD = (id: String) => {
-    const queryString = `http://localhost:42069/api/delete/project/ERD`;
-    const body = {
-      params: {
-        erdId: id,
-      },
-    };
-    axios
-      .delete(queryString, body)
-      .then((response) => {
-        const erdData = response.data;
-        dispatch(setERDiagrams(erdData));
-      })
-      .catch((error) => {
-        console.log("There was an error on deleting: ", error);
-      });
+  const removeERD = (id: string) => {
+    const body = { params: { erdId: erd.erdId } };
+    dispatch(deleteERD(body));
   };
 
   const detailModal = () => {
@@ -84,47 +70,45 @@ const ERDCard = ({ erd }: any) => {
 
   return (
     <>
-    <ListGroup.Item className="project-list-item erd-wrapper-container" onClick={handleOpen}>
-      <Row >
-        <Col className="project-description">
-          <img src={erdImg} alt={erdImg} style={{maxHeight: '10rem', maxWidth: '10rem'}}/>
-        </Col>
+      <ListGroup.Item className="project-list-item erd-wrapper-container" onClick={handleOpen}>
+        <Row >
+          <Col className="project-description">
+            <img src={erdImg} alt={erdImg} style={{maxHeight: '10rem', maxWidth: '10rem'}}/>
+          </Col>
 
-        <Col className="project-name">
-          {erdName}
-        </Col>
+          <Col className="project-name">
+            {erdName}
+          </Col>
 
-        <Col className="project-description">
-          <Container className="des-container">
-            {erdDescription}
-          </Container>
-            
-        </Col>
+          <Col className="project-description">
+            <Container className="des-container">
+              {erdDescription}
+            </Container>
+          </Col>
 
-        <Col >
-          <span className="float-right">  
-            <Button
-              variant="danger"
-              value={erd.ERDiagramId}
-              onClick={(e) => removeERD(erd.ERDiagramId)}
-            >
-              <FontAwesomeIcon
-                style={{height: '100%'}}
-                className="fa-1x"
-                icon={faTrash}
-              /> 
-            </Button>
+          <Col >
+            <span className="float-right">  
+              <Button
+                variant="danger"
+                value={erd.ERDiagramId}
+                onClick={(e) => removeERD(erd.ERDiagramId)}
+              >
+                <FontAwesomeIcon
+                  style={{height: '100%'}}
+                  className="fa-1x"
+                  icon={faTrash}
+                /> 
+              </Button>
 
-            <span style={{paddingRight: '1em'}}></span>
-          </span>
-        </Col>
-      </Row>
-    </ListGroup.Item>
-    <br></br>
-    {detailModal()}
-    {viewImg()}
-</>
-
+              <span style={{paddingRight: '1em'}}></span>
+            </span>
+          </Col>
+        </Row>
+      </ListGroup.Item>
+      <br></br>
+      {detailModal()}
+      {viewImg()}
+    </>
   );
 };
 

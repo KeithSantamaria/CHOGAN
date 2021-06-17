@@ -1,11 +1,11 @@
-import axios from "axios";
 import React, { useMemo } from "react";
 import { Button, Modal, Container, Row, Col } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { selectProjectApp, setEndpoints } from "../redux/projectAppSlice";
+import { selectProjectApp, getAllEndpoints } from "../redux/projectAppSlice";
 import ProjectSideNav from "./ProjectSideNav";
 import EndpointForm from "./endpoint/EndpointForm";
 import EndpointCard from "./endpoint/EndpointCard";
+import TopNavbar from '../components/TopNavbar';
 
 function ProjectEndpoints() {
   const projectAppState = useAppSelector(selectProjectApp);
@@ -13,27 +13,11 @@ function ProjectEndpoints() {
   const handleOpen = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
   const dispatch = useAppDispatch();
+  const projectId = projectAppState.project.projectId;
 
   const getEndpoints = () => {
-    // Test query string works; comment when ready to test prod
-    const queryString = `http://localhost:42069/api/read/project/endpoints`;
-    const body = {
-      params: {
-        projectId: "60bc36b65d2b0da1deb9ada2",
-      },
-    };
-    // Production query string; uncomment when ready to test prod
-    // const queryString = `http://localhost:42069/api/read/project?projectId=${projectId}`;
-    axios
-      .get(queryString, body)
-      .then((response) => {
-        console.log("response", response);
-        const endpointData = response.data;
-        dispatch(setEndpoints(endpointData));
-      })
-      .catch((error) => {
-        console.log("There was an error: ", error);
-      });
+    const body = { params: { projectId: projectId }};
+    dispatch(getAllEndpoints(body));
   };
 
   useMemo(() => {
@@ -56,10 +40,6 @@ function ProjectEndpoints() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {/* Production */}
-          {/* <EndpointForm projectId={projectAppState.project.projectId} /> */}
-
-          {/* Test */}
           <EndpointForm />
         </Modal.Body>
       </Modal>
@@ -67,6 +47,7 @@ function ProjectEndpoints() {
   };
   return (
     <>
+      <TopNavbar/>
       <ProjectSideNav active={"endpoint"}/>
 
       <Container id="pg-content">

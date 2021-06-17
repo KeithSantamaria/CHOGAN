@@ -3,10 +3,9 @@ import React from "react";
 import { Button, Form, Container } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
-  resetCreateNewEndpointForm,
+  createEndpoint,
   selectProjectApp,
   setCreateNewEndpointForm,
-  setEndpoints,
 } from "../../redux/projectAppSlice";
 
 const EndpointForm = () => {
@@ -20,13 +19,12 @@ const EndpointForm = () => {
   };
 
   const addEndpoint = () => {
-    const queryString = `http://localhost:42069/api/create/project/endpoint`;
     if (
       projectAppState.createNewEndpointForm.endpointDescription === "" ||
       projectAppState.createNewEndpointForm.endpointName === "" ||
       projectAppState.createNewEndpointForm.urlPattern === "" 
     ) {
-      alert("There is nothing to add");
+      console.log("ERROR: There is nothing to add.");
     } else {
       const endpoint = {
         endpointName: projectAppState.createNewEndpointForm.endpointName,
@@ -34,20 +32,8 @@ const EndpointForm = () => {
         endpointUrlPattern: projectAppState.createNewEndpointForm.urlPattern,
         projectId: projectId,
       };
-
-      axios
-        .post(queryString, endpoint)
-        .then((response) => {
-          console.log("response", response);
-          const endpointData = response.data;
-          dispatch(setEndpoints(endpointData));
-          dispatch(resetCreateNewEndpointForm());
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  };
+      dispatch(createEndpoint(endpoint));
+  }};
 
   return (
     <Container className="create-proj-form-container">

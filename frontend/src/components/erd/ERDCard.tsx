@@ -1,8 +1,7 @@
-import axios from "axios";
 import React from "react";
 import { ListGroup, Row, Col, Button, Container, Modal } from "react-bootstrap";
 import { useAppDispatch } from "../../redux/hooks";
-import { setERDiagrams } from "../../redux/projectAppSlice";
+import { deleteERD } from "../../redux/projectAppSlice";
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
@@ -22,22 +21,9 @@ const ERDCard = ({ erd }: any) => {
   const handleOpenImg = () => setModalImg(true);
   const handleCloseImg = () => setModalImg(false);
 
-  const removeERD = (id: String) => {
-    const queryString = `http://localhost:42069/api/delete/project/ERD`;
-    const body = {
-      params: {
-        erdId: id,
-      },
-    };
-    axios
-      .delete(queryString, body)
-      .then((response) => {
-        const erdData = response.data;
-        dispatch(setERDiagrams(erdData));
-      })
-      .catch((error) => {
-        console.log("There was an error on deleting: ", error);
-      });
+  const removeERD = (id: string) => {
+    const body = { params: { erdId: erd.erdId } };
+    dispatch(deleteERD(body));
   };
 
   const detailModal = () => {

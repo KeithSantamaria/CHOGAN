@@ -30,7 +30,7 @@ interface createWidgetPayload {
 export const getAllWidgetsByProjectId = createAsyncThunk (
   'projects/getAllWidgets',
   async (payload : projectIdPayload) => {
-    const response = axios.get("http://localhost:42069/api/read/project/widgets", payload)
+    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/read/project/widgets", payload)
     .then( (response) => response.data)
     .catch( error => {console.log(error)});
     return response;
@@ -40,7 +40,7 @@ export const getAllWidgetsByProjectId = createAsyncThunk (
 export const createWidget = createAsyncThunk (
   'projects/createWidget',
   async (payload : createWidgetPayload) => {
-    const response = axios.post("http://localhost:42069/api/create/project/widget", payload)
+    const response = axios.post("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/create/project/widget", payload)
     .then( (response) => response.data)
     .catch( (error) => {console.log(error)});
     return response;
@@ -50,7 +50,7 @@ export const createWidget = createAsyncThunk (
 export const createProject = createAsyncThunk (
   'projects/createProject',
   async (payload : createProjectPayload) => {
-    const response = axios.post("http://localhost:42069/api/create/project", payload)
+    const response = axios.post("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/create/project", payload)
       .then( (response) => response.data)
       .catch( (error) => {console.log(error)});
     return response;
@@ -60,7 +60,7 @@ export const createProject = createAsyncThunk (
 export const getAllProjects = createAsyncThunk(
   'projects/getAllProjects',
   async (payload : userIdPayload) => {
-    const response = axios.get("http://localhost:42069/api/read/projects", payload)
+    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/read/projects", payload)
       .then( (response) => response.data)
       .catch(error => {console.log(error)});
     return response;

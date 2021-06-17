@@ -11,7 +11,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "@types/jest": "^24.9.1",
+    "@types/jest": "^26.0.23",
     "@types/node": "^12.20.13",
     "@types/react": "^16.14.8",
     "@types/react-dom": "^16.9.13",
@@ -33,7 +33,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest --env=jsdom",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -50,5 +50,19 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.5",
+    "@babel/preset-typescript": "^7.14.5",
+    "@types/enzyme": "^3.10.8",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.2",
+    "babel-jest": "^27.0.2",
+    "enzyme-to-json": "^3.6.2",
+    "jest": "^27.0.4",
+    "react-test-render": "^1.1.2",
+    "react-test-renderer": "^17.0.2",
+    "ts-jest": "^27.0.3"
   }
 }

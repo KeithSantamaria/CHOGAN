@@ -3,9 +3,12 @@ import '../css/project-service/project-sidenav.css';
 import { useHistory } from "react-router-dom";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faHome, faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
+import { useAppDispatch } from '../redux/hooks';
+import { resetProjectState } from '../redux/projectAppSlice';
 
 const ProjectSideNav = (props: any) => {
 
+    const dispatch = useAppDispatch();
     const history = useHistory();
     const goToGeneral = () => {
         history.push("/user/project/general");    
@@ -29,6 +32,7 @@ const ProjectSideNav = (props: any) => {
         history.push("/user/project/tags");
     };
     const goToHome = () => {
+        dispatch(resetProjectState());
         history.push("/home");
     };
 
@@ -37,12 +41,10 @@ const ProjectSideNav = (props: any) => {
                 <div className="sm-wrapper">
                     <Row>
                         <span className={props.active === 'general' ? " active-general " : ""}><p onClick={goToGeneral}> General </p></span>
-                        {/* <FontAwesomeIcon onClick={goToGeneral} className="fa-icon" icon={faBook} /> */}
                     </Row>
 
                     <Row>
                         <span className={props.active === 'wire-frame' ? " active-wire-frame " : ""}><p onClick={goToWireframes}> Wireframes </p></span>
-                        {/* <FontAwesomeIcon onClick={goToWireframes} className="fa-icon" icon={faWindowRestore} /> */}
                     </Row>
 
                     <Row>

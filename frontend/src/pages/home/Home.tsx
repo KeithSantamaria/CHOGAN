@@ -20,23 +20,13 @@ export default function Home() {
     const projectAppState= useAppSelector(selectProjectApp);
     const userAppState= useAppSelector(currentUser);
     const dispatch = useAppDispatch();
-
-
     const [activeGrid, setActiveGrid] = useState(true);
     const [activeList, setActiveList] = useState(false);
-
     const [tabs, setTabs] = useState("grid");
-
     const projects = useAppSelector((state) => state.projectApp.projects);
 
     const getProjects = () => {
-        // Test query string works; comment when ready to test prod
-        const queryString = `http://localhost:42069/api/read/projects`;
-        // const body = {params:{userId: "60c7f7afcfa7eb6bf04a410c"}};
         const body ={params:{userId: userAppState.id}};
-
-        // Production query string; uncomment when ready to test prod
-        // const queryString = `http://localhost:42069/api/read/projects`;
         dispatch(getAllProjects(body));
     };
 

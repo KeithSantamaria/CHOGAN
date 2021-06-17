@@ -1,5 +1,4 @@
 import React, { useMemo } from "react";
-import axios from "axios";
 import ProjectSideNav from "./ProjectSideNav";
 import WidgetForm from "./general/WidgetForm";
 import TopNavbar from '../components/TopNavbar';
@@ -7,8 +6,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { Card, Button, Modal, Col, Row, CardDeck, Container} from "react-bootstrap";
 import {
   selectProjectApp,
-  setProject,
-  setWidgets,
+  getProject
 } from "../redux/projectAppSlice";
 import WidgetComponent from "./general/WidgetComponent";
 
@@ -23,28 +21,13 @@ const ProjectGeneralInfo = () => {
   const handleOpen = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
 
-  const getProject = () => {
-    // Production
-    const queryString = `http://localhost:42069/api/read/project`;
-    const body = {
-      params: {
-        projectId: project.projectId,
-      },
-    };
-    axios
-      .get(queryString, body)
-      .then((response) => {
-        console.log("response", response);
-        const projectData = response.data;
-        dispatch(setProject(projectData));
-      })
-      .catch((error) => {
-        console.log("There was an error: ", error);
-      });
+  const setProject = () => {
+    const body = { params: { projectId: project.projectId }};
+    dispatch(getProject(body));
   };
 
   useMemo(() => {
-    getProject();
+    setProject();
   }, []);
 
   const newWidgetModal = () => {

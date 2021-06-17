@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/user")
 //CHANGE THAT ONCE WE GET FRONTEND STABLE
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin()
 public class UserController {
     //vars
     @Autowired

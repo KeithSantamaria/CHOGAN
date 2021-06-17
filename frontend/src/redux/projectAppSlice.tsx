@@ -114,6 +114,16 @@ export const getAllProjects = createAsyncThunk(
   }
 );
 
+export const getProject = createAsyncThunk(
+  'projects/getProject',
+  async (payload : projectIdPayload) => {
+    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/read/project", payload)
+      .then( (response) => response.data)
+      .catch(error => {console.log(error)});
+    return response;
+  }
+);
+
 export const getAllWidgets = createAsyncThunk (
   'projects/getAllWidgets',
   async (payload : projectIdPayload) => {
@@ -971,6 +981,15 @@ export const projectAppSlice = createSlice({
       (state, action) => {
         console.log("Dispatching getAllProjects reducer with action: ", action);
         state.projects = action.payload;
+        return state;
+      }
+    )
+
+    builder.addCase(
+      getProject.fulfilled,
+      (state, action) => {
+        console.log("Dispatching getProject reducer with action: ", action);
+        state.project = action.payload;
         return state;
       }
     )

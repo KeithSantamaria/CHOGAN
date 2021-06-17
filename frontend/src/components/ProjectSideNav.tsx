@@ -37,12 +37,10 @@ const ProjectSideNav = (props: any) => {
                 <div className="sm-wrapper">
                     <Row>
                         <span className={props.active === 'general' ? " active-general " : ""}><p onClick={goToGeneral}> General </p></span>
-                        {/* <FontAwesomeIcon onClick={goToGeneral} className="fa-icon" icon={faBook} /> */}
                     </Row>
 
                     <Row>
                         <span className={props.active === 'wire-frame' ? " active-wire-frame " : ""}><p onClick={goToWireframes}> Wireframes </p></span>
-                        {/* <FontAwesomeIcon onClick={goToWireframes} className="fa-icon" icon={faWindowRestore} /> */}
                     </Row>
 
                     <Row>

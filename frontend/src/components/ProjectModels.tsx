@@ -1,8 +1,7 @@
-import axios from "axios";
 import React, { useMemo } from "react";
 import { Button, Modal, Container, Col, Row } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { selectProjectApp, setModels } from "../redux/projectAppSlice";
+import { selectProjectApp, getAllModels } from "../redux/projectAppSlice";
 import ModelForm from "./model/ModelForm";
 import ProjectSideNav from "./ProjectSideNav";
 import ModelCard from "./model/ModelCard";
@@ -17,22 +16,8 @@ function ProjectModels() {
   const projectId = projectAppState.project.projectId;
 
   const getModels = () => {
-    const queryString = `http://localhost:42069/api/read/project/models`;
-    const body = {
-      params: {
-        projectId: projectId,
-      },
-    };
-    axios
-      .get(queryString, body)
-      .then((response) => {
-        console.log("response", response);
-        const modelData = response.data;
-        dispatch(setModels(modelData));
-      })
-      .catch((error) => {
-        console.log("There was an error: ", error);
-      });
+    const body = { params: { projectId: projectId } };
+    dispatch(getAllModels(body));
   };
 
   useMemo(() => {
@@ -65,11 +50,10 @@ function ProjectModels() {
       <TopNavbar />
       <ProjectSideNav active={"model"} />
 
-      
       <Container id="pg-content">
-        <Row style={{paddingBottom: '5px'}}>
+        <Row style={{ paddingBottom: "5px" }}>
           <Col>
-            <span style={{color: 'gray'}}>
+            <span style={{ color: "gray" }}>
               <h4>Models - {projectAppState.project.projectName}</h4>
             </span>
           </Col>
@@ -84,9 +68,14 @@ function ProjectModels() {
         </Row>
         <hr></hr>
 
-        <Row style={{paddingBottom: '1em', fontWeight: 'bold'}}>
+        <Row style={{ paddingBottom: "1em", fontWeight: "bold" }}>
           <Col>Model</Col>
-          <Col><span style={{paddingRight: '4em'}} className="float-right"> Action </span></Col>
+          <Col>
+            <span style={{ paddingRight: "4em" }} className="float-right">
+              {" "}
+              Action{" "}
+            </span>
+          </Col>
         </Row>
 
         {projectAppState.models.map((model: any) => {

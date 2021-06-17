@@ -1,8 +1,7 @@
-import axios from "axios";
 import React, { useMemo } from "react";
 import { Button, Modal, Container, Col, Row } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { selectProjectApp, setUserStories } from "../redux/projectAppSlice";
+import { selectProjectApp, getAllUserStories } from "../redux/projectAppSlice";
 import ProjectSideNav from "./ProjectSideNav";
 import UserStoryCard from "./userstory/UserStoryCard";
 import UserStoryForm from "./userstory/UserStoryForm";
@@ -17,23 +16,8 @@ function ProjectUserStories() {
   const projectId = projectAppState.project.projectId;
   
   const getUserStories = () => {
-    const queryString = `http://localhost:42069/api/read/project/userstories`;
-    const body = {
-      params: {
-        projectId: projectId
-      },
-    };
-
-    axios
-      .get(queryString, body)
-      .then((response) => {
-        console.log("response", response);
-        const userStoryData = response.data;
-        dispatch(setUserStories(userStoryData));
-      })
-      .catch((error) => {
-        console.log("There was an error: ", error);
-      });
+    const body = { params: { projectId: projectId }};
+    dispatch(getAllUserStories(body));
   };
 
   const userStoryModal = () => {

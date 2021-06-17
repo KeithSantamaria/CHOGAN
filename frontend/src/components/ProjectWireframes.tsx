@@ -1,8 +1,7 @@
-import axios from "axios";
 import React, { useMemo } from "react";
 import { Button, Modal, Container, Col, Row } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { selectProjectApp, setWireframes } from "../redux/projectAppSlice";
+import { selectProjectApp, getAllWireframes } from "../redux/projectAppSlice";
 import ProjectSideNav from "./ProjectSideNav";
 import WireframeCard from "./wireframe/WireframeCard";
 import WireframeForm from "./wireframe/WireframeForm";
@@ -17,13 +16,8 @@ function ProjectWireframes() {
   const projectId = projectAppState.project.projectId;
   
   const getWireframes = () => {
-    const body ={params:{userId: userAppState.id}};
-
-    const body = {
-      params: {
-        projectId: projectId,
-      },
-    };
+    const body = { params: { projectId: projectId }};
+    dispatch(getAllWireframes(body));
   };
 
   useMemo(() => {

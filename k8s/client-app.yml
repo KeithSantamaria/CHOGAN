@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: client-app-container
-        image: chogan/client-app:0.1.2
+        image: chogan/client-app:0.1.5
         imagePullPolicy: Always
         resources:
           limits:

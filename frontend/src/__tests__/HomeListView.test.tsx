@@ -1,12 +1,17 @@
 import * as React from 'react';
-import { shallow, render, mount } from 'enzyme';
+import { mount} from 'enzyme';
 import HomeListView from '../components/home/HomeListView';
-import {ListGroup} from 'react-bootstrap';
 
-describe('HomeListView Tests', () => {
-
-    it('shallow rendering list-view-items', () => {
-      const wrapper = shallow(<HomeListView />);
-      //expect(wrapper.find('.list-view-container')).toBeDefined();
+describe('HomeListView tests', () => {
+    let wrapper:any;
+    let projs:any;
+    beforeEach(() => {
+        projs = [{projectName: 'one', projectDescription: "one"}, {projectName: 'two', projectDescription: "two"}];
+        wrapper = mount(<HomeListView projects={projs} />);
+     });
+    it('shallow rendering project-name', () => {
+        
+        const actual = wrapper.find('.project-list-item');
+        expect(actual.length).toBeGreaterThanOrEqual(projs.length);
     });
   });

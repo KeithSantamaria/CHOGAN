@@ -2,20 +2,20 @@ import * as React from 'react';
 import { mount} from 'enzyme';
 import { store } from '../../redux/store';
 import { Provider } from 'react-redux';
-import ProjectERDs from '../../components/ProjectERDs';
+import ProjectSideNav from '../../components/ProjectSideNav';
 
-describe('ProjectERDs tests', () => {
+describe('ProjectSideNav tests', () => {
     let wrapper:any;
     let projs:any;
     beforeEach(() => {
         wrapper = mount(
           <Provider store={store} > 
-            <ProjectERDs /> 
+            <ProjectSideNav /> 
           </Provider>
         );
      });
     it('checking page loads', () => {
-        const actual = wrapper.find('#pg-content');
+        const actual = wrapper.find('#sideMenu');
         expect(actual.length).toBeGreaterThanOrEqual(1);
     });
 });

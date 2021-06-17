@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import Home from '../pages/home/Home';
+import Home from '../../pages/home/Home';
 
 
-import { store } from '../redux/store';
+import { store } from '../../redux/store';
 import { Provider } from 'react-redux';
 
 describe('Home Tests', () => {

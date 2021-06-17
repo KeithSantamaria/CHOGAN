@@ -1,11 +1,9 @@
 import React from "react";
-import axios from "axios";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
-  resetCreateNewWireframeForm,
+  createWireframe,
   selectProjectApp,
   setCreateNewWireframeForm,
-  setWireframes,
 } from "../../redux/projectAppSlice";
 import { Button, Form, Container } from "react-bootstrap";
 
@@ -22,13 +20,12 @@ const WireframeForm = () => {
   };
 
   const addWireframe = () => {
-    const queryString = `http://localhost:42069/api/create/project/wireframe`;
     if (
       projectAppState.createNewWireframeForm.wireframeName === "" ||
       projectAppState.createNewWireframeForm.wireframeDescription === "" ||
       imgDat === ""
     ) {
-      alert("There is nothing to add");
+      console.log("ERROR: There is nothing to add");
     } else {
       const wireframe = {
         wireframeName: projectAppState.createNewWireframeForm.wireframeName,
@@ -37,18 +34,7 @@ const WireframeForm = () => {
         wireframeImageUrl: imgDat,
         projectId: projectId,
       };
-      console.log(wireframe);
-      axios
-        .post(queryString, wireframe)
-        .then((response) => {
-          console.log("response", response);
-          const wireframeData = response.data;
-          dispatch(setWireframes(wireframeData));
-          dispatch(resetCreateNewWireframeForm());
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      dispatch(createWireframe(wireframe));
     }
   };
 

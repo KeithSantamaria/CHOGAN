@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   selectProjectApp,
@@ -44,11 +43,8 @@ const ERDForm = () => {
       let fileToLoad = value[0];
       let fileReader = new FileReader();
       fileReader.onload = (fileLoadedEvent: any) => {
-        let sourceData = fileLoadedEvent.target.result; // <--- data: base64
-        // dispatch(setWireframeImageInForm(sourceData));
+        let sourceData = fileLoadedEvent.target.result;
         setImgDat(sourceData);
-        // console.log(sourceData);
-        alert(sourceData);
 
       };
       fileReader.readAsDataURL(fileToLoad);

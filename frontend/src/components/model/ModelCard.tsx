@@ -1,7 +1,7 @@
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { ListGroup, Row, Col, Button, Card } from "react-bootstrap";
+import { ListGroup, Row, Col, Button } from "react-bootstrap";
 import { useAppDispatch } from "../../redux/hooks";
 import { deleteModel } from "../../redux/projectAppSlice";
 
@@ -17,6 +17,9 @@ const ModelCard = ({ model }: any) => {
     <>
       <ListGroup.Item className="project-list-item">
         <Row>
+          <h5>
+            {model.modelName}
+          </h5>
           <Col className="project-name">{
             Object.entries(model.modelMetadata).map((element: any, index: number) => {
               const field = element[0];

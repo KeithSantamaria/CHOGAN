@@ -4,7 +4,7 @@ import ProjectGeneralInfo from '../../components/ProjectGeneralInfo';
 import { store } from '../../redux/store';
 import { Provider } from 'react-redux';
 
-describe('GridView tests', () => {
+describe('ProjectGeneralInfo tests', () => {
     let wrapper:any;
     let projs:any;
     beforeEach(() => {
@@ -14,8 +14,8 @@ describe('GridView tests', () => {
           </Provider>
         );
      });
-    it('rendering inner project card', () => {
-        const actual = wrapper.find('.pg-content');
+    it('checking for #pg-content elements', () => {
+        const actual = wrapper.find('#pg-content');
         expect(actual.length).toBeGreaterThanOrEqual(1);
     });
 });

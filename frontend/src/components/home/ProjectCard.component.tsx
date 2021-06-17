@@ -35,7 +35,7 @@ export default function ProjectCard(props:any) {
                 
               </Card.Body>
               <Card.Footer className="text-right">
-                <span><ProjectElipsisBtn/></span>
+                {/* <span><ProjectElipsisBtn/></span> */}
               </Card.Footer>
             </Card>
           </CardDeck>

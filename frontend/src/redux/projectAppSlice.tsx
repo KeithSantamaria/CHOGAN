@@ -971,6 +971,20 @@ export const projectAppSlice = createSlice({
     resetCreateNewProjectForm: (state)=> {
       state.createNewProjectForm.projectDescription = "";
       state.createNewProjectForm.projectName = ""
+    },
+
+    resetProjectState: (state) => {
+      state.project.projectId = "";
+      state.project.projectName = "";
+      state.project.projectDescription = "";
+      state.models = [];
+      state.endpoints = [];
+      state.tags = [];
+      state.widgets = [];
+      state.erds = [];
+      state.wireframes = [];
+      state.userStories = [];
+
     }
   },
   extraReducers : (builder) => {
@@ -1223,6 +1237,7 @@ export const {
   resetCreateNewWireframeForm,
   resetCreateNewERDiagramForm,
   resetCreateNewProjectForm,
+  resetProjectState
 } = projectAppSlice.actions;
 
 export const selectProjectApp = (state: RootState) => state.projectApp;

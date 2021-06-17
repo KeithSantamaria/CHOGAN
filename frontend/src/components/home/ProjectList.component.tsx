@@ -30,7 +30,7 @@ export default function ProjectList(props:any) {
               <Col className="project-description">
                   {project.projectDescription}
               </Col>
-              <span><ProjectElipsisBtn/></span>
+              {/* <span><ProjectElipsisBtn/></span> */}
             </Row>
         </ListGroup.Item>
       ))}

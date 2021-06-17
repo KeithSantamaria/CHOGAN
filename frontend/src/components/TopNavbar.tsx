@@ -3,19 +3,26 @@ import {Navbar} from 'react-bootstrap';
 import '../css/other/nav.css';
 
 import { useHistory } from "react-router-dom";
-import { useAppSelector } from '../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import {currentUser} from '../redux/userSlice';
+import { resetProjectState } from '../redux/projectAppSlice';
 
 export default function TopNavbar() {
   const currentlyLoggedUser = useAppSelector(currentUser);
+  const dispatch = useAppDispatch();
   const history = useHistory();
+
+  const goHome = () => {
+    dispatch(resetProjectState());
+    history.push("/");
+  };
 
   return (
     <>
       <div className="nav-wrapper">
         <Navbar>
           <Navbar.Brand>
-            <h3 onClick={() => {history.push("/")}}>Chogan</h3>
+            <h3 onClick={() => goHome()}>Chogan</h3>
           </Navbar.Brand>
 
           <Navbar.Toggle />

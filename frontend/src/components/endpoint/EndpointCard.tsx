@@ -43,16 +43,6 @@ const EndpointCard = ({ endpoint }: any) => {
                   icon={faTrash}
                 />
               </Button>
-
-              <span style={{ paddingRight: "1em" }}></span>
-
-              <Button value={endpoint.endpointId} variant="outline-warning">
-                <FontAwesomeIcon
-                  style={{ height: "100%" }}
-                  className="fa-1x"
-                  icon={faEdit}
-                />
-              </Button>
             </span>
           </Col>
         </Row>

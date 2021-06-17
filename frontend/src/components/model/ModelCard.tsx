@@ -6,13 +6,10 @@ import { useAppDispatch } from "../../redux/hooks";
 import { deleteModel } from "../../redux/projectAppSlice";
 
 const ModelCard = ({ model }: any) => {
-  const [modelName] = React.useState(model.modelName);
-  const [metadata] = React.useState(model.modelMetadata);
-  const [modelId] = React.useState(model.modelId);
   const dispatch = useAppDispatch();
 
-  const removeModel = (id: string) => {
-    const body = { params: { modelId: modelId } };
+  const removeModel = () => {
+    const body = { params: { modelId: model.modelId } };
     dispatch(deleteModel(body));
   };
 
@@ -20,10 +17,10 @@ const ModelCard = ({ model }: any) => {
     <Card>
       <Card.Body>
         <Card.Title>
-          {modelName}
+          {model.modelName}
           <Button
             value={model.modelId}
-            onClick={(e) => removeModel((e.target as HTMLButtonElement).value)}
+            onClick={() => removeModel()}
             variant="outline-dark"
           >
             <FontAwesomeIcon
@@ -33,12 +30,12 @@ const ModelCard = ({ model }: any) => {
             />
           </Button>
         </Card.Title>
-        {Object.entries(metadata).map((element: any, index: number) => {
+        {Object.entries(model.modelMetadata).map((element: any, index: number) => {
           const field = element[0];
           const type = element[1];
           return (
             <Card.Text>
-              {field} : {type}
+              {field} : {type} : {model.modelId}
             </Card.Text>
           );
         })}

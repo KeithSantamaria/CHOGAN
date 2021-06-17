@@ -55,6 +55,9 @@ const ModelForm = () => {
         projectId: projectId,
       };
       dispatch(createModel(model));
+      tempArrayAll=new Array();
+      tempData={} as any;
+      tempArray=new Array();
     }
   };
 

@@ -147,7 +147,7 @@ export const getAllWireframes = createAsyncThunk (
 export const getAllERDs = createAsyncThunk (
   'projects/getAllERDs',
   async (payload : projectIdPayload) => {
-    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/read/project/erds", payload)
+    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/read/project/ERDs", payload)
     .then( (response) => response.data)
     .catch( error => {console.log(error)});
     return response;
@@ -228,7 +228,7 @@ export const createWireframe = createAsyncThunk (
 export const createERD = createAsyncThunk (
   'projects/createERD',
   async (payload : createERDPayload) => {
-    const response = axios.post("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/create/project/erd", payload)
+    const response = axios.post("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/create/project/ERD", payload)
     .then( (response) => response.data)
     .catch( (error) => {console.log(error)});
     return response;
@@ -280,7 +280,7 @@ export const createTag = createAsyncThunk (
 export const deleteWireframe = createAsyncThunk(
   'projects/deleteWireframe',
   async(payload: wireframeIdPayload) => {
-    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/delete/project/wireframe", payload)
+    const response = axios.delete("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/delete/project/wireframe", payload)
     .then( (response) => response.data)
     .catch(error => {console.log(error)});
   return response;
@@ -290,7 +290,7 @@ export const deleteWireframe = createAsyncThunk(
 export const deleteModel = createAsyncThunk(
   'projects/deleteModel',
   async(payload: modelIdPayload) => {
-    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/delete/project/model", payload)
+    const response = axios.delete("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/delete/project/model", payload)
     .then( (response) => response.data)
     .catch(error => {console.log(error)});
   return response;
@@ -300,7 +300,7 @@ export const deleteModel = createAsyncThunk(
 export const deleteTag = createAsyncThunk(
   'projects/deleteTag',
   async(payload: tagIdPayload) => {
-    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/delete/project/tag", payload)
+    const response = axios.delete("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/delete/project/tag", payload)
     .then( (response) => response.data)
     .catch(error => {console.log(error)});
   return response;
@@ -310,7 +310,7 @@ export const deleteTag = createAsyncThunk(
 export const deleteERD = createAsyncThunk(
   'projects/deleteERD',
   async(payload: erdIdPayload) => {
-    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/delete/project/erd", payload)
+    const response = axios.delete("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/delete/project/ERD", payload)
     .then( (response) => response.data)
     .catch(error => {console.log(error)});
   return response;
@@ -320,7 +320,7 @@ export const deleteERD = createAsyncThunk(
 export const deleteUserStory = createAsyncThunk(
   'projects/deleteUserStory',
   async(payload: userStoryIdPayload) => {
-    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/delete/project/userstory", payload)
+    const response = axios.delete("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/delete/project/userstory", payload)
     .then( (response) => response.data)
     .catch(error => {console.log(error)});
   return response;
@@ -330,7 +330,7 @@ export const deleteUserStory = createAsyncThunk(
 export const deleteEndpoint = createAsyncThunk(
   'projects/deleteEndpoint',
   async(payload: endpointIdPayload) => {
-    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/delete/project/endpoint", payload)
+    const response = axios.delete("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/delete/project/endpoint", payload)
     .then( (response) => response.data)
     .catch(error => {console.log(error)});
   return response;

@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
 import {RootState,} from "./store";
 
-
+// ID PAYLOADS
 interface userIdPayload {
   params:{
     userId: string;
@@ -15,6 +15,43 @@ interface projectIdPayload {
   }
 }
 
+interface wireframeIdPayload{
+  params:{
+    wireframeId: string;
+  }
+}
+
+interface modelIdPayload{
+  params:{
+    modelId: string;
+  }
+}
+
+interface endpointIdPayload{
+  params:{
+    endpointId: string;
+  }
+}
+
+interface erdIdPayload{
+  params:{
+    erdId: string;
+  }
+}
+
+interface userStoryIdPayload{
+  params:{
+    userStoryId: string;
+  }
+}
+
+interface tagIdPayload{
+  params:{
+    tagId: string;
+  }
+}
+
+// CREATE PAYLOADS
 interface createProjectPayload {
   userId : string;
   projectName : string;
@@ -27,7 +64,57 @@ interface createWidgetPayload {
   widgetDescription : string;
 }
 
-export const getAllWidgetsByProjectId = createAsyncThunk (
+interface createWireframePayload {
+  projectId: string;
+  wireframeName: string;
+  wireframeDescription: string;
+  wireframeImageUrl: string;
+}
+
+interface createERDPayload {
+  projectId: string;
+  erdName: string;
+  erdDescription: string;
+  erdImageUrl: string;
+}
+
+interface createEndpointPayload{
+  projectId: string;
+  endpointName: string;
+  endpointUrlPattern: string;
+  endpointDescription: string;
+}
+
+interface createTagPayload{
+  projectId: string;
+  tagName: string;
+  tagDescription: string;
+}
+
+interface createUserStoryPayload{
+  projectId: string;
+  userStoryDescription: string;
+}
+
+interface createModelPayload {
+  projectId: string;
+  modelName: string;
+  modelMetadata:Array<{ key: string, value: string }>
+}
+
+
+// GET
+export const getAllProjects = createAsyncThunk(
+  'projects/getAllProjects',
+  async (payload : userIdPayload) => {
+    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/read/projects", payload)
+      .then( (response) => response.data)
+      .catch(error => {console.log(error)});
+    return response;
+  }
+);
+
+export const getAllWidgets = createAsyncThunk (
   'projects/getAllWidgets',
   async (payload : projectIdPayload) => {
     const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/read/project/widgets", payload)
@@ -36,6 +123,77 @@ export const getAllWidgetsByProjectId = createAsyncThunk (
     return response;
   }
 )
+
+export const getAllWireframes = createAsyncThunk (
+  'projects/getAllWireframes',
+  async (payload : projectIdPayload) => {
+    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/read/project/wireframes", payload)
+    .then( (response) => response.data)
+    .catch( error => {console.log(error)});
+    return response;
+  }
+)
+
+export const getAllERDs = createAsyncThunk (
+  'projects/getAllERDs',
+  async (payload : projectIdPayload) => {
+    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/read/project/erds", payload)
+    .then( (response) => response.data)
+    .catch( error => {console.log(error)});
+    return response;
+  }
+)
+
+export const getAllEndpoints = createAsyncThunk (
+  'projects/getAllEndpoints',
+  async (payload : projectIdPayload) => {
+    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/read/project/endpoints", payload)
+    .then( (response) => response.data)
+    .catch( error => {console.log(error)});
+    return response;
+  }
+)
+
+export const getAllModels = createAsyncThunk (
+  'projects/getAllModels',
+  async (payload : projectIdPayload) => {
+    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/read/project/models", payload)
+    .then( (response) => response.data)
+    .catch( error => {console.log(error)});
+    return response;
+  }
+)
+
+export const getAllUserStories = createAsyncThunk (
+  'projects/getAllUserStories',
+  async (payload : projectIdPayload) => {
+    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/read/project/userstories", payload)
+    .then( (response) => response.data)
+    .catch( error => {console.log(error)});
+    return response;
+  }
+)
+
+export const getAllTags = createAsyncThunk (
+  'projects/getAllTags',
+  async (payload : projectIdPayload) => {
+    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/read/project/tags", payload)
+    .then( (response) => response.data)
+    .catch( error => {console.log(error)});
+    return response;
+  }
+)
+
+// CREATE 
+export const createProject = createAsyncThunk (
+  'projects/createProject',
+  async (payload : createProjectPayload) => {
+    const response = axios.post("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/create/project", payload)
+      .then( (response) => response.data)
+      .catch( (error) => {console.log(error)});
+    return response;
+  }
+);
 
 export const createWidget = createAsyncThunk (
   'projects/createWidget',
@@ -47,34 +205,134 @@ export const createWidget = createAsyncThunk (
   }
 );
 
-export const createProject = createAsyncThunk (
-  'projects/createProject',
-  async (payload : createProjectPayload) => {
-    const response = axios.post("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/create/project", payload)
-      .then( (response) => response.data)
-      .catch( (error) => {console.log(error)});
+export const createWireframe = createAsyncThunk (
+  'projects/createWireframe',
+  async (payload : createWireframePayload) => {
+    const response = axios.post("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/create/project/wireframe", payload)
+    .then( (response) => response.data)
+    .catch( (error) => {console.log(error)});
     return response;
   }
 );
 
-export const getAllProjects = createAsyncThunk(
-  'projects/getAllProjects',
-  async (payload : userIdPayload) => {
-    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/read/projects", payload)
-      .then( (response) => response.data)
-      .catch(error => {console.log(error)});
+export const createERD = createAsyncThunk (
+  'projects/createERD',
+  async (payload : createERDPayload) => {
+    const response = axios.post("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/create/project/erd", payload)
+    .then( (response) => response.data)
+    .catch( (error) => {console.log(error)});
     return response;
   }
 );
+
+export const createEndpoint = createAsyncThunk (
+  'projects/createEndpoint',
+  async (payload : createEndpointPayload) => {
+    const response = axios.post("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/create/project/endpoint", payload)
+    .then( (response) => response.data)
+    .catch( (error) => {console.log(error)});
+    return response;
+  }
+);
+
+export const createModel = createAsyncThunk (
+  'projects/createModel',
+  async (payload : createModelPayload) => {
+    const response = axios.post("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/create/project/model", payload)
+    .then( (response) => response.data)
+    .catch( (error) => {console.log(error)});
+    return response;
+  }
+);
+
+export const createUserStory = createAsyncThunk (
+  'projects/createUserStory',
+  async (payload : createUserStoryPayload) => {
+    const response = axios.post("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/create/project/userstory", payload)
+    .then( (response) => response.data)
+    .catch( (error) => {console.log(error)});
+    return response;
+  }
+);
+
+export const createTag = createAsyncThunk (
+  'projects/createTag',
+  async (payload : createTagPayload) => {
+    const response = axios.post("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/create/project/tag", payload)
+    .then( (response) => response.data)
+    .catch( (error) => {console.log(error)});
+    return response;
+  }
+);
+
+
+// DELETE
+export const deleteWireframe = createAsyncThunk(
+  'projects/deleteWireframe',
+  async(payload: wireframeIdPayload) => {
+    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/delete/project/wireframe", payload)
+    .then( (response) => response.data)
+    .catch(error => {console.log(error)});
+  return response;
+  }
+)
+
+export const deleteModel = createAsyncThunk(
+  'projects/deleteModel',
+  async(payload: modelIdPayload) => {
+    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/delete/project/model", payload)
+    .then( (response) => response.data)
+    .catch(error => {console.log(error)});
+  return response;
+  }
+)
+
+export const deleteTag = createAsyncThunk(
+  'projects/deleteTag',
+  async(payload: tagIdPayload) => {
+    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/delete/project/tag", payload)
+    .then( (response) => response.data)
+    .catch(error => {console.log(error)});
+  return response;
+  }
+)
+
+export const deleteERD = createAsyncThunk(
+  'projects/deleteERD',
+  async(payload: erdIdPayload) => {
+    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/delete/project/erd", payload)
+    .then( (response) => response.data)
+    .catch(error => {console.log(error)});
+  return response;
+  }
+)
+
+export const deleteUserStory = createAsyncThunk(
+  'projects/deleteUserStory',
+  async(payload: userStoryIdPayload) => {
+    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/delete/project/userstory", payload)
+    .then( (response) => response.data)
+    .catch(error => {console.log(error)});
+  return response;
+  }
+)
+
+export const deleteEndpoint = createAsyncThunk(
+  'projects/deleteEndpoint',
+  async(payload: endpointIdPayload) => {
+    const response = axios.get("https://a1c38ce6e98214dfbbd87b14cb7d92d5-827158951.us-east-1.elb.amazonaws.com/api/project/api/delete/project/endpoint", payload)
+    .then( (response) => response.data)
+    .catch(error => {console.log(error)});
+  return response;
+  }
+)
+
 
 export interface Model {
     modelId: string;
     projectId: string;
     modelName: string;
-    modelMetadata:Array<{
-        // index signature https://basarat.gitbook.io/typescript/type-system/index-signatures
-        key: string, value: string
-    }>
+    modelMetadata:Array<{ key: string, value: string }>
 }
 
 export interface Endpoint {
@@ -706,6 +964,8 @@ export const projectAppSlice = createSlice({
     }
   },
   extraReducers : (builder) => {
+
+    //GET
     builder.addCase(
       getAllProjects.fulfilled,
       (state, action) => {
@@ -715,6 +975,70 @@ export const projectAppSlice = createSlice({
       }
     )
 
+    builder.addCase(
+      getAllWidgets.fulfilled,
+      (state, action) => {
+        console.log("Dispatching getAllWidgets reducer with action: ", action);
+        state.widgets = action.payload;
+        return state;
+      }
+    )
+
+    builder.addCase(
+      getAllWireframes.fulfilled,
+      (state, action) => {
+        console.log("Dispatching getAllWireframes reducer with action: ", action);
+        state.wireframes = action.payload;
+        return state;
+      }
+    )
+
+    builder.addCase(
+      getAllERDs.fulfilled,
+      (state, action) => {
+        console.log("Dispatching getAllERDs reducer with action: ", action);
+        state.erds = action.payload;
+        return state;
+      }
+    )
+
+    builder.addCase(
+      getAllEndpoints.fulfilled,
+      (state, action) => {
+        console.log("Dispatching getAllEndpoints reducer with action: ", action);
+        state.endpoints = action.payload;
+        return state;
+      }
+    )
+
+    builder.addCase(
+      getAllTags.fulfilled,
+      (state, action) => {
+        console.log("Dispatching getAllTags reducer with action: ", action);
+        state.tags = action.payload;
+        return state;
+      }
+    )
+
+    builder.addCase(
+      getAllModels.fulfilled,
+      (state, action) => {
+        console.log("Dispatching getAllModels reducer with action: ", action);
+        state.models = action.payload;
+        return state;
+      }
+    )
+
+    builder.addCase(
+      getAllUserStories.fulfilled,
+      (state, action) => {
+        console.log("Dispatching getAllUserStories reducer with action: ", action);
+        state.userStories = action.payload;
+        return state;
+      }
+    )
+
+    //CREATE   
     builder.addCase(
       createProject.fulfilled,
       (state, action) => {
@@ -728,17 +1052,117 @@ export const projectAppSlice = createSlice({
       createWidget.fulfilled,
       (state, action) => {
         console.log("Dispatching createWidget reducer with action: ", action);
-        // currently create Widget returns a list of widgets
         state.widgets = action.payload;
         return state;
       }
     )
 
     builder.addCase(
-      getAllWidgetsByProjectId.fulfilled,
+      createWireframe.fulfilled,
       (state, action) => {
-        console.log("Dispatching getAllWidgetsByProjectId reducer with action: ", action);
-        state.widgets = action.payload;
+        console.log("Dispatching createWireframe reducer with action: ", action);
+        state.wireframes = action.payload;
+        return state;
+      }
+    )
+
+    builder.addCase(
+      createERD.fulfilled,
+      (state, action) => {
+        console.log("Dispatching createERD reducer with action: ", action);
+        state.erds = action.payload;
+        return state;
+      }
+    )
+
+    builder.addCase(
+      createModel.fulfilled,
+      (state, action) => {
+        console.log("Dispatching createModel reducer with action: ", action);
+        state.models = action.payload;
+        return state;
+      }
+    )
+
+    builder.addCase(
+      createUserStory.fulfilled,
+      (state, action) => {
+        console.log("Dispatching createUserStory reducer with action: ", action);
+        state.userStories = action.payload;
+        return state;
+      }
+    )
+
+    builder.addCase(
+      createTag.fulfilled,
+      (state, action) => {
+        console.log("Dispatching createTag reducer with action: ", action);
+        state.tags = action.payload;
+        return state;
+      }
+    )
+
+    builder.addCase(
+      createEndpoint.fulfilled,
+      (state, action) => {
+        console.log("Dispatching createEndpoint reducer with action: ", action);
+        state.endpoints = action.payload;
+        return state;
+      }
+    )
+
+    //DELETE
+
+    builder.addCase(
+      deleteWireframe.fulfilled,
+      (state,action) => {
+        console.log("Dispatching deleteWireframe reducer with action: ", action);
+        state.wireframes = action.payload;
+        return state;
+      }
+    )
+
+    builder.addCase(
+      deleteERD.fulfilled,
+      (state,action) => {
+        console.log("Dispatching deleteERD reducer with action: ", action);
+        state.erds = action.payload;
+        return state;
+      }
+    )
+        
+    builder.addCase(
+      deleteEndpoint.fulfilled,
+      (state,action) => {
+        console.log("Dispatching deleteEndpoint reducer with action: ", action);
+        state.endpoints = action.payload;
+        return state;
+      }
+    )
+        
+    builder.addCase(
+      deleteModel.fulfilled,
+      (state,action) => {
+        console.log("Dispatching deleteModel reducer with action: ", action);
+        state.models = action.payload;
+        return state;
+      }
+    )
+        
+    builder.addCase(
+      deleteTag.fulfilled,
+      (state,action) => {
+        console.log("Dispatching deleteTag reducer with action: ", action);
+        state.tags = action.payload;
+        return state;
+      }
+    )
+        
+    builder.addCase(
+      deleteUserStory.fulfilled,
+      (state,action) => {
+        console.log("Dispatching deleteUserStory reducer with action: ", action);
+        state.userStories = action.payload;
         return state;
       }
     )

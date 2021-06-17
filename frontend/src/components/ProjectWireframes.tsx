@@ -17,24 +17,13 @@ function ProjectWireframes() {
   const projectId = projectAppState.project.projectId;
   
   const getWireframes = () => {
-    const queryString = `http://localhost:42069/api/read/project/wireframes`;
-        
+    const body ={params:{userId: userAppState.id}};
+
     const body = {
       params: {
         projectId: projectId,
       },
     };
-
-    axios
-      .get(queryString, body)
-      .then((response) => {
-        console.log("response", response);
-        const wireframeData = response.data;
-        dispatch(setWireframes(wireframeData));
-      })
-      .catch((error) => {
-        console.log("There was an error: ", error);
-      });
   };
 
   useMemo(() => {

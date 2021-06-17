@@ -1,8 +1,7 @@
-import axios from "axios";
 import React from "react";
 import { ListGroup, Row, Col, Button } from "react-bootstrap";
 import { useAppDispatch } from "../../redux/hooks";
-import { setEndpoints } from "../../redux/projectAppSlice";
+import { deleteEndpoint } from "../../redux/projectAppSlice";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons";
@@ -15,24 +14,8 @@ const EndpointCard = ({ endpoint }: any) => {
   const [endpointUrlPattern] = React.useState(endpoint.endpointUrlPattern);
 
   const removeEndpoint = (id: string) => {
-    const queryDeleteString = `http://localhost:42069/api/delete/project/endpoint`;
-    const body = {
-      params: {
-        endpointId: endpoint.endpointId,
-      },
-    };
-    console.log("request body: ", queryDeleteString, body);
-
-    axios
-      .delete(queryDeleteString, body)
-      .then((response) => {
-        console.log("response", response);
-        const tagData = response.data;
-        dispatch(setEndpoints(tagData));
-      })
-      .catch((error) => {
-        console.log("There was an error on deleting: ", error);
-      });
+    const body = { params: { endpointId: endpoint.endpointId } };
+    dispatch(deleteEndpoint(body));
   };
 
   return (

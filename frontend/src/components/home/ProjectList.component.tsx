@@ -19,11 +19,12 @@ export default function ProjectList(props:any) {
   }; 
 
   return (
-    <>
+    <div className='component'>
       {renderCard.map((project:any) => (
+        <div className="test">
          <ListGroup.Item className="project-list-item">
             <Row>
-              <Col className="project-name" onClick={goToProject}>
+              <Col title='test' className="project-name" onClick={goToProject}>
                   <FontAwesomeIcon style={{height: '40%', marginRight: '10px'}}className="fa-1x" icon={faClipboardList}/> 
                   {project.projectName}
               </Col>
@@ -33,8 +34,9 @@ export default function ProjectList(props:any) {
               <span><ProjectElipsisBtn/></span>
             </Row>
         </ListGroup.Item>
+        </div>
       ))}
-    </>
+    </div>
   );
 }
 

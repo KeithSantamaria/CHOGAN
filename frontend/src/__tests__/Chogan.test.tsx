@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import HomeListView from '../components/home/HomeListView';
 import Chogan from '../Chogan';
 
-describe('HomeListView Tests', () => {
+describe('Chogan Tests', () => {
 
     it('renders list-items', () => {
       const wrapper = shallow(<Chogan/>);

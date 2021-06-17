@@ -12,5 +12,7 @@ module.exports ={
   "transform": {
     "^.+\\.(ts|tsx)$": "ts-jest"
   },
+  "snapshotSerializers": ["enzyme-to-json/serializer"],
+  "testEnvironment": "jsdom",
   setupTestFrameworkScriptFile: "<rootDir>/src/setupTests.ts"
 };

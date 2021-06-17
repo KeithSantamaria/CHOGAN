@@ -6,7 +6,7 @@ import Home from '../pages/home/Home';
 import { store } from '../redux/store';
 import { Provider } from 'react-redux';
 
-describe('HomeListView Tests', () => {
+describe('Home Tests', () => {
 
     it('renders list-items', () => {
       const wrapper = shallow(
@@ -14,10 +14,6 @@ describe('HomeListView Tests', () => {
         <Home />
       </Provider>
       );
-      //const instance = wrapper.instance();
-
-      // Expect the wrapper object to be defined
-      console.log(wrapper.find('.home-container-wrapper').toString());
-      expect(wrapper.find('.homes-container-wrapper')).toBeDefined();
+      expect(wrapper.find('.home-container-wrapper')).toBeDefined();
     });
   });

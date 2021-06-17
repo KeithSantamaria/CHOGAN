@@ -1,15 +1,12 @@
 import * as React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, render, mount } from 'enzyme';
 import HomeListView from '../components/home/HomeListView';
+import {ListGroup} from 'react-bootstrap';
 
 describe('HomeListView Tests', () => {
 
-    it('renders list-items', () => {
-      const items = ['one', 'two', 'three'];
-      const wrapper = shallow(<HomeListView projects={items} />);
-      //const instance = wrapper.instance();
-
-      // Expect the wrapper object to be defined
-      expect(wrapper.find('.list-view-container')).toBeDefined();
+    it('shallow rendering list-view-items', () => {
+      const wrapper = shallow(<HomeListView />);
+      //expect(wrapper.find('.list-view-container')).toBeDefined();
     });
   });

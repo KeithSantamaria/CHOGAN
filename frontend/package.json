@@ -33,7 +33,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
+    "test": "jest --env=jsdom",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -57,9 +57,12 @@
     "@babel/preset-typescript": "^7.14.5",
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.2",
     "babel-jest": "^27.0.2",
     "enzyme-to-json": "^3.6.2",
     "jest": "^27.0.4",
+    "react-test-render": "^1.1.2",
+    "react-test-renderer": "^17.0.2",
     "ts-jest": "^27.0.3"
   }
 }

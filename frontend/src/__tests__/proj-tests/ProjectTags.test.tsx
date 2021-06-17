@@ -14,7 +14,7 @@ describe('ProjectTags tests', () => {
           </Provider>
         );
      });
-    it('checking for #pg-content element', () => {
+    it('checking page loads by checking #pg-content element', () => {
         const actual = wrapper.find('#pg-content');
         expect(actual.length).toBeGreaterThanOrEqual(1);
     });

@@ -1,21 +1,21 @@
 import * as React from 'react';
 import { mount} from 'enzyme';
-import ProjectGeneralInfo from '../../components/ProjectGeneralInfo';
 import { store } from '../../redux/store';
 import { Provider } from 'react-redux';
+import ProjectSideNav from '../../components/ProjectSideNav';
 
-describe('ProjectGeneralInfo tests', () => {
+describe('ProjectSideNav tests', () => {
     let wrapper:any;
     let projs:any;
     beforeEach(() => {
         wrapper = mount(
           <Provider store={store} > 
-            <ProjectGeneralInfo /> 
+            <ProjectSideNav /> 
           </Provider>
         );
      });
     it('checking page loads', () => {
-        const actual = wrapper.find('#pg-content');
+        const actual = wrapper.find('#sideMenu');
         expect(actual.length).toBeGreaterThanOrEqual(1);
     });
 });

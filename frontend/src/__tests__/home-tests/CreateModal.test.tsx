@@ -1,21 +1,18 @@
 import * as React from 'react';
 import { mount} from 'enzyme';
-import ProjectGeneralInfo from '../../components/ProjectGeneralInfo';
 import { store } from '../../redux/store';
-import { Provider } from 'react-redux';
+import CreateModal from '../../components/home/CreateModal';
 
-describe('ProjectGeneralInfo tests', () => {
+describe('CreateModal tests', () => {
     let wrapper:any;
     let projs:any;
     beforeEach(() => {
         wrapper = mount(
-          <Provider store={store} > 
-            <ProjectGeneralInfo /> 
-          </Provider>
+            <CreateModal /> 
         );
      });
     it('checking page loads', () => {
-        const actual = wrapper.find('#pg-content');
+        const actual = wrapper.find('Modal');
         expect(actual.length).toBeGreaterThanOrEqual(1);
     });
 });

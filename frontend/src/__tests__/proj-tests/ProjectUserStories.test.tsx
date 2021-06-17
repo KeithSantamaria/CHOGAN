@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { mount} from 'enzyme';
-import ProjectGeneralInfo from '../../components/ProjectGeneralInfo';
 import { store } from '../../redux/store';
 import { Provider } from 'react-redux';
+import ProjectUserStories from '../../components/ProjectUserStories';
 
-describe('ProjectGeneralInfo tests', () => {
+describe('ProjectUserStories tests', () => {
     let wrapper:any;
     let projs:any;
     beforeEach(() => {
         wrapper = mount(
           <Provider store={store} > 
-            <ProjectGeneralInfo /> 
+            <ProjectUserStories /> 
           </Provider>
         );
      });

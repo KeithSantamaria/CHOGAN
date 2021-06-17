@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
-import axios from "axios";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { selectProjectApp, setWidgets } from "../../redux/projectAppSlice";
+import { selectProjectApp, getAllWidgets } from "../../redux/projectAppSlice";
 import { Card, CardDeck } from "react-bootstrap";
 
 const WidgetComponent = () => {
@@ -10,23 +9,12 @@ const WidgetComponent = () => {
   const projectId = projectAppState.project.projectId;
 
   const getWidgets = () => {
-    const queryString = `http://localhost:42069/api/read/project/widgets`;
     const body = {
       params: {
         projectId: projectId,
       },
     };
-
-    axios
-      .get(queryString, body)
-      .then((response) => {
-        console.log("response", response);
-        const widgetData = response.data;
-        dispatch(setWidgets(widgetData));
-      })
-      .catch((error) => {
-        console.log("There was an error: ", error);
-      });
+    dispatch(getAllWidgets(body));
   };
 
   useMemo(() => {

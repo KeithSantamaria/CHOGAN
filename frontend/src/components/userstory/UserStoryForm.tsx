@@ -1,16 +1,15 @@
-import axios from "axios";
 import { Button, Form, Container } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
-  resetCreateNewUserStoryForm,
   selectProjectApp,
   setCreateNewUserStoryForm,
-  setUserStories,
+  createUserStory
 } from "../../redux/projectAppSlice";
 
 const UserStoryForm = () => {
   const projectAppState = useAppSelector(selectProjectApp);
   const dispatch = useAppDispatch();
+  const projectId = projectAppState.project.projectId;
 
   const formChangeHandler = (event: any) => {
     const fieldName = event.target.name;
@@ -19,30 +18,14 @@ const UserStoryForm = () => {
   };
 
   const addUserStory = () => {
-    // Test
-    const projectId = "60bc36b65d2b0da1deb9ada2";
-
-    const queryString = `http://localhost:42069/api/create/project/userstory`;
-
     if (projectAppState.createNewUserStoryForm.userStoryDescription === "") {
-      alert("There is nothing to add");
+      console.log("There is nothing to add");
     } else {
       const userStory = {
-        userStoryDescription:
-          projectAppState.createNewUserStoryForm.userStoryDescription,
-        //production
-        //projectId: projectAppState.project.projectId,
-
-        //test
+        userStoryDescription: projectAppState.createNewUserStoryForm.userStoryDescription,
         projectId: projectId,
       };
-
-      axios.post(queryString, userStory).then((response) => {
-        console.log("response", response);
-        const userStoryData = response.data;
-        dispatch(setUserStories(userStoryData));
-        dispatch(resetCreateNewUserStoryForm());
-      });
+      dispatch(createUserStory(userStory));
     }
   };
 
@@ -56,7 +39,6 @@ const UserStoryForm = () => {
             name="userStoryDescription"
             as="textarea"
             rows={3}
-            // placeholder="Employees"
             onChange={formChangeHandler}
           />
         </Form.Group>

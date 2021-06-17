@@ -2,20 +2,20 @@ import * as React from 'react';
 import { mount} from 'enzyme';
 import { store } from '../../redux/store';
 import { Provider } from 'react-redux';
-import TopNavbar from '../../components/TopNavbar';
+import UpdateTag from '../../components/UpdateTag';
 
-describe('TopNavbar tests', () => {
+describe('UpdateTag tests', () => {
     let wrapper:any;
     let projs:any;
     beforeEach(() => {
         wrapper = mount(
           <Provider store={store} > 
-            <TopNavbar /> 
+            <UpdateTag /> 
           </Provider>
         );
      });
     it('checking page loads', () => {
-        const actual = wrapper.find('.nav-wrapper');
+        const actual = wrapper.find('.update-proj-form-container');
         expect(actual.length).toBeGreaterThanOrEqual(1);
     });
 });
